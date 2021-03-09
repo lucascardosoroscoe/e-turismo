@@ -1,0 +1,76 @@
+.btn, .btn-large, .btn-small {
+    width: 100% !important;
+    background-color: #061623 !important;
+}
+.btn:focus, .btn-large:focus, .btn-small:focus, .btn-floating:focus {
+    background-color: #061623 !important;
+}
+#adicionar, #editar, #excluir, #reativar, #visualizar {
+    display: inline-block !important;
+    width: 19% !important;
+}
+h1{
+    width: min-content !important;
+    margin: auto !important;
+    margin-top: 30px !important;
+    margin-bottom: 20px !important;
+}
+h3{
+    font-size: 1.8rem !important;
+    text-align: center !important;
+    margin: auto !important;
+    margin-top: 10px !important;
+    margin-bottom: 15px !important;
+
+}
+.ico{
+    width: 40% !important;
+    display: inline-block !important;
+    margin-left: 6%;
+}
+
+.ic{
+    width: 120px !important;
+    margin: auto !important;
+    display: block !important;
+}
+.titulo{
+    margin-top: 15px !important;
+    margin-bottom: 15px !important;
+}
+.ti{
+    text-align: center !important;
+    margin-top: 0px !important;
+    margin-bottom: 20px !important;
+}
+.logo{
+    width: 35% !important;
+    margin: auto !important;
+    display: block !important;
+    margin-top: 20px !important;
+}
+select {
+    display: block !important;
+}
+td, th {
+    border-left: 0.1px;
+    border-color: #ccc;
+    border-style: dotted;
+    border-right: none;
+    border-bottom: none;
+    border-top: none;
+}
+thead {
+    background-color: #061623;
+    color: #FFD;
+}
+a{
+    color: #061623 ;
+}
+h5, h6{
+    text-align: center;
+    margin-bottom: 30px;
+}
+p{
+    margin-left: 3px;
+}
