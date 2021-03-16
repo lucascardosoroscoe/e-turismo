@@ -1,0 +1,16 @@
+.imgEvento {
+    width: 100%;
+}
+img.qr {
+    margin-left: 25%;
+}
+h5 {
+    font-size: 5em;
+    text-align: center;
+    margin-top: 0px;
+    margin-bottom: 30px;
+}
+p {
+    text-align: center;
+    font-size: 3em;
+}

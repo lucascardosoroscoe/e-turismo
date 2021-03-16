@@ -30,25 +30,34 @@ function pegarValor(rIndex){
 }
 
 editar.onclick = function (){
-    
+    verificarEventoAtual();
     window.location.replace("../editar/lote.php?nome="+nome+"&evento="+eventoatual);
 }
 excluir.onclick = function (){
+    verificarEventoAtual();
     window.location.replace("../invalidar/lote.php?nome="+nome+"&evento="+eventoatual);
 }
 apagar.onclick = function (){
+    verificarEventoAtual();
     window.location.replace("../excluir/lote.php?nome="+nome+"&evento="+eventoatual);
 }
     
 
 adicionar.onclick = function (){
+    verificarEventoAtual();
     window.location.replace("../adicionar/lote.php?evento="+eventoatual);
 }
 reativar.onclick = function (){
+    verificarEventoAtual();
     window.location.replace("../reativar/lote.php?nome="+nome+"&evento="+eventoatual);
 }
 
 function selecionarEvento(){
     var evento = document.getElementById('evento').value;
     window.location.replace("index.php?evento="+evento);
+}
+function verificarEventoAtual(){
+    if(eventoatual == ""){
+        alert("Selecione um evento");
+    }
 }
