@@ -26,7 +26,10 @@ $(function(){
 });
 
 //Script Selecionar Evento
-function selectEvento(){
-    alert("oi");
+function selectevento(id){
+    var inputEvento = document.getElementById('selectEvento');
+    var idEvento = inputEvento.value;
+    var url = "../index.php";
+    var nomeEvento = inputEvento.options[inputEvento.selectedIndex].text;
+    window.location = "./assets/selecionarEvento.php?idEvento="+ idEvento + "&nomeEvento=" + nomeEvento + "&u=" + url;
 }
-alert("oi");

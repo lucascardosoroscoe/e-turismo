@@ -11,7 +11,6 @@
       <link rel="stylesheet"  href="<?php echo $HTTP_HOST;?>/css/table.css">
       <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
       <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js" crossorigin="anonymous"></script>
-
       <!-- <link rel="stylesheet" href="style1.css">
       <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
       <script type="text/javascript" src="<?php echo $HTTP_HOST;?>/js/graph.js"></script> -->
@@ -29,8 +28,8 @@ $nCaixa = $_SESSION["nCaixa"];
 $tipoUsuario = $_SESSION["tipoUsuario"];
 $idUsuario = $_SESSION["idUsuario"];
 $tipoUsuario = 1;
-$eventoId = $_SESSION["eventoId"];
-$eventoId = 25;
+$nomeEvento = $_SESSION["nomeEvento"];
+$idEvento = $_SESSION["idEvento"];
 
 setlocale(LC_ALL, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
 
@@ -161,7 +160,7 @@ setlocale(LC_ALL, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
 
 <?php
   function selectEvento(){
-    global $tipoUsuario, $eventoId, $idUsuario;
+    global $tipoUsuario, $idEvento, $idUsuario;
     
     if($tipoUsuario == 1){
       $consulta = "SELECT * FROM `Evento` WHERE 1";
@@ -171,10 +170,14 @@ setlocale(LC_ALL, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
      
     }
     $dados = selecionar($consulta);
-    echo('<select name="selectEvento" id="selectEvento" onchange="selectEvento()">');
+    echo('<select name="selectEvento" id="selectEvento" onchange="selectevento(1)">');
       echo('<option value="">Selecione o Evento</option>');
       foreach ($dados as $evento) {
-        echo('<option value="'. $evento['id'] .'">'. $evento['nome'] .'</option>');
+        if($idEvento == $evento['id']){
+          echo('<option value="'. $evento['id'] .'" selected>'. $evento['nome'] .'</option>');
+        }else{
+          echo('<option value="'. $evento['id'] .'">'. $evento['nome'] .'</option>');
+        }
       }
     echo('</select>');
   }

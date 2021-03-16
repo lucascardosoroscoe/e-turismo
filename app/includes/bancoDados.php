@@ -8,7 +8,7 @@
     
     global $DOCUMENT_ROOT, $HTTP_HOST;
     $DOCUMENT_ROOT = $_SERVER['DOCUMENT_ROOT'];
-    $HTTP_HOST = "http://".$_SERVER['HTTP_HOST']."/ingressozapp";
+    $HTTP_HOST = "http://".$_SERVER['HTTP_HOST']."/app";
     $TOKEN = "BMJ-7V@9-$%ASbZXS#v%!bnmpHI%Cavj";
 
 
