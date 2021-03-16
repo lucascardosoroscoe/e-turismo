@@ -157,14 +157,25 @@ setlocale(LC_ALL, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
 
 <div id="layoutSidenav_content">
   <main class="fh">
-
+  
 
 <?php
- function selectEvento(){
-   global $tipoUsuario, $eventoId;
-   if($)
-  echo('<select name="selectEvento" id="selectEvento">');
-    echo('<option value="">Selecione o Evento</option>');
-  echo('</select>');
- }
+  function selectEvento(){
+    global $tipoUsuario, $eventoId, $idUsuario;
+    
+    if($tipoUsuario == 1){
+      $consulta = "SELECT * FROM `Evento` WHERE 1";
+    }else if($tipoUsuario == 2){
+      $consulta = "SELECT * FROM `Evento` WHERE `produtor`= '$idUsuario'";
+    }else if($tipoUsuario == 3){
+     
+    }
+    $dados = selecionar($consulta);
+    echo('<select name="selectEvento" id="selectEvento" onchange="selectEvento()">');
+      echo('<option value="">Selecione o Evento</option>');
+      foreach ($dados as $evento) {
+        echo('<option value="'. $evento['id'] .'">'. $evento['nome'] .'</option>');
+      }
+    echo('</select>');
+  }
 ?>

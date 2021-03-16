@@ -1,8 +1,8 @@
 <?php
     //Conexão com o o Banco de dados
-    $servidor = '127.0.0.1:3306';
-    $senha ='ingressozapp';
-    $usuario ='u989688937_ingressozapp';
+    $servidorBanco = '185.201.11.212:3306';
+    $senhaBanco ='ingressozapp';
+    $usuarioBanco ='u989688937_ingressozapp';
     $bdados ='u989688937_ingressozapp';
     
     

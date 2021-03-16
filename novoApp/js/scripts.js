@@ -24,3 +24,9 @@
 $(function(){
 	$('.tablesorter').tablesorter();
 });
+
+//Script Selecionar Evento
+function selectEvento(){
+    alert("oi");
+}
+alert("oi");
