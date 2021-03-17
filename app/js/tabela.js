@@ -5,7 +5,6 @@ function filtrarTabela(status){
         var achou = false;
         var tr = tbody.childNodes[i];
         var td = tr.childNodes;
-
         for(var j = 1; j < td.length - 1; j++){
             var value = td[j].childNodes[0].nodeValue.toLowerCase();
             if(value.indexOf(pesquisa) >= 0){

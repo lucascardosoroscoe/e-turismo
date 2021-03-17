@@ -13,7 +13,7 @@
 
     if($inputPassword == $inputConfirmPassword){
         $hash = password_hash($inputPassword, PASSWORD_DEFAULT);
-        $consulta = "SELECT `id` FROM `Produtor` WHERE `usuario` = 'email'";
+        $consulta = "SELECT `id` FROM `Produtor` WHERE `usuario` = '$email'";
         $msg = verificar($consulta);
         if($msg == "Sucesso!"){
             $consulta = "INSERT INTO `Produtor`(`usuario`, `senha`, `nome`, `telefone`, `email`, `cidade`, `estado`) VALUES ('$email', '$hash', '$nome', '$telefone', '$email', '$cidade', '$estado')";
