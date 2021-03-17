@@ -4,6 +4,16 @@ session_start();
 $usuario = $_SESSION["usuario"];
 $idUsuario = $_SESSION["idUsuario"];
 $tipoUsuario = $_SESSION["tipoUsuario"];
+$idEvento = $_SESSION["idEvento"];
+$validade = $_SESSION["validade"];
+$produtor  =  $_SESSION["usuario"];
+$nCaixa = $_SESSION["nCaixa"];
+$tipoUsuario = $_SESSION["tipoUsuario"];
+$idUsuario = $_SESSION["idUsuario"];
+$tipoUsuario = 1;
+$nomeEvento = $_SESSION["nomeEvento"];
+$idEvento = $_SESSION["idEvento"];
+$produtor = "Roscoe";
 
 if($tipoUsuario != 1 && $tipoUsuario != 2 && $tipoUsuario != 3&& $tipoUsuario != 4){
   // header('Location: http://139.59.210.161/login/index.php?msg='.$msg);

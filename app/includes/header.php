@@ -20,18 +20,6 @@
 <?php
 include('bancoDados.php');
 
-session_start();
-/*session created*/
-$validade = $_SESSION["validade"];
-$produtor  =  $_SESSION["usuario"];
-$nCaixa = $_SESSION["nCaixa"];
-$tipoUsuario = $_SESSION["tipoUsuario"];
-$idUsuario = $_SESSION["idUsuario"];
-$tipoUsuario = 1;
-$nomeEvento = $_SESSION["nomeEvento"];
-$idEvento = $_SESSION["idEvento"];
-$produtor = "Roscoe";
-
 setlocale(LC_ALL, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
 
 // if ($validade == "VALIDO"){}else{header('Location: ../../produtor/login/');}
@@ -47,9 +35,9 @@ setlocale(LC_ALL, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
           <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button>
         <!-- Barra de Pesquisa -->
           <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
-            <div class="input-group">
-              <?php selectEvento();?>
-            </div>
+            <!-- <div class="input-group">
+              <?php //selectEvento();?>
+            </div> -->
           </form>
         <!-- Menu de Usuário -->
           <ul class="navbar-nav ml-auto ml-md-0">
@@ -103,6 +91,7 @@ setlocale(LC_ALL, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
                     if($tipoUsuario == 2 || $tipoUsuario == 1){
                       //Eventos
                       echo('<a class="nav-link" href="'.$HTTP_HOST.'/eventos"><div class="sb-nav-link-icon"><i class="fas fa-gas-pump"></i></div>Eventos</a>');
+                      echo('<a class="nav-link" href="'.$HTTP_HOST.'/lotes"><div class="sb-nav-link-icon"><i class="fas fa-gas-pump"></i></div>Lotes</a>');
                       //Relatórios
                       echo('<a class="nav-link collapsed" href="#produtividade" data-toggle="collapse" data-target="#collapse" aria-expanded="false" aria-controls="collapse">');
                         echo('<div class="sb-nav-link-icon"><i class="fas fa-chart-line"></i></div>Relatórios<div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>');

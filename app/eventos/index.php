@@ -66,7 +66,7 @@ function addTabela($consulta){
         $validade = $obj['validade'];
         echo ("<td>".$obj['validade']."</td>");
         if($validade == "VALIDO"){
-            echo ("<td style='display: flex;'><a href='editar.php?id=".$obj['id']."' class='iconeTabela'><i class='fas fa-user-edit'></i></a><a href='invalidar.php?id=".$obj['id']."' class='iconeTabela red'><i class='fas fa-user-times'></i></a></td>");  
+            echo ("<td style='display: flex;'><a href='editar.php?id=".$obj['id']."' class='iconeTabela'><i class='fas fa-user-edit'></i></a><a href='invalidar.php?id=".$obj['id']."' class='iconeTabela red'><i class='fas fa-user-times'></i></a><a href='detalhar.php?id=".$obj['id']."' class='iconeTabela'><i class='fas fa-eye'></i></a></td>");  
         }else{
             echo ("<td><a href='reativar.php?id=".$obj['id']."' style='margin-left: 15px;'>Reativar</a></td>");
         }

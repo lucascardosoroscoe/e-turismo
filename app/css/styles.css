@@ -10357,3 +10357,8 @@ button{
   overflow: hidden;
   margin: 5px;
 }
+.imgEvento{
+  width: 100%;
+  border-radius: 5px;
+  box-shadow: 2px 2px #000000;
+}
