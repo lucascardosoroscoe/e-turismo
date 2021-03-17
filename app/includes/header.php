@@ -30,6 +30,7 @@ $idUsuario = $_SESSION["idUsuario"];
 $tipoUsuario = 1;
 $nomeEvento = $_SESSION["nomeEvento"];
 $idEvento = $_SESSION["idEvento"];
+$produtor = "Roscoe";
 
 setlocale(LC_ALL, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
 
