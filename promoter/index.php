@@ -3,12 +3,10 @@
 session_start();
 /*session created*/
 $promoter  =  $_SESSION["promoter"];
-$email  =  $_SESSION["email"];
+$email  = "Maktub@gmail.com";
 
 //echo ($email);
 $atividade =  $_SESSION["atividade"];
-
-if ($atividade == "VALIDO"){
     echo ('<div class="row">');
             echo ('<div class="col s12 m6 push-m3 ">');
                 echo ('<img src="includes/logo.png"class="logo">');
@@ -21,11 +19,6 @@ if ($atividade == "VALIDO"){
                 echo ('<h5><a href="login/index.php">Sair</a></h5>');
         echo ('</div>');
     echo ('</div>');
-
-
-} else {
-    header('Location: https://ingressozapp.com/promoter/login/');
-}
 
 function itemSelect($email){
     include('includes/db_valores.php');

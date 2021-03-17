@@ -33,10 +33,8 @@ include('../includes/header.php');
                     </thead>
                     <tbody id="tbody">
                         <?php
-                            if($tipoUsuario == 1){
-                                $consulta = "SELECT * FROM Produtor";
-                                addTabela($consulta);
-                            }
+                            $consulta = "SELECT * FROM Produtor";
+                            addTabela($consulta);
                         ?>
                     </tbody>
                 </table>

@@ -3,8 +3,11 @@ include('../includes/verificarAcesso.php');
 verificarAcesso(2);
 include('../includes/header.php');
 $id = $_GET['id'];
-$consulta = "SELECT * FROM `Evento` WHERE `id` = '$id'";
-$dados = selecionar($consulta);
+// $consulta = "SELECT * FROM `Evento` WHERE `id` = '$id'";
+// $dados = selecionar($consulta);
+// if($dados[0]['']){
+
+// }
 ?>      
     <div style='background-image: url("../img/fundoLogin.jpeg"); background-size: cover;height: 1080px;'>
         <div class="container">

@@ -3,7 +3,7 @@
     verificarAcesso(2);
     include('../includes/bancoDados.php');
 
-    $produtor = 42;
+    
     $email = $_POST['inputEmailAddress'];
     $nome = $_POST['inputName'];
     $telefone = $_POST['inputTelefone'];

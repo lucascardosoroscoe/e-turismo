@@ -64,7 +64,8 @@ setlocale(LC_ALL, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
                   echo('<div class="sb-sidenav-menu-heading">Principal</div>');
 
                   //Painel de Controle
-                  echo('<a class="nav-link" href="'.$HTTP_HOST.'/index.php"><div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>Painel de Controle</a>');
+                  echo('<a class="nav-link" href="'.$HTTP_HOST.'/index.php"><div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>Home</a>');
+                  echo('<a class="nav-link" href="'.$HTTP_HOST.'/vendas.php"><div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>Minhas Vendas</a>');
 
 
                   //Usuários
@@ -160,13 +161,29 @@ setlocale(LC_ALL, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
      
     }
     $dados = selecionar($consulta);
-    echo('<select class="form-control" name="selectEvento" id="selectEvento" onchange="selectevento(1)">');
+    echo('<select class="form-control" name="selectEvento" id="selectEvento" onchange="selectevento(1)"  form="emitir" required>');
       echo('<option value="">Selecione o Evento</option>');
       foreach ($dados as $evento) {
         if($idEvento == $evento['id']){
           echo('<option value="'. $evento['id'] .'" selected>'. $evento['nome'] .'</option>');
         }else{
           echo('<option value="'. $evento['id'] .'">'. $evento['nome'] .'</option>');
+        }
+      }
+    echo('</select>');
+  }
+
+  function selectLote(){
+    global $idEvento, $idLote;
+      $consulta = "SELECT * FROM `Lote` WHERE `evento`= '$idEvento' AND `validade`= 'DISPONÍVEL'";
+    $dados = selecionar($consulta);
+    echo('<select class="form-control" name="selectLote" id="selectLote" onchange="selectlote(1)" form="emitir" required>');
+      echo('<option value="">Selecione o Lote</option>');
+      foreach ($dados as $lote) {
+        if($idLote == $lote['id']){
+          echo('<option value="'. $lote['id'] .'" selected>'. $lote['nome'] .'</option>');
+        }else{
+          echo('<option value="'. $lote['id'] .'">'. $lote['nome'] .'</option>');
         }
       }
     echo('</select>');

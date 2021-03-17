@@ -11,8 +11,6 @@ $atividade =  $_SESSION["atividade"];
 $msg = $_GET["msg"];
 $evento    =  $_GET['evento'];
 $_SESSION["evento"] = $evento;
-if ($atividade == "VALIDO"){
-    
     echo ('<div class="row">');
             echo ('<div class="col s12 m6 push-m3 ">');
                 echo ('<img src="includes/logo.png"class="logo">');
@@ -54,9 +52,6 @@ if ($atividade == "VALIDO"){
         echo ('</div>');
 
 
-} else {
-    header('Location: https://ingressozapp.com/promoter/login/');
-}
 
 function addLote($evento){
     global $conexao;

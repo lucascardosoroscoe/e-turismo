@@ -36,12 +36,7 @@ include('../includes/header.php');
                                 $consulta = "SELECT * FROM Evento";
                                 addTabela($consulta);
                             }else if($tipoUsuario == 2){
-                                $consulta = "SELECT tc_users.id, tc_users.name, tc_users.email FROM tc_users JOIN tc_user_driver ON tc_user_driver.driverid = tc_users.id WHERE tc_users.type = 4 AND tc_user_driver.userid = '$idUsuario'";
-                                addTabela($consulta);
-                                $consulta = "SELECT tc_users.id, tc_users.name, tc_users.email FROM tc_users JOIN tc_user_driver ON tc_user_driver.driverid = tc_users.id JOIN tc_user_user ON tc_user_user.manageduserid = tc_user_driver.userid WHERE tc_users.type = 4 AND tc_user_user.userid = '$idUsuario'";
-                                addTabela($consulta);
-                            }else if($tipoUsuario == 3){
-                                $consulta = "SELECT tc_users.id, tc_users.name, tc_users.email FROM tc_users JOIN tc_user_driver ON tc_user_driver.driverid = tc_users.id WHERE tc_users.type = 4 AND tc_user_driver.userid = '$idUsuario'";
+                                $consulta = "SELECT * FROM Evento WHERE produtor = '$produtor'";
                                 addTabela($consulta);
                             }
                         ?>
