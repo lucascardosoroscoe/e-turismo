@@ -39,7 +39,7 @@ include('../includes/header.php');
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label class="small mb-1" for="inputDescricao">Descrição do Evento*</label>
-                                            <textarea class="form-control py-4" id="inputDescricao"  name="inputDescricao" rows="5" placeholder="Texto descritivo do Evento para ser exibido no ingresso."></textarea>
+                                            <textarea class="form-control py-4" id="inputDescricao"  name="inputDescricao" rows="5" placeholder="Texto descritivo do Evento para ser exibido no ingresso." required></textarea>
                                             <!-- <input class="form-control py-4" id="inputDescricao"  name="inputDescricao" type="text" placeholder="Digite o nome completo" required/> -->
                                         </div>
                                     </div>

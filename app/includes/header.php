@@ -171,7 +171,7 @@ setlocale(LC_ALL, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
      
     }
     $dados = selecionar($consulta);
-    echo('<select name="selectEvento" id="selectEvento" onchange="selectevento(1)">');
+    echo('<select class="form-control" name="selectEvento" id="selectEvento" onchange="selectevento(1)">');
       echo('<option value="">Selecione o Evento</option>');
       foreach ($dados as $evento) {
         if($idEvento == $evento['id']){

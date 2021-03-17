@@ -13,7 +13,7 @@ $dados = selecionar($consulta);
                     <div class="card shadow-lg border-0 rounded-lg mt-5">
                         <div class="card-header"><h3 class="text-center font-weight-light my-4">Editar Evento</h3></div>
                         <div class="card-body">
-                            <form action="edit.php" id="edit_evento" method="POST">
+                            <form action="edit.php" id="edit_evento" method="POST" enctype="multipart/form-data">
                                 <input  name="inputId" type="hidden" value="<?php echo $id; ?>" required/>
                                 <div class="form-row">
                                     <div class="col-md-12">
@@ -43,7 +43,7 @@ $dados = selecionar($consulta);
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label class="small mb-1" for="inputDescricao">Descrição do Evento*</label>
-                                            <textarea class="form-control py-4" id="inputDescricao"  name="inputDescricao" rows="5" placeholder="Texto descritivo do Evento para ser exibido no ingresso." value="<?php echo $dados[0]['descricao']; ?>"></textarea>
+                                            <textarea class="form-control py-4" id="inputDescricao"  name="inputDescricao" rows="5" required><?php echo $dados[0]['descricao']; ?></textarea>
                                             <!-- <input class="form-control py-4" id="inputDescricao"  name="inputDescricao" type="text" placeholder="Digite o nome completo" required/> -->
                                         </div>
                                     </div>
