@@ -10,7 +10,6 @@ $produtor  =  $_SESSION["usuario"];
 $nCaixa = $_SESSION["nCaixa"];
 $tipoUsuario = $_SESSION["tipoUsuario"];
 $idUsuario = $_SESSION["idUsuario"];
-$tipoUsuario = 1;
 $nomeEvento = $_SESSION["nomeEvento"];
 $idEvento = $_SESSION["idEvento"];
 $produtor = "Roscoe";

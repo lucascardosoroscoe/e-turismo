@@ -1,12 +1,16 @@
 <?php
     include('../includes/headerLogin.php');
+    $msg = $_GET['msg'];
 ?>     
     <div style='background-image: url("../img/fundoLogin.jpeg"); background-size: cover;height: 1080px;'>
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-5">
                     <div style="margin-top: 7em !important;" class="card shadow-lg border-0 rounded-lg mt-5">
-                        <div class="card-header"><h3 class="text-center font-weight-light my-4">Login</h3></div>
+                        <div class="card-header">
+                            <h3 class="text-center font-weight-light my-4">Login</h3>
+                            <?php echo $msg;?>
+                        </div>
                         <div class="card-body">
                             <form action="login.php" method="POST">
                                 <div class="form-group">
