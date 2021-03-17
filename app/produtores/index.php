@@ -1,11 +1,7 @@
 <?php
 include('../includes/verificarAcesso.php');
-verificarAcesso(3);
+verificarAcesso(1);
 include('../includes/header.php');
-if($tipoUsuario == 4){
-    $msg = "Faça Login como Administrador ou Gerente";
-    echo "<h1>".$msg."</h1>";
-}
 
 
 ?>
@@ -40,14 +36,6 @@ if($tipoUsuario == 4){
                             if($tipoUsuario == 1){
                                 $consulta = "SELECT * FROM Produtor";
                                 addTabela($consulta);
-                            }else if($tipoUsuario == 2){
-                                $consulta = "SELECT tc_users.id, tc_users.name, tc_users.email FROM tc_users JOIN tc_user_driver ON tc_user_driver.driverid = tc_users.id WHERE tc_users.type = 4 AND tc_user_driver.userid = '$idUsuario'";
-                                addTabela($consulta);
-                                $consulta = "SELECT tc_users.id, tc_users.name, tc_users.email FROM tc_users JOIN tc_user_driver ON tc_user_driver.driverid = tc_users.id JOIN tc_user_user ON tc_user_user.manageduserid = tc_user_driver.userid WHERE tc_users.type = 4 AND tc_user_user.userid = '$idUsuario'";
-                                addTabela($consulta);
-                            }else if($tipoUsuario == 3){
-                                $consulta = "SELECT tc_users.id, tc_users.name, tc_users.email FROM tc_users JOIN tc_user_driver ON tc_user_driver.driverid = tc_users.id WHERE tc_users.type = 4 AND tc_user_driver.userid = '$idUsuario'";
-                                addTabela($consulta);
                             }
                         ?>
                     </tbody>
@@ -71,7 +59,7 @@ function addTabela($consulta){
         $validade = $obj['validade'];
         echo ("<td>".$obj['validade']."</td>");
         if($validade == "VALIDO"){
-            echo ("<td style='display: flex;'><a href='editar.php?id=".$obj['id']."' class='iconeTabela'><i class='fas fa-user-edit'></i></a><a href='excluir.php?id=".$obj['id']."' class='iconeTabela red'><i class='fas fa-user-times'></i></a></td>");  
+            echo ("<td style='display: flex;'><a href='editar.php?id=".$obj['id']."' class='iconeTabela'><i class='fas fa-user-edit'></i></a><a href='invalidar.php?id=".$obj['id']."' class='iconeTabela red'><i class='fas fa-user-times'></i></a></td>");  
         }else{
             echo ("<td><a href='reativar.php?id=".$obj['id']."' style='margin-left: 15px;'>Reativar</a></td>");
         }

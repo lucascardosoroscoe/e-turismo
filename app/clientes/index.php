@@ -16,7 +16,6 @@ if($tipoUsuario == 4){
             <i class="fas fa-table mr-1"></i>
             CLIENTES
             <div class="btn btnAdd" onclick="fnExcelReport('dataTable')" style="margin-left: 2px;"><i class="far fa-file-excel"></i> Exportar Excel</div>
-            <a href='adicionar.php'><div class="btn btnAdd"><i class='fas fa-user-plus'></i> Adicionar</div></a>
         </div>
         <div class="card-body">
             <div class="col-md-8" style="float:left; margin-top: 5px;">
@@ -63,7 +62,7 @@ function addTabela($consulta){
             echo ("<td style='display:none;'>".$obj['id']."</td>");
             echo ("<td>".$obj['nome']."</td>"); 
             echo ("<td>".$obj['telefone']."</td>");
-            echo ("<td style='display: flex;'><a href='editar.php?id=".$obj['id']."' class='iconeTabela'><i class='fas fa-user-edit'></i></a><a href='excluir.php?id=".$obj['id']."' class='iconeTabela red'><i class='fas fa-user-times'></i></a></td>");  
+            echo ("<td style='display: flex;'><a href='editar.php?id=".$obj['id']."' class='iconeTabela'><i class='fas fa-user-edit'></i></a></td>");  
         echo "</tr>";
     }
 }
