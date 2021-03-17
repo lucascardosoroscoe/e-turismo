@@ -3,7 +3,7 @@ include('../includes/verificarAcesso.php');
 verificarAcesso(2);
 include('../includes/header.php');
 $id = $_GET['id'];
-$conculta = "SELECT * FROM `Vendedor` WHERE `id` = '$id'";
+$conculta = "SELECT * FROM `Cliente` WHERE `id` = '$id'";
 $dados = selecionar($conculta);
 ?>      
     <div style='background-image: url("../img/fundoLogin.jpeg"); background-size: cover;height: 1080px;'>
@@ -11,18 +11,10 @@ $dados = selecionar($conculta);
             <div class="row justify-content-center">
                 <div class="col-lg-7">
                     <div class="card shadow-lg border-0 rounded-lg mt-5">
-                        <div class="card-header"><h3 class="text-center font-weight-light my-4">Editar Vendedor</h3></div>
+                        <div class="card-header"><h3 class="text-center font-weight-light my-4">Editar Cliente</h3></div>
                         <div class="card-body">
                             <form action="edit.php" id="edit_user" method="POST">
                                 <input  name="inputId" type="hidden" value="<?php echo $id; ?>" required/>
-                                <div class="form-row">
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <label class="small mb-1" for="inputEmailAddress">E-mail</label>
-                                            <input class="form-control py-4" id="inputEmailAddress"  name="inputEmailAddress" type="email" aria-describedby="emailHelp" placeholder="Digite o e-mail" value="<?php echo $dados[0]['email']; ?>" required/>
-                                        </div>
-                                    </div>
-                                </div>
                                 <div class="form-row">
                                     <div class="col-md-6">
                                         <div class="form-group">
@@ -37,17 +29,7 @@ $dados = selecionar($conculta);
                                         </div>
                                     </div>
                                 </div>
-                                <div class="form-row">
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <div class="custom-control custom-checkbox">
-                                                <input class="custom-control-input" id="resetPasswordCheck" name="resetPasswordCheck" value='1' type="checkbox" />
-                                                <label class="custom-control-label" for="resetPasswordCheck">Modificar Senha</label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group mt-4 mb-0"><button class="btn btn-primary btn-block" type="submit" >Editar Vendedor</button></div>
+                                <div class="form-group mt-4 mb-0"><button class="btn btn-primary btn-block" type="submit" >Editar Cliente</button></div>
                             </form>
                         </div>
                     </div>
