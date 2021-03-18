@@ -1,7 +1,7 @@
 <?php
 include('../includes/verificarAcesso.php');
 verificarAcesso(2);
-include('../includes/bancoDados.php');
+
 
 
 $id = $_POST['inputId'];

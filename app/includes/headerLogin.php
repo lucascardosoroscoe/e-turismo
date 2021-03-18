@@ -23,7 +23,7 @@
     ?>
     <nav class="sb-topnav navbar navbar-expand " style="background-color: #fff;">
           <a class="navbar-brand" href="<?php echo $HTTP_HOST;?>/index.php"><img src="<?php echo $HTTP_HOST;?>/img/logo.png" alt="Soluções2c" srcset="" style="height:40px;"></a>
-        <!-- Botão do Menu -->
+          <!-- Botão do Menu -->
           <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button>
     </nav>
     <div id="layoutSidenav_content">

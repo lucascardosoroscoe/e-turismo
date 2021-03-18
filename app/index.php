@@ -43,7 +43,7 @@ include('./includes/header.php');
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label class="small mb-1" for="inputTelefone">Telefone do Cliente*</label>
-                                        <input class="form-control py-4" id="inputTelefone"  name="inputTelefone" type="text" placeholder="Digite o telefone (DDD obrigatório)" required/>
+                                        <input class="form-control py-4" id="inputTelefone"  name="inputTelefone" type="number" placeholder="Digite o telefone (DDD obrigatório)" required/>
                                     </div>
                                 </div>
                             </div>

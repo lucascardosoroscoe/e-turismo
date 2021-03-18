@@ -25,12 +25,21 @@ $(function(){
 	$('.tablesorter').tablesorter();
 });
 var inputEvento = document.getElementById('selectEvento');
+var inputLote   = document.getElementById('selectLote');
+
 //Script Selecionar Evento
 function selectevento(id){
     var idEvento = inputEvento.value;
     var url = window.location.href;
     var nomeEvento = inputEvento.options[inputEvento.selectedIndex].text;
     window.location = "http://ingressozapp.com/app/assets/selecionarEvento.php?idEvento="+ idEvento + "&nomeEvento=" + nomeEvento + "&u=" + url;
+}
+
+//Script Selecionar Evento
+function selectlote(id){
+    var idLote = inputLote.value;
+    var url = window.location.href;
+    window.location = "http://ingressozapp.com/app/assets/selecionarLotes.php?idLote="+ idLote + "&u=" + url;
 }
 
 function adicionarlote() {

@@ -1,5 +1,5 @@
 <?php
-include('../includes/bancoDados.php');
+
 
 $email = $_POST['inputEmailAddress'];
 $inputPassword = $_POST['inputPassword'];

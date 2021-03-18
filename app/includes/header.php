@@ -18,7 +18,7 @@
 
     <body>
 <?php
-include('bancoDados.php');
+
 
 setlocale(LC_ALL, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
 
@@ -154,11 +154,14 @@ setlocale(LC_ALL, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
     global $tipoUsuario, $idEvento, $idUsuario;
     
     if($tipoUsuario == 1){
-      $consulta = "SELECT * FROM `Evento` WHERE 1";
+      $consulta = "SELECT * FROM `Evento` WHERE validade = 'VALIDO'";
     }else if($tipoUsuario == 2){
-      $consulta = "SELECT * FROM `Evento` WHERE `produtor`= '$idUsuario'";
+      $consulta = "SELECT * FROM `Evento` WHERE `produtor`= '$idUsuario' AND validade = 'VALIDO'";
     }else if($tipoUsuario == 3){
-     
+      $consulta = "SELECT Evento.id, Evento.nome FROM Evento 
+      JOIN Produtor ON Evento.produtor = Produtor.id
+      JOIN Vendedor ON Produtor.id = Vendedor.produtor
+      WHERE Vendedor.id = '$idUsuario' AND Produtor.validade = 'VALIDO' AND Evento.validade = 'VALIDO'";
     }
     $dados = selecionar($consulta);
     echo('<select class="form-control" name="selectEvento" id="selectEvento" onchange="selectevento(1)"  form="emitir" required>');

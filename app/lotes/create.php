@@ -1,7 +1,7 @@
 <?php
     include('../includes/verificarAcesso.php');
     verificarAcesso(2);
-    include('../includes/bancoDados.php');
+    
     
     $nome = $_POST['inputName'];
     $valor   = $_POST['inputValor'];

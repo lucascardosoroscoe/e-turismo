@@ -1,4 +1,5 @@
 <?php
+include('bancoDados.php');
 session_start();
 /*Verificar Login*/
 $usuario = $_SESSION["usuario"];
@@ -6,12 +7,20 @@ $idUsuario = $_SESSION["idUsuario"];
 $tipoUsuario = $_SESSION["tipoUsuario"];
 $idEvento = $_SESSION["idEvento"];
 $nomeEvento = $_SESSION["nomeEvento"];
-
+$idLote = $_SESSION["idLote"];
 $nCaixa = $_SESSION["nCaixa"];
 
-if($tipoUsuario == 2){
-  $produtor = $idUsuario;
-}
+  $consulta = "SELECT `produtor` FROM `Evento` WHERE `id` = '$idEvento'";
+  $produtor = selecionar($consulta);
+  $produtor = $produtor[0]['produtor'];
+
+  if($tipoUsuario == 1){
+    $vendedor = 184;
+  }else if($tipoUsuario == 2){
+    $vendedor = 185;
+  }else if($tipoUsuario == 3){
+    $vendedor = $idUsuario;
+  }
 
 if($tipoUsuario != 1 && $tipoUsuario != 2 && $tipoUsuario != 3 && $tipoUsuario != 4){
   header('Location: http://ingressozapp.com/app/login/index.php?msg='.$msg);
