@@ -1,7 +1,6 @@
 <?php
 include('bancoDados.php');
-session_start();
-/*Verificar Login*/
+
 $usuario = $_SESSION["usuario"];
 $idUsuario = $_SESSION["idUsuario"];
 $tipoUsuario = $_SESSION["tipoUsuario"];
@@ -10,19 +9,8 @@ $nomeEvento = $_SESSION["nomeEvento"];
 $idLote = $_SESSION["idLote"];
 $nCaixa = $_SESSION["nCaixa"];
 
-  $consulta = "SELECT `produtor` FROM `Evento` WHERE `id` = '$idEvento'";
-  $produtor = selecionar($consulta);
-  $produtor = $produtor[0]['produtor'];
 
-  if($tipoUsuario == 1){
-    $vendedor = 184;
-  }else if($tipoUsuario == 2){
-    $vendedor = 185;
-  }else if($tipoUsuario == 3){
-    $vendedor = $idUsuario;
-  }
-
-if($tipoUsuario != 1 && $tipoUsuario != 2 && $tipoUsuario != 3 && $tipoUsuario != 4){
+if($tipoUsuario != '1' && $tipoUsuario != '2' && $tipoUsuario != '3' && $tipoUsuario != '4'){
   header('Location: http://ingressozapp.com/app/login/index.php?msg='.$msg);
 }
 function verificarAcesso($nivelAcesso){
@@ -32,10 +20,6 @@ function verificarAcesso($nivelAcesso){
         if($tipoUsuario == 1 || $tipoUsuario == 2 || $tipoUsuario == 3){
           header('Location: http://ingressozapp.com/app/index.php?msg='.$msg);
         }
-        // else if($tipoUsuario = 4){
-        //   $msg = $_GET['msg'];
-        //   header('Location: http://ingressozapp.com/app/appMotorista/index.php?msg=' . $msg);
-        // }
     }
 }
 

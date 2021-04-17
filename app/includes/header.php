@@ -115,12 +115,6 @@ setlocale(LC_ALL, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
                       echo('<a class="nav-link" href="'.$HTTP_HOST.'/produtos"><div class="sb-nav-link-icon"><i class="fas fa-cogs"></i></div>Cadastro de produtos</a>');
                       echo('<a class="nav-link" href="'.$HTTP_HOST.'/cardapio"><div class="sb-nav-link-icon"><i class="fas fa-cogs"></i></div>Cadastro de Cardápio</a>');
                     }
-                }else if($tipoUsuario = 4){
-                  echo('<a class="nav-link" href="'.$HTTP_HOST.'/appMotorista/index.php"><div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>Principal</a>');
-                  echo('<a class="nav-link" href="'.$HTTP_HOST.'/appMotorista/associarVeiculo.php"><div class="sb-nav-link-icon"><i class="fas fa-car"></i></div>Veículo</a>');
-                  echo('<a class="nav-link" href="'.$HTTP_HOST.'/fuel/adicionar.php"><div class="sb-nav-link-icon"><i class="fas fa-gas-pump"></i></div>Abastecimento</a>');
-                  echo('<a class="nav-link" href="'.$HTTP_HOST.'/maintenances/planejadas/adicionar.php"><div class="sb-nav-link-icon"><i class="fas fa-cogs"></i></div>Manutenção</a>');
-
                 }
                 ?>
               </div>

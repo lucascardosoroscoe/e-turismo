@@ -10,7 +10,9 @@ include('./includes/header.php');
                 <div class="card shadow-lg border-0 rounded-lg mt-5">
                     <div class="card-header">
                         <i class="fas fa-user"></i>
-                        <?php if($tipoUsuario != ''){echo $usuario;}?> , seja bem vindo ao IngressoZapp!
+                        <?php 
+                        if($tipoUsuario != ""){echo $usuario;}
+                        ?> , seja bem vindo ao IngressoZapp!
                     </div>
                     <div class="card-body">
                         <h2>Emitir Ingresso</h2>

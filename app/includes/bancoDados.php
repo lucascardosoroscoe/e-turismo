@@ -1,4 +1,5 @@
 <?php
+    session_start();
     //Conexão com o o Banco de dados
     $servidorBanco = '185.201.11.212:3306';
     $senhaBanco ='ingressozapp';

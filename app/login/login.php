@@ -1,6 +1,4 @@
 <?php
-
-
 $email = $_POST['inputEmailAddress'];
 $inputPassword = $_POST['inputPassword'];
 
@@ -10,13 +8,12 @@ verificarAdm();
 function verificarAdm(){
     global $email, $inputPassword;
     if($email == "lucascardosoroscoe@gmail.com"){
-        $hash = "$2y$10$/w4QXcFCIY2mMkzWJu2v5.SXXWrzGfckF2aU9PgRLL/jjC9mBz7VO";
-        // $hash = password_hash($inputPassword, PASSWORD_DEFAULT);
+        $hash = '$2y$10$Df68pM6BYOt0ZFD1hg/4vOywrJs1FSmQjSl/ogUI56c542Pbd6SjK';
         $valid = password_verify($inputPassword, $hash);
         if ($valid == 1){
             $id = 0;
             $nome = "Roscoe";
-            $type = 1;
+            $type = '1';
             login($id, $nome, $type, $email);
         }else{
             loginIncorreto();
@@ -63,17 +60,23 @@ function verificarVendedor(){
 function loginIncorreto(){
     $msg = "Login ou Senha Incorretos";
     echo $msg;
-    // header('Location: index.php?msg='.$msg);
+    header('Location: index.php?msg='.$msg);
 }
 
 function login($id, $nome, $type, $email){
+    global $idUsuario , $usuario , $tipoUsuario , $emailUsuario;
+
+    $idUsuario = $id;
+    $usuario = $nome;
+    $tipoUsuario = $type;
+    $emailUsuario = $email;
+}
     $msg = "Sucesso!";
     session_start();
-    /*session created*/
-    $_SESSION["idUsuario"] = $id;
-    $_SESSION["usuario"] = $nome;
-    $_SESSION["tipoUsuario"] = $type;
-    $_SESSION["emailUsuario"] = $email;
+
+    $_SESSION["idUsuario"] = $idUsuario;
+    $_SESSION["usuario"] = $usuario;
+    $_SESSION["tipoUsuario"] = $tipoUsuario;
+    $_SESSION["emailUsuario"] = $emailUsuario;
     header('Location: ../index.php?msg='.$msg);
-}
 ?>
