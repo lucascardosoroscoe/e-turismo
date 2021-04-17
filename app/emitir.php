@@ -1,100 +1,134 @@
 <?php
-include('./includes/verificarAcesso.php');
+include('includes/verificarAcesso.php');
 verificarAcesso(2);
 
-$codigo    =  rand ( 10000000 , 99999999 );
-$evento    =  $_POST['selectEvento'];
-$idLote    =  $_POST["selectLote"];
-$cliente   =  $_POST['inputNome'];
-$telefone  =  $_POST['inputTelefone'];
-$telefone = str_replace(" ", "", $telefone);
-$telefone = str_replace("(", "", $telefone);
-$telefone = str_replace(")", "", $telefone);
-$telefone = str_replace("-", "", $telefone);
-$telefone = str_replace("+55", "", $telefone);
-$prim = substr($telefone,0,1);
-if($prim == 0){
-    $telefone = substr($telefone,1,11);
+carregarPost();
+getLote();
+getCliente();
+verificarIngresso();
+$local='https://ingressozapp.com/promoter/enviar.php?codigo='.$codigo;    
+enviarIngresso();
+
+function carregarPost(){
+    global $codigo, $evento, $idLote, $nomeCliente, $telefone;
+    $codigo    =  rand ( 1000000000 , 9999999999 );
+    $evento    =  $_POST['selectEvento'];
+    $idLote    =  $_POST["selectLote"];
+    $nomeCliente   =  $_POST['inputNome'];
+    $telefone  =  $_POST['inputTelefone'];
+    $telefone = str_replace(" ", "", $telefone);
+    $telefone = str_replace("(", "", $telefone);
+    $telefone = str_replace(")", "", $telefone);
+    $telefone = str_replace("-", "", $telefone);
+    $telefone = str_replace("+55", "", $telefone);
+    $prim = substr($telefone,0,1);
+    if($prim == 0){
+        $telefone = substr($telefone,1,11);
+    }
 }
 
-// $local='https://ingressozapp.com/promoter/enviar.php?codigo='.$codigo.'&evento='.$evento.'&produtor='.$produtor.'&nome='.$cliente.'&telefone='.$telefone;
+function getLote(){
+    global $idLote, $valor, $sexo, $quantidade, $vendidos;
+    $consulta = "SELECT * FROM Lote WHERE id='$idLote'";
+    $obj = selecionar($consulta);
+    $lote = $obj[0];
+    $valor     =  $lote['valor'];
+    $sexo      =  $lote['sexo'];
+    $quantidade=  $lote['quantidade'];
+    $vendidos  =  $lote['vendidos'];
+    $vendidos  =  $vendidos + 1 ;
 
-//Pega as informações do Lote e adiciona um ingresso vendido
-$consulta = "SELECT * FROM Lote WHERE id='$idLote'";
-echo "<br>".$consulta;
-$obj = selecionar($consulta);
-$lote = $obj[0];
-$valor     =  $lote['valor'];
-$sexo      =  $lote['sexo'];
-$quantidade=  $lote['quantidade'];
-$vendidos  =  $lote['vendidos'];
-$vendidos  =  $vendidos + 1 ;
-   
-$consulta = "UPDATE `Lote` SET `vendidos`='$vendidos' WHERE `id` = '$idLote'";
-echo "<br>".$consulta;
-$msg = executar($consulta);
-
-//Confere se Já foi gerado um ingresso do mesmo vendedor, com o mesmo nome, pro mesmo evento.
-$consulta = "SELECT * from Ingresso WHERE produtor= '$produtor' AND evento= '$evento' AND vendedor= '$vendedor' AND cliente= '$cliente'";
-$msg = verificar($consulta);
-echo "<br>".$consulta;
-//echo json_encode($dados);
-if($msg=="Sucesso!"){
-    echo "<br>".$msg;
-    // $conexao = mysqli_connect($servidor, $usuario, $senha, $bdados);
-    //     $consulta = "insert into Ingresso (codigo, produtor, evento, vendedor, cliente, telefone, valor, lote, sexo) values ('$codigo', '$produtor', '$evento', '$promoter', '$cliente', '$telefone', '$valor', '$lote', '$sexo')";
-    //     echo $consulta;
-    //     if(mysqli_query($conexao, $consulta)){
-    //         $sucesso = 1;
-    //     }else{echo "erro";}
-
-    // mysqli_close($conexao);
-    // if($sucesso == 1){
-        
-    //     if($quantidade == $vendidos){
-    //         //Invalida o Lote
-    //         $conexao = mysqli_connect($servidor, $usuario, $senha, $bdados);
-    //         $consulta = "update Lote set validade = 'ESGOTADO' where 'nome' = '$lote' AND 'evento ' = '$evento' ";
-    //         if(mysqli_query($conexao, $consulta)){echo "<br>";}else{echo "Falha ao invalidar Evento";}
-    //         mysqli_close($conexao);        
-    //         //Dispara o e-mail de lote acabado para o Produtor 
-    //     }else if ($quantidade - $vendidos == 5)
-    //     {
-    //         //Verifica e-mail do produtor
-    //         $conexao = mysqli_connect($servidor, $usuario, $senha, $bdados);
-    //         $consulta = "SELECT * FROM Produtor WHERE usuario='$produtor'";
-    //         $gravacoes = mysqli_query($conexao, $consulta);
-    //         $dados = array();
-    //         while($linha = mysqli_fetch_assoc($gravacoes)){
-    //             $dados[] = $linha; 
-    //         }
-    //         $obj = $dados[0];    
-    //         mysqli_close($conexao);
-    //         //Dispara o e-mail de lote acabando para o Produtor 
-    //         echo "Lote acabando";
-    //         $assunto = 'Lote "'.$lote.'" Encerrando';
-    //         $mensagem = 'O lote "'.$lote.'" está se encerrando. Entre agora mesmo no aplicativo "Painel IngressoZapp" e verifique se o próximo lote já está a venda.';
-    //         $destinatario = $obj['email'];
-    //         header('Location: https://ingressozapp.com/enviar_email.php?assunto='.$assunto.'&mensagem='.$mensagem.'&destinatario='.$destinatario.'&local='.$local);
-    //     }
-
-
-    //     //Verificando se é ou não um ingresso Rápido
-    //     $msg = $_GET["msg"];
-    //     if (empty($msg)){
-    //         header('Location: '.$local);
-    //     }else{
-    //         $conexao = mysqli_connect($servidor, $usuario, $senha, $bdados);
-    //         $consulta = "update Ingresso set validade = 'INVALIDO' where codigo = '$codigo'";
-
-    //         if(mysqli_query($conexao, $consulta)){}else{echo "<h5>Falha ao invalidar ingresso</h5>";}
-    //         mysqli_close($conexao);
-    //         echo("<h1>Ingresso gerado com sucesso, permitir entrada!!!!</h1>");
-    //     }
-    // }
-}else{
-    echo("<h3>Você já gerou um ingresso com essse mesmo nome de cliente para o evento $evento. Caso esteja gerando um novo ingresso, para outro cliente, por favor volte e coloque um nome mais completo.<br><br>Caso esteja tentantando reenviar o ingresso pois errou o número do Whatsapp ao gerar o ingresso <a href='$local'>Clique aqui</a> </h3>");
 }
 
+function getCliente(){
+    global $nomeCliente, $telefone, $idCliente;
+    $consulta = "SELECT `id` FROM `Cliente` WHERE `nome` = '$nomeCliente' AND `telefone` = '$telefone'";
+    $dados = selecionar($consulta);
+    if($dados[0]['id'] == ""){
+        $consulta = "INSERT INTO `Cliente`(`nome`, `telefone`) VALUES ('$nomeCliente', '$telefone')";
+        $msg = executar($consulta);
+        if($msg == "Sucesso!"){
+            $consulta = "SELECT `id` FROM `Cliente` WHERE `nome` = '$nomeCliente' AND `telefone` = '$telefone'";
+            $dados = selecionar($consulta);
+            $idCliente = $dados[0]['id'];
+        }else{
+            echo "Erro ao criar Cliente";
+        }
+    }else{
+        $idCliente = $dados[0]['id'];
+    }
+}
+
+function verificarIngresso(){
+    global $tipoUsuario, $evento, $idCliente, $vendedor;
+    if($tipoUsuario == '1'){
+        $consulta = "SELECT * from Ingresso WHERE evento= '$evento' AND vendedor= '1' AND idCliente= '$idCliente'";
+        $vendedor = 1;
+    }else if($tipoUsuario == '2'){
+        $consulta = "SELECT * from Ingresso WHERE evento= '$evento' AND vendedor= '2' AND idCliente= '$idCliente'";
+        $vendedor = 2;
+    }else if($tipoUsuario == '3'){
+        $consulta = "SELECT * from Ingresso WHERE evento= '$evento' AND vendedor= '$idUsuario' AND idCliente= '$idCliente'";
+        $vendedor = $idUsuario;
+    }
+    $dados = selecionar($consulta);
+    if ($dados[0]['codigo'] == ""){
+        gerarIngresso();
+        atualizarVendidosLote();
+    }else{
+        echo("<h3>Você já gerou um ingresso para" . $nomeCliente . " deste mesmo Evento . Caso esteja gerando um novo ingresso, para outro cliente, por favor volte e coloque um nome mais completo.<br><br>Caso esteja tentantando reenviar o ingresso pois errou o número do Whatsapp ao gerar o ingresso <a href='$local'>Clique aqui</a> </h3>");
+
+    }
+}
+
+function gerarIngresso(){
+    global $codigo, $evento, $vendedor, $idCliente, $telefone, $valor, $idLote;
+    $consulta = "INSERT INTO Ingresso (codigo, evento, vendedor, idCliente, valor, lote) VALUES ('$codigo', '$evento', '$vendedor', '$idCliente', '$valor', '$idLote')";
+    echo $consulta;
+    $msg = executar($consulta);
+    if($msg == 'Sucesso!'){
+        echo "Ingresso gerado.";
+        atualizarVendidosLote();
+        enviarIngresso();
+    }else{
+        echo "Erro ao gerar ingresso.";
+        gerarIngresso();
+    }
+}
+
+function atualizarVendidosLote(){
+    global $vendidos, $idLote, $quantidade;
+    if($quantidade == $vendidos){
+        $consulta = "UPDATE Lote SET validade = 'ESGOTADO' WHERE id = $idLote ";
+        $msg = executar($consulta);
+        if($msg == 'Sucesso!'){
+            emailVirada();
+        }else{
+            echo "Falha ao invalidar Lote";
+        }
+    }
+    $consulta = "UPDATE `Lote` SET `vendidos`='$vendidos' WHERE `id` = '$idLote'";
+    $msg = executar($consulta);    
+}
+
+function emailVirada(){
+    echo "E-mail enviado";
+}
+
+function enviarIngresso(){
+    global $local;
+    $msg = $_POST["msg"];
+    if (empty($msg)){
+        header('Location: '.$local);
+    }else if ($msg == "1"){
+        $consulta = "UPDATE Ingresso SET validade = 'INVALIDO' WHERE codigo = '$codigo'";
+        $msg = executar($consulta);
+        if($msg == 'Sucesso!'){
+            echo("<h1>Ingresso gerado com sucesso, permitir entrada!!!!</h1>");
+        }else{
+            echo "<h5>Falha ao invalidar ingresso</h5>";
+        }
+    }
+}
 
 ?>
