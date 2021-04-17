@@ -36,7 +36,7 @@ include('../includes/header.php');
                                 $consulta = "SELECT * FROM Evento";
                                 addTabela($consulta);
                             }else if($tipoUsuario == 2){
-                                $consulta = "SELECT * FROM Evento WHERE produtor = '$produtor'";
+                                $consulta = "SELECT * FROM Evento WHERE produtor = '$idUsuario'";
                                 addTabela($consulta);
                             }
                         ?>

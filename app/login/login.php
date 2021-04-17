@@ -1,4 +1,5 @@
 <?php
+include('../includes/bancoDados.php');
 $email = $_POST['inputEmailAddress'];
 $inputPassword = $_POST['inputPassword'];
 
@@ -28,7 +29,9 @@ function verificarProdutor(){
     $consulta = "SELECT `id`, `nome`, `senha` FROM `Produtor` WHERE `email` = '$email'";
     echo $consulta;
     $dados = selecionar($consulta);
+    echo json_encode($dados);
     $hash = $dados[0]['senha'];
+    echo $hash;
     $valid = password_verify($inputPassword, $hash);
     if ($valid == 1){
         $id = $dados[0]['id'];
@@ -43,9 +46,9 @@ function verificarProdutor(){
 function verificarVendedor(){
     global $email, $inputPassword;
     $consulta = "SELECT `id`, `nome`, `senha` FROM `Vendedor` WHERE `email` = '$email'";
-    echo $consulta;
     $dados = selecionar($consulta);
     $hash = $dados[0]['senha'];
+    echo $hash;
     $valid = password_verify($inputPassword, $hash);
     if ($valid == 1){
         $id = $dados[0]['id'];
@@ -64,19 +67,15 @@ function loginIncorreto(){
 }
 
 function login($id, $nome, $type, $email){
-    global $idUsuario , $usuario , $tipoUsuario , $emailUsuario;
-
-    $idUsuario = $id;
-    $usuario = $nome;
-    $tipoUsuario = $type;
-    $emailUsuario = $email;
-}
     $msg = "Sucesso!";
     session_start();
 
-    $_SESSION["idUsuario"] = $idUsuario;
-    $_SESSION["usuario"] = $usuario;
-    $_SESSION["tipoUsuario"] = $tipoUsuario;
-    $_SESSION["emailUsuario"] = $emailUsuario;
+    $_SESSION["idUsuario"] = $id;
+    $_SESSION["usuario"] = $nome;
+    $_SESSION["tipoUsuario"] = $type;
+    $_SESSION["emailUsuario"] = $email;
+    echo $_SESSION["tipoUsuario"];
     header('Location: ../index.php?msg='.$msg);
+}
+    
 ?>
