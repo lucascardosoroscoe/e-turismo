@@ -60,13 +60,13 @@ setlocale(LC_ALL, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
               <div class="nav">
               <?php
                 
-                echo('<a class="nav-link" href="'.$HTTP_HOST.'/index.php"><div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>IngressoZapp</a>');
+                echo('<a class="nav-link" href="'.$HTTP_HOST.'/index.php"><div class="sb-nav-link-icon"><i class="fas fa-home"></i></div>IngressoZapp</a>');
                 if($tipoUsuario == 1 || $tipoUsuario == 2 || $tipoUsuario == 3){
                   echo('<div class="sb-sidenav-menu-heading">Principal</div>');
 
                   //Painel de Controle
                   echo('<a class="nav-link" href="'.$HTTP_HOST.'/ingresso.php"><div class="sb-nav-link-icon"><i class="fas fa-ticket-alt"></i></div>Emitir Ingresso</a>');
-                  echo('<a class="nav-link" href="'.$HTTP_HOST.'/vendas.php"><div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>Minhas Vendas</a>');
+                  echo('<a class="nav-link" href="'.$HTTP_HOST.'/vendas"><div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>Minhas Vendas</a>');
 
 
                   //Usuários

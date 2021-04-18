@@ -1,21 +1,16 @@
 <?php
-include_once '../includes/header.php';
+include('../includes/verificarAcesso.php');
+verificarAcesso(3);
+include('../includes/header.php');
 
-/*session created*/
-include 'consulta.php';
-
-
-
-     session_start();
-     $promoter  =  $_SESSION["promoter"];
-     $evento  = $_SESSION['evento'];
-
-     
-
-
-
+if($tipoUsuario == 1){
      $consulta = "SELECT * FROM `Ingresso` WHERE `evento` = '$evento' AND `vendedor` = '$promoter' AND (`validade` = 'VALIDO' OR `validade` = 'INVALIDO')";
-     $dados = selecionar($consulta);
+}else if($tipoUsuario == 2){
+
+}else if($tipoUsuario == 3){
+
+}
+// $dados = selecionar($consulta);
 
 $hoje = date('d/m/Y h:m', strtotime("-3 hour"));
 ?>
@@ -125,6 +120,26 @@ echo ('</div>');
 <link rel="stylesheet" type="text/css" href="print.css" media="print" />
 <?php
 
+     function addEvento($evento, $promoter){
+          $consulta = "SELECT Evento.nome FROM Evento JOIN Produtor ON Evento.produtor = Produtor.usuario JOIN Vendedor ON Vendedor.produtor = Produtor.usuario WHERE Vendedor.usuario = '$promoter'";
+          echo $consulta;
+          $dados = selecionar($consulta);
+          $size = sizeof($dados);
+          echo $size;
+          
+          for ($i = 0; $i < $size; $i++){
+          $obj = $dados[$i];
+          //echo json_encode($primeiro);
+          //echo "<br>";
+          $nome = $obj['nome'];
+          if ($nome == $evento){
+               echo ('<option value="'.$nome.'" selected>'.$nome.'</option>');
+          }else{
+               echo ('<option value="'.$nome.'">'.$nome.'</option>');
+          }
+          }
+          
+     }
 
     include_once '../includes/footer.php';
 ?>
