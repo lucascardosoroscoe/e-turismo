@@ -17,9 +17,11 @@ $count = 0;
      </ol>
      <div class="card mb-4">
           <div class="card-header">
-               <img src="../includes/logo.png" alt="" class="logo">
-               <h3>INGRESSOZAPP</h3>
-               <h6 style="text-align: end;">LR Software - <?php echo $hoje ?></h6>
+               <img src="../img/logo.png" alt="" class="logo" style="float:left;">
+               <div style="float:right; width: 60%;">
+                    <h2>INGRESSOZAPP</h2>
+                    <h6 style="text-align: end;">LR Software - <?php echo $hoje ?></h6>
+               </div>
           </div>
           <div class="card-body">
                <?php 
@@ -37,6 +39,29 @@ $count = 0;
 <link rel="stylesheet" type="text/css" href="print.css" media="print" />    
                
 <?php
+     function addEvento(){
+          global $tipoUsuario, $idUsuario, $idEvento, $nomeEvento, $vendedor;
+          if($tipoUsuario == 1){
+               $consulta = "SELECT * FROM Evento";
+          }else if($tipoUsuario == 2){
+               $consulta = "SELECT * FROM Evento WHERE `produtor` = $idUsuario";
+          }else if($tipoUsuario == 3){
+               $consulta = "SELECT * FROM Evento JOIN ProdutorVendedor ON ProdutorVendedor.idProdutor = Evento.produtor WHERE ProdutorVendedor.idVendedor = '$idUsuario'";
+          }
+          
+          $eventos = selecionar($consulta);
+          foreach ($eventos as $evento) {
+               $id = $evento['id'];
+               $nome = $evento['nome'];
+               if ($id == $idEvento){
+                    echo ('<option value="'.$id.'" selected>'.$nome.'</option>');
+                    $nomeEvento = $nome;
+               }else{
+                    echo ('<option value="'.$id.'">'.$nome.'</option>');
+               }
+          }   
+     }
+
      function carregarCabecalho(){
           global $usuario, $nomeEvento;
           echo'<h3>Relatório de Emissão de Ingressos</h3>';
@@ -45,35 +70,34 @@ $count = 0;
      }
 
      function carregarIngressos(){
-          global $tipoUsuario, $idUsuario, $soma, $count;
+          global $tipoUsuario, $idEvento, $idUsuario, $soma, $count;
 
           if($tipoUsuario == 1){
                $consulta = "SELECT Ingresso.codigo, Ingresso.valor, Ingresso.validade, Ingresso.data,
-               Evento.nome as evento, Vendedor.nome as vendedor, Cliente.nome as cliente, Cliente.telefone, Lote.nome as lote
+               Evento.nome as evento, Vendedor.nome as vendedor, Cliente.nome as cliente, Cliente.telefone
                FROM Ingresso 
                JOIN Evento ON Evento.id = Ingresso.evento
                JOIN Vendedor ON Vendedor.id = Ingresso.vendedor
                JOIN Cliente ON Cliente.id = Ingresso.idCliente
-               JOIN Lote ON Lote.id = Ingresso.lote
-               WHERE 1";
+               WHERE Vendedor.id = 1 AND Evento.id = $idEvento";
+               // Add lote depois
+               // JOIN Lote ON Lote.id = Ingresso.lote
           }else if($tipoUsuario == 2){
                $consulta = "SELECT Ingresso.codigo, Ingresso.valor, Ingresso.validade, Ingresso.data,
-               Evento.nome as evento, Vendedor.nome as vendedor, Cliente.nome as cliente, Cliente.telefone, Lote.nome as lote
+               Evento.nome as evento, Vendedor.nome as vendedor, Cliente.nome as cliente, Cliente.telefone
                FROM Ingresso 
                JOIN Evento ON Evento.id = Ingresso.evento
                JOIN Vendedor ON Vendedor.id = Ingresso.vendedor
                JOIN Cliente ON Cliente.id = Ingresso.idCliente
-               JOIN Lote ON Lote.id = Ingresso.lote
-               WHERE Vendedor.id = 2 AND Evento.produtor = $idUsuario";
+               WHERE Vendedor.id = 2 AND Evento.id = $idEvento";
           }else if($tipoUsuario == 3){
                $consulta = "SELECT Ingresso.codigo, Ingresso.valor, Ingresso.validade, Ingresso.data,
-               Evento.nome as evento, Vendedor.nome as vendedor, Cliente.nome as cliente, Cliente.telefone, Lote.nome as lote
+               Evento.nome as evento, Vendedor.nome as vendedor, Cliente.nome as cliente, Cliente.telefone
                FROM Ingresso 
                JOIN Evento ON Evento.id = Ingresso.evento
                JOIN Vendedor ON Vendedor.id = Ingresso.vendedor
                JOIN Cliente ON Cliente.id = Ingresso.idCliente
-               JOIN Lote ON Lote.id = Ingresso.lote
-               WHERE Vendedor.id = $idUsuario";
+               WHERE Vendedor.id = $idUsuario AND Evento.id = $idEvento";
           }
 
           echo'<br><h3>Tabela de Ingressos</h3>';
@@ -84,7 +108,7 @@ $count = 0;
                               echo'<th>Código</th>';
                               echo'<th>Cliente</th>';
                               echo'<th>Valor</th>';
-                              echo'<th>Lote</th>';
+                              // echo'<th>Lote</th>';
                          echo'</tr>';
                     echo'</thead>';
                     echo'<tbody id="tbody">';
@@ -95,7 +119,7 @@ $count = 0;
                               echo ("<td>".$ingresso['codigo']."</td>");
                               echo ("<td>".$ingresso['cliente']."</td>");
                               echo ("<td>R$".number_format($ingresso['valor'], 2, ',', '.')."</td>");  
-                              echo ("<td>".$ingresso['lote']."</td>"); 
+                              // echo ("<td>".$ingresso['lote']."</td>"); 
                          echo "</tr>";
                          $soma += floatval($ingresso['valor']);
                          $count++;
@@ -105,6 +129,7 @@ $count = 0;
                     echo'</tbody>';
                echo'</table>';
           echo'</div>  ';
+          // echo $consulta;
      }
      
      function carregarTotal(){
@@ -113,14 +138,14 @@ $count = 0;
      }
      
      function carregarRecebimentos(){
-          global  $soma;
+          global  $soma, $tipoUsuario, $idUsuario, $idEvento;
 
           if($tipoUsuario == 1){
-               $consulta = "SELECT * FROM `Recebidos`";
+               $consulta = "SELECT * FROM `Recebidos` WHERE vendedor = 1          AND evento = $idEvento";
           }else if($tipoUsuario == 2){
-               $consulta = "SELECT * FROM `Recebidos`";
+               $consulta = "SELECT * FROM `Recebidos` WHERE vendedor = 2          AND evento = $idEvento";
           }else if($tipoUsuario == 3){
-               $consulta = "SELECT * FROM `Recebidos`";
+               $consulta = "SELECT * FROM `Recebidos` WHERE vendedor = $idUsuario AND evento = $idEvento";
           }
 
           echo ("<br><h3>Recebimentos</h3>");
@@ -147,29 +172,6 @@ $count = 0;
           echo ("<h5>Valor Total Pago: R$".number_format($somaRecebido, 2, ',', '.')."</h5>");
           $saldo = $soma - $somaRecebido;
           echo ("<br><h5>Saldo a Pagar: R$".number_format($saldo, 2, ',', '.')."</h5>");
-     }
-
-     function addEvento(){
-          global $tipoUsuario, $idUsuario, $idEvento, $nomeEvento, $vendedor;
-          if($tipoUsuario == 1){
-               $consulta = "SELECT * FROM Evento";
-          }else if($tipoUsuario == 2){
-               $consulta = "SELECT * FROM Evento WHERE `produtor` = $idUsuario";
-          }else if($tipoUsuario == 3){
-               $consulta = "SELECT * FROM Evento JOIN ProdutorVendedor ON ProdutorVendedor.idProdutor = Evento.produtor WHERE ProdutorVendedor.idVendedor = '$idUsuario'";
-          }
-          
-          $eventos = selecionar($consulta);
-          foreach ($eventos as $evento) {
-               $id = $evento['id'];
-               $nome = $evento['nome'];
-               if ($id == $idEvento){
-                    echo ('<option value="'.$id.'" selected>'.$nome.'</option>');
-                    $nomeEvento = $nome;
-               }else{
-                    echo ('<option value="'.$id.'">'.$nome.'</option>');
-               }
-          }   
      }
 
     include_once '../includes/footer.php';
