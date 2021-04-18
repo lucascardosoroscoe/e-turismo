@@ -47,7 +47,7 @@ setlocale(LC_ALL, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
                 <a class="dropdown-item" href="#">Configurações</a>
                 <a class="dropdown-item" onclick="window.print()">Exportar PDF</a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="<?php echo $HTTP_HOST;?>/login">Sair</a>
+                <a class="dropdown-item" href="<?php echo $HTTP_HOST;?>/login">Login</a>
               </div>
             </li>
           </ul>
@@ -60,11 +60,12 @@ setlocale(LC_ALL, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
               <div class="nav">
               <?php
                 
+                echo('<a class="nav-link" href="'.$HTTP_HOST.'/index.php"><div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>IngressoZapp</a>');
                 if($tipoUsuario == 1 || $tipoUsuario == 2 || $tipoUsuario == 3){
                   echo('<div class="sb-sidenav-menu-heading">Principal</div>');
 
                   //Painel de Controle
-                  echo('<a class="nav-link" href="'.$HTTP_HOST.'/index.php"><div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>Home</a>');
+                  echo('<a class="nav-link" href="'.$HTTP_HOST.'/ingresso.php"><div class="sb-nav-link-icon"><i class="fas fa-ticket-alt"></i></div>Emitir Ingresso</a>');
                   echo('<a class="nav-link" href="'.$HTTP_HOST.'/vendas.php"><div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>Minhas Vendas</a>');
 
 
@@ -115,6 +116,8 @@ setlocale(LC_ALL, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
                       echo('<a class="nav-link" href="'.$HTTP_HOST.'/produtos"><div class="sb-nav-link-icon"><i class="fas fa-cogs"></i></div>Cadastro de produtos</a>');
                       echo('<a class="nav-link" href="'.$HTTP_HOST.'/cardapio"><div class="sb-nav-link-icon"><i class="fas fa-cogs"></i></div>Cadastro de Cardápio</a>');
                     }
+                }else{
+                  echo('<a class="nav-link" href="'.$HTTP_HOST.'/login/"><div class="sb-nav-link-icon"><i class="fas fa-user fa-fw"></i></div>Login</a>');
                 }
                 ?>
               </div>

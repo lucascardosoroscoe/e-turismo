@@ -3,55 +3,30 @@ include('./includes/verificarAcesso.php');
 verificarAcesso(3);
 include('./includes/header.php');
 ?>
-<div style='background-image: url("./img/fundoLogin.jpeg"); background-size: cover;height: 1080px;'>
+<div style='background-image: url("./img/fundoLogin.jpeg"); background-size: cover;height: 100%;'>
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-7">
                 <div class="card shadow-lg border-0 rounded-lg mt-5">
                     <div class="card-header">
-                        <i class="fas fa-user"></i>
-                        <?php 
-                        if($tipoUsuario != ""){echo $usuario;}
-                        ?> , seja bem vindo ao IngressoZapp!
+                        <h3 class="text-center font-weight-light my-4">Sobre Nós</h3>
                     </div>
                     <div class="card-body">
-                        <h2>Emitir Ingresso</h2>
-                        <form action="emitir.php" id="emitir" method="POST">
-                            <div class="form-row">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label class="small mb-1" for="selectEvento">Selecione o Evento*</label>
-                                        <?php selectEvento(); ?>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-row">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label class="small mb-1" for="selectLote">Selecione o Lote*</label>
-                                        <?php selectLote(); ?>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-row">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label class="small mb-1" for="inputNome">Nome do Cliente*</label>
-                                        <input class="form-control py-4" id="inputNome"  name="inputNome" type="text" placeholder="Digite o nome" required/>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-row">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label class="small mb-1" for="inputTelefone">Telefone do Cliente*</label>
-                                        <input class="form-control py-4" id="inputTelefone"  name="inputTelefone" type="number" placeholder="Digite o telefone (DDD obrigatório)" required/>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group mt-4 mb-0"><button class="btn btn-primary btn-block" type="submit" >Emitir Ingresso</button></div>
-                        </form>
-                        
+                        <p class="text-justify font-weight-light">  
+                            <span style="margin: 50px;">
+                            O Sistema de gerenciamento de venda de ingressos IngressoZapp foi criado no início de 2020. 
+                            Surgiu a partir da necessidade do nosso criador em seus próprios eventos. 
+                            Habituado a vender seus ingressos por meio de promoters oficiais do evento, 
+                            sentiu falta de um sistema que que permitisse um melhor controle dessas vendas, 
+                            visto que, morava a cerca de mil quilômetros do local onde realizava anualmente seus eventos. 
+                            <br><br>
+                            <span style="margin: 50px;">
+                            O aplicativo além de permitir ao produtor acompanhar em tempo real a venda dos ingresso, 
+                            ainda levanta informações importantes para as estratégias de Marketing adotadas por ele, 
+                            elimina a logística de distribuição e reposição de ingresso, extingue o custo de impressão do ingressos físicos, 
+                            impede fraudes, permite um melhor controle de disponibilidade dos lotes à venda e constrói um banco de dados 
+                            organizado dos clientes, facilitando a venda em eventos futuros.</p>
+                        <a href="http://ingressozapp.com/" target="_blank" class="btn btn-primary btn-block" rel="noopener noreferrer">Saiba Mais</a>
                     </div>
                 </div>
             </div>

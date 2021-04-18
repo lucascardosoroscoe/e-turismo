@@ -1,5 +1,5 @@
 <?php
-include('includes/bancoDados.php');
+include('includes/verificarAcesso.php');
 include('./includes/header.php');
 
 $codigo    = $_GET['codigo'];

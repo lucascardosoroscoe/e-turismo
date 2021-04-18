@@ -10,9 +10,6 @@ $idLote = $_SESSION["idLote"];
 $nCaixa = $_SESSION["nCaixa"];
 
 
-if($tipoUsuario != '1' && $tipoUsuario != '2' && $tipoUsuario != '3' && $tipoUsuario != '4'){
-  header('Location: http://ingressozapp.com/app/login/index.php?msg='.$msg);
-}
 function verificarAcesso($nivelAcesso){
     global $tipoUsuario;
     if($nivelAcesso < $tipoUsuario){
