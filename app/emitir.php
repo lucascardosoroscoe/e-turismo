@@ -115,7 +115,7 @@ function enviarIngresso(){
     global $local;
     $msg = $_POST["msg"];
     if (empty($msg)){
-        // header('Location: '.$local);
+        header('Location: '.$local);
     }else if ($msg == "1"){
         $consulta = "UPDATE Ingresso SET validade = 'INVALIDO' WHERE codigo = '$codigo'";
         $msg = executar($consulta);

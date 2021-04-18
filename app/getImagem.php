@@ -1,14 +1,10 @@
 <?php
-    include('includes/db_valores.php');
-    $produtor  =  $_GET["produtor"];
-    $nome = $_GET["nome"];
-    $conexao = mysqli_connect($servidor, $usuario, $senha, $bdados);
+    include('includes/verificarAcesso.php');
+    $codigo  =  $_GET["codigo"];
 
-    $consulta = "SELECT * FROM Evento WHERE produtor='$produtor' AND nome = '$nome'";
-    $gravacoes = mysqli_query($conexao, $consulta);
-
-    $row = mysqli_fetch_assoc($gravacoes);
-
+    $consulta = "SELECT imagem FROM Evento WHERE id = $id";
+    $imagem = selecionar($consulta);
+    
     Header( "Content-type: image/gif"); 
-    echo $row['imagem']; 
+    echo $imagem[0]['imagem'];
 ?>
