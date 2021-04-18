@@ -1,10 +1,9 @@
 
 <?php
 
-$evento = $_GET["evento"];
-echo $evento;
+$idEvento = $_GET["evento"];
 session_start();
-$_SESSION["evento"] = $evento;
+$_SESSION["idEvento"] = $idEvento;
 header('Location: index.php');
 ?>
 

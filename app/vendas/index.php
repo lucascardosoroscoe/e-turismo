@@ -3,142 +3,173 @@ include('../includes/verificarAcesso.php');
 verificarAcesso(3);
 include('../includes/header.php');
 
-if($tipoUsuario == 1){
-     $consulta = "SELECT * FROM `Ingresso` WHERE `evento` = '$evento' AND `vendedor` = '$promoter' AND (`validade` = 'VALIDO' OR `validade` = 'INVALIDO')";
-}else if($tipoUsuario == 2){
-
-}else if($tipoUsuario == 3){
-
-}
-// $dados = selecionar($consulta);
-
 $hoje = date('d/m/Y h:m', strtotime("-3 hour"));
+$soma = 0;
+$count = 0;
 ?>
-
-<div class="row">
-    <div class="col s12 m6 push-m3 ">
-          <div style="display: flex;">
-               <img src="../includes/logo.png" alt="" class="logo">
-               <div class="empresa">
-               <h4>INGRESSOZAPP</h4>
-               <h6 style="text-align: end;">LR Software - <?php echo $hoje ?></h6>
-               </div>
-               
-          </div>
-          <select id="evento" onchange="selecionarEvento()">
-          <option value="">Selecione o Evento</option>
-          <?php addEvento($evento, $promoter); ?>
+<div class="container-fluid">
+     <!-- Tabela dos veículos-->
+     <ol class="breadcrumb mb-4" style="margin-top: 20px !important">
+          <select class="form-control" id="evento" onchange="selecionarEvento()">
+               <option value="">Selecione o Evento</option>
+               <?php addEvento(); ?>
           </select>
-          <h3>Relatório de Emissão de Ingressos</h3>
-          <h6>Promoter: <?php echo $promoter; ?></h6> 
-          <h6>Evento: <?php echo $evento; ?></h6> 
-          <h3>Tabela de Ingressos</h3>
-          <table id="tabela">
-               <thead>
-                    <tr>
-                         <td>Código</td>
-                         <td>Cliente</td>
-                         <td>Valor</td>
-                         <td>Lote</td>
-                    </tr>
-               </thead>
-               <tbody>
-               <?php
-               
-               
-               $size = sizeof($dados);
-
-               for ($i = 0; $i < $size; $i++){
-                    $obj = $dados[$i];
-                    //echo json_encode($primeiro);
-                    //echo "<br>";
-                    //imprime o conteúdo do objeto 
-                    echo "<tr>";
-                    echo ("<td>".$obj['codigo']."</td>");
-                    echo ("<td>".$obj['cliente']."</td>");
-                    echo ("<td>R$".number_format($obj['valor'], 2, ',', '.')."</td>");  
-                    echo ("<td>".$obj['lote']."</td>"); 
-                    echo "</tr>";
-                    $soma += floatval($obj['valor']);
-                    $count++;
-               }
+     </ol>
+     <div class="card mb-4">
+          <div class="card-header">
+               <img src="../includes/logo.png" alt="" class="logo">
+               <h3>INGRESSOZAPP</h3>
+               <h6 style="text-align: end;">LR Software - <?php echo $hoje ?></h6>
+          </div>
+          <div class="card-body">
+               <?php 
+                    carregarCabecalho(); 
+                    carregarIngressos();
+                    carregarTotal();
+                    carregarRecebimentos();
+                    echo ('<br><button onclick="window.print()" class="btn btn-primary btn-block">Imprimir</button>');
+                    echo ('<br><br><a href="https://ingressozapp.com/produtor/" class="btn btn-primary btn-block">Voltar</a>');
                ?>
-            
-               </tbody>
-          </table>
-          <?php
-          
-          $soma = number_format($soma, 2, ',', '.'); 
-          echo ("<h5>Valor Total Vendido: R$".$soma."<br>Quantidade: ".$count." ingressos.</h5>"); 
+          </div>
+     </div>
+</div>
+<script type="text/javascript" src="visualizar.js"></script>
+<link rel="stylesheet" type="text/css" href="print.css" media="print" />    
+               
+<?php
+     function carregarCabecalho(){
+          global $usuario, $nomeEvento;
+          echo'<h3>Relatório de Emissão de Ingressos</h3>';
+          echo'<h6>Promoter: '. $usuario .'</h6>';
+          echo'<h6>Evento: '. $nomeEvento .'</h6>';
+     }
 
-          echo ("<h3>Recebimentos</h3>");
-          $consulta = "SELECT * FROM `Recebidos` WHERE `vendedor` = '$promoter' AND `evento` = '$evento'";
-          $dados = selecionar($consulta);
-            ?>
-          <table id="tabela">
+     function carregarIngressos(){
+          global $tipoUsuario, $idUsuario, $soma, $count;
+
+          if($tipoUsuario == 1){
+               $consulta = "SELECT Ingresso.codigo, Ingresso.valor, Ingresso.validade, Ingresso.data,
+               Evento.nome as evento, Vendedor.nome as vendedor, Cliente.nome as cliente, Cliente.telefone, Lote.nome as lote
+               FROM Ingresso 
+               JOIN Evento ON Evento.id = Ingresso.evento
+               JOIN Vendedor ON Vendedor.id = Ingresso.vendedor
+               JOIN Cliente ON Cliente.id = Ingresso.idCliente
+               JOIN Lote ON Lote.id = Ingresso.lote
+               WHERE 1";
+          }else if($tipoUsuario == 2){
+               $consulta = "SELECT Ingresso.codigo, Ingresso.valor, Ingresso.validade, Ingresso.data,
+               Evento.nome as evento, Vendedor.nome as vendedor, Cliente.nome as cliente, Cliente.telefone, Lote.nome as lote
+               FROM Ingresso 
+               JOIN Evento ON Evento.id = Ingresso.evento
+               JOIN Vendedor ON Vendedor.id = Ingresso.vendedor
+               JOIN Cliente ON Cliente.id = Ingresso.idCliente
+               JOIN Lote ON Lote.id = Ingresso.lote
+               WHERE Vendedor.id = 2 AND Evento.produtor = $idUsuario";
+          }else if($tipoUsuario == 3){
+               $consulta = "SELECT Ingresso.codigo, Ingresso.valor, Ingresso.validade, Ingresso.data,
+               Evento.nome as evento, Vendedor.nome as vendedor, Cliente.nome as cliente, Cliente.telefone, Lote.nome as lote
+               FROM Ingresso 
+               JOIN Evento ON Evento.id = Ingresso.evento
+               JOIN Vendedor ON Vendedor.id = Ingresso.vendedor
+               JOIN Cliente ON Cliente.id = Ingresso.idCliente
+               JOIN Lote ON Lote.id = Ingresso.lote
+               WHERE Vendedor.id = $idUsuario";
+          }
+
+          echo'<br><h3>Tabela de Ingressos</h3>';
+          echo'<div class="table-responsive table-hover">';
+               echo'<table class="table tablesorter table-hover" id="dataTable" width="100%" cellspacing="0">';
+                    echo'<thead>';
+                         echo'<tr>';
+                              echo'<th>Código</th>';
+                              echo'<th>Cliente</th>';
+                              echo'<th>Valor</th>';
+                              echo'<th>Lote</th>';
+                         echo'</tr>';
+                    echo'</thead>';
+                    echo'<tbody id="tbody">';
+               
+                    $ingressos = selecionar($consulta);
+                    foreach ($ingressos as $ingresso) {
+                         echo "<tr>";
+                              echo ("<td>".$ingresso['codigo']."</td>");
+                              echo ("<td>".$ingresso['cliente']."</td>");
+                              echo ("<td>R$".number_format($ingresso['valor'], 2, ',', '.')."</td>");  
+                              echo ("<td>".$ingresso['lote']."</td>"); 
+                         echo "</tr>";
+                         $soma += floatval($ingresso['valor']);
+                         $count++;
+                    }
+                    $soma = number_format($soma, 2, ',', '.'); 
+
+                    echo'</tbody>';
+               echo'</table>';
+          echo'</div>  ';
+     }
+     
+     function carregarTotal(){
+          global  $soma, $count;
+          echo ("<h5>Valor Total Vendido: R$".$soma."<br>Quantidade: ".$count." ingressos.</h5>"); 
+     }
+     
+     function carregarRecebimentos(){
+          global  $soma;
+
+          if($tipoUsuario == 1){
+               $consulta = "SELECT * FROM `Recebidos`";
+          }else if($tipoUsuario == 2){
+               $consulta = "SELECT * FROM `Recebidos`";
+          }else if($tipoUsuario == 3){
+               $consulta = "SELECT * FROM `Recebidos`";
+          }
+
+          echo ("<br><h3>Recebimentos</h3>");
+          $recebidos = selecionar($consulta);
+               ?>
+          <table class="table tablesorter table-hover" id="dataTable" width="100%" cellspacing="0">
                <thead>
                     <tr>
-                         <td>Valor</td>
-                         <td>Data</td>
+                         <th>Valor</th>
+                         <th>Data</th>
                     </tr>
                </thead>
-               <tbody>
+               <tbody id="tbody">
                <?php
-               
-               
-               $size = sizeof($dados);
-
-               for ($i = 0; $i < $size; $i++){
-                    $obj = $dados[$i];
-                    //echo json_encode($primeiro);
-                    //echo "<br>";
-                    //imprime o conteúdo do objeto 
-                    echo "<tr>";
-                    echo ("<td>R$".number_format($obj['valor'], 2, ',', '.')."</td>");  
-                    echo ("<td>".$obj['data']."</td>"); 
-                    echo "</tr>";
-                    $somaRecebido += floatval($obj['valor']);
-               }
+                    foreach ($recebidos as $recebido) {
+                         echo "<tr>";
+                              echo ("<td>R$".number_format($recebido['valor'], 2, ',', '.')."</td>");  
+                              echo ("<td>".$recebido['data']."</td>"); 
+                         echo "</tr>";
+                         $somaRecebido += floatval($recebido['valor']);
+                    }
                echo ("</tbody>"); 
-               echo ("</table>"); 
-               echo ("<h5>Valor Total Pago: R$".number_format($somaRecebido, 2, ',', '.')."</h5>");
-               $saldo = $soma - $somaRecebido;
-               echo ("<br><h5>Saldo a Pagar: R$".number_format($saldo, 2, ',', '.')."</h5>");
-        
-          echo ('<br><button onclick="window.print()" class="btn">Imprimir</button>');
-          echo ('<br><br><a href="https://ingressozapp.com/produtor/" class="btn">Voltar</a>');
-     
+          echo ("</table>"); 
+          echo ("<h5>Valor Total Pago: R$".number_format($somaRecebido, 2, ',', '.')."</h5>");
+          $saldo = $soma - $somaRecebido;
+          echo ("<br><h5>Saldo a Pagar: R$".number_format($saldo, 2, ',', '.')."</h5>");
+     }
 
-          
-
-     echo ('</div>');
-echo ('</div>');
-
-
-?>
-<script type="text/javascript" src="visualizar.js"></script>
-<link rel="stylesheet" type="text/css" href="print.css" media="print" />
-<?php
-
-     function addEvento($evento, $promoter){
-          $consulta = "SELECT Evento.nome FROM Evento JOIN Produtor ON Evento.produtor = Produtor.usuario JOIN Vendedor ON Vendedor.produtor = Produtor.usuario WHERE Vendedor.usuario = '$promoter'";
-          echo $consulta;
-          $dados = selecionar($consulta);
-          $size = sizeof($dados);
-          echo $size;
-          
-          for ($i = 0; $i < $size; $i++){
-          $obj = $dados[$i];
-          //echo json_encode($primeiro);
-          //echo "<br>";
-          $nome = $obj['nome'];
-          if ($nome == $evento){
-               echo ('<option value="'.$nome.'" selected>'.$nome.'</option>');
-          }else{
-               echo ('<option value="'.$nome.'">'.$nome.'</option>');
-          }
+     function addEvento(){
+          global $tipoUsuario, $idUsuario, $idEvento, $nomeEvento, $vendedor;
+          if($tipoUsuario == 1){
+               $consulta = "SELECT * FROM Evento";
+          }else if($tipoUsuario == 2){
+               $consulta = "SELECT * FROM Evento WHERE `produtor` = $idUsuario";
+          }else if($tipoUsuario == 3){
+               $consulta = "SELECT * FROM Evento JOIN ProdutorVendedor ON ProdutorVendedor.idProdutor = Evento.produtor WHERE ProdutorVendedor.idVendedor = '$idUsuario'";
           }
           
+          $eventos = selecionar($consulta);
+          foreach ($eventos as $evento) {
+               $id = $evento['id'];
+               $nome = $evento['nome'];
+               if ($id == $idEvento){
+                    echo ('<option value="'.$id.'" selected>'.$nome.'</option>');
+                    $nomeEvento = $nome;
+               }else{
+                    echo ('<option value="'.$id.'">'.$nome.'</option>');
+               }
+          }   
      }
 
     include_once '../includes/footer.php';
