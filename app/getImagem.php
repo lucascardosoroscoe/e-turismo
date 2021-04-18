@@ -1,6 +1,6 @@
 <?php
-    include('includes/verificarAcesso.php');
-    $codigo  =  $_GET["codigo"];
+    include('includes/bancoDados.php');
+    $id  =  $_GET["id"];
 
     $consulta = "SELECT imagem FROM Evento WHERE id = $id";
     $imagem = selecionar($consulta);
