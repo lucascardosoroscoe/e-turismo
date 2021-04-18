@@ -6,8 +6,6 @@ carregarPost();
 getLote();
 getCliente();
 verificarIngresso();
-$local='https://ingressozapp.com/promoter/enviar.php?codigo='.$codigo;    
-enviarIngresso();
 
 function carregarPost(){
     global $codigo, $evento, $idLote, $nomeCliente, $telefone;
@@ -60,7 +58,7 @@ function getCliente(){
 }
 
 function verificarIngresso(){
-    global $tipoUsuario, $evento, $idCliente, $vendedor;
+    global $tipoUsuario, $evento, $idCliente, $vendedor, $codigo, $local;
     if($tipoUsuario == '1'){
         $consulta = "SELECT * from Ingresso WHERE evento= '$evento' AND vendedor= '1' AND idCliente= '$idCliente'";
         $vendedor = 1;
@@ -74,8 +72,11 @@ function verificarIngresso(){
     $dados = selecionar($consulta);
     if ($dados[0]['codigo'] == ""){
         gerarIngresso();
-        atualizarVendidosLote();
+        atualizarVendidosLote(); 
+        $local='https://ingressozapp.com/app/enviar.php?codigo='.$codigo;
+        enviarIngresso(); 
     }else{
+        $local='https://ingressozapp.com/app/enviar.php?codigo='.$dados[0]['codigo'];
         echo("<h3>Você já gerou um ingresso para" . $nomeCliente . " deste mesmo Evento . Caso esteja gerando um novo ingresso, para outro cliente, por favor volte e coloque um nome mais completo.<br><br>Caso esteja tentantando reenviar o ingresso pois errou o número do Whatsapp ao gerar o ingresso <a href='$local'>Clique aqui</a> </h3>");
 
     }
@@ -86,14 +87,8 @@ function gerarIngresso(){
     $consulta = "INSERT INTO Ingresso (codigo, evento, vendedor, idCliente, valor, lote) VALUES ('$codigo', '$evento', '$vendedor', '$idCliente', '$valor', '$idLote')";
     echo $consulta;
     $msg = executar($consulta);
-    if($msg == 'Sucesso!'){
-        echo "Ingresso gerado.";
-        atualizarVendidosLote();
-        enviarIngresso();
-    }else{
-        echo "Erro ao gerar ingresso.";
-        gerarIngresso();
-    }
+    echo "Ingresso gerado.";
+    
 }
 
 function atualizarVendidosLote(){
@@ -108,6 +103,7 @@ function atualizarVendidosLote(){
         }
     }
     $consulta = "UPDATE `Lote` SET `vendidos`='$vendidos' WHERE `id` = '$idLote'";
+    echo '<br>' . $consulta;
     $msg = executar($consulta);    
 }
 
@@ -119,7 +115,7 @@ function enviarIngresso(){
     global $local;
     $msg = $_POST["msg"];
     if (empty($msg)){
-        header('Location: '.$local);
+        // header('Location: '.$local);
     }else if ($msg == "1"){
         $consulta = "UPDATE Ingresso SET validade = 'INVALIDO' WHERE codigo = '$codigo'";
         $msg = executar($consulta);
