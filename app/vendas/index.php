@@ -10,10 +10,9 @@ $count = 0;
 <div class="container-fluid">
      <!-- Tabela dos veículos-->
      <ol class="breadcrumb mb-4" style="margin-top: 20px !important">
-          <select class="form-control" id="evento" onchange="selecionarEvento()">
-               <option value="">Selecione o Evento</option>
-               <?php addEvento(); ?>
-          </select>
+          <?php 
+          selectEvento();
+          ?>
      </ol>
      <div class="card mb-4">
           <div class="card-header">
@@ -29,14 +28,10 @@ $count = 0;
                     carregarIngressos();
                     carregarTotal();
                     carregarRecebimentos();
-                    echo ('<br><button onclick="window.print()" class="btn btn-primary btn-block">Imprimir</button>');
-                    echo ('<br><br><a href="https://ingressozapp.com/produtor/" class="btn btn-primary btn-block">Voltar</a>');
                ?>
           </div>
      </div>
 </div>
-<script type="text/javascript" src="visualizar.js"></script>
-<link rel="stylesheet" type="text/css" href="print.css" media="print" />    
                
 <?php
      function addEvento(){

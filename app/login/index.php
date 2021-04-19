@@ -2,7 +2,7 @@
     include('../includes/headerLogin.php');
     $msg = $_GET['msg'];
 ?>     
-    <div style='background-image: url("../img/fundoLogin.jpg"); background-size: cover;height: 100%;'>
+    <div style='background-image: url("../img/fundoLogin.jpg"); background-size: cover;height: 900px;'>
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-5">
@@ -14,8 +14,8 @@
                         <div class="card-body">
                             <form action="login.php" method="POST">
                                 <div class="form-group">
-                                    <label class="small mb-1" for="inputEmailAddress">E-mail</label>
-                                    <input class="form-control py-4" id="inputEmailAddress" name="inputEmailAddress" type="email" placeholder="Digite seu e-mail" />
+                                    <label class="small mb-1" for="inputEmailAddress">E-mail/Usuário</label>
+                                    <input class="form-control py-4" id="inputEmailAddress" name="inputEmailAddress" type="text" placeholder="Digite seu e-mail" />
                                 </div>
                                 <div class="form-group">
                                     <label class="small mb-1" for="inputPassword">Senha</label>

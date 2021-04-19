@@ -99,7 +99,7 @@ setlocale(LC_ALL, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
                         echo('<div class="sb-nav-link-icon"><i class="fas fa-chart-line"></i></div>Relatórios<div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>');
                       echo('</a>');
                       echo('<div class="collapse" id="collapse" aria-labelledby="headingOne" data-parent="#sidenavAccordion"><nav class="sb-sidenav-menu-nested nav">');
-                        echo('<a class="nav-link" href="'.$HTTP_HOST.'/relatorios/vendaIngressos">Venda de Ingressos</a>');
+                        echo('<a class="nav-link" href="'.$HTTP_HOST.'/relatorios/vendaIngresso">Venda de Ingressos</a>');
                         echo('<a class="nav-link" href="'.$HTTP_HOST.'/relatorios/vendaBar">Vendas no Bar</a>');
                         echo('<a class="nav-link" href="'.$HTTP_HOST.'/relatorios/recebimento">Recebimentos</a>');
                         echo('<a class="nav-link" href="'.$HTTP_HOST.'/relatorios/financeiro">Financeiro</a>');
