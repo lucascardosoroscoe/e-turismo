@@ -3,7 +3,7 @@ include('./includes/verificarAcesso.php');
 verificarAcesso(3);
 include('./includes/header.php');
 ?>
-<div style='background-image: url("./img/fundoLogin.jpeg"); background-size: cover;height: 100%;'>
+<div style='background-image: url("./img/fundoLogin.jpg"); background-size: cover;height: 100%;'>
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-7">

@@ -9,7 +9,7 @@ $obj = $dados[0];
 $nome = $obj['nome'];
 $produtor = $obj['produtor'];
 ?>     
-    <div style='background-image: url("../img/fundoLogin.jpeg"); background-size: cover;height: 1080px;'>
+    <div style='background-image: url("../img/fundoLogin.jpg"); background-size: cover;height: 100%;'>
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-7">

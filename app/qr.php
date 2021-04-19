@@ -26,7 +26,7 @@ $aux .= 'e=H&';
 $aux .= 's=4&';
 $aux .= 't=P';
 ?>
-<div style='background-image: url("./img/fundoLogin.jpeg"); background-size: cover;height: 100%;'>
+<div style='background-image: url("./img/fundoLogin.jpg"); background-size: cover;height: 100%;'>
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-7">

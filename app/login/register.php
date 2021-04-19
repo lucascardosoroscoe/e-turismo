@@ -1,7 +1,7 @@
 <?php
 include('../includes/headerLogin.php');
 ?>     
-    <div style='background-image: url("../assets/img/fundoLogin.jpeg"); background-size: cover;height: 1080px;'>
+    <div style='background-image: url("../assets/img/fundoLogin.jpg"); background-size: cover;height: 100%;'>
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-7">

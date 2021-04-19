@@ -6,7 +6,7 @@ $id = $_GET['id'];
 $conculta = "SELECT * FROM `Cliente` WHERE `id` = '$id'";
 $dados = selecionar($conculta);
 ?>      
-    <div style='background-image: url("../img/fundoLogin.jpeg"); background-size: cover;height: 1080px;'>
+    <div style='background-image: url("../img/fundoLogin.jpg"); background-size: cover;height: 100%;'>
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-7">
