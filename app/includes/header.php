@@ -113,7 +113,7 @@ setlocale(LC_ALL, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
 
                       //Bar
                       echo('<div class="sb-sidenav-menu-heading">Bar</div>');
-                      echo('<a class="nav-link" href="'.$HTTP_HOST.'/produtos"><div class="sb-nav-link-icon"><i class="fas fa-cogs"></i></div>Cadastro de produtos</a>');
+                      echo('<a class="nav-link" href="'.$HTTP_HOST.'/produtos"><div class="sb-nav-link-icon"><i class="fas fa-cogs"></i></div>Produtos</a>');
                       echo('<a class="nav-link" href="'.$HTTP_HOST.'/cardapio"><div class="sb-nav-link-icon"><i class="fas fa-cogs"></i></div>Cadastro de Cardápio</a>');
                     }
                 }else{
