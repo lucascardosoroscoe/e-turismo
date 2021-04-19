@@ -34,13 +34,18 @@ include('../includes/header.php');
                                 $consulta = "SELECT * FROM Vendedor";
                                 addTabela($consulta);
                             }else if($tipoUsuario == 2){
-                                $consulta = "SELECT * FROM Vendedor WHERE produtor = '$idUsuario'";
+                                $consulta = "SELECT Vendedor.id, Vendedor.usuario, Vendedor.nome, Vendedor.telefone, Vendedor.validade
+                                FROM Vendedor 
+                                JOIN ProdutorVendedor ON Vendedor.id = ProdutorVendedor.idVendedor
+                                WHERE ProdutorVendedor.idProdutor = '$idUsuario'";
                                 addTabela($consulta);
                             }
                         ?>
                     </tbody>
                 </table>
             </div>
+            <h5>Adicionar Vendedor Existente</h5>
+            <?php addVendedor();?>
         </div>
     </div>
 </div>
@@ -65,5 +70,24 @@ function addTabela($consulta){
         echo "</tr>";
     }
 }
+
+function addVendedor(){
+    global $idUsuario;
+    echo'<form action="add.php" id="add" method="POST">';
+        echo'<input name="idProdutor" type="hidden" value="'. $idUsuario .'" required/>';
+        $consulta = "SELECT * FROM Vendedor ORDER BY email";
+        echo'<select class="form-control" id="vendedor" form="add" name="vendedor" onchange="selecionarVendedor()">';
+        echo'<option value="">Selecione o Vendedor</option>';
+        $vendedores = selecionar($consulta);
+        foreach ($vendedores as $vendedor) {
+            $id = $vendedor['id'];
+            $email = $vendedor['email'];
+            echo ('<option value="'.$id.'">'.$email.'</option>');
+        }   
+        echo'</select>';
+        echo'<div class="form-group mt-4 mb-0"><button class="btn btn-primary btn-block" type="submit" >Adicionar Vendedor</button></div>';
+    echo'</form>';
+}
+
 include('../includes/footer.php');
 ?>

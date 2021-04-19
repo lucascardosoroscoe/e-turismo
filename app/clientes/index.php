@@ -33,7 +33,15 @@ include('../includes/header.php');
                             }else if($tipoUsuario == 2){
                                 $consulta = "SELECT Cliente.id, Cliente.nome, Cliente.telefone FROM Cliente 
                                 JOIN Ingresso ON Ingresso.idCliente = Cliente.id
-                                WHERE Ingresso.produtor = '$produtor'
+                                JOIN Vendedor ON Ingresso.vendedor = Vendedor.id
+                                JOIN ProdutorVendedor ON Vendedor.id = ProdutorVendedor.idVendedor
+                                WHERE ProdutorVendedor.idProdutor = '$idUsuario'
+                                GROUP BY Cliente.id";
+                                addTabela($consulta);
+                            }else if($tipoUsuario == 3){
+                                $consulta = "SELECT Cliente.id, Cliente.nome, Cliente.telefone FROM Cliente 
+                                JOIN Ingresso ON Ingresso.idCliente = Cliente.id
+                                WHERE Ingresso.vendedor = '$idUsuario'
                                 GROUP BY Cliente.id";
                                 addTabela($consulta);
                             }
