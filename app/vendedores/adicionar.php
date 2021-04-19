@@ -11,8 +11,9 @@ include('../includes/header.php');
                         <div class="card-header"><h3 class="text-center font-weight-light my-4">Adicionar Vendedor</h3></div>
                         <div class="card-body">
                             <form action="create.php" id="create_user" method="POST">
+                                <input  name="inputId" type="hidden" value="<?php echo $id; ?>" required/>
                                 <div class="form-row">
-                                    <div class="col-md-12">
+                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label class="small mb-1" for="inputEmailAddress">E-mail</label>
                                             <input class="form-control py-4" id="inputEmailAddress"  name="inputEmailAddress" type="email" aria-describedby="emailHelp" placeholder="Digite o e-mail" required/>
