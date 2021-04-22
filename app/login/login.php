@@ -1,5 +1,5 @@
 <?php
-include('../includes/bancoDados.php');
+include('../includes/verificarAcesso.php');
 $email = $_POST['inputEmailAddress'];
 $inputPassword = $_POST['inputPassword'];
 
@@ -68,7 +68,6 @@ function loginIncorreto(){
 
 function login($id, $nome, $type, $email){
     $msg = "Sucesso!";
-    session_start();
 
     $_SESSION["idUsuario"] = $id;
     $_SESSION["usuario"] = $nome;

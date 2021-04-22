@@ -9,7 +9,7 @@ verificarIngresso();
 
 function carregarPost(){
     global $codigo, $evento, $idLote, $nomeCliente, $telefone;
-    $codigo    =  rand ( 1000000000 , 9999999999 );
+    $codigo    =  rand ( 100000 , 999999 );
     $evento    =  $_POST['selectEvento'];
     $idLote    =  $_POST["selectLote"];
     $nomeCliente   =  $_POST['inputNome'];

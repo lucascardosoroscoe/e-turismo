@@ -5,11 +5,10 @@ session_start();
 /*session created*/
 $produtor  =  $_SESSION["usuario"];
 $validade =  $_SESSION["validade"];
-
 include 'consulta.php';
 include 'dadosGraficos.php';
 
-$hoje = date('d/m/Y h:m', strtotime("-3 hour"));
+$hoje = date('d/m/Y h:m', strtotime("-3 hour"))
 ?>
 
 <div class="row">
@@ -22,10 +21,13 @@ $hoje = date('d/m/Y h:m', strtotime("-3 hour"));
                </div>
                
           </div>
-        <h3>Relatório de Vendas no Bar</h3>
+        <h3>Relatório de Emissão de Ingressos</h3>
         <h6>Produtor: <?php echo $produtor; ?></h6> 
         <h6>Evento: <?php echo $evento; ?></h6> 
-
+        <h6>Vendedor: <?php echo $vendedor; ?></h6> 
+        <h6>Lote: <?php echo $lote; ?></h6> 
+        <h6>Sexo: <?php echo $sexo; ?></h6> 
+        <h6>Validade do Ingresso: <?php echo $validade; ?></h6> 
         <?php carregarDadosNumeroIngressos($dados); ?>
         <?php carregarDadosFaturamento($dados); ?>
         <?php carregarDadosVendasPromoters($dados); ?>
@@ -36,7 +38,7 @@ $hoje = date('d/m/Y h:m', strtotime("-3 hour"));
           <div id="chart_div3" style="width: 100%; height: 400px;"></div>
           <div id="chart_div4" style="width: 100%; height: 400px;"></div>
           </div>
-          <h3>Tabela de Vendas</h3>
+          <h3>Tabela de Ingressos</h3>
           <table id="tabela">
                <thead>
                     <tr>
@@ -76,7 +78,7 @@ $hoje = date('d/m/Y h:m', strtotime("-3 hour"));
           echo ("<h5>Valor Total: R$".$soma."<br>Quantidade: ".$count." ingressos.</h5>"); 
         
           echo ('<br><button onclick="window.print()" class="btn">Imprimir</button>');
-          echo ('<br><br><a href="https://ingressozapp.com/produtor/relatorio/" class="btn">Voltar</a>');
+          echo ('<br><br><a href="https://ingressozapp.com/produtor/" class="btn">Voltar</a>');
      
 
           
@@ -111,7 +113,7 @@ function pegarValor(rIndex){
 </script>
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-<script type="text/javascript" src="relBar.js"></script>
+<script type="text/javascript" src="relatorio.js"></script>
 <link rel="stylesheet" type="text/css" href="print.css" media="print" />
 <?php
 

@@ -1,6 +1,10 @@
 <?php
     include('../includes/headerLogin.php');
     $msg = $_GET['msg'];
+    $_SESSION["idUsuario"] = "";
+    $_SESSION["usuario"] = "";
+    $_SESSION["tipoUsuario"] = "";
+    $_SESSION["emailUsuario"] = "";
 ?>     
     <div style='background-image: url("../img/fundoLogin.jpg"); background-size: cover;height: 900px;'>
         <div class="container">
