@@ -26,8 +26,8 @@ include('./includes/header.php');
                             elimina a logística de distribuição e reposição de ingresso, extingue o custo de impressão do ingressos físicos, 
                             impede fraudes, permite um melhor controle de disponibilidade dos lotes à venda e constrói um banco de dados 
                             organizado dos clientes, facilitando a venda em eventos futuros.</p>
-                            <?php echo json_encode($_SESSION);?>
-                        <a href="http://ingressozapp.com/" target="_blank" class="btn btn-primary btn-block" rel="noopener noreferrer">Saiba Mais</a>
+                            <!-- <?php echo json_encode($_SESSION);?> -->
+                        <a href="http://ingressozapp.com/app/login" class="btn btn-primary btn-block" rel="noopener noreferrer">Fazer Login</a>
                     </div>
                 </div>
             </div>

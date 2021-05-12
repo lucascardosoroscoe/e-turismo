@@ -1,6 +1,6 @@
 <?php
 include('includes/verificarAcesso.php');
-verificarAcesso(2);
+verificarAcesso(3);
 
 carregarPost();
 getLote();
@@ -50,7 +50,7 @@ function getCliente(){
             $dados = selecionar($consulta);
             $idCliente = $dados[0]['id'];
         }else{
-            echo "Erro ao criar Cliente";
+            echo "Erro ao criar Cliente!!!<br>";
         }
     }else{
         $idCliente = $dados[0]['id'];
@@ -58,7 +58,7 @@ function getCliente(){
 }
 
 function verificarIngresso(){
-    global $tipoUsuario, $evento, $idCliente, $vendedor, $codigo, $local;
+    global $tipoUsuario,$idUsuario, $evento, $idCliente, $vendedor, $codigo, $local;
     if($tipoUsuario == '1'){
         $consulta = "SELECT * from Ingresso WHERE evento= '$evento' AND vendedor= '1' AND idCliente= '$idCliente'";
         $vendedor = 1;
@@ -72,7 +72,7 @@ function verificarIngresso(){
     $dados = selecionar($consulta);
     if ($dados[0]['codigo'] == ""){
         gerarIngresso();
-        atualizarVendidosLote(); 
+        
         $local='https://ingressozapp.com/app/enviar.php?codigo='.$codigo;
         enviarIngresso(); 
     }else{
@@ -87,6 +87,9 @@ function gerarIngresso(){
     $consulta = "INSERT INTO Ingresso (codigo, evento, vendedor, idCliente, valor, lote) VALUES ('$codigo', '$evento', '$vendedor', '$idCliente', '$valor', '$idLote')";
     echo $consulta;
     $msg = executar($consulta);
+    if($msg == "Sucesso!"){
+        atualizarVendidosLote(); 
+    }
     echo "Ingresso gerado.";
     
 }
@@ -99,11 +102,10 @@ function atualizarVendidosLote(){
         if($msg == 'Sucesso!'){
             emailVirada();
         }else{
-            echo "Falha ao invalidar Lote";
+            echo "Falha ao invalidar Lote!!!<br>";
         }
     }
     $consulta = "UPDATE `Lote` SET `vendidos`='$vendidos' WHERE `id` = '$idLote'";
-    echo '<br>' . $consulta;
     $msg = executar($consulta);    
 }
 
