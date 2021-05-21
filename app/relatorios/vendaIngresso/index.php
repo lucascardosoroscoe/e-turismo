@@ -106,17 +106,17 @@ $idSecretaria = $_SESSION["idSecretaria"];
         $graphs = [];
         global $idEvento, $idUsuario;
         if($idEvento == ""){
-            $consulta1 = "SELECT COUNT(Ingresso.codigo) as quantidade, Ingresso.lote FROM Ingresso JOIN Vendedor ON Vendedor.id = Ingresso.vendedor WHERE Vendedor.produtor = '$idUsuario' GROUP BY lote";
-            $consulta2 = "SELECT SUM(Ingresso.valor) as valor, Ingresso.lote FROM Ingresso JOIN Vendedor ON Vendedor.id = Ingresso.vendedor WHERE Vendedor.produtor = '$idUsuario' GROUP BY lote";
-            $consulta3 = "SELECT COUNT(Ingresso.codigo) as quantidade, Vendedor.nome as vendedor FROM Ingresso JOIN Vendedor ON Vendedor.id = Ingresso.vendedor WHERE Vendedor.produtor = '$idUsuario' GROUP BY Ingresso.vendedor";
-            $consulta4 = "SELECT SUM(Ingresso.valor) as valor, Vendedor.nome as vendedor FROM Ingresso JOIN Vendedor ON Vendedor.id = Ingresso.vendedor WHERE Vendedor.produtor = '$idUsuario' GROUP BY Ingresso.vendedor";
-            $consulta5 = "SELECT count(Ingresso.codigo) as quantidade, sum(Ingresso.valor) AS valor, Ingresso.data FROM Ingresso JOIN Vendedor ON Vendedor.id = Ingresso.vendedor WHERE Vendedor.produtor = '$idUsuario' GROUP BY `data` ORDER BY `data`";
+            $consulta1 = "SELECT COUNT(Ingresso.codigo) as quantidade, Lote.nome as lote FROM Ingresso JOIN Lote ON Lote.id = Ingresso.lote JOIN Vendedor ON Vendedor.id = Ingresso.vendedor WHERE Vendedor.produtor = '$idUsuario' AND Ingresso.validade != 'CANCELADO' GROUP BY Ingresso.lote";
+            $consulta2 = "SELECT SUM(Ingresso.valor) as valor, Lote.nome as lote FROM Ingresso JOIN Lote ON Lote.id = Ingresso.lote JOIN Vendedor ON Vendedor.id = Ingresso.vendedor WHERE Vendedor.produtor = '$idUsuario' AND Ingresso.validade != 'CANCELADO' GROUP BY Ingresso.lote";
+            $consulta3 = "SELECT COUNT(Ingresso.codigo) as quantidade, Vendedor.nome as vendedor FROM Ingresso JOIN Lote ON Lote.id = Ingresso.lote JOIN Vendedor ON Vendedor.id = Ingresso.vendedor WHERE Vendedor.produtor = '$idUsuario' AND Ingresso.validade != 'CANCELADO' GROUP BY Ingresso.vendedor";
+            $consulta4 = "SELECT SUM(Ingresso.valor) as valor, Vendedor.nome as vendedor FROM Ingresso JOIN Lote ON Lote.id = Ingresso.lote JOIN Vendedor ON Vendedor.id = Ingresso.vendedor WHERE Vendedor.produtor = '$idUsuario' AND Ingresso.validade != 'CANCELADO' GROUP BY Ingresso.vendedor";
+            $consulta5 = "SELECT count(Ingresso.codigo) as quantidade, sum(Ingresso.valor) AS valor, Ingresso.data FROM JOIN Lote ON Lote.id = Ingresso.lote Ingresso JOIN Vendedor ON Vendedor.id = Ingresso.vendedor WHERE Vendedor.produtor = '$idUsuario' AND Ingresso.validade != 'CANCELADO' GROUP BY Ingresso.data ORDER BY Ingresso.data";
         }else{
-            $consulta1 = "SELECT COUNT(codigo) as quantidade, lote FROM `Ingresso` WHERE `evento` = '$idEvento' GROUP BY lote";
-            $consulta2 = "SELECT SUM(valor) as valor, lote FROM `Ingresso` WHERE `evento` = '$idEvento' GROUP BY lote";
-            $consulta3 = "SELECT COUNT(codigo) as quantidade, Vendedor.nome as vendedor FROM Ingresso JOIN Vendedor ON Vendedor.id = Ingresso.vendedor WHERE Ingresso.evento = '$idEvento' GROUP BY Ingresso.vendedor";
-            $consulta4 = "SELECT SUM(Ingresso.valor) as valor, Vendedor.nome as vendedor FROM Ingresso JOIN Vendedor ON Vendedor.id = Ingresso.vendedor WHERE Ingresso.evento = '$idEvento' GROUP BY Ingresso.vendedor";
-            $consulta5 = "SELECT count(`codigo`) as quantidade, sum(valor) AS valor, data FROM `Ingresso` WHERE evento = '$idEvento' GROUP BY `data` ORDER BY `data`";
+            $consulta1 = "SELECT COUNT(Ingresso.codigo) as quantidade, Lote.nome as lote  FROM `Ingresso` JOIN Lote ON Lote.id = Ingresso.lote WHERE Ingresso.evento = '$idEvento' AND Ingresso.validade != 'CANCELADO' GROUP BY Ingresso.lote";
+            $consulta2 = "SELECT SUM(Ingresso.valor) as valor, Lote.nome as lote  FROM `Ingresso` JOIN Lote ON Lote.id = Ingresso.lote WHERE Ingresso.evento = '$idEvento' AND Ingresso.validade != 'CANCELADO' GROUP BY Ingresso.lote";
+            $consulta3 = "SELECT COUNT(Ingresso.codigo) as quantidade, Vendedor.nome as vendedor FROM Ingresso JOIN Lote ON Lote.id = Ingresso.lote JOIN Vendedor ON Vendedor.id = Ingresso.vendedor WHERE Ingresso.evento = '$idEvento' AND Ingresso.validade != 'CANCELADO' GROUP BY Ingresso.vendedor";
+            $consulta4 = "SELECT SUM(Ingresso.valor) as valor, Vendedor.nome as vendedor FROM Ingresso JOIN Lote ON Lote.id = Ingresso.lote JOIN Vendedor ON Vendedor.id = Ingresso.vendedor WHERE Ingresso.evento = '$idEvento' AND Ingresso.validade != 'CANCELADO' GROUP BY Ingresso.vendedor";
+            $consulta5 = "SELECT count(Ingresso.codigo) as quantidade, sum(Ingresso.valor) AS valor, data FROM `Ingresso` JOIN Lote ON Lote.id = Ingresso.lote WHERE Ingresso.evento = '$idEvento' AND Ingresso.validade != 'CANCELADO' GROUP BY Ingresso.data ORDER BY Ingresso.data";
         }
         // echo "Consulta: ". $consulta ."<br>";
         $obg = selecionar($consulta1);
@@ -418,8 +418,15 @@ $idSecretaria = $_SESSION["idSecretaria"];
             echo ("<td>".$obj['cliente']."</td>"); 
             echo ("<td>R$".$obj['valor']."</td>"); 
             echo ("<td>".$obj['vendedor']."</td>"); 
-            echo ("<td>".$obj['validade']."</td>"); 
-            echo ("<td>.</td>"); 
+            $validade = $obj['validade'];
+            echo ("<td>".$validade."</td>");
+            if($validade == "VALIDO"){
+                echo ("<td style='display: flex;'><a href='invalidar.php?id=".$obj['codigo']."' class='iconeTabela red'><i class='fas fa-user-times'></i></a></td>");  
+                // <a href='editar.php?id=".$obj['codigo']."' class='iconeTabela'><i class='fas fa-user-edit'></i></a>
+                // <a href='detalhar.php?id=".$obj['codigo']."' class='iconeTabela'><i class='fas fa-eye'></i></a>
+            }else{
+                echo ("<td><a href='reativar.php?id=".$obj['codigo']."' style='margin-left: 15px;'>Reativar</a></td>");
+            }
             echo "</tr>";
         }
     }

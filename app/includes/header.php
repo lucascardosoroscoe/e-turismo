@@ -157,7 +157,8 @@ setlocale(LC_ALL, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
     }else if($tipoUsuario == 3){
       $consulta = "SELECT Evento.id, Evento.nome FROM Evento 
       JOIN Produtor ON Evento.produtor = Produtor.id
-      JOIN Vendedor ON Produtor.id = Vendedor.produtor
+      JOIN ProdutorVendedor ON ProdutorVendedor.idProdutor = Produtor.id
+      JOIN Vendedor ON ProdutorVendedor.idVendedor = Vendedor.id
       WHERE Vendedor.id = '$idUsuario' AND Produtor.validade = 'VALIDO' AND Evento.validade = 'VALIDO'";
     }
     $dados = selecionar($consulta);
