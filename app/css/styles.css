@@ -10365,3 +10365,7 @@ button{
 .logo{
   width: 100px;
 }
+.black{
+  color: #000;
+  border-color: #000;
+}
