@@ -23,6 +23,11 @@ include('../includes/header.php');
                     <thead>
                         <tr>
                             <th style="display:none;">Id</th>
+                            <?php 
+                            if($tipoUsuario == 1){
+                                echo '<th>Produtor</th>';
+                            } 
+                            ?>
                             <th>Categoria</th>
                             <th>Nome</th>
                             <th>Valor</th>
@@ -33,7 +38,11 @@ include('../includes/header.php');
                     </thead>
                     <tbody id="tbody">
                         <?php
-                            $consulta = "SELECT * FROM `Produto` WHERE `produtor` = '$idUsuario' ORDER BY categoria, nome";
+                            if($tipoUsuario == 1){
+                                $consulta = "SELECT Produto.idProduto, Produtor.nome as produtor, Produto.categoria, Produto.nome, Produto.valor, Produto.estoque, Produto.validade FROM Produto JOIN Produtor ON Produtor.id = Produto.produtor WHERE 1 ORDER BY Produtor.nome, Produto.categoria, Produto.nome";
+                            }else if($tipoUsuario == 2){
+                                $consulta = "SELECT * FROM `Produto` WHERE `produtor` = '$idUsuario' ORDER BY categoria, nome";
+                            }
                             addTabela($consulta);
                         ?>
                     </tbody>
@@ -46,11 +55,14 @@ include('../includes/header.php');
 
 <?php
 function addTabela($consulta){
-    
+    global $tipoUsuario;
     $usuarios = selecionar($consulta);
     foreach ($usuarios as $obj) {
         echo "<tr>";
         echo ("<td style='display:none;'>".$obj['id']."</td>"); 
+        if($tipoUsuario == 1){
+            echo "<td>".$obj['produtor']."</td>";
+        } 
         echo ("<td>".$obj['categoria']."</td>"); 
         echo ("<td>".$obj['nome']."</td>"); 
         echo ("<td>R$".number_format(floatval($obj['valor']),2,",",".")."</td>");

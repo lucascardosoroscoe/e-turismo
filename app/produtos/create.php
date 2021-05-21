@@ -1,6 +1,6 @@
 <?php
     include('../includes/verificarAcesso.php');
-    verificarAcesso(1);
+    verificarAcesso(2);
     
     $nome = $_POST['nome'];
     $valor = $_POST['valor'];
@@ -15,23 +15,17 @@
 
             $imagem = addslashes(fread(fopen($nomeFinal, "r"), $tamanhoImg)); 
             $idImagem = addImagem($imagem);
-            echo $idImagem;
         }
     }
 
-    criarProduto();
-
-    function criarProduto(){
-        global $idImagem, $idUsuario, $categoria, $nome, $valor, $estoque;
-        $consulta = "INSERT INTO `Produto`(`usuario`, `idImagem`, `categoria`, `nome`, `valor`, `estoque`) VALUES  ('$idUsuario', '$idImagem', '$categoria', '$nome', '$valor', '$estoque')";
-        echo $consulta;
-        $msg = executar($consulta);
-        echo $msg;
+    $consulta = "INSERT INTO `Produto`(`produtor`, `idImagem`, `categoria`, `nome`, `valor`, `estoque`) VALUES  ('$idUsuario', '$idImagem', '$categoria', '$nome', '$valor', '$estoque')";
+    $msg = executar($consulta);
+    if($msg == "Sucesso!"){
         header('Location: index.php?msg='.$msg);
     }
+
     function addImagem($imagem){
         $consulta = "INSERT INTO `Imagem` (`imagem`) VALUES ('$imagem')";
-        echo $consulta;
         $msg = executar($consulta);
         $consulta = "SELECT MAX(`idImagem`)FROM Imagem";
         $dados = selecionar($consulta);
