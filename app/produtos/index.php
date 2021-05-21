@@ -59,7 +59,7 @@ function addTabela($consulta){
     $usuarios = selecionar($consulta);
     foreach ($usuarios as $obj) {
         echo "<tr>";
-        echo ("<td style='display:none;'>".$obj['id']."</td>"); 
+        echo ("<td style='display:none;'>".$obj['idProduto']."</td>"); 
         if($tipoUsuario == 1){
             echo "<td>".$obj['produtor']."</td>";
         } 
@@ -70,10 +70,9 @@ function addTabela($consulta){
         $validade = $obj['validade'];
         echo ("<td>".$validade."</td>");
         if($validade == "VALIDO"){
-            // <a href='editar.php?id=".$obj['id']."' class='iconeTabela'><i class='fas fa-user-edit'></i></a>
-            echo ("<td style='display: flex;'><a href='invalidar.php?id=".$obj['id']."' class='iconeTabela red'><i class='fas fa-user-times'></i></a></td>");  
+            echo ("<td style='display: flex;'><a href='editar.php?id=".$obj['idProduto']."' class='iconeTabela'><i class='fas fa-user-edit'></i></a><a href='invalidar.php?id=".$obj['idProduto']."' class='iconeTabela red'><i class='fas fa-user-times'></i></a></td>");  
         }else{
-            echo ("<td><a href='reativar.php?id=".$obj['id']."' style='margin-left: 15px;'>Reativar</a></td>");
+            echo ("<td><a href='reativar.php?id=".$obj['idProduto']."' style='margin-left: 15px;'>Reativar</a></td>");
         }
         echo "</tr>";
     }

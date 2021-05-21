@@ -1,36 +1,33 @@
 <?php
-include('../includes/verificarAcesso.php');
-verificarAcesso(1);
+    include('../includes/verificarAcesso.php');
+    verificarAcesso(2);
+    $id = $_POST['id'];
+    $nome = $_POST['nome'];
+    $valor = $_POST['valor'];
+    $categoria = $_POST['categoria'];
+    $estoque = $_POST['estoque'];
+    $idImagem = $_POST['idImagem'];
+    $imagem = $_FILES['imagem'];
 
+    if($imagem != NULL) { 
+        $nomeFinal = time().'.jpg';
+        if (move_uploaded_file($imagem['tmp_name'], $nomeFinal)) {
+            $tamanhoImg = filesize($nomeFinal); 
 
-
-$id = $_POST['inputId'];
-$email = $_POST['inputEmailAddress'];
-$nome = $_POST['inputName'];
-$telefone = $_POST['inputTelefone'];
-$cidade = $_POST['inputCidade'];
-$estado = $_POST['inputEstado'];
-$pagos = $_POST['inputPagos'];
-$pagos = 1;
-$inputConfirmPassword = $_POST['inputConfirmPassword'];
-$inputPassword = $_POST['inputPassword'];
-$resetPasswordCheck = $_POST['resetPasswordCheck'];
-if($resetPasswordCheck == '1'){
-    if($inputPassword == $inputConfirmPassword){
-        $hash = password_hash($inputPassword, PASSWORD_DEFAULT);
-        $consulta = "UPDATE `Produtor` SET `usuario`='$email',`senha`='$hash',`nome`='$nome',`telefone`='$telefone',
-        `email`='$email',`cidade`='$cidade',`estado`='$estado' WHERE `id` = '$id'";
-        $msg = executar($consulta);
-    }else{
-        $msg = "A senha não condiz com a confirmação de Senha";
+            $imagem = addslashes(fread(fopen($nomeFinal, "r"), $tamanhoImg)); 
+            $idImagem = editImagem($idImagem, $imagem);
+        }
     }
-}else{
-    $consulta = "UPDATE `Produtor` SET `usuario`='$email',`nome`='$nome',`telefone`='$telefone',
-        `email`='$email',`cidade`='$cidade',`estado`='$estado' WHERE `id` = '$id'";
+
+    $consulta = "UPDATE `Produto` SET `categoria`='$categoria',`nome`='$nome',`valor`='$valor',`estoque`='$estoque' WHERE `idProduto` = '$id'";
     $msg = executar($consulta);
-}
+    if($msg == "Sucesso!"){
+        header('Location: index.php?msg='.$msg);
+    }
 
-
-echo $consulta;
-header('Location: index.php?msg='.$msg);
+    function editImagem($idImagem, $imagem){
+        $consulta = "UPDATE `Imagem` SET `imagem`='$imagem' WHERE `idImagem` = '$idImagem'";
+        $msg = executar($consulta);
+        return $idImagem;
+    }
 ?>
