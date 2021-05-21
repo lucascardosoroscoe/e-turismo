@@ -25,6 +25,7 @@ $(function(){
 	$('.tablesorter').tablesorter();
 });
 var inputEvento = document.getElementById('selectEvento');
+var inputVendedor = document.getElementById('selectVendedor');
 var inputLote   = document.getElementById('selectLote');
 
 //Script Selecionar Evento
@@ -33,6 +34,12 @@ function selectevento(id){
     var url = window.location.href;
     var nomeEvento = inputEvento.options[inputEvento.selectedIndex].text;
     window.location = "http://ingressozapp.com/app/assets/selecionarEvento.php?idEvento="+ idEvento + "&nomeEvento=" + nomeEvento + "&u=" + url;
+}
+function selectVendedor(id){
+    var idVendedor = inputVendedor.value;
+    var url = window.location.href;
+    var nomeVendedor = inputVendedor.options[inputVendedor.selectedIndex].text;
+    window.location = "http://ingressozapp.com/app/assets/selecionarVendedor.php?idVendedor="+ idVendedor + "&nomeVendedor=" + nomeVendedor + "&u=" + url;
 }
 
 //Script Selecionar Evento

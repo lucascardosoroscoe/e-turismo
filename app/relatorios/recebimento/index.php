@@ -14,15 +14,15 @@ $nomeSecretaria = $_SESSION["nomeSecretaria"];
 $idSecretaria = $_SESSION["idSecretaria"];
 ?>
 <div class="container-fluid">
-    <ol class="breadcrumb mb-4" style="margin-top: 20px !important">
-        <?php 
-        selectEvento();
-        ?>
-        <!-- <form action="veiculo.php" method="get">
-            <input type="date" name="dataInicial" id="dataInicial" value="<?php echo $dataInicial;?>">
-            <input type="date" name="dataFinal" id="dataFinal" value="<?php echo $dataFinal;?>">
-            <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button>
-        </form> -->
+    <ol class="breadcrumb mb-4" style="margin-top: 20px !important;">
+        <div class="row" style="width: 100%;">
+            <div class="col-md-6">
+                <?php selectEvento(); ?>
+            </div>
+            <div class="col-md-6">
+                <?php selectVendedor(); ?>
+            </div>
+        </div>
     </ol>
 
     <div class="card mb-4">

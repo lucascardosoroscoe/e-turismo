@@ -6,6 +6,8 @@ $idUsuario = $_SESSION["idUsuario"];
 $tipoUsuario = $_SESSION["tipoUsuario"];
 $idEvento = $_SESSION["idEvento"];
 $nomeEvento = $_SESSION["nomeEvento"];
+$idVendedor = $_SESSION["idVendedor"];
+$nomeVendedor = $_SESSION["nomeVendedor"];
 $idLote = $_SESSION["idLote"];
 $nCaixa = $_SESSION["nCaixa"];
 

@@ -94,6 +94,10 @@ setlocale(LC_ALL, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
                       //Eventos
                       echo('<a class="nav-link" href="'.$HTTP_HOST.'/eventos"><div class="sb-nav-link-icon"><i class="fas fa-gas-pump"></i></div>Eventos</a>');
                       echo('<a class="nav-link" href="'.$HTTP_HOST.'/lotes"><div class="sb-nav-link-icon"><i class="fas fa-gas-pump"></i></div>Lotes</a>');
+                      
+                      // Custos
+                      echo('<a class="nav-link" href="'.$HTTP_HOST.'/custos"><div class="sb-nav-link-icon"><i class="fas fa-cogs"></i></div>Custos</a>');
+
                       //Relatórios
                       echo('<a class="nav-link collapsed" href="#produtividade" data-toggle="collapse" data-target="#collapse" aria-expanded="false" aria-controls="collapse">');
                         echo('<div class="sb-nav-link-icon"><i class="fas fa-chart-line"></i></div>Relatórios<div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>');
@@ -104,12 +108,6 @@ setlocale(LC_ALL, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
                         echo('<a class="nav-link" href="'.$HTTP_HOST.'/relatorios/recebimento">Recebimentos</a>');
                         echo('<a class="nav-link" href="'.$HTTP_HOST.'/relatorios/financeiro">Financeiro</a>');
                       echo('</nav></div>');
-
-
-                      //Custos
-                      echo('<div class="sb-sidenav-menu-heading">Financeiro</div>');
-                      echo('<a class="nav-link" href="'.$HTTP_HOST.'/custos"><div class="sb-nav-link-icon"><i class="fas fa-cogs"></i></div>Custos</a>');
-                      echo('<a class="nav-link" href="'.$HTTP_HOST.'/recebimentos"><div class="sb-nav-link-icon"><i class="fas fa-cogs"></i></div>Recebimentos</a>');
 
                       //Bar
                       echo('<div class="sb-sidenav-menu-heading">Bar</div>');
@@ -185,6 +183,34 @@ setlocale(LC_ALL, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
           echo('<option value="'. $lote['id'] .'" selected>'. $lote['nome'] .'</option>');
         }else{
           echo('<option value="'. $lote['id'] .'">'. $lote['nome'] .'</option>');
+        }
+      }
+    echo('</select>');
+  }
+
+  function selectVendedor(){
+    global $tipoUsuario, $idUsuario;
+    
+    if($tipoUsuario == 1){
+      $consulta = "SELECT * FROM `Vendedor` WHERE validade = 'VALIDO' ORDER BY nome";
+      selectVend($consulta);
+    }else if($tipoUsuario == 2){
+      $consulta = "SELECT * FROM `Vendedor` WHERE `produtor`= '$idUsuario' AND validade = 'VALIDO' ORDER BY nome";
+      selectVend($consulta);
+    }
+   
+  }
+
+  function selectVend($consulta){
+    global $idVendedor;
+    $dados = selecionar($consulta);
+    echo('<select class="form-control" name="selectVendedor" id="selectVendedor" onchange="selectVendedor(1)"  form="emitir" required>');
+      echo('<option value="">Selecione o Vendedor</option>');
+      foreach ($dados as $vendedor) {
+        if($idVendedor == $vendedor['id']){
+          echo('<option value="'. $vendedor['id'] .'" selected>'. $vendedor['nome'] .'</option>');
+        }else{
+          echo('<option value="'. $vendedor['id'] .'">'. $vendedor['nome'] .'</option>');
         }
       }
     echo('</select>');
