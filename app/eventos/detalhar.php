@@ -17,7 +17,7 @@ $produtor = $obj['produtor'];
                         <div class="card-header"><h3 class="text-center font-weight-light my-4"><?php echo $nome;?></h3></div>
                         <div class="card-body">
                             <?php
-                                echo ("<img class='imgEvento' src='../../getImagem.php?nome=$nome&produtor=$produtor'/>");
+                                echo ("<img class='imgEvento' src='../getImagem.php?id=$id'/>");
                                 echo ("<br><br><h4>Data do Evento: ".$obj['data']."</h4>"); 
                                 echo ("<br><h4>Descrição do Evento: ".$obj['descricao']."</h4>"); 
                                 echo ("<br><h4>Validade do Evento: ".$obj['validade']."</h4>");

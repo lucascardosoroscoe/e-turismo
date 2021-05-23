@@ -1,10 +1,10 @@
 <?php
     session_start();
     //Conexão com o o Banco de dados
-    $servidorBanco = '185.201.11.212:3306';
-    $senhaBanco ='ingressozapp';
-    $usuarioBanco ='u989688937_ingressozapp';
-    $bdados ='u989688937_ingressozapp';
+    $servidorBanco = '127.0.0.1:3306';
+    $senhaBanco ='vjdC7p5XBy';
+    $usuarioBanco ='u989688937_IHLyR';
+    $bdados ='u989688937_WtNbV';
     
     
     global $DOCUMENT_ROOT, $HTTP_HOST;
