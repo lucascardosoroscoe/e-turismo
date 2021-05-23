@@ -106,6 +106,7 @@ setlocale(LC_ALL, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
                         echo('<a class="nav-link" href="'.$HTTP_HOST.'/relatorios/vendaIngresso">Venda de Ingressos</a>');
                         echo('<a class="nav-link" href="'.$HTTP_HOST.'/relatorios/recebimento">Recebimentos</a>');
                         echo('<a class="nav-link" href="'.$HTTP_HOST.'/relatorios/vendaBar">Vendas no Bar</a>');
+                        echo('<a class="nav-link" href="'.$HTTP_HOST.'/relatorios/pix">PIX</a>');
                         echo('<a class="nav-link" href="'.$HTTP_HOST.'/relatorios/financeiro">Financeiro</a>');
                       echo('</nav></div>');
 

@@ -22,4 +22,21 @@ function verificarAcesso($nivelAcesso){
     }
 }
 
+setlocale(LC_ALL, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
+function formatarData($data){
+  return ucfirst(strftime("%d de %B de %Y", strtotime($data) ) );
+}
+function UsToBr($valor){ 
+  return number_format($valor,2,",",".");
+} 
+function BrToUs($valor){ 
+  $valor = str_replace(".","",$valor);
+  $valor = str_replace(",",".",$valor);
+  return number_format($valor,2,".",",");
+} 
+function UsToHodo($valor){ 
+  $valor = str_replace(",","",$valor);
+  $valor = str_replace(".",",",$valor);
+  return number_format($valor,0,",",".");
+} 
 ?>

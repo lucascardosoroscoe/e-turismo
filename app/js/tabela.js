@@ -129,7 +129,7 @@ function filtrarTabela(pesquisa){
     console.log("Max Pagina: " + maxPaginacao);
     soma = 0;
     countPage = 0;
-    for(var i = 1; i < tbody.childNodes.length; i++){
+    for(var i = 0; i < tbody.childNodes.length; i++){
         var achou = false;
         var tr = tbody.childNodes[i];
         var td = tr.childNodes;

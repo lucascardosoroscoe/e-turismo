@@ -1,6 +1,6 @@
 <?php
 include('../../includes/verificarAcesso.php');
-verificarAcesso(3);
+verificarAcesso(1);
 include('../../includes/header.php');
 $dataInicial = $_GET['dataInicial'];
 $dataFinal = $_GET['dataFinal'];
@@ -31,7 +31,7 @@ $idSecretaria = $_SESSION["idSecretaria"];
             if($idEvento == ""){
                 $nomeEvento = "Todos os Eventos";
             }
-            echo ('<p style="font-size: x-large;">Relatório de Vendas no Bar - '. $nomeEvento.'</p>');
+            echo ('<p style="font-size: x-large;">Entrada de Recursos via PIX</p>');
             ?>
         </div>
         <div class="card-body" style="background-color: #eee;">
@@ -84,7 +84,6 @@ $idSecretaria = $_SESSION["idSecretaria"];
             </div> -->
             <div class="row">
                 <div class="col-md-12">
-                    <h3 style="margin-top: 20px;">DETALHAMENTO DE VENDAS ONLINE</h3>
                     <div class="col-md-8" style="float:left; margin-top: 5px;">
                         <input class="form-control" type="text" placeholder="Buscar..." style="margin-bottom: 5px" id="buscar" onkeyup="buscar()"/>
                     </div>'
@@ -400,16 +399,16 @@ $idSecretaria = $_SESSION["idSecretaria"];
                         wp_wc_customer_lookup.first_name, wp_wc_customer_lookup.last_name, wp_wc_customer_lookup.postcode 
                         FROM wp_wc_order_stats 
                         JOIN wp_wc_customer_lookup ON wp_wc_customer_lookup.customer_id = wp_wc_order_stats.customer_id 
-                        WHERE (wp_wc_order_stats.status = 'wc-processing' OR wp_wc_order_stats.status = 'wc-completed') 
-                        AND wp_wc_order_stats.date_created >= '$dataInicial' AND wp_wc_order_stats.date_created <= '$dataFinal'";
+                        WHERE wp_wc_order_stats.date_created >= '$dataInicial' AND wp_wc_order_stats.date_created <= '$dataFinal'
+                        ORDER BY wp_wc_order_stats.date_created";
                     }else{
                         $consulta = "SELECT wp_wc_order_stats.order_id, wp_wc_order_stats.date_created, 
                         wp_wc_order_stats.net_total, wp_wc_order_stats.status, wp_wc_customer_lookup.email , 
                         wp_wc_customer_lookup.first_name, wp_wc_customer_lookup.last_name, wp_wc_customer_lookup.postcode 
                         FROM wp_wc_order_stats 
                         JOIN wp_wc_customer_lookup ON wp_wc_customer_lookup.customer_id = wp_wc_order_stats.customer_id 
-                        WHERE (wp_wc_order_stats.status = 'wc-processing' OR wp_wc_order_stats.status = 'wc-completed') 
-                        AND wp_wc_order_stats.date_created >= '$dataInicial' AND wp_wc_order_stats.date_created <= '$dataFinal'";
+                        WHERE wp_wc_order_stats.date_created >= '$dataInicial' AND wp_wc_order_stats.date_created <= '$dataFinal'
+                        ORDER BY wp_wc_order_stats.date_created";
                     }
                     addtabela($consulta);
                 echo('</tbody>');
@@ -423,16 +422,19 @@ $idSecretaria = $_SESSION["idSecretaria"];
             echo "<tr>";
             echo ("<td style='display:none;'>".$obj['order_id']."</td>");
             echo ("<td>".$obj['first_name']." - ".$obj['email']."</td>"); 
-            echo ("<td>R$".$obj['last_name']."</td>"); 
-            echo ("<td>R$".$obj['net_total']."</td>"); 
+            echo ("<td>".$obj['last_name']."</td>"); 
+            echo ("<td>R$".UsToBr($obj['net_total'])."</td>"); 
             echo ("<td>".$obj['postcode']."</td>"); 
-            echo ("<td>".$obj['date_created']."</td>"); 
+            echo ("<td>".formatarData($obj['date_created'])."</td>"); 
             if($obj['status'] == 'wc-processing'){
                 echo ("<td>Pago</td>");
-                // echo ("<td style='display: flex;'><a href='invalidar.php?id=".$obj['codigo']."' class='iconeTabela red'><i class='fas fa-user-times'></i></a></td>");  
+                echo ("<td style='display: flex;'><a href='invalidar.php?id=".$obj['codigo']."' class='iconeTabela red'><i class='fas fa-user-times'></i></a></td>");  
             }else if($obj['status'] == 'wc-completed'){
-                echo ("<td>Registrado</td>");
-                // echo ("<td><a href='reativar.php?id=".$obj['codigo']."' style='margin-left: 15px;'>Reativar</a></td>");
+                echo ("<td>Crédito Adicionado</td>");
+                echo ("<td><a href='reativar.php?id=".$obj['codigo']."' style='margin-left: 15px;'>Reativar</a></td>");
+            }else if($obj['status'] == 'wc-on-hold'){
+                echo ("<td>Aguardando Pagamento</td>");
+                echo ("<td><a href='reativar.php?id=".$obj['codigo']."' style='margin-left: 15px;'>Reativar</a></td>");
             }
             echo "</tr>";
         }
