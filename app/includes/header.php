@@ -7,13 +7,13 @@
       <meta name="description" content="IngressoZapp" />
       <meta name="author" content="Lucas Cardoso Roscoe" />
       <title>IngressoZapp</title>
-      <link  rel="stylesheet" href="<?php echo $HTTP_HOST;?>/css/styles.css" />
-      <link rel="stylesheet"  href="<?php echo $HTTP_HOST;?>/css/table.css">
+      <link  rel="stylesheet" href="<?php echo $HTTP_HOST . "/app";?>/css/styles.css" />
+      <link rel="stylesheet"  href="<?php echo $HTTP_HOST . "/app";?>/css/table.css">
       <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
       <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js" crossorigin="anonymous"></script>
       <!-- <link rel="stylesheet" href="style1.css">
       <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-      <script type="text/javascript" src="<?php echo $HTTP_HOST;?>/js/graph.js"></script> -->
+      <script type="text/javascript" src="<?php echo $HTTP_HOST . "/app";?>/js/graph.js"></script> -->
     </head>
 
     <body>
@@ -30,7 +30,7 @@ setlocale(LC_ALL, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
       <!-- navbar-dark bg-dark -->
         <!-- Título Site -->
         
-          <a class="navbar-brand" href="<?php echo $HTTP_HOST;?>/index.php"><img src="<?php echo $HTTP_HOST;?>/img/logo.png" alt="Soluções2c" srcset="" style="height:40px;"></a>
+          <a class="navbar-brand" href="<?php echo $HTTP_HOST . "/app";?>/index.php"><img src="<?php echo $HTTP_HOST . "/app";?>/img/logo.png" alt="Soluções2c" srcset="" style="height:40px;"></a>
         <!-- Botão do Menu -->
           <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button>
         <!-- Barra de Pesquisa -->
@@ -47,7 +47,7 @@ setlocale(LC_ALL, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
                 <a class="dropdown-item" href="#">Configurações</a>
                 <a class="dropdown-item" onclick="window.print()">Exportar PDF</a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="<?php echo $HTTP_HOST;?>/login">Login</a>
+                <a class="dropdown-item" href="<?php echo $HTTP_HOST . "/app";?>/login">Login</a>
               </div>
             </li>
           </ul>
@@ -60,13 +60,13 @@ setlocale(LC_ALL, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
               <div class="nav">
               <?php
                 
-                echo('<a class="nav-link" href="'.$HTTP_HOST.'/index.php"><div class="sb-nav-link-icon"><i class="fas fa-home"></i></div>IngressoZapp</a>');
+                echo('<a class="nav-link" href="'.$HTTP_HOST . "/app".'/index.php"><div class="sb-nav-link-icon"><i class="fas fa-home"></i></div>IngressoZapp</a>');
                 if($tipoUsuario == 1 || $tipoUsuario == 2 || $tipoUsuario == 3){
                   echo('<div class="sb-sidenav-menu-heading">Principal</div>');
 
                   //Painel de Controle
-                  echo('<a class="nav-link" href="'.$HTTP_HOST.'/ingresso.php"><div class="sb-nav-link-icon"><i class="fas fa-ticket-alt"></i></div>Emitir Ingresso</a>');
-                  echo('<a class="nav-link" href="'.$HTTP_HOST.'/vendas"><div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>Minhas Vendas</a>');
+                  echo('<a class="nav-link" href="'.$HTTP_HOST . "/app".'/ingresso.php"><div class="sb-nav-link-icon"><i class="fas fa-ticket-alt"></i></div>Emitir Ingresso</a>');
+                  echo('<a class="nav-link" href="'.$HTTP_HOST . "/app".'/vendas"><div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>Minhas Vendas</a>');
 
 
                   //Usuários
@@ -75,48 +75,48 @@ setlocale(LC_ALL, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
                         echo('<div class="sb-nav-link-icon"><i class="fas fa-user-friends"></i></div>Usuários<div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>');
                       echo('</a>');
                       echo('<div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-parent="#sidenavAccordion"><nav class="sb-sidenav-menu-nested nav">');
-                          echo('<a class="nav-link" href="'.$HTTP_HOST.'/produtores">Produtores</a>');
-                          echo('<a class="nav-link" href="'.$HTTP_HOST.'/vendedores">Vendedores</a>');
-                          echo('<a class="nav-link" href="'.$HTTP_HOST.'/clientes">Clientes</a>');
+                          echo('<a class="nav-link" href="'.$HTTP_HOST . "/app".'/produtores">Produtores</a>');
+                          echo('<a class="nav-link" href="'.$HTTP_HOST . "/app".'/vendedores">Vendedores</a>');
+                          echo('<a class="nav-link" href="'.$HTTP_HOST . "/app".'/clientes">Clientes</a>');
                       echo('</nav></div>');
                     }else if($tipoUsuario == 2){
                       echo('<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">');
                       echo('<div class="sb-nav-link-icon"><i class="fas fa-user-friends"></i></div>Usuários<div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>');
                       echo('</a>');
                       echo('<div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-parent="#sidenavAccordion"><nav class="sb-sidenav-menu-nested nav">');
-                        echo('<a class="nav-link" href="'.$HTTP_HOST.'/vendedores">Vendedores</a>');
-                        echo('<a class="nav-link" href="'.$HTTP_HOST.'/clientes">Clientes</a>');
+                        echo('<a class="nav-link" href="'.$HTTP_HOST . "/app".'/vendedores">Vendedores</a>');
+                        echo('<a class="nav-link" href="'.$HTTP_HOST . "/app".'/clientes">Clientes</a>');
                       echo('</nav></div>');
                     }else if($tipoUsuario == 3){
-                      echo('<a class="nav-link" href="'.$HTTP_HOST.'/clientes">Clientes</a>');
+                      echo('<a class="nav-link" href="'.$HTTP_HOST . "/app".'/clientes">Clientes</a>');
                     }
                     if($tipoUsuario == 2 || $tipoUsuario == 1){
                       //Eventos
-                      echo('<a class="nav-link" href="'.$HTTP_HOST.'/eventos"><div class="sb-nav-link-icon"><i class="fas fa-gas-pump"></i></div>Eventos</a>');
-                      echo('<a class="nav-link" href="'.$HTTP_HOST.'/lotes"><div class="sb-nav-link-icon"><i class="fas fa-gas-pump"></i></div>Lotes</a>');
+                      echo('<a class="nav-link" href="'.$HTTP_HOST . "/app".'/eventos"><div class="sb-nav-link-icon"><i class="fas fa-gas-pump"></i></div>Eventos</a>');
+                      echo('<a class="nav-link" href="'.$HTTP_HOST . "/app".'/lotes"><div class="sb-nav-link-icon"><i class="fas fa-gas-pump"></i></div>Lotes</a>');
                       
                       // Custos
-                      echo('<a class="nav-link" href="'.$HTTP_HOST.'/custos"><div class="sb-nav-link-icon"><i class="fas fa-cogs"></i></div>Custos</a>');
+                      echo('<a class="nav-link" href="'.$HTTP_HOST . "/app".'/custos"><div class="sb-nav-link-icon"><i class="fas fa-cogs"></i></div>Custos</a>');
 
                       //Relatórios
                       echo('<a class="nav-link collapsed" href="#produtividade" data-toggle="collapse" data-target="#collapse" aria-expanded="false" aria-controls="collapse">');
                         echo('<div class="sb-nav-link-icon"><i class="fas fa-chart-line"></i></div>Relatórios<div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>');
                       echo('</a>');
                       echo('<div class="collapse" id="collapse" aria-labelledby="headingOne" data-parent="#sidenavAccordion"><nav class="sb-sidenav-menu-nested nav">');
-                        echo('<a class="nav-link" href="'.$HTTP_HOST.'/relatorios/vendaIngresso">Venda de Ingressos</a>');
-                        echo('<a class="nav-link" href="'.$HTTP_HOST.'/relatorios/recebimento">Recebimentos</a>');
-                        echo('<a class="nav-link" href="'.$HTTP_HOST.'/relatorios/vendaBar">Vendas no Bar</a>');
-                        echo('<a class="nav-link" href="'.$HTTP_HOST.'/relatorios/pix">PIX</a>');
-                        echo('<a class="nav-link" href="'.$HTTP_HOST.'/relatorios/financeiro">Financeiro</a>');
+                        echo('<a class="nav-link" href="'.$HTTP_HOST . "/app".'/relatorios/vendaIngresso">Venda de Ingressos</a>');
+                        echo('<a class="nav-link" href="'.$HTTP_HOST . "/app".'/relatorios/recebimento">Recebimentos</a>');
+                        echo('<a class="nav-link" href="'.$HTTP_HOST . "/app".'/relatorios/vendaBar">Vendas no Bar</a>');
+                        echo('<a class="nav-link" href="'.$HTTP_HOST . "/app".'/relatorios/pix">PIX</a>');
+                        echo('<a class="nav-link" href="'.$HTTP_HOST . "/app".'/relatorios/financeiro">Financeiro</a>');
                       echo('</nav></div>');
 
                       //Bar
                       echo('<div class="sb-sidenav-menu-heading">Bar</div>');
-                      echo('<a class="nav-link" href="'.$HTTP_HOST.'/produtos"><div class="sb-nav-link-icon"><i class="fas fa-cogs"></i></div>Produtos</a>');
-                      echo('<a class="nav-link" href="'.$HTTP_HOST.'/cardapio"><div class="sb-nav-link-icon"><i class="fas fa-cogs"></i></div>Cadastro de Cardápio</a>');
+                      echo('<a class="nav-link" href="'.$HTTP_HOST . "/app".'/produtos"><div class="sb-nav-link-icon"><i class="fas fa-cogs"></i></div>Produtos</a>');
+                      echo('<a class="nav-link" href="'.$HTTP_HOST . "/app".'/cardapio"><div class="sb-nav-link-icon"><i class="fas fa-cogs"></i></div>Cadastro de Cardápio</a>');
                     }
                 }else{
-                  echo('<a class="nav-link" href="'.$HTTP_HOST.'/login/"><div class="sb-nav-link-icon"><i class="fas fa-user fa-fw"></i></div>Login</a>');
+                  echo('<a class="nav-link" href="'.$HTTP_HOST . "/app".'/login/"><div class="sb-nav-link-icon"><i class="fas fa-user fa-fw"></i></div>Login</a>');
                 }
                 ?>
               </div>
