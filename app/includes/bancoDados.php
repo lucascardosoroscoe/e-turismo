@@ -9,7 +9,7 @@
     
     global $DOCUMENT_ROOT, $HTTP_HOST;
     $DOCUMENT_ROOT = $_SERVER['DOCUMENT_ROOT'];
-    $HTTP_HOST = "https:" $_SERVER['HTTP_HOST'];
+    $HTTP_HOST = "https://". $_SERVER['HTTP_HOST'];
     $TOKEN = "BMJ-7V@9-$%ASbZXS#v%!bnmpHI%Cavj";
 
 

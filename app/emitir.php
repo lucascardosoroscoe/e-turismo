@@ -85,7 +85,7 @@ function verificarIngresso(){
 function gerarIngresso(){
     global $codigo, $evento, $vendedor, $idCliente, $telefone, $valor, $idLote;
     $consulta = "INSERT INTO Ingresso (codigo, evento, vendedor, idCliente, valor, lote) VALUES ('$codigo', '$evento', '$vendedor', '$idCliente', '$valor', '$idLote')";
-    echo $consulta;
+    // echo $consulta;
     $msg = executar($consulta);
     if($msg == "Sucesso!"){
         atualizarVendidosLote(); 
@@ -117,6 +117,7 @@ function enviarIngresso(){
     global $local;
     $msg = $_POST["msg"];
     if (empty($msg)){
+        // echo '<br>'.$local;
         header('Location: '.$local);
     }else if ($msg == "1"){
         $consulta = "UPDATE Ingresso SET validade = 'INVALIDO' WHERE codigo = '$codigo'";

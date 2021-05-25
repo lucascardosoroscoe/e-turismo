@@ -6,7 +6,7 @@ include('../includes/header.php');
     <div style='background-image: url("../img/fundoLogin.jpg"); background-size: cover;height: 100%;'>
         <div class="container">
             <div class="row justify-content-center">
-                <div class="col-lg-7">
+                <div class="col-lg-9">
                     <div class="card shadow-lg border-0 rounded-lg mt-5">
                         <div class="card-header"><h3 class="text-center font-weight-light my-4">Adicionar Evento</h3></div>
                         <div class="card-body">
