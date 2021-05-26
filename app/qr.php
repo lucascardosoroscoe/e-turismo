@@ -39,8 +39,9 @@ $aux .= 't=P';
                         <?php
                             echo ("<img style='width: 100%;' src='getImagem.php?id=$idEvento'/>");
                             echo ('<img style="margin-left: 25%;" src="'.$aux.'" alt="" width="50%">');
-                            echo ('<p class="font-weight-light">Cliente: '.$cliente.'</p>');
-                            echo ('<p class="font-weight-light">Descrição do Evento: '.$descricaoEvento.'</p>');
+                            echo ('<h4 style="text-align: center;">'.$descricaoEvento.'</h4>');
+                            echo ('<h4>Cliente: '.$cliente.'</h4>');
+                            
                             ?>
                         </div>
                     </div>

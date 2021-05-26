@@ -423,8 +423,8 @@ $idSecretaria = $_SESSION["idSecretaria"];
             echo "<tr>";
             echo ("<td style='display:none;'>".$obj['order_id']."</td>");
             echo ("<td>".$obj['first_name']." - ".$obj['email']."</td>"); 
-            echo ("<td>R$".$obj['last_name']."</td>"); 
-            echo ("<td>R$".$obj['net_total']."</td>"); 
+            echo ("<td>".$obj['last_name']."</td>"); 
+            echo ("<td>R$".UsToBr($obj['net_total'])."</td>"); 
             echo ("<td>".$obj['postcode']."</td>"); 
             echo ("<td>".$obj['date_created']."</td>"); 
             if($obj['status'] == 'wc-processing'){

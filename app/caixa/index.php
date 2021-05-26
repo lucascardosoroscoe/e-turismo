@@ -27,7 +27,7 @@ $nCaixa = $_SESSION["nCaixa"];
                             echo ('</div>');
                         }else{
                             $id = $_GET['id'];
-                            $consulta = "";
+                            // $consulta = "";
 
                             // $dados = selecionar($consulta);
                             // if ($dados[0] == ""){
@@ -49,22 +49,22 @@ $nCaixa = $_SESSION["nCaixa"];
                                 echo ('<div class="Adicionar">');
                                     // echo ('<h5>Adicionar Saldo</h5>');
                                     echo ('<div class="form-row">');
-                                        echo ('<a class="btn btn-primary btn-block adicionarDiv" href="adicionar.php?id='. $id .'&idFicha='. $idFicha .'&valor=1">');
-                                            echo ('+ R$1,00');
+                                        echo ('<a class="btn btn-primary btn-block adicionarDiv" onclick="adicionar('.$id.','.$nCaixa.',1)">');
+                                        echo ('+ R$1,00');
                                         echo ('</a>');
-                                        echo ('<a class="btn btn-primary btn-block adicionarDiv" href="adicionar.php?id='. $id .'&idFicha='. $idFicha .'&valor=5">');
+                                        echo ('<a class="btn btn-primary btn-block adicionarDiv" onclick="adicionar('.$id.','.$nCaixa.',5)">');
                                         echo ('+ R$5,00');
                                         echo ('</a>');
-                                        echo ('<a class="btn btn-primary btn-block adicionarDiv" href="adicionar.php?id='. $id .'&idFicha='. $idFicha .'&valor=10">');
+                                        echo ('<a class="btn btn-primary btn-block adicionarDiv" onclick="adicionar('.$id.','.$nCaixa.',10)">');
                                         echo ('+ R$10,00');
                                         echo ('</a>');
-                                        echo ('<a class="btn btn-primary btn-block adicionarDiv" href="adicionar.php?id='. $id .'&idFicha='. $idFicha .'&valor=20">');
+                                        echo ('<a class="btn btn-primary btn-block adicionarDiv" onclick="adicionar('.$id.','.$nCaixa.',20)">');
                                         echo ('+ R$20,00');
                                         echo ('</a>');
-                                        echo ('<a class="btn btn-primary btn-block adicionarDiv" href="adicionar.php?id='. $id .'&idFicha='. $idFicha .'&valor=50">');
+                                        echo ('<a class="btn btn-primary btn-block adicionarDiv" onclick="adicionar('.$id.','.$nCaixa.',50)">');
                                         echo ('+ R$50,00');
                                         echo ('</a>');
-                                        echo ('<a class="btn btn-primary btn-block adicionarDiv" href="adicionar.php?id='. $id .'&idFicha='. $idFicha .'&valor=100">');
+                                        echo ('<a class="btn btn-primary btn-block adicionarDiv" onclick="adicionar('.$obj['id'].','.$obj['nCaixa'].',100)">');
                                         echo ('+ R$100,00');
                                         echo ('</a>');
                                     echo ('</div>');
@@ -101,6 +101,7 @@ $nCaixa = $_SESSION["nCaixa"];
     display: flow-root;
 }
 </style>
+<script src="index.js"></script>
 <?php
 
 function selectCaixa(){

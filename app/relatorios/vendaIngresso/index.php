@@ -418,7 +418,7 @@ $idSecretaria = $_SESSION["idSecretaria"];
             echo ("<td>".$obj['codigo']."</td>");
             echo ("<td>".$obj['cliente']."</td>");
             echo ("<td>".$obj['telefone']."</td>"); 
-            echo ("<td>R$".$obj['valor']."</td>"); 
+            echo ("<td>R$".UsToBr($obj['valor'])."</td>"); 
             echo ("<td>".$obj['vendedor']."</td>"); 
             $validade = $obj['validade'];
             echo ("<td>".$validade."</td>");

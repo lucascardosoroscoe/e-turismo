@@ -104,7 +104,7 @@ $idSecretaria = $_SESSION["idSecretaria"];
         foreach ($dados as $obj) {
             echo "<tr>";
             echo ("<td style='display:none;'>".$obj['id']."</td>"); 
-            echo ("<td>R$".number_format($obj['valor'], 2, ',', '.')."</td>");
+            echo ("<td>R$".UsToBr($obj['valor'])."</td>");
             echo ("<td>".$obj['data']."</td>"); 
             echo "</tr>";
         }

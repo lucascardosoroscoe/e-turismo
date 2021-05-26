@@ -6,8 +6,8 @@ verificarAcesso(2);
 $id = $_POST['inputId'];
 $nome = $_POST['inputName'];
 $imagem      = $_FILES["inputImagem"];
-$descricao   = $_POST['inputData'];
-$data        = $_POST['inputDescricao'];
+$data   = $_POST['inputData'];
+$descricao        = $_POST['inputDescricao'];
 if($imagem != NULL) { 
     $nomeFinal = time().'.jpg';
     if (move_uploaded_file($imagem['tmp_name'], $nomeFinal)) {
