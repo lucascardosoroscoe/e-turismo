@@ -1,25 +1,34 @@
 <?php
-include('../includes/verificarAcesso.php');
+include('../../includes/verificarAcesso.php');
 verificarAcesso(2);
 
-
-$id = $_POST['inputId'];
-$nome = $_POST['inputName'];
-$imagem      = $_FILES["inputImagem"];
-$descricao   = $_POST['inputData'];
-$data        = $_POST['inputDescricao'];
-if($imagem != NULL) { 
-    $nomeFinal = time().'.jpg';
-    if (move_uploaded_file($imagem['tmp_name'], $nomeFinal)) {
-        $tamanhoImg = filesize($nomeFinal); 
- 
-        $mysqlImg = addslashes(fread(fopen($nomeFinal, "r"), $tamanhoImg)); 
-    }
-    $consulta = "UPDATE `Evento` SET `nome`='$nome',`imagem`='$imagem',`data`='$data',`descricao`='$descricao' WHERE `id` = '$id'";
-    $msg = executar($consulta);
-}else{
-    $consulta = "UPDATE `Evento` SET `nome`='$nome',`data`='$data',`descricao`='$descricao' WHERE `id` = '$id'";
-    $msg = executar($consulta);
+$codigo = $_POST['codigo'];
+$selectLote = $_POST['selectLote'];
+$idCliente   = $_POST['idCliente'];
+$inputName   = $_POST['inputName'];
+$telefone  =  $_POST['inputTelefone'];
+$telefone = str_replace(" ", "", $telefone);
+$telefone = str_replace("(", "", $telefone);
+$telefone = str_replace(")", "", $telefone);
+$telefone = str_replace("-", "", $telefone);
+$telefone = str_replace("+55", "", $telefone);
+$prim = substr($telefone,0,1);
+if($prim == 0){
+    $telefone = substr($telefone,1,11);
 }
-header('Location: index.php?msg='.$msg);
+
+$consulta = "UPDATE `Cliente` SET `nome`='$inputName',`telefone`= '$telefone' WHERE `id`=$idCliente";
+$msg = executar($consulta);
+if($msg == "Sucesso!"){    
+    $consulta = "SELECT * FROM `Lote` WHERE `id` = '$selectLote'";
+    $dados = selecionar($consulta);
+    $valor = $dados[0]['valor'];
+    $consulta = "UPDATE `Ingresso` SET `valor`='$valor',`lote`='$selectLote' WHERE `codigo` = '$codigo'";
+    $msg = executar($consulta);
+    if($msg == "Sucesso!"){
+        header('Location: index.php?msg='.$msg);
+    }
+}
+echo $consulta;
+
 ?>
