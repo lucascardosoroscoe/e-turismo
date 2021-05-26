@@ -428,13 +428,13 @@ $idSecretaria = $_SESSION["idSecretaria"];
             echo ("<td>".formatarData($obj['date_created'])."</td>"); 
             if($obj['status'] == 'wc-processing'){
                 echo ("<td>Pago</td>");
-                echo ("<td style='display: flex;'><a href='invalidar.php?id=".$obj['codigo']."' class='iconeTabela red'><i class='fas fa-user-times'></i></a></td>");  
+                // echo ("<td style='display: flex;'><a href='invalidar.php?id=".$obj['codigo']."' class='iconeTabela red'><i class='fas fa-user-times'></i></a></td>");  
             }else if($obj['status'] == 'wc-completed'){
                 echo ("<td>Crédito Adicionado</td>");
-                echo ("<td><a href='reativar.php?id=".$obj['codigo']."' style='margin-left: 15px;'>Reativar</a></td>");
+                // echo ("<td><a href='reativar.php?id=".$obj['codigo']."' style='margin-left: 15px;'>Reativar</a></td>");
             }else if($obj['status'] == 'wc-on-hold'){
                 echo ("<td>Aguardando Pagamento</td>");
-                echo ("<td><a href='reativar.php?id=".$obj['codigo']."' style='margin-left: 15px;'>Reativar</a></td>");
+                // echo ("<td><a href='reativar.php?id=".$obj['codigo']."' style='margin-left: 15px;'>Reativar</a></td>");
             }
             echo "</tr>";
         }

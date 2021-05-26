@@ -104,10 +104,12 @@ setlocale(LC_ALL, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
                       echo('</a>');
                       echo('<div class="collapse" id="collapse" aria-labelledby="headingOne" data-parent="#sidenavAccordion"><nav class="sb-sidenav-menu-nested nav">');
                         echo('<a class="nav-link" href="'.$HTTP_HOST . "/app".'/relatorios/vendaIngresso">Venda de Ingressos</a>');
+                        echo('<a class="nav-link" href="'.$HTTP_HOST . "/app".'/relatorios/financeiro">Financeiro</a>');
                         echo('<a class="nav-link" href="'.$HTTP_HOST . "/app".'/relatorios/recebimento">Recebimentos</a>');
                         echo('<a class="nav-link" href="'.$HTTP_HOST . "/app".'/relatorios/vendaBar">Vendas no Bar</a>');
+                      if($tipoUsuario == 1){
                         echo('<a class="nav-link" href="'.$HTTP_HOST . "/app".'/relatorios/pix">PIX</a>');
-                        echo('<a class="nav-link" href="'.$HTTP_HOST . "/app".'/relatorios/financeiro">Financeiro</a>');
+                      }
                       echo('</nav></div>');
 
                       //Bar
