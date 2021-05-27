@@ -114,9 +114,9 @@ setlocale(LC_ALL, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
 
                       //Bar
                       echo('<div class="sb-sidenav-menu-heading">Bar</div>');
-                      echo('<a class="nav-link" href="'.$HTTP_HOST . "/app".'/produtos"><div class="sb-nav-link-icon"><i class="fas fa-cogs"></i></div>Produtos</a>');
-                      echo('<a class="nav-link" href="'.$HTTP_HOST . "/app".'/caixa"><div class="sb-nav-link-icon"><i class="fas fa-cogs"></i></div>Caixa</a>');
-                      echo('<a class="nav-link" href="'.$HTTP_HOST . "/app".'/cardapio"><div class="sb-nav-link-icon"><i class="fas fa-cogs"></i></div>Cadastro de Cardápio</a>');
+                      echo('<a class="nav-link" href="'.$HTTP_HOST . "/app".'/produtos"><div class="sb-nav-link-icon"><i class="fas fa-cocktail"></i></div>Produtos</a>');
+                      // echo('<a class="nav-link" href="'.$HTTP_HOST . "/app".'/caixa"><div class="sb-nav-link-icon"><i class="fas fa-cogs"></i></div>Caixa</a>');
+                      // echo('<a class="nav-link" href="'.$HTTP_HOST . "/app".'/cardapio"><div class="sb-nav-link-icon"><i class="fas fa-cogs"></i></div>Cadastro de Cardápio</a>');
                     }
                 }else{
                   echo('<a class="nav-link" href="'.$HTTP_HOST . "/app".'/login/"><div class="sb-nav-link-icon"><i class="fas fa-user fa-fw"></i></div>Login</a>');

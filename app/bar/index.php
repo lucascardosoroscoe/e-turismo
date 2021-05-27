@@ -1,9 +1,9 @@
 <?php
-    session_start();
-    /*session created*/
-    $idProdutor = $_SESSION["usuario"];
-    $id = $_GET['id'];
-    include_once '../../includes/header.php';
+    include('../includes/verificarAcesso.php');
+    verificarAcesso(2);
+    include('../includes/headerLogin.php');
+
+/*
     $idFicha = carregarSaldo($id, $idProdutor);
     $produtos = selecionarProdutos($idProdutor);
     carregarCategorias($produtos);
@@ -74,9 +74,10 @@
         $dados = selecionar($consulta);
         return $dados;
     }
+    */
 
-    ?>
+?>
     <script src="loja.js"></script>
-    <?php
-    include_once '../../includes/footer.php';
+<?php
+    include('../includes/footer.php');
 ?>

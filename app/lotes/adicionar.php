@@ -13,7 +13,7 @@ include('../includes/header.php');
                             <form action="create.php" id="create_lote" method="POST" enctype="multipart/form-data">
                                 <div class="form-row">
                                     <div class="col-md-12">
-                                        <div class="form-group">
+                                        <div class="form-group"> 
                                             <label class="small mb-1" for="inputName">Nome do Lote*</label>
                                             <input class="form-control py-4" id="inputName"  name="inputName" type="text" placeholder="Digite o Nome" required/>
                                         </div>
@@ -31,7 +31,7 @@ include('../includes/header.php');
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label class="small mb-1" for="inputQuantidade">Quantidade de Ingressos Disponíveis*</label>
-                                            <input class="form-control py-4" id="inputQuantidade"  name="inputQuantidade" type="text" placeholder="Digite o Nome" required/>
+                                            <input class="form-control py-4" id="inputQuantidade"  name="inputQuantidade" type="text" placeholder="Digite a Quantidade" required/>
                                         </div>
                                     </div>
                                 </div>

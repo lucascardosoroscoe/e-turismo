@@ -84,12 +84,24 @@ $idSecretaria = $_SESSION["idSecretaria"];
             </div> -->
             <div class="row">
                 <div class="col-md-12">
-                    <h3 style="margin-top: 20px;">DETALHAMENTO DE VENDAS</h3>
-                    <div class="col-md-8" style="float:left; margin-top: 5px;">
-                        <input class="form-control" type="text" placeholder="Buscar..." style="margin-bottom: 5px" id="buscar" onkeyup="buscar()"/>
-                    </div>'
-                    <div class="btn btnAdd" onclick="fnExcelReport('dataTable')" style="margin-left: 2px;color: #000;border-color: #000;"><i class="far fa-file-excel"></i> Exportar Excel</div>
                     
+                    <h3 style="margin-top: 20px;">DETALHAMENTO DE VENDAS</h3>
+                    <div class="row">
+                        <div class="col-md-8" style="float:left; margin-top: 5px;">
+                            <input class="form-control" type="text" placeholder="Buscar..." style="margin-bottom: 5px" id="buscar" onkeyup="buscar()"/>
+                        </div>
+                        <div class="col-md-4" style="margin-top: 10px; text-align:center;">
+                            <div class="btn btnAdd" onclick="fnExcelReport('dataTable')" style="margin-left: 2px;color: #000;border-color: #000;"><i class="far fa-file-excel"></i> Exportar Excel</div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6" style="margin-top: 10px; text-align:center;">
+                            <h5>Numero de Ingressos: <span id='qIngressos'>R$</span></h5>
+                        </div>
+                        <div class="col-md-6" style="margin-top: 10px; text-align:center;">
+                            <h5>Total Faturado: <span id='total'>R$</span></h5>
+                        </div>
+                    </div>
                     <?php 
                         addTabelaVendas();
                     ?>
@@ -386,8 +398,8 @@ $idSecretaria = $_SESSION["idSecretaria"];
                     echo('<tr>');
                     echo('<th>Código</th>');
                     echo('<th>Cliente</th>');
-                    echo('<th>Telefone</th>');
                     echo('<th>Valor</th>');
+                    echo('<th>Telefone</th>');
                     echo('<th>Vendedor</th>');
                     echo('<th>Validade</th>');
                     echo('<th></th>');
@@ -417,15 +429,15 @@ $idSecretaria = $_SESSION["idSecretaria"];
             echo "<tr>";
             echo ("<td>".$obj['codigo']."</td>");
             echo ("<td>".$obj['cliente']."</td>");
-            echo ("<td>".$obj['telefone']."</td>"); 
             echo ("<td>R$".UsToBr($obj['valor'])."</td>"); 
+            echo ("<td>".$obj['telefone']."</td>"); 
             echo ("<td>".$obj['vendedor']."</td>"); 
             $validade = $obj['validade'];
             echo ("<td>".$validade."</td>");
             if($validade == "VALIDO"){
                 echo ("<td style='display: flex;'><a href='editar.php?id=".$obj['codigo']."' class='iconeTabela'><i class='fas fa-user-edit'></i></a>");  
                 echo ("<a href='invalidar.php?id=".$obj['codigo']."' class='iconeTabela red'><i class='fas fa-user-times'></i></a>");  
-                echo ("<a href='../../enviar.php?codigo=".$obj['codigo']."' class='iconeTabela'><i class='far fa-copy'></i></a></td>");  
+                echo ("<a href='../../enviar.php?codigo=".$obj['codigo']."' target='_blank' class='iconeTabela'><i class='far fa-copy'></i></a></td>");  
             }else{
                 echo ("<td><a href='reativar.php?id=".$obj['codigo']."' style='margin-left: 15px;'>Reativar</a></td>");
             }

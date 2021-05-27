@@ -1,6 +1,8 @@
 var tbody = document.getElementById('tbody');
 var total = document.getElementById('total');
+var qIngressos = document.getElementById('qIngressos');
 var soma = 0;
+var quantidade = 0;
 var filtro;
 let perPage = 10;
 
@@ -128,6 +130,7 @@ function filtrarTabela(pesquisa){
     var maxPaginacao = (estado.page*estado.perPage);
     console.log("Max Pagina: " + maxPaginacao);
     soma = 0;
+    quantidade = 0;
     countPage = 0;
     for(var i = 0; i < tbody.childNodes.length; i++){
         var achou = false;
@@ -209,7 +212,9 @@ function totalTabela(preco){
     preco = preco.replace(/[^\d]+/g,'');
     preco = parseInt(preco);
     soma = (soma + preco);
+    quantidade = quantidade + 1;
     somaFianl = soma/100;
+    qIngressos.innerHTML = quantidade;
     total.innerHTML = somaFianl.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'});
 }
 

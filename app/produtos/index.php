@@ -15,8 +15,13 @@ include('../includes/header.php');
             <a href='adicionar.php'><div class="btn btnAdd"><i class='fas fa-user-plus'></i> Adicionar</div></a>
         </div>
         <div class="card-body">
-            <div class="col-md-8" style="float:left; margin-top: 5px;">
-                <input class="form-control" type="text" placeholder="Buscar..." style="margin-bottom: 5px" id="buscar" onkeyup="buscar()"/>
+            <div class="row">
+                <div class="col-md-6" style="margin-top: 5px;">
+                    <input class="form-control" type="text" placeholder="Buscar..." style="margin-bottom: 5px" id="buscar" onkeyup="buscar()"/>
+                </div>
+                <div class="col-md-6" style="margin-top: 5px;">
+                <a class="btn btn-primary btn-block" href="view.php" >Visualizar Loja</a>
+                </div>
             </div>
             <div class="table-responsive table-hover">
                 <table class="table tablesorter table-hover" id="dataTable" width="100%" cellspacing="0">

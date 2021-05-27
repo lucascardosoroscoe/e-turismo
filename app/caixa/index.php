@@ -1,7 +1,7 @@
 <?php
 include('../includes/verificarAcesso.php');
 verificarAcesso(2);
-include '../includes/header.php';
+include '../includes/headerLogin.php';
 
 
 $nCaixa = $_SESSION["nCaixa"];
@@ -27,16 +27,15 @@ $nCaixa = $_SESSION["nCaixa"];
                             echo ('</div>');
                         }else{
                             $id = $_GET['id'];
-                            // $consulta = "";
-
-                            // $dados = selecionar($consulta);
-                            // if ($dados[0] == ""){
-                            //     $consulta = "INSERT INTO `Fichas de Bar`(`codigoQR`, `usuarioProdutor`, `valor`) VALUES ('$id','$produtor', '0')";
-                            //     $msg = executar($consulta);
-                            // }else{
-                            //     $saldo = $dados[0]['valor'];
-                            //     $idFicha = $dados[0]['idFicha'];
-                            // }
+                            $consulta = "SELECT * FROM `Carteira` WHERE `idIngresso` = '$id'";
+                            $dados = selecionar($consulta);
+                            if ($dados[0] == ""){
+                                $consulta = "INSERT INTO `Fichas de Bar`(`codigoQR`, `usuarioProdutor`, `valor`) VALUES ('$id','$produtor', '0')";
+                                $msg = executar($consulta);
+                            }else{
+                                $saldo = $dados[0]['valor'];
+                                $idFicha = $dados[0]['idFicha'];
+                            }
 
 
 
@@ -114,7 +113,10 @@ function selectCaixa(){
             echo('<option value="'. $caixa['id'] .'">'. $caixa['nome'] .'</option>');
         }
     echo('</select>');
-  }
+}
 
+function verificarPIX(){
+    
+}
 include '../includes/footer.php';
 ?>

@@ -6,18 +6,12 @@
     $nome = $_POST['inputName'];
     $valor   = $_POST['inputValor'];
     $quantidade        = $_POST['inputQuantidade'];
-    if($imagem != NULL) { 
-        $nomeFinal = time().'.jpg';
-        if (move_uploaded_file($imagem['tmp_name'], $nomeFinal)) {
-            $tamanhoImg = filesize($nomeFinal); 
-     
-            $mysqlImg = addslashes(fread(fopen($nomeFinal, "r"), $tamanhoImg)); 
-        }
-    }
     $consulta = "INSERT INTO `Lote`(`nome`, `evento`, `valor`, `quantidade`) VALUES ('$nome', '$idEvento', '$valor', '$quantidade')";
     $msg = executar($consulta);
-    if($msg != "Sucesso!"){
-            $msg = "Erro ao criar Vendedor, por favor contate o suporte!!";
+    if($msg == "Sucesso!"){
+        header('Location: index.php?msg='.$msg);
+    }else{
+        $msg = "Erro ao criar Lote, por favor contate o suporte!!<br>";
+        echo $consulta;
     }
-    header('Location: index.php?msg='.$msg);
 ?>

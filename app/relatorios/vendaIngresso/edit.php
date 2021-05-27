@@ -16,8 +16,14 @@ $prim = substr($telefone,0,1);
 if($prim == 0){
     $telefone = substr($telefone,1,11);
 }
-
-$consulta = "UPDATE `Cliente` SET `nome`='$inputName',`telefone`= '$telefone' WHERE `id`=$idCliente";
+$consulta = "SELECT * FROM `Cliente` WHERE `telefone`= '$telefone'";
+$dados = selecionar($consulta);
+if($dados[0]['id'] != $idCliente && $dados[0]['id'] != ''){
+    $idCliente = $dados[0]['id'];
+    $consulta = "UPDATE `Ingresso` SET `idCliente`='$idCliente' WHERE `codigo` = '$codigo'";
+    $msg = executar($consulta);
+}
+$consulta = "UPDATE `Cliente` SET `nome`='$inputName',`telefone`= '$telefone' WHERE `id`= $idCliente ";
 $msg = executar($consulta);
 if($msg == "Sucesso!"){    
     $consulta = "SELECT * FROM `Lote` WHERE `id` = '$selectLote'";

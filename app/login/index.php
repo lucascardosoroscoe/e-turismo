@@ -1,4 +1,5 @@
 <?php
+    include('../includes/bancoDados.php');
     include('../includes/headerLogin.php');
     $msg = $_GET['msg'];
     $_SESSION["idUsuario"] = "";
