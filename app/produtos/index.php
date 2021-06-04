@@ -20,7 +20,7 @@ include('../includes/header.php');
                     <input class="form-control" type="text" placeholder="Buscar..." style="margin-bottom: 5px" id="buscar" onkeyup="buscar()"/>
                 </div>
                 <div class="col-md-6" style="margin-top: 5px;">
-                <a class="btn btn-primary btn-block" href="view.php" >Visualizar Loja</a>
+                <a class="btn btn-primary btn-block" href="../bar/index.php?id=1" >Visualizar Loja</a>
                 </div>
             </div>
             <div class="table-responsive table-hover">

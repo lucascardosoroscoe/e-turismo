@@ -1,12 +1,11 @@
 <?php
-    session_start();
-    /*session created*/
+    include('../includes/verificarAcesso.php');
+    verificarAcesso(2);
     $idProdutor = $_SESSION["usuario"];
     $idProduto = $_GET['idProduto'];
     $idFicha = $_GET['idFicha'];
     $id = $_GET['id'];
     $nomeFuncionario = 'Lucas Roscoe';
-    include_once '../../includes/header.php';
 
     $consulta = "SELECT * FROM `Produto` WHERE `idProduto` = '$idProduto'";
     $produto = selecionar($consulta);

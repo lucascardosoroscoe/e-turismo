@@ -3,11 +3,34 @@
     verificarAcesso(2);
     include('../includes/headerLogin.php');
 
-/*
-    $idFicha = carregarSaldo($id, $idProdutor);
-    $produtos = selecionarProdutos($idProdutor);
-    carregarCategorias($produtos);
-    carregarProdutos($produtos, $idFicha);
+    $idIngresso = $_GET['id'];
+?>
+    <div class="container-fluid">
+    <!-- Tabela dos veículos-->
+    <div class="card mb-4">
+        <div class="card-header" style="padding-bottom:0px;">
+            <?php 
+                $idCarteira = carregarSaldo($idIngresso);
+                $produtos = selecionarProdutos($idUsuario);
+                carregarCategorias($produtos);
+            ?>
+        </div>
+        <div class="card-body">
+            <?php
+                carregarProdutos($produtos, $idCarteira);
+            ?>
+        </div>
+    </div>
+</div>
+<?php
+    function carregarSaldo($id){
+        $consulta = "SELECT * FROM Carteira WHERE idIngresso = $id";
+        $fichas = selecionar($consulta);
+        $saldo = $fichas[0]['saldo'];
+        $idCarteira = $fichas[0]['id'];
+        echo ('<br><h3>Ficha nº '. $id .', Saldo:R$ '. number_format($saldo, 2, ',', '.') .'</h3>');
+        return $idCarteira;
+    }
 
     function carregarCategorias($produtos){
         $categoriaAnterior = "";
@@ -23,16 +46,15 @@
         }
         echo('</div>');
     }
-    function carregarSaldo($id, $produtor){
-        $consulta = "SELECT * FROM `Fichas de Bar` WHERE `codigoQR` = '$id' AND `usuarioProdutor` = '$produtor'";
+    
+    function selecionarProdutos($idProdutor){
+        $consulta = "SELECT * FROM `Produto` WHERE `produtor` = '$idProdutor' ORDER BY categoria, nome";
         $dados = selecionar($consulta);
-        $saldo = $dados[0]['valor'];
-        $idFicha = $dados[0]['idFicha'];
-        echo ('<br><h3>Ficha nº '. $idFicha .', Saldo:R$ '. number_format($saldo, 2, ',', '.') .'</h3>');
-        return $idFicha;
+        return $dados;
     }
-    function carregarProdutos($produtos, $idFicha){
 
+    function carregarProdutos($produtos, $idCarteira){
+        global $id;
         
         $categoriaAnterior = "";
         $size = sizeof($produtos);
@@ -44,40 +66,28 @@
                 $valor = $produto['valor'];
                 $idImagem = $produto['idImagem'];
                 $categoria = $produto['categoria'];
-                    if($categoriaAnterior != $categoria){
-                        echo ('<a name="'.$categoria.'"></a>');
-                    }
-                    $categoriaAnterior = $categoria;
-                    
-                    echo('<div class="col s4 m2 push-m3">');  
-                        echo('<div class="produto">');  
-                            echo ('<a name="'.$idProduto.'" href="venda.php?idProduto='.$idProduto.'&idFicha='.$idFicha.'&id='.$id.'">');
-                            echo('<h5 style="margin: 0 0 0 0.3em;width: 98px;height: 65px;font-size: large;">'.$nome.'</h5>');
-                            if ($idImagem != 0){
-                            echo('<div style="margin: auto;width:100px;height:100px;overflow: hidden;border: solid black 1px;border-radius: 8px;">');
-                            echo ("<img style='height: 98px;width: 98px;}' src='getImagem.php?id=$idImagem'>");
-                            echo('</div>');
-                            }
-                            echo('<h5 style="color: green;text-align: end;margin-bottom: auto;font-size: medium;">Valor: R$'.$valor.'</h5>');
-                            echo ('</a>');
+                if($categoriaAnterior != $categoria){
+                    echo ('<a name="'.$categoria.'"></a>');
+                }
+                $categoriaAnterior = $categoria;
+                
+                echo('<div class="col s4 m2 push-m3">');  
+                    echo('<div class="produto">');  
+                        echo ('<a name="'.$idProduto.'" href="venda.php?idProduto='.$idProduto.'&idCarteira='.$idCarteira.'&id='.$id.'">');
+                        echo('<h5 style="margin: 0 0 0 0.3em;width: 98px;height: 65px;font-size: large;">'.$nome.'</h5>');
+                        if ($idImagem != 0){
+                        echo('<div style="margin: auto;width:100px;height:100px;overflow: hidden;border: solid black 1px;border-radius: 8px;">');
+                        echo ("<img style='height: 98px;width: 98px;}' src='getImagem.php?id=$idImagem'>");
                         echo('</div>');
+                        }
+                        echo('<h5 style="color: green;text-align: end;margin-bottom: auto;font-size: medium;">Valor: R$'.$valor.'</h5>');
+                        echo ('</a>');
                     echo('</div>');
-                    
-
-                    
-                }    
+                echo('</div>');
+            }    
         echo ('</div>');
 
     }
-    function selecionarProdutos($idProdutor){
-        $consulta = "SELECT * FROM `Produto` WHERE `usuario` = '$idProdutor' ORDER BY categoria, nome";
-        $dados = selecionar($consulta);
-        return $dados;
-    }
-    */
-
-?>
-    <script src="loja.js"></script>
-<?php
+    
     include('../includes/footer.php');
 ?>
