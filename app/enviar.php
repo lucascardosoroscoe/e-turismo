@@ -43,7 +43,8 @@ $aviso = "
 Lembramos que o QR CODE de verificação só poderá ser usado uma vez, sendo considerado INVÁLIDO numa segunda tentativa de entrada. Por isso, não compartilhe uma imagem do ingresso sem antes tampar completamente o QR CODE.
 Saiba mais sobre o aplicativo IngressoZapp e nosso sistema anti-fraude de gerenciamento de eventos em nosso site: www.ingressozapp.com";
 
-$msg = $msg . $bar . $aviso;
+// $msg = $msg . $bar . $aviso;
+$msg = $msg . $aviso;
 $msg =  urlencode ($msg);
 header("Location: https://api.whatsapp.com/send?phone=55".$telefone."&text=".$msg."");
     

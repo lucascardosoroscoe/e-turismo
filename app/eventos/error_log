@@ -1,0 +1,4 @@
+[23-May-2021 10:58:58 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'u989688937_IHLyR'@'185.201.11.212' (using password: YES) in /home/u989688937/domains/ingressozapp.com/public_html/app/includes/bancoDados.php on line 51
+[23-May-2021 10:58:58 UTC] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, bool given in /home/u989688937/domains/ingressozapp.com/public_html/app/includes/bancoDados.php on line 53
+[23-May-2021 10:58:58 UTC] PHP Warning:  mysqli_fetch_assoc() expects parameter 1 to be mysqli_result, null given in /home/u989688937/domains/ingressozapp.com/public_html/app/includes/bancoDados.php on line 56
+[23-May-2021 10:58:58 UTC] PHP Warning:  mysqli_close() expects parameter 1 to be mysqli, bool given in /home/u989688937/domains/ingressozapp.com/public_html/app/includes/bancoDados.php on line 60

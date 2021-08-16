@@ -86,7 +86,7 @@ $idSecretaria = $_SESSION["idSecretaria"];
         FROM Ingresso JOIN Vendedor ON Ingresso.vendedor = Vendedor.id 
         JOIN Cliente ON Ingresso.idCliente = Cliente.id
         WHERE Ingresso.evento = '$idEvento' AND Ingresso.vendedor = '$idVendedor'";
-        
+        $somatotal = 0;
         $dados = selecionar($consulta);
         foreach ($dados as $obj) {
             $validade = $obj['validade'] ;

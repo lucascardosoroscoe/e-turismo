@@ -1,7 +1,7 @@
 <?php
 include('../includes/verificarAcesso.php');
 verificarAcesso(2);
-include '../includes/headerLogin.php';
+include '../includes/header.php';
 
 
 $nCaixa = $_SESSION["nCaixa"];
@@ -30,11 +30,12 @@ $nCaixa = $_SESSION["nCaixa"];
                             $consulta = "SELECT * FROM `Carteira` WHERE `idIngresso` = '$id'";
                             $dados = selecionar($consulta);
                             if ($dados[0] == ""){
-                                $consulta = "INSERT INTO `Fichas de Bar`(`codigoQR`, `usuarioProdutor`, `valor`) VALUES ('$id','$produtor', '0')";
+                                $consulta = "INSERT INTO `Carteira`(`idIngresso`, `saldo`) VALUES ('$id', '0')";
+                                echo $consulta;
                                 $msg = executar($consulta);
                             }else{
-                                $saldo = $dados[0]['valor'];
-                                $idFicha = $dados[0]['idFicha'];
+                                $saldo = $dados[0]['saldo'];
+                                $idCarteira = $dados[0]['id'];
                             }
 
 
@@ -63,7 +64,7 @@ $nCaixa = $_SESSION["nCaixa"];
                                         echo ('<a class="btn btn-primary btn-block adicionarDiv" onclick="adicionar('.$id.','.$nCaixa.',50)">');
                                         echo ('+ R$50,00');
                                         echo ('</a>');
-                                        echo ('<a class="btn btn-primary btn-block adicionarDiv" onclick="adicionar('.$obj['id'].','.$obj['nCaixa'].',100)">');
+                                        echo ('<a class="btn btn-primary btn-block adicionarDiv" onclick="adicionar('.$id.','.$nCaixa.',100)">');
                                         echo ('+ R$100,00');
                                         echo ('</a>');
                                     echo ('</div>');

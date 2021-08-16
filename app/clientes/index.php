@@ -10,7 +10,6 @@ include('../includes/header.php');
             <i class="fas fa-table mr-1"></i>
             CLIENTES
             <div class="btn btnAdd" onclick="fnExcelReport('dataTable')" style="margin-left: 2px;"><i class="far fa-file-excel"></i> Exportar Excel</div>
-            <a href='adicionar.php'><div class="btn btnAdd"><i class='fas fa-user-plus'></i> Adicionar</div></a>
         </div>
         <div class="card-body">
             <div class="col-md-8" style="float:left; margin-top: 5px;">
@@ -20,10 +19,10 @@ include('../includes/header.php');
                 <table class="table tablesorter table-hover" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                         <tr>
-                            <td style="display:none;">Id</td>
-                            <td>Nome</td>
-                            <td>Telefone</td>
-                            <td></td>
+                            <th style="display:none;">Id</th>
+                            <th>Nome</th>
+                            <th>Telefone</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody id="tbody">

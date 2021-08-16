@@ -1,0 +1,4 @@
+[06-Jun-2021 02:58:07 UTC] PHP Warning:  mysqli_query(): Empty query in /home/u989688937/domains/ingressozapp.com/public_html/app/includes/bancoDados.php on line 53
+[06-Jun-2021 02:58:07 UTC] PHP Warning:  mysqli_fetch_assoc() expects parameter 1 to be mysqli_result, bool given in /home/u989688937/domains/ingressozapp.com/public_html/app/includes/bancoDados.php on line 56
+[06-Jun-2021 04:41:21 UTC] PHP Warning:  mysqli_query(): Empty query in /home/u989688937/domains/ingressozapp.com/public_html/app/includes/bancoDados.php on line 53
+[06-Jun-2021 04:41:21 UTC] PHP Warning:  mysqli_fetch_assoc() expects parameter 1 to be mysqli_result, bool given in /home/u989688937/domains/ingressozapp.com/public_html/app/includes/bancoDados.php on line 56

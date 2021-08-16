@@ -16,7 +16,11 @@
         $consulta = "INSERT INTO `TransacoesCredito`(`idTansacao`, `tipoCredito`, `responsavel`) VALUES ($idTransacao, 1, $idCaixa)";
         $msg = executar($consulta);
         if($msg == "Sucesso!"){
-            header('Location: index.php?id='.$codigo);
+            $consulta ="UPDATE `Carteira` SET `saldo`= `saldo` + $valor WHERE `idIngresso` = '$codigo'";
+            $msg = executar($consulta);
+            if($msg == "Sucesso!"){
+                header('Location: index.php?id='.$codigo);
+            }            
         }else{
             $msg = "Erro ao criar Crédito, por favor contate o suporte!!";
             echo $msg;
@@ -25,7 +29,6 @@
         $msg = "Erro ao criar Transação, por favor contate o suporte!!";
         echo $msg;
     }
-    echo $consulta;
     
     
 ?>

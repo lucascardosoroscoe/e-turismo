@@ -1,6 +1,6 @@
 <?php
 include('../includes/verificarAcesso.php');
-verificarAcesso(1);
+verificarAcesso(2);
 include('../includes/header.php');
 $id = $_GET['id'];
 $conculta = "SELECT * FROM `Produto` WHERE `idProduto` = '$id'";

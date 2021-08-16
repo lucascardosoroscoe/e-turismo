@@ -2,14 +2,19 @@
 include('includes/verificarAcesso.php');
 verificarAcesso(3);
 
-carregarPost();
-getLote();
-getCliente();
-verificarIngresso();
+if(carregarPost()){
+    if(getLote()){
+        if(getCliente()){
+            verificarIngresso();
+        }
+    };
+};
+
+
 
 function carregarPost(){
     global $codigo, $evento, $idLote, $nomeCliente, $telefone;
-    $codigo    =  rand ( 100000 , 999999 );
+    
     $evento    =  $_POST['selectEvento'];
     $idLote    =  $_POST["selectLote"];
     $nomeCliente   =  $_POST['inputNome'];
@@ -23,6 +28,29 @@ function carregarPost(){
     if($prim == 0){
         $telefone = substr($telefone,1,11);
     }
+    // Verifica de Nome do Cliente, Lote e Telefone estão OK
+    if($evento == "" || $idLote == "" || $nomeCliente == "" || $telefone == ""){
+        echo "Dados insuficientes para gerar o Ingresso";
+        return false;
+    }else{
+        $codigo = gerarCodigo();
+        return true;
+    }
+}
+
+function gerarCodigo(){
+    $codigo = 0;
+    while ($codigo == 0) {
+        $codigo    =  rand ( 100000 , 999999 );
+        $consulta = "SELECT * FROM `Ingresso` WHERE `codigo` = '$codigo'";
+        $dados = selecionar($consulta);
+        if($dados[0] != ""){
+            echo "Código ". $codigo ." já existe, gerando novo código.";
+            $codigo = 0;
+        }
+    }
+    // echo "Código Gerado com sucesso: " . $codigo;
+    return $codigo;
 }
 
 function getLote(){
@@ -35,30 +63,51 @@ function getLote(){
     $quantidade=  $lote['quantidade'];
     $vendidos  =  $lote['vendidos'];
     $vendidos  =  $vendidos + 1 ;
-
+    if($valor == "" || $quantidade == ""){
+        echo "Dados insuficientes sobre o lote.";
+        return false;
+    }else{
+        // echo "Lote carregado com sucesso!";
+        return true;
+    }
 }
 
 function getCliente(){
     global $nomeCliente, $telefone, $idCliente;
-    $consulta = "SELECT `id` FROM `Cliente` WHERE `nome` = '$nomeCliente' AND `telefone` = '$telefone'";
+    $consulta = "SELECT `id` FROM `Cliente` WHERE `telefone` = '$telefone'";
     $dados = selecionar($consulta);
     if($dados[0]['id'] == ""){
         $consulta = "INSERT INTO `Cliente`(`nome`, `telefone`) VALUES ('$nomeCliente', '$telefone')";
+        echo "Criando Cliente: <br>Nome: ".$nomeCliente."<br>Telefone: ".$telefone."<br>";
         $msg = executar($consulta);
         if($msg == "Sucesso!"){
             $consulta = "SELECT `id` FROM `Cliente` WHERE `nome` = '$nomeCliente' AND `telefone` = '$telefone'";
             $dados = selecionar($consulta);
             $idCliente = $dados[0]['id'];
+            // echo "Cliente Criado com Sucesso: <br>Id: ".$idCliente."<br>";
+            return true;
         }else{
             echo "Erro ao criar Cliente!!!<br>";
+            echo $consulta . "<br>";
+            return false;
         }
     }else{
+        // echo "Cliente já existe no sistema.<br>";
         $idCliente = $dados[0]['id'];
+        $consulta = "UPDATE `Cliente` SET `nome`='$nomeCliente' WHERE `id` = '$idCliente'";
+        $msg = executar($consulta);
+        if($msg == "Sucesso!"){
+            // echo "Nome do Cliente atualizado com sucesso.<br>";
+            return true;
+        }else{
+            echo "Erro ao atualizar nome do Cliente.<br>";
+            return false;
+        }
     }
 }
 
 function verificarIngresso(){
-    global $tipoUsuario,$idUsuario, $evento, $idCliente, $vendedor, $codigo, $local;
+    global $tipoUsuario,$idUsuario, $evento, $idCliente, $vendedor, $codigo, $local, $nomeCliente;
     if($tipoUsuario == '1'){
         $consulta = "SELECT * from Ingresso WHERE evento= '$evento' AND vendedor= '1' AND idCliente= '$idCliente'";
         $vendedor = 1;
@@ -71,10 +120,10 @@ function verificarIngresso(){
     }
     $dados = selecionar($consulta);
     if ($dados[0]['codigo'] == ""){
-        gerarIngresso();
-        
-        $local='https://ingressozapp.com/app/enviar.php?codigo='.$codigo;
-        enviarIngresso(); 
+        if(gerarIngresso()){
+            $local='https://ingressozapp.com/app/enviar.php?codigo='.$codigo;
+            enviarIngresso(); 
+        }
     }else{
         $local='https://ingressozapp.com/app/enviar.php?codigo='.$dados[0]['codigo'];
         echo("<h3>Você já gerou um ingresso para " . $nomeCliente . " deste mesmo Evento . Caso esteja gerando um novo ingresso, para outro cliente, por favor volte e coloque um nome mais completo.<br><br>Caso esteja tentantando reenviar o ingresso pois errou o número do Whatsapp ao gerar o ingresso <a href='$local'>Clique aqui</a> </h3>");
@@ -89,8 +138,12 @@ function gerarIngresso(){
     $msg = executar($consulta);
     if($msg == "Sucesso!"){
         atualizarVendidosLote(); 
+        // echo "Ingresso gerado.";
+        return true;
+    }else{
+        echo "Erro ao gerar Ingresso";
+        return false;
     }
-    echo "Ingresso gerado.";
     
 }
 
@@ -114,7 +167,7 @@ function emailVirada(){
 }
 
 function enviarIngresso(){
-    global $local;
+    global $local, $codigo;
     $msg = $_POST["msg"];
     if (empty($msg)){
         // echo '<br>'.$local;

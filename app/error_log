@@ -1,0 +1,71 @@
+[23-May-2021 11:07:15 UTC] PHP Warning:  mysqli_fetch_assoc() expects parameter 1 to be mysqli_result, bool given in /home/u989688937/domains/ingressozapp.com/public_html/app/includes/bancoDados.php on line 56
+[23-May-2021 11:07:21 UTC] PHP Warning:  mysqli_fetch_assoc() expects parameter 1 to be mysqli_result, bool given in /home/u989688937/domains/ingressozapp.com/public_html/app/includes/bancoDados.php on line 56
+[23-May-2021 21:40:53 UTC] PHP Warning:  Header may not contain more than a single header, new line detected in /home/u989688937/domains/ingressozapp.com/public_html/app/enviar.php on line 37
+[23-May-2021 21:41:33 UTC] PHP Warning:  Header may not contain more than a single header, new line detected in /home/u989688937/domains/ingressozapp.com/public_html/app/enviar.php on line 37
+[23-May-2021 21:42:46 UTC] PHP Warning:  Header may not contain more than a single header, new line detected in /home/u989688937/domains/ingressozapp.com/public_html/app/enviar.php on line 38
+[23-May-2021 21:43:24 UTC] PHP Warning:  Header may not contain more than a single header, new line detected in /home/u989688937/domains/ingressozapp.com/public_html/app/enviar.php on line 38
+[23-May-2021 21:45:16 UTC] PHP Warning:  Header may not contain more than a single header, new line detected in /home/u989688937/domains/ingressozapp.com/public_html/app/enviar.php on line 38
+[23-May-2021 21:46:47 UTC] PHP Warning:  Header may not contain more than a single header, new line detected in /home/u989688937/domains/ingressozapp.com/public_html/app/enviar.php on line 38
+[23-May-2021 22:13:23 UTC] PHP Parse error:  syntax error, unexpected '$aviso' (T_VARIABLE) in /home/u989688937/domains/ingressozapp.com/public_html/app/enviar.php on line 41
+[25-May-2021 17:55:43 UTC] PHP Warning:  mysqli_query(): Empty query in /home/u989688937/domains/ingressozapp.com/public_html/app/includes/bancoDados.php on line 53
+[25-May-2021 17:55:43 UTC] PHP Warning:  mysqli_fetch_assoc() expects parameter 1 to be mysqli_result, bool given in /home/u989688937/domains/ingressozapp.com/public_html/app/includes/bancoDados.php on line 56
+[25-May-2021 18:04:09 UTC] PHP Parse error:  syntax error, unexpected '$local' (T_VARIABLE), expecting ';' or ',' in /home/u989688937/domains/ingressozapp.com/public_html/app/emitir.php on line 120
+[25-May-2021 18:04:25 UTC] PHP Parse error:  syntax error, unexpected '$local' (T_VARIABLE), expecting ';' or ',' in /home/u989688937/domains/ingressozapp.com/public_html/app/emitir.php on line 120
+[25-May-2021 18:04:27 UTC] PHP Parse error:  syntax error, unexpected '$local' (T_VARIABLE), expecting ';' or ',' in /home/u989688937/domains/ingressozapp.com/public_html/app/emitir.php on line 120
+[01-Jun-2021 12:42:13 UTC] PHP Warning:  mysqli_fetch_assoc() expects parameter 1 to be mysqli_result, bool given in /home/u989688937/domains/ingressozapp.com/public_html/app/includes/bancoDados.php on line 56
+[01-Jun-2021 12:42:15 UTC] PHP Warning:  mysqli_fetch_assoc() expects parameter 1 to be mysqli_result, bool given in /home/u989688937/domains/ingressozapp.com/public_html/app/includes/bancoDados.php on line 56
+[01-Jun-2021 12:42:50 UTC] PHP Warning:  mysqli_fetch_assoc() expects parameter 1 to be mysqli_result, bool given in /home/u989688937/domains/ingressozapp.com/public_html/app/includes/bancoDados.php on line 56
+[01-Jun-2021 12:42:51 UTC] PHP Warning:  mysqli_fetch_assoc() expects parameter 1 to be mysqli_result, bool given in /home/u989688937/domains/ingressozapp.com/public_html/app/includes/bancoDados.php on line 56
+[01-Jun-2021 12:43:03 UTC] PHP Warning:  mysqli_fetch_assoc() expects parameter 1 to be mysqli_result, bool given in /home/u989688937/domains/ingressozapp.com/public_html/app/includes/bancoDados.php on line 56
+[01-Jun-2021 12:43:04 UTC] PHP Warning:  mysqli_fetch_assoc() expects parameter 1 to be mysqli_result, bool given in /home/u989688937/domains/ingressozapp.com/public_html/app/includes/bancoDados.php on line 56
+[01-Jun-2021 12:43:08 UTC] PHP Warning:  mysqli_fetch_assoc() expects parameter 1 to be mysqli_result, bool given in /home/u989688937/domains/ingressozapp.com/public_html/app/includes/bancoDados.php on line 56
+[01-Jun-2021 12:43:08 UTC] PHP Warning:  mysqli_fetch_assoc() expects parameter 1 to be mysqli_result, bool given in /home/u989688937/domains/ingressozapp.com/public_html/app/includes/bancoDados.php on line 56
+[01-Jun-2021 12:43:21 UTC] PHP Warning:  mysqli_fetch_assoc() expects parameter 1 to be mysqli_result, bool given in /home/u989688937/domains/ingressozapp.com/public_html/app/includes/bancoDados.php on line 56
+[01-Jun-2021 12:43:21 UTC] PHP Warning:  mysqli_fetch_assoc() expects parameter 1 to be mysqli_result, bool given in /home/u989688937/domains/ingressozapp.com/public_html/app/includes/bancoDados.php on line 56
+[01-Jun-2021 12:44:27 UTC] PHP Warning:  mysqli_fetch_assoc() expects parameter 1 to be mysqli_result, bool given in /home/u989688937/domains/ingressozapp.com/public_html/app/includes/bancoDados.php on line 56
+[01-Jun-2021 12:44:27 UTC] PHP Warning:  mysqli_fetch_assoc() expects parameter 1 to be mysqli_result, bool given in /home/u989688937/domains/ingressozapp.com/public_html/app/includes/bancoDados.php on line 56
+[01-Jun-2021 12:45:18 UTC] PHP Warning:  mysqli_fetch_assoc() expects parameter 1 to be mysqli_result, bool given in /home/u989688937/domains/ingressozapp.com/public_html/app/includes/bancoDados.php on line 56
+[01-Jun-2021 12:45:19 UTC] PHP Warning:  mysqli_fetch_assoc() expects parameter 1 to be mysqli_result, bool given in /home/u989688937/domains/ingressozapp.com/public_html/app/includes/bancoDados.php on line 56
+[01-Jun-2021 12:45:25 UTC] PHP Warning:  mysqli_fetch_assoc() expects parameter 1 to be mysqli_result, bool given in /home/u989688937/domains/ingressozapp.com/public_html/app/includes/bancoDados.php on line 56
+[01-Jun-2021 12:45:25 UTC] PHP Warning:  mysqli_fetch_assoc() expects parameter 1 to be mysqli_result, bool given in /home/u989688937/domains/ingressozapp.com/public_html/app/includes/bancoDados.php on line 56
+[01-Jun-2021 12:45:40 UTC] PHP Warning:  mysqli_fetch_assoc() expects parameter 1 to be mysqli_result, bool given in /home/u989688937/domains/ingressozapp.com/public_html/app/includes/bancoDados.php on line 56
+[01-Jun-2021 12:45:40 UTC] PHP Warning:  mysqli_fetch_assoc() expects parameter 1 to be mysqli_result, bool given in /home/u989688937/domains/ingressozapp.com/public_html/app/includes/bancoDados.php on line 56
+[01-Jun-2021 12:48:20 UTC] PHP Warning:  mysqli_fetch_assoc() expects parameter 1 to be mysqli_result, bool given in /home/u989688937/domains/ingressozapp.com/public_html/app/includes/bancoDados.php on line 56
+[01-Jun-2021 12:48:21 UTC] PHP Warning:  mysqli_fetch_assoc() expects parameter 1 to be mysqli_result, bool given in /home/u989688937/domains/ingressozapp.com/public_html/app/includes/bancoDados.php on line 56
+[02-Jun-2021 05:38:03 UTC] PHP Warning:  mysqli_query(): Empty query in /home/u989688937/domains/ingressozapp.com/public_html/app/includes/bancoDados.php on line 53
+[02-Jun-2021 05:38:03 UTC] PHP Warning:  mysqli_fetch_assoc() expects parameter 1 to be mysqli_result, bool given in /home/u989688937/domains/ingressozapp.com/public_html/app/includes/bancoDados.php on line 56
+[02-Jun-2021 21:56:43 UTC] PHP Warning:  mysqli_query(): Empty query in /home/u989688937/domains/ingressozapp.com/public_html/app/includes/bancoDados.php on line 53
+[02-Jun-2021 21:56:43 UTC] PHP Warning:  mysqli_fetch_assoc() expects parameter 1 to be mysqli_result, bool given in /home/u989688937/domains/ingressozapp.com/public_html/app/includes/bancoDados.php on line 56
+[04-Jun-2021 03:02:14 UTC] PHP Warning:  mysqli_query(): Empty query in /home/u989688937/domains/ingressozapp.com/public_html/app/includes/bancoDados.php on line 53
+[04-Jun-2021 03:02:14 UTC] PHP Warning:  mysqli_fetch_assoc() expects parameter 1 to be mysqli_result, bool given in /home/u989688937/domains/ingressozapp.com/public_html/app/includes/bancoDados.php on line 56
+[05-Jun-2021 06:30:09 UTC] PHP Warning:  mysqli_query(): Empty query in /home/u989688937/domains/ingressozapp.com/public_html/app/includes/bancoDados.php on line 53
+[05-Jun-2021 06:30:09 UTC] PHP Warning:  mysqli_fetch_assoc() expects parameter 1 to be mysqli_result, bool given in /home/u989688937/domains/ingressozapp.com/public_html/app/includes/bancoDados.php on line 56
+[05-Jun-2021 06:36:57 UTC] PHP Warning:  mysqli_fetch_assoc() expects parameter 1 to be mysqli_result, bool given in /home/u989688937/domains/ingressozapp.com/public_html/app/includes/bancoDados.php on line 56
+[05-Jun-2021 06:37:04 UTC] PHP Warning:  mysqli_fetch_assoc() expects parameter 1 to be mysqli_result, bool given in /home/u989688937/domains/ingressozapp.com/public_html/app/includes/bancoDados.php on line 56
+[05-Jun-2021 06:37:04 UTC] PHP Warning:  mysqli_fetch_assoc() expects parameter 1 to be mysqli_result, bool given in /home/u989688937/domains/ingressozapp.com/public_html/app/includes/bancoDados.php on line 56
+[05-Jun-2021 06:37:05 UTC] PHP Warning:  mysqli_fetch_assoc() expects parameter 1 to be mysqli_result, bool given in /home/u989688937/domains/ingressozapp.com/public_html/app/includes/bancoDados.php on line 56
+[05-Jun-2021 06:37:05 UTC] PHP Warning:  mysqli_fetch_assoc() expects parameter 1 to be mysqli_result, bool given in /home/u989688937/domains/ingressozapp.com/public_html/app/includes/bancoDados.php on line 56
+[05-Jun-2021 06:37:05 UTC] PHP Warning:  mysqli_fetch_assoc() expects parameter 1 to be mysqli_result, bool given in /home/u989688937/domains/ingressozapp.com/public_html/app/includes/bancoDados.php on line 56
+[05-Jun-2021 06:37:05 UTC] PHP Warning:  mysqli_fetch_assoc() expects parameter 1 to be mysqli_result, bool given in /home/u989688937/domains/ingressozapp.com/public_html/app/includes/bancoDados.php on line 56
+[05-Jun-2021 06:37:14 UTC] PHP Warning:  mysqli_fetch_assoc() expects parameter 1 to be mysqli_result, bool given in /home/u989688937/domains/ingressozapp.com/public_html/app/includes/bancoDados.php on line 56
+[05-Jun-2021 06:37:18 UTC] PHP Warning:  mysqli_fetch_assoc() expects parameter 1 to be mysqli_result, bool given in /home/u989688937/domains/ingressozapp.com/public_html/app/includes/bancoDados.php on line 56
+[05-Jun-2021 06:37:24 UTC] PHP Warning:  mysqli_fetch_assoc() expects parameter 1 to be mysqli_result, bool given in /home/u989688937/domains/ingressozapp.com/public_html/app/includes/bancoDados.php on line 56
+[05-Jun-2021 06:38:08 UTC] PHP Warning:  mysqli_fetch_assoc() expects parameter 1 to be mysqli_result, bool given in /home/u989688937/domains/ingressozapp.com/public_html/app/includes/bancoDados.php on line 56
+[05-Jun-2021 06:38:10 UTC] PHP Warning:  mysqli_fetch_assoc() expects parameter 1 to be mysqli_result, bool given in /home/u989688937/domains/ingressozapp.com/public_html/app/includes/bancoDados.php on line 56
+[26-Jun-2021 20:57:17 UTC] PHP Warning:  mysqli_query(): Empty query in /home/u989688937/domains/ingressozapp.com/public_html/app/includes/bancoDados.php on line 53
+[26-Jun-2021 20:57:17 UTC] PHP Warning:  mysqli_fetch_assoc() expects parameter 1 to be mysqli_result, bool given in /home/u989688937/domains/ingressozapp.com/public_html/app/includes/bancoDados.php on line 56
+[26-Jun-2021 20:57:46 UTC] PHP Warning:  mysqli_query(): Empty query in /home/u989688937/domains/ingressozapp.com/public_html/app/includes/bancoDados.php on line 53
+[26-Jun-2021 20:57:46 UTC] PHP Warning:  mysqli_fetch_assoc() expects parameter 1 to be mysqli_result, bool given in /home/u989688937/domains/ingressozapp.com/public_html/app/includes/bancoDados.php on line 56
+[29-Jun-2021 00:01:20 UTC] PHP Warning:  mysqli_fetch_assoc() expects parameter 1 to be mysqli_result, bool given in /home/u989688937/domains/ingressozapp.com/public_html/app/includes/bancoDados.php on line 56
+[29-Jul-2021 23:23:31 UTC] PHP Warning:  mysqli_query(): Empty query in /home/u989688937/domains/ingressozapp.com/public_html/app/includes/bancoDados.php on line 53
+[29-Jul-2021 23:23:31 UTC] PHP Warning:  mysqli_fetch_assoc() expects parameter 1 to be mysqli_result, bool given in /home/u989688937/domains/ingressozapp.com/public_html/app/includes/bancoDados.php on line 56
+[30-Jul-2021 02:12:02 UTC] PHP Warning:  mysqli_query(): Empty query in /home/u989688937/domains/ingressozapp.com/public_html/app/includes/bancoDados.php on line 53
+[30-Jul-2021 02:12:02 UTC] PHP Warning:  mysqli_fetch_assoc() expects parameter 1 to be mysqli_result, bool given in /home/u989688937/domains/ingressozapp.com/public_html/app/includes/bancoDados.php on line 56
+[30-Jul-2021 02:12:03 UTC] PHP Warning:  mysqli_query(): Empty query in /home/u989688937/domains/ingressozapp.com/public_html/app/includes/bancoDados.php on line 53
+[30-Jul-2021 02:12:03 UTC] PHP Warning:  mysqli_fetch_assoc() expects parameter 1 to be mysqli_result, bool given in /home/u989688937/domains/ingressozapp.com/public_html/app/includes/bancoDados.php on line 56
+[14-Aug-2021 04:03:11 UTC] PHP Warning:  mysqli_query(): Empty query in /home/u989688937/domains/ingressozapp.com/public_html/app/includes/bancoDados.php on line 53
+[14-Aug-2021 04:03:11 UTC] PHP Warning:  mysqli_fetch_assoc() expects parameter 1 to be mysqli_result, bool given in /home/u989688937/domains/ingressozapp.com/public_html/app/includes/bancoDados.php on line 56
+[15-Aug-2021 19:47:49 UTC] PHP Warning:  mysqli_query(): Empty query in /home/u989688937/domains/ingressozapp.com/public_html/app/includes/bancoDados.php on line 53
+[15-Aug-2021 19:47:49 UTC] PHP Warning:  mysqli_fetch_assoc() expects parameter 1 to be mysqli_result, bool given in /home/u989688937/domains/ingressozapp.com/public_html/app/includes/bancoDados.php on line 56
+[15-Aug-2021 19:47:50 UTC] PHP Warning:  mysqli_query(): Empty query in /home/u989688937/domains/ingressozapp.com/public_html/app/includes/bancoDados.php on line 53
+[15-Aug-2021 19:47:50 UTC] PHP Warning:  mysqli_fetch_assoc() expects parameter 1 to be mysqli_result, bool given in /home/u989688937/domains/ingressozapp.com/public_html/app/includes/bancoDados.php on line 56

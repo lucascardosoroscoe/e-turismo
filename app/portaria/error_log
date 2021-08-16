@@ -1,0 +1,2 @@
+[04-Jun-2021 17:13:08 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'Thiago Ferreira da silva'@'localhost' (using password: NO) in /home/u989688937/domains/ingressozapp.com/public_html/app/portaria/index.php on line 20
+[04-Jun-2021 17:13:59 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'Thiago Ferreira da silva'@'localhost' (using password: NO) in /home/u989688937/domains/ingressozapp.com/public_html/app/portaria/index.php on line 19

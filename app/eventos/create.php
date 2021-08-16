@@ -3,11 +3,11 @@
     verificarAcesso(2);
     
 
-    $produtor = 42;
+    $produtor = $idUsuario;
     $nome = $_POST['inputName'];
     $imagem      = $_FILES["inputImagem"];
-    $descricao   = $_POST['inputData'];
-    $data        = $_POST['inputDescricao'];
+    $descricao   = $_POST['inputDescricao'];
+    $data        = $_POST['inputData'];
     if($imagem != NULL) { 
         $nomeFinal = time().'.jpg';
         if (move_uploaded_file($imagem['tmp_name'], $nomeFinal)) {

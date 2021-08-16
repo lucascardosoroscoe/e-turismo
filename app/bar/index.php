@@ -80,7 +80,7 @@
                         echo ("<img style='height: 98px;width: 98px;}' src='getImagem.php?id=$idImagem'>");
                         echo('</div>');
                         }
-                        echo('<h5 style="color: green;text-align: end;margin-bottom: auto;font-size: medium;">Valor: R$'.$valor.'</h5>');
+                        echo('<h5 style="color: green;text-align: end;margin-bottom: auto;font-size: medium;">Valor: R$'.number_format($valor, 2, ',', '.').'</h5>');
                         echo ('</a>');
                     echo('</div>');
                 echo('</div>');

@@ -1,90 +1,12 @@
-[23-May-2021 17:19:55 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function addTabelaCaixa() in /home/u989688937/domains/ingressozapp.com/public_html/app/relatorios/vendaBar/index.php:108
-Stack trace:
-#0 {main}
-  thrown in /home/u989688937/domains/ingressozapp.com/public_html/app/relatorios/vendaBar/index.php on line 108
-[23-May-2021 17:20:50 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function addTabelaCaixa() in /home/u989688937/domains/ingressozapp.com/public_html/app/relatorios/vendaBar/index.php:108
-Stack trace:
-#0 {main}
-  thrown in /home/u989688937/domains/ingressozapp.com/public_html/app/relatorios/vendaBar/index.php on line 108
-[23-May-2021 17:23:05 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function addTabelaCaixa() in /home/u989688937/domains/ingressozapp.com/public_html/app/relatorios/vendaBar/index.php:108
-Stack trace:
-#0 {main}
-  thrown in /home/u989688937/domains/ingressozapp.com/public_html/app/relatorios/vendaBar/index.php on line 108
-[23-May-2021 17:23:55 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function addTabelaCaixa() in /home/u989688937/domains/ingressozapp.com/public_html/app/relatorios/vendaBar/index.php:108
-Stack trace:
-#0 {main}
-  thrown in /home/u989688937/domains/ingressozapp.com/public_html/app/relatorios/vendaBar/index.php on line 108
-[23-May-2021 17:24:36 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function addTabelaCaixa() in /home/u989688937/domains/ingressozapp.com/public_html/app/relatorios/vendaBar/index.php:108
-Stack trace:
-#0 {main}
-  thrown in /home/u989688937/domains/ingressozapp.com/public_html/app/relatorios/vendaBar/index.php on line 108
-[23-May-2021 17:25:16 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function addTabelaCaixa() in /home/u989688937/domains/ingressozapp.com/public_html/app/relatorios/vendaBar/index.php:108
-Stack trace:
-#0 {main}
-  thrown in /home/u989688937/domains/ingressozapp.com/public_html/app/relatorios/vendaBar/index.php on line 108
-[23-May-2021 17:26:29 UTC] PHP Parse error:  syntax error, unexpected 'display' (T_STRING) in /home/u989688937/domains/ingressozapp.com/public_html/app/relatorios/vendaBar/index.php on line 432
-[23-May-2021 17:26:47 UTC] PHP Parse error:  syntax error, unexpected 'display' (T_STRING) in /home/u989688937/domains/ingressozapp.com/public_html/app/relatorios/vendaBar/index.php on line 432
-[23-May-2021 17:26:49 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function addTabelaCaixa() in /home/u989688937/domains/ingressozapp.com/public_html/app/relatorios/vendaBar/index.php:108
-Stack trace:
-#0 {main}
-  thrown in /home/u989688937/domains/ingressozapp.com/public_html/app/relatorios/vendaBar/index.php on line 108
-[23-May-2021 17:27:54 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function addTabelaCaixa() in /home/u989688937/domains/ingressozapp.com/public_html/app/relatorios/vendaBar/index.php:108
-Stack trace:
-#0 {main}
-  thrown in /home/u989688937/domains/ingressozapp.com/public_html/app/relatorios/vendaBar/index.php on line 108
-[23-May-2021 17:29:14 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function addTabelaCaixa() in /home/u989688937/domains/ingressozapp.com/public_html/app/relatorios/vendaBar/index.php:108
-Stack trace:
-#0 {main}
-  thrown in /home/u989688937/domains/ingressozapp.com/public_html/app/relatorios/vendaBar/index.php on line 108
-[23-May-2021 17:31:10 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function addTabelaCaixa() in /home/u989688937/domains/ingressozapp.com/public_html/app/relatorios/vendaBar/index.php:108
-Stack trace:
-#0 {main}
-  thrown in /home/u989688937/domains/ingressozapp.com/public_html/app/relatorios/vendaBar/index.php on line 108
-[23-May-2021 17:31:27 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function addTabelaCaixa() in /home/u989688937/domains/ingressozapp.com/public_html/app/relatorios/vendaBar/index.php:108
-Stack trace:
-#0 {main}
-  thrown in /home/u989688937/domains/ingressozapp.com/public_html/app/relatorios/vendaBar/index.php on line 108
-[23-May-2021 17:32:08 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function addTabelaCaixa() in /home/u989688937/domains/ingressozapp.com/public_html/app/relatorios/vendaBar/index.php:108
-Stack trace:
-#0 {main}
-  thrown in /home/u989688937/domains/ingressozapp.com/public_html/app/relatorios/vendaBar/index.php on line 108
-[23-May-2021 17:32:12 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function addTabelaCaixa() in /home/u989688937/domains/ingressozapp.com/public_html/app/relatorios/vendaBar/index.php:108
-Stack trace:
-#0 {main}
-  thrown in /home/u989688937/domains/ingressozapp.com/public_html/app/relatorios/vendaBar/index.php on line 108
-[23-May-2021 17:32:17 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function addTabelaCaixa() in /home/u989688937/domains/ingressozapp.com/public_html/app/relatorios/vendaBar/index.php:108
-Stack trace:
-#0 {main}
-  thrown in /home/u989688937/domains/ingressozapp.com/public_html/app/relatorios/vendaBar/index.php on line 108
-[23-May-2021 17:33:00 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function addTabelaCaixa() in /home/u989688937/domains/ingressozapp.com/public_html/app/relatorios/vendaBar/index.php:109
-Stack trace:
-#0 {main}
-  thrown in /home/u989688937/domains/ingressozapp.com/public_html/app/relatorios/vendaBar/index.php on line 109
-[23-May-2021 17:33:29 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function addTabelaCaixa() in /home/u989688937/domains/ingressozapp.com/public_html/app/relatorios/vendaBar/index.php:109
-Stack trace:
-#0 {main}
-  thrown in /home/u989688937/domains/ingressozapp.com/public_html/app/relatorios/vendaBar/index.php on line 109
-[23-May-2021 17:33:37 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function addTabelaCaixa() in /home/u989688937/domains/ingressozapp.com/public_html/app/relatorios/vendaBar/index.php:109
-Stack trace:
-#0 {main}
-  thrown in /home/u989688937/domains/ingressozapp.com/public_html/app/relatorios/vendaBar/index.php on line 109
-[23-May-2021 17:33:52 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function addTabelaCaixa() in /home/u989688937/domains/ingressozapp.com/public_html/app/relatorios/vendaBar/index.php:109
-Stack trace:
-#0 {main}
-  thrown in /home/u989688937/domains/ingressozapp.com/public_html/app/relatorios/vendaBar/index.php on line 109
-[23-May-2021 17:33:57 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function addTabelaCaixa() in /home/u989688937/domains/ingressozapp.com/public_html/app/relatorios/vendaBar/index.php:109
-Stack trace:
-#0 {main}
-  thrown in /home/u989688937/domains/ingressozapp.com/public_html/app/relatorios/vendaBar/index.php on line 109
-[23-May-2021 17:34:20 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function addTabelaCaixa() in /home/u989688937/domains/ingressozapp.com/public_html/app/relatorios/vendaBar/index.php:108
-Stack trace:
-#0 {main}
-  thrown in /home/u989688937/domains/ingressozapp.com/public_html/app/relatorios/vendaBar/index.php on line 108
-[23-May-2021 17:34:21 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function addTabelaCaixa() in /home/u989688937/domains/ingressozapp.com/public_html/app/relatorios/vendaBar/index.php:108
-Stack trace:
-#0 {main}
-  thrown in /home/u989688937/domains/ingressozapp.com/public_html/app/relatorios/vendaBar/index.php on line 108
-[23-May-2021 17:34:42 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function addTabelaCaixa() in /home/u989688937/domains/ingressozapp.com/public_html/app/relatorios/vendaBar/index.php:108
-Stack trace:
-#0 {main}
-  thrown in /home/u989688937/domains/ingressozapp.com/public_html/app/relatorios/vendaBar/index.php on line 108
+[22-Jun-2021 00:29:44 UTC] PHP Warning:  mysqli_query(): Empty query in /home/u989688937/domains/ingressozapp.com/public_html/app/includes/bancoDados.php on line 53
+[22-Jun-2021 00:29:44 UTC] PHP Warning:  mysqli_fetch_assoc() expects parameter 1 to be mysqli_result, bool given in /home/u989688937/domains/ingressozapp.com/public_html/app/includes/bancoDados.php on line 56
+[22-Jun-2021 00:29:44 UTC] PHP Warning:  mysqli_query(): Empty query in /home/u989688937/domains/ingressozapp.com/public_html/app/includes/bancoDados.php on line 53
+[22-Jun-2021 00:29:44 UTC] PHP Warning:  mysqli_fetch_assoc() expects parameter 1 to be mysqli_result, bool given in /home/u989688937/domains/ingressozapp.com/public_html/app/includes/bancoDados.php on line 56
+[22-Jun-2021 00:29:44 UTC] PHP Warning:  mysqli_query(): Empty query in /home/u989688937/domains/ingressozapp.com/public_html/app/includes/bancoDados.php on line 53
+[22-Jun-2021 00:29:44 UTC] PHP Warning:  mysqli_fetch_assoc() expects parameter 1 to be mysqli_result, bool given in /home/u989688937/domains/ingressozapp.com/public_html/app/includes/bancoDados.php on line 56
+[27-Jun-2021 05:18:19 UTC] PHP Warning:  mysqli_query(): Empty query in /home/u989688937/domains/ingressozapp.com/public_html/app/includes/bancoDados.php on line 53
+[27-Jun-2021 05:18:19 UTC] PHP Warning:  mysqli_fetch_assoc() expects parameter 1 to be mysqli_result, bool given in /home/u989688937/domains/ingressozapp.com/public_html/app/includes/bancoDados.php on line 56
+[27-Jun-2021 05:18:19 UTC] PHP Warning:  mysqli_query(): Empty query in /home/u989688937/domains/ingressozapp.com/public_html/app/includes/bancoDados.php on line 53
+[27-Jun-2021 05:18:19 UTC] PHP Warning:  mysqli_fetch_assoc() expects parameter 1 to be mysqli_result, bool given in /home/u989688937/domains/ingressozapp.com/public_html/app/includes/bancoDados.php on line 56
+[27-Jun-2021 05:18:19 UTC] PHP Warning:  mysqli_query(): Empty query in /home/u989688937/domains/ingressozapp.com/public_html/app/includes/bancoDados.php on line 53
+[27-Jun-2021 05:18:19 UTC] PHP Warning:  mysqli_fetch_assoc() expects parameter 1 to be mysqli_result, bool given in /home/u989688937/domains/ingressozapp.com/public_html/app/includes/bancoDados.php on line 56
