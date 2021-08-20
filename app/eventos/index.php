@@ -23,7 +23,11 @@ include('../includes/header.php');
                         <tr>
                             <th style="display:none;">Id</th>
                             <th>Nome</th>
-                            <th>Produtor</th>
+                            <?php
+                            if($tipoUsuario == 1){
+                               echo "<th>Produtor</th>";
+                            }
+                            ?>
                             <th>Data</th>
                             <th>Descrição</th>
                             <th>Validade</th>
@@ -33,7 +37,8 @@ include('../includes/header.php');
                     <tbody id="tbody">
                         <?php
                             if($tipoUsuario == 1){
-                                $consulta = "SELECT * FROM Evento";
+                                $consulta = "SELECT Evento.id, Evento.nome, Produtor.nome as produtor, Evento.data, Evento.descricao, Evento.validade
+                                FROM Evento JOIN Produtor ON Evento.produtor = Produtor.id";
                                 addTabela($consulta);
                             }else if($tipoUsuario == 2){
                                 $consulta = "SELECT * FROM Evento WHERE produtor = '$idUsuario'";
@@ -49,13 +54,15 @@ include('../includes/header.php');
 
 <?php
 function addTabela($consulta){
-    
+    global $tipoUsuario;
     $usuarios = selecionar($consulta);
     foreach ($usuarios as $obj) {
         echo "<tr>";
         echo ("<td style='display:none;'>".$obj['id']."</td>"); 
         echo ("<td>".$obj['nome']."</td>"); 
-        echo ("<td>".$obj['produtor']."</td>"); 
+        if($tipoUsuario == 1){
+            echo ("<td>".$obj['produtor']."</td>"); 
+        }
         echo ("<td>".$obj['data']."</td>");
         echo ("<td>".$obj['descricao']."</td>");
         $validade = $obj['validade'];

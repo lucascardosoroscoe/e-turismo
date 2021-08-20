@@ -138,11 +138,16 @@ function filtrarTabela(pesquisa){
         var td = tr.childNodes;
 
         for(var j = 1; j < td.length - 1; j++){
-            var value = td[j].childNodes[0].nodeValue.toLowerCase();
-            // alert("Valor: "+ preco);
-            if(value.indexOf(pesquisa) >= 0){
-                achou = true;
+            try {
+                var value = td[j].childNodes[0].nodeValue.toLowerCase();
+                // alert("Valor: "+ preco);
+                if(value.indexOf(pesquisa) >= 0){
+                    achou = true;
+                }
+            } catch (error) {
+                console.log(error);
             }
+           
         }
         try{
             if (achou){

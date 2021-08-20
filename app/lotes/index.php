@@ -56,7 +56,7 @@ function addTabela($consulta){
         echo "<tr>";
         echo ("<td style='display:none;'>".$obj['id']."</td>"); 
         echo ("<td>".$obj['nome']."</td>"); 
-        echo ("<td>".$obj['valor']."</td>"); 
+        echo ("<td>R$".$obj['valor'].",00</td>"); 
         echo ("<td>".$obj['quantidade']."</td>");
         echo ("<td>".$obj['vendidos']."</td>");
         $validade = $obj['validade'];

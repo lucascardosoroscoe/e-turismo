@@ -1,4 +1,0 @@
-[19-Apr-2021 01:52:20 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function executar() in /home/u989688937/domains/ingressozapp.com/public_html/app/vendedores/add.php:5
-Stack trace:
-#0 {main}
-  thrown in /home/u989688937/domains/ingressozapp.com/public_html/app/vendedores/add.php on line 5

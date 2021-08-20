@@ -22,6 +22,7 @@ include('../includes/header.php');
                             <th style="display:none;">Id</th>
                             <th>Nome</th>
                             <th>Telefone</th>
+                            <th>Whatsapp</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -62,6 +63,12 @@ function addTabela($consulta){
             echo ("<td style='display:none;'>".$obj['id']."</td>");
             echo ("<td>".$obj['nome']."</td>"); 
             echo ("<td>".$obj['telefone']."</td>");
+            $nomeCompleto = explode(' ',trim($obj['nome']));
+            $primeiroNome = $nomeCompleto[0];
+            $mensagem = "Boa tarde ".$primeiroNome.", tudo bem?";
+
+            echo ("<td><a target='_blank' href='https://api.whatsapp.com/send?phone=55".$obj['telefone']."&text=".$mensagem."'>Contatar</a></td>");
+        
             echo ("<td style='display: flex;'><a href='editar.php?id=".$obj['id']."' class='iconeTabela'><i class='fas fa-user-edit'></i></a></td>");  
         echo "</tr>";
     }

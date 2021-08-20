@@ -28,6 +28,7 @@ include('../includes/header.php');
                             <th>Telefone</th>
                             <th>Cidade</th>
                             <th>Validade</th>
+                            <th>Whatsapp</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -56,6 +57,11 @@ function addTabela($consulta){
         echo ("<td>".$obj['cidade'].", ".$obj['estado']."</td>");
         $validade = $obj['validade'];
         echo ("<td>".$obj['validade']."</td>");
+        $nomeCompleto = explode(' ',trim($obj['nome']));
+        $primeiroNome = $nomeCompleto[0];
+        $mensagem = "Boa tarde ".$primeiroNome.", beleza? Sou o Giovanny do IngressoZapp, estou entrando em contato pra saber como está a retomada dos eventos no ".$obj['estado']." atualmente?";
+
+        echo ("<td><a target='_blank' href='https://api.whatsapp.com/send?phone=55".$obj['telefone']."&text=".$mensagem."'>Contatar</a></td>");
         if($validade == "VALIDO"){
             echo ("<td style='display: flex;'><a href='editar.php?id=".$obj['id']."' class='iconeTabela'><i class='fas fa-user-edit'></i></a><a href='invalidar.php?id=".$obj['id']."' class='iconeTabela red'><i class='fas fa-user-times'></i></a></td>");  
         }else{

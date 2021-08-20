@@ -12,7 +12,7 @@
     if($msg != "Sucesso!"){
         $msg = "Erro ao criar Vendedor, por favor contate o suporte!!";
     }else{
-        // header('Location: index.php?msg='.$msg);
+        header('Location: index.php?msg='.$msg);
 
     }
 
