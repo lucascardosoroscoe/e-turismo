@@ -59,7 +59,7 @@ function addTabela($consulta){
         echo ("<td>".$obj['validade']."</td>");
         $nomeCompleto = explode(' ',trim($obj['nome']));
         $primeiroNome = $nomeCompleto[0];
-        $mensagem = "Boa tarde ".$primeiroNome.", beleza? Sou o Giovanny do IngressoZapp, estou entrando em contato pra saber como está a retomada dos eventos no ".$obj['estado']." atualmente?";
+        $mensagem = "Bom dia ".$primeiroNome.", tudo bem? O IngressoZapp está voltando com tudo pra te ajudar a ter mais lucratividade nos seus eventos. Estamos retomando o contato com nossos parceiros produtores de eventos. Você tem 5 minutinhos para conversarmos a respeito da sua retomada nos eventos?";
 
         echo ("<td><a target='_blank' href='https://api.whatsapp.com/send?phone=55".$obj['telefone']."&text=".$mensagem."'>Contatar</a></td>");
         if($validade == "VALIDO"){

@@ -65,7 +65,7 @@ function addTabela($consulta){
             echo ("<td>".$obj['telefone']."</td>");
             $nomeCompleto = explode(' ',trim($obj['nome']));
             $primeiroNome = $nomeCompleto[0];
-            $mensagem = "Boa tarde ".$primeiroNome.", tudo bem?";
+            $mensagem = "E aí ".$primeiroNome.", blz? Dia 11/09 tem mais uma edição do Fullon Prog e Sunset. São 20hrs de rolê open cooler: https://www.facebook.com/events/563140354873047 Tô passando pra te convidar pro rolê e pra te pedir, se possível, pra confirmar presença e convidar 10 amigos. Como contrapartida vamos fazer o possível pra te dar o melhor rolê de todos ";
 
             echo ("<td><a target='_blank' href='https://api.whatsapp.com/send?phone=55".$obj['telefone']."&text=".$mensagem."'>Contatar</a></td>");
         

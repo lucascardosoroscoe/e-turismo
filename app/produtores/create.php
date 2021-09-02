@@ -1,6 +1,5 @@
 <?php
     include('../includes/verificarAcesso.php');
-    verificarAcesso(1);
     
 
     $email = $_POST['inputEmailAddress'];
