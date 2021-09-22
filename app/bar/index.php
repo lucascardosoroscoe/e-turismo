@@ -77,7 +77,7 @@
                         echo('<h5 style="margin: 0 0 0 0.3em;width: 98px;height: 65px;font-size: large;">'.$nome.'</h5>');
                         if ($idImagem != 0){
                         echo('<div style="margin: auto;width:100px;height:100px;overflow: hidden;border: solid black 1px;border-radius: 8px;">');
-                        echo ("<img style='height: 98px;width: 98px;}' src='getImagem.php?id=$idImagem'>");
+                        echo ("<img style='height: 98px;width: 98px;}' src='https://ingressozapp.com/app/bar/getImagem.php?id=$idImagem'>");
                         echo('</div>');
                         }
                         echo('<h5 style="color: green;text-align: end;margin-bottom: auto;font-size: medium;">Valor: R$'.number_format($valor, 2, ',', '.').'</h5>');

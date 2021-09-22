@@ -6,6 +6,11 @@
     $_SESSION["usuario"] = "";
     $_SESSION["tipoUsuario"] = "";
     $_SESSION["emailUsuario"] = "";
+    $_SESSION["nomeVendedor"] = "";
+    $_SESSION["idLote"] = "";
+    $_SESSION["nCaixa"] = "";
+    $_SESSION["msg"] = "";
+
 ?>     
     <div style='background-image: url("../img/fundoLogin.jpg"); background-size: cover;height: 900px;'>
         <div class="container">

@@ -10,13 +10,14 @@ $idVendedor = $_SESSION["idVendedor"];
 $nomeVendedor = $_SESSION["nomeVendedor"];
 $idLote = $_SESSION["idLote"];
 $nCaixa = $_SESSION["nCaixa"];
+$msg = $_SESSION["msg"];
 
 
 function verificarAcesso($nivelAcesso){
     global $tipoUsuario;
-    if($nivelAcesso < $tipoUsuario){
+    if($nivelAcesso < $tipoUsuario || $tipoUsuario == ""){
         $msg= "O usuário não possúi permissões de acesso à página que tentou acessar";
-        if($tipoUsuario == 1 || $tipoUsuario == 2 || $tipoUsuario == 3){
+        if($tipoUsuario == 1 || $tipoUsuario == 2 || $tipoUsuario == 3 || $tipoUsuario == ""){
           header('Location: http://ingressozapp.com/app/index.php?msg='.$msg);
         }
     }

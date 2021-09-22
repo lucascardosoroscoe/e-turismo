@@ -1,8 +1,8 @@
 <?php
 $servidor = '127.0.0.1:3306';
 $senha ='ingressozapp';
-$usuario ='u989688937_ingressozapp';
-$bdados ='u989688937_ingressozapp';
+$usuario ='u989688937_WtNbV';
+$bdados ='u989688937_WtNbV';
 
 $idLote    = $_POST['selecionarLote'];
 $quantidade    = $_POST['selecionarQuantidade'];

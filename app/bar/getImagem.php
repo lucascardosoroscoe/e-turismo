@@ -1,8 +1,8 @@
 <?php
     $servidor = '127.0.0.1:3306';
-    $bsenha ='ingressozapp';
-    $busuario ='u989688937_ingressozapp';
-    $bdados ='u989688937_ingressozapp';
+    $bsenha ='vjdC7p5XBy';
+    $busuario ='u989688937_IHLyR';
+    $bdados ='u989688937_WtNbV';
 
     $idImagem = $_GET['id'];
 
@@ -11,7 +11,6 @@
     $gravacoes = mysqli_query($conexao, $consulta);
 
     $row = mysqli_fetch_assoc($gravacoes);
-
     Header( "Content-type: image/gif"); 
     echo $row['imagem']; 
 

@@ -104,7 +104,7 @@ setlocale(LC_ALL, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
                       echo('</a>');
                       echo('<div class="collapse" id="collapse" aria-labelledby="headingOne" data-parent="#sidenavAccordion"><nav class="sb-sidenav-menu-nested nav">');
                         echo('<a class="nav-link" href="'.$HTTP_HOST . "/app".'/relatorios/vendaIngresso">Venda de Ingressos</a>');
-                        echo('<a class="nav-link" href="'.$HTTP_HOST . "/app".'/relatorios/financeiro">Financeiro</a>');
+                        // echo('<a class="nav-link" href="'.$HTTP_HOST . "/app".'/relatorios/financeiro">Financeiro</a>');
                         echo('<a class="nav-link" href="'.$HTTP_HOST . "/app".'/relatorios/recebimento">Recebimentos</a>');
                         echo('<a class="nav-link" href="'.$HTTP_HOST . "/app".'/relatorios/vendaBar">Vendas no Bar</a>');
                       if($tipoUsuario == 1){
@@ -184,9 +184,9 @@ setlocale(LC_ALL, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
       echo('<option value="">Selecione o Lote</option>');
       foreach ($dados as $lote) {
         if($idLote == $lote['id']){
-          echo('<option value="'. $lote['id'] .'" selected>'. $lote['nome'] .'</option>');
+          echo('<option value="'. $lote['id'] .'" selected>'. $lote['nome'] .' - R$'. $lote['valor'] .',00</option>');
         }else{
-          echo('<option value="'. $lote['id'] .'">'. $lote['nome'] .'</option>');
+          echo('<option value="'. $lote['id'] .'">'. $lote['nome'] .' - R$'. $lote['valor'] .',00</option>');
         }
       }
     echo('</select>');
@@ -218,5 +218,15 @@ setlocale(LC_ALL, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
         }
       }
     echo('</select>');
+  }
+
+  function msgAutomatica(){
+    global $msg;
+    echo '<div class="row">';
+      echo '<div class="col-md-12">';
+        echo '<label class="small mb-1" for="inputMsg">Mensagem Automatizada</label>';
+        echo '<input class="form-control py-4" type="text" id="inputMsg" name="inputMsg" onchange="modificarMsg()" placeholder="Digite a mensagem para enviar via contato" value="'.$msg.'"></input>';
+      echo '</div>';
+    echo '</div>';
   }
 ?>

@@ -73,6 +73,9 @@ function login($id, $nome, $type, $email){
     $_SESSION["usuario"] = $nome;
     $_SESSION["tipoUsuario"] = $type;
     $_SESSION["emailUsuario"] = $email;
+    $_SESSION["idLote"] = "0";
+    $_SESSION["nCaixa"] = "0";
+    $_SESSION["msg"] = "0";
     echo $_SESSION["tipoUsuario"];
     header('Location: ../index.php?msg='.$msg);
 }

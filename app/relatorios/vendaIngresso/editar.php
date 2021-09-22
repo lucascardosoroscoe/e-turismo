@@ -20,6 +20,7 @@ $idLote = $dados[0]['lote'];
                             <form action="edit.php" id="edit_evento" method="POST" enctype="multipart/form-data">
                                 <input  name="codigo" type="hidden" value="<?php echo $id; ?>" required/>
                                 <input  name="idCliente" type="hidden" value="<?php echo $dados[0]['id']; ?>" required/>
+                                <input  name="telefoneAntigo" type="hidden" value="<?php echo $dados[0]['telefone']; ?>" required/>
                                 <div class="form-row">
                                     <div class="col-md-12">
                                         <div class="form-group">

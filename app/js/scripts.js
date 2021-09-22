@@ -27,6 +27,7 @@ $(function(){
 var inputEvento = document.getElementById('selectEvento');
 var inputVendedor = document.getElementById('selectVendedor');
 var inputLote   = document.getElementById('selectLote');
+var inputMsg = document.getElementById('inputMsg');
 
 //Script Selecionar Evento
 function selectevento(id){
@@ -47,6 +48,13 @@ function selectlote(id){
     var idLote = inputLote.value;
     var url = window.location.href;
     window.location = "http://ingressozapp.com/app/assets/selecionarLotes.php?idLote="+ idLote + "&u=" + url;
+}
+
+//Mensagem Automação
+function modificarMsg(){
+    var msg = inputMsg.value;
+    var url = window.location.href;
+    window.location = "http://ingressozapp.com/app/assets/definirMsg.php?msg="+ msg + "&u=" + url;
 }
 
 function adicionarlote() {

@@ -13,9 +13,13 @@ include('../includes/header.php');
             <a href='adicionar.php'><div class="btn btnAdd"><i class='fas fa-user-plus'></i> Adicionar</div></a>
         </div>
         <div class="card-body">
-            <div class="col-md-8" style="float:left; margin-top: 5px;">
-                <input class="form-control" type="text" placeholder="Buscar..." style="margin-bottom: 5px" id="buscar" onkeyup="buscar()"/>
+            <?php msgAutomatica(); ?>
+            <div class="row">
+                <div class="col-md-8" style="float:left; margin-top: 5px;">
+                    <input class="form-control" type="text" placeholder="Buscar..." style="margin-bottom: 5px" id="buscar" onkeyup="buscar()"/>
+                </div>
             </div>
+            
             <div class="table-responsive table-hover">
                 <table class="table tablesorter table-hover" id="dataTable" width="100%" cellspacing="0">
                     <thead>
@@ -53,15 +57,13 @@ include('../includes/header.php');
 
 <?php
 function addTabela($consulta){
-    
+    global $msg;
     $usuarios = selecionar($consulta);
     foreach ($usuarios as $obj) {
         $nomeCompleto = explode(' ',trim($obj['nome']));
         $primeiroNome = $nomeCompleto[0];
-        $mensagem = "Boa tarde ". $primeiroNome .". O IngressoZapp está montando um Time de promoters oficiais de música eletrônica em Campo Grande. Como você já tem prática de utilização do aplicativo, gostaria de te convidar para compor nosso time, já são pelo menos 4 eventos programados para esse ano de 2021. Você faz a divulgação e venda sem sair de casa, ganha entrada grátis em todos os eventos parceiros e 5% do valor vendido. Lembrando que é tudo simplificado, rápido e online. Gostaria de fazer parte desse time? Entre no grupo exclusivo e faça parte da família:
-        https://chat.whatsapp.com/JzRIqN4Gqv5G1ESyILa1OQ
-        ";
-
+        $mensagem = "Oi ". $primeiroNome .", tudo bem? " . $msg;
+        $mensagem = urlencode($mensagem);
         echo "<tr>";
         echo ("<td style='display:none;'>".$obj['id']."</td>"); 
         echo ("<td>".$obj['usuario']."</td>"); 

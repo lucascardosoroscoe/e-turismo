@@ -1,6 +1,5 @@
 <?php
 include('./includes/verificarAcesso.php');
-verificarAcesso(3);
 include('./includes/header.php');
 ?>
 <div style='background-image: url("./img/fundoLogin.jpg"); background-size: cover;height: 100%;'>
