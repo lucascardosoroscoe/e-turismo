@@ -401,18 +401,19 @@ $idSecretaria = $_SESSION["idSecretaria"];
                     echo('<th>Valor</th>');
                     echo('<th>Telefone</th>');
                     echo('<th>Vendedor</th>');
+                    echo('<th>Data</th>');
                     echo('<th>Validade</th>');
                     echo('<th></th>');
                     echo('</tr>');
                 echo('</thead>');
                 echo('<tbody id="tbody">');
                     if($idEvento == ""){
-                        $consulta = "SELECT Ingresso.codigo, Vendedor.nome as vendedor, Cliente.nome as cliente, Cliente.telefone as telefone, Ingresso.valor, Ingresso.validade 
+                        $consulta = "SELECT Ingresso.codigo, Ingresso.data, Vendedor.nome as vendedor, Cliente.nome as cliente, Cliente.telefone as telefone, Ingresso.valor, Ingresso.validade 
                         FROM Ingresso JOIN Vendedor ON Ingresso.vendedor = Vendedor.id 
                         JOIN Cliente ON Ingresso.idCliente = Cliente.id
                         WHERE Vendedor.produtor = '$idUsuario' AND Ingresso.validade != 'CANCELADO' ORDER BY Ingresso.codigo";
                     }else{
-                        $consulta = "SELECT Ingresso.codigo, Vendedor.nome as vendedor, Cliente.nome as cliente, Cliente.telefone as telefone, Ingresso.valor, Ingresso.validade 
+                        $consulta = "SELECT Ingresso.codigo, Ingresso.data, Vendedor.nome as vendedor, Cliente.nome as cliente, Cliente.telefone as telefone, Ingresso.valor, Ingresso.validade 
                         FROM Ingresso JOIN Vendedor ON Ingresso.vendedor = Vendedor.id 
                         JOIN Cliente ON Ingresso.idCliente = Cliente.id
                         WHERE Ingresso.evento = '$idEvento' AND Ingresso.validade != 'CANCELADO' ORDER BY Ingresso.codigo";
@@ -432,6 +433,7 @@ $idSecretaria = $_SESSION["idSecretaria"];
             echo ("<td>R$".UsToBr($obj['valor'])."</td>"); 
             echo ("<td>".$obj['telefone']."</td>"); 
             echo ("<td>".$obj['vendedor']."</td>"); 
+            echo ("<td>".$obj['data']."</td>"); 
             $validade = $obj['validade'];
             echo ("<td>".$validade."</td>");
             if($validade == "VALIDO"){
