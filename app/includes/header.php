@@ -175,6 +175,33 @@ setlocale(LC_ALL, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
       }
     echo('</select>');
   }
+  function selecEvento($idEvento){
+    global $tipoUsuario, $idUsuario;
+    
+    if($tipoUsuario == 1){
+      $consulta = "SELECT * FROM `Evento` WHERE validade = 'VALIDO'";
+    }else if($tipoUsuario == 2){
+      $consulta = "SELECT * FROM `Evento` WHERE `produtor`= '$idUsuario' AND validade = 'VALIDO'";
+    }else if($tipoUsuario == 3){
+      $consulta = "SELECT Evento.id, Evento.nome FROM Evento 
+      JOIN Produtor ON Evento.produtor = Produtor.id
+      JOIN ProdutorVendedor ON ProdutorVendedor.idProdutor = Produtor.id
+      JOIN Vendedor ON ProdutorVendedor.idVendedor = Vendedor.id
+      WHERE Vendedor.id = '$idUsuario' AND Produtor.validade = 'VALIDO' AND Evento.validade = 'VALIDO'";
+    }
+    $dados = selecionar($consulta);
+    echo('<select class="form-control" name="selectEvento" id="selectEvento" onchange="selectevento(1)"  form="emitir" required>');
+      echo('<option value="">Selecione o Evento</option>');
+      foreach ($dados as $evento) {
+        if($idEvento == $evento['id']){
+          echo('<option value="'. $evento['id'] .'" selected>'. $evento['nome'] .'</option>');
+        }else{
+          echo('<option value="'. $evento['id'] .'">'. $evento['nome'] .'</option>');
+        }
+      }
+    echo('</select>');
+  }
+
 
   function selectLote(){
     global $idEvento, $idLote;

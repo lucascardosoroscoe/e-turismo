@@ -11,6 +11,13 @@ include('./includes/header.php');
                         <h5 class="text-center font-weight-light my-4">Bem vindo ao Guia de utilização do aplicativo IngressoZapp!</h5>
                     </div>
                     <div class="card-body">
+                        <?
+                        if($idUsuario == ""){
+                            echo '<a style="margin-bottom:10px;" class="btn btn-primary btn-block" href="login/index.php"><h6>Fazer login</h6></a>';
+                        }else{
+                            echo '<a style="margin-bottom:10px;" class="btn btn-primary btn-block"  href="ingresso.php"><h6>Emitir ingresso</h6></a>';
+                        }
+                        ?>
                         <div class="menuSelecaoGuias">
                             <div class="row">
                                 <div class="col-lg-4">
@@ -128,13 +135,12 @@ include('./includes/header.php');
                                     <span style="margin: 50px;">
                                     Antes de usar o Aplicativo de Caixa IngressoZapp o produtor de eventos deve acessar o aplicativo, fazer login, com seu e-mail e senha oficiais e entregá-lo ao caixa responsável. <br>
                                     <br>
-                                    <!-- <span style="margin: 50px;"> -->
                                     Para carregar o saldo no cartão QR CODE físico ou no próprio ingresso siga as instruções:<br>
                                     1- O cliente comparece ao caixa e solicita o crédito no valor desejado (caso o cliente ainda não possua o QR CODE, recebe um novo cartão)<br>
                                     2- O funcionário do Caixa utilizando o aplicativo  Caixa IngressoZapp, clica no ícone  de câmera 📷 e focaliza o QR CODE do cliente. <br>
                                     3- Em tela será exibido o saldo do disponível em cartão. O cliente é informado então quanto já possuía de saldo. <br>
                                     4- O responsável pelo caixa recebe o valor que o cliente deseja adicionar (dinheiro, cartão, PIX, disponibilizados pelo produtor de eventos)<br>
-                                    <!-- <span style="margin: 50px;"> -->
+                                   
                                     5- Selecionando o valor pago pelo cliente adiciona-se o saldo no cartão e informa-se o saldo total do cliente em cartão.<br>
                                 </p>
                             </div>
@@ -196,7 +202,6 @@ include('./includes/header.php');
                                 </p>
                             </div>
                         </div>
-<!-- 
                         <div id="produtor" class="row">
                             <div class="col-lg-12">
                                 <h5 style="padding-top:50px; padding-bottom: 30px;">Produtor - Gerenicie seu evento</h5>
@@ -214,8 +219,7 @@ include('./includes/header.php');
                                     O aplicativo além de permitir ao produtor acompanhar em tempo real a venda dos ingressos, monitora individualmente o desempenho de seus vendedores, e, ainda gera informações importantes para as estratégias de Marketing adotadas por ele, faz o cadastro dos produtos e vendas do bar em tempo real, online, com ou sem o uso de um cartão físico com a tecnologia QR CODE disponibilizados para os produtores pela Empresa, elimina a logística de distribuição e reposição de ingresso, extingue o custo de impressão dos ingressos físicos, impede fraudes, permite um maior e melhor controle de disponibilidade dos lotes a venda e, ainda constrói um banco de dados organizado dos clientes, facilitando o marketing para os eventos futuros. Unindo a venda dos Ingressos, vendas do bar e o controle de custos do seu evento, tenha relatórios completos do seu resultado financeiro. Evite surpresas e tenha mais assertividade em sua estratégia com o IngressoZapp.<br>
                                 </p>
                             </div>
-                        </div> -->
-
+                        </div>
                                           
                     </div>
                 </div>

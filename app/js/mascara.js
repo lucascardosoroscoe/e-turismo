@@ -1,10 +1,10 @@
 $(document).ready(function(){
     $("#inputCpf").mask("000.000.000-00")
     $("#inputCnpj").mask("00.000.000/0000-00")
-    $("#inputValor").mask("999.999.990,00", {reverse: true})
-    $("#inputLimite").mask("999.999.990", {reverse: true})
-    $("#inputHodometro").mask("999.999.990", {reverse: true})
-    $("#inputQuantidade").mask("999.999.990", {reverse: true})
+    $("#inputValor").mask("999999990,00", {reverse: true})
+    $("#inputLimite").mask("999999990", {reverse: true})
+    $("#inputHodometro").mask("999999990", {reverse: true})
+    $("#inputQuantidade").mask("999999990", {reverse: true})
     $("#cep").mask("00.000-000")
     $("#dataNascimento").mask("00/00/0000")
     

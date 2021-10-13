@@ -6,6 +6,6 @@ $idEvento = $_GET['idEvento'];
 $u = $_GET['u'];
 $_SESSION["nomeEvento"] = $nomeEvento;
 $_SESSION["idEvento"] = $idEvento;
-header('Location: '. $u);
+header('Location: '. $u. '?evento='. $idEvento);
 
 ?>

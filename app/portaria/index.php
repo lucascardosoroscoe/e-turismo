@@ -1,7 +1,7 @@
 <body>
 <?php
     include('../includes/verificarAcesso.php');
-    verificarAcesso(2);
+    // verificarAcesso(2);
     include('../includes/header.php');
 
     $codigo    =  $_GET['codigo'];

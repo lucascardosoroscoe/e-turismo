@@ -28,6 +28,7 @@ function formatarData($data){
   return ucfirst(strftime("%d de %B de %Y", strtotime($data) ) );
 }
 function UsToBr($valor){ 
+  $valor = floatval($valor);
   return number_format($valor,2,",",".");
 } 
 function BrToUs($valor){ 

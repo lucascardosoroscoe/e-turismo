@@ -27,7 +27,7 @@ $dados = selecionar($consulta);
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label class="small mb-1" for="inputValor">Preço de Venda*</label>
-                                            <input class="form-control py-4" id="inputValor"  name="inputValor" type="number" placeholder="Digite o Preço (R$)" value="<?php echo $dados[0]['valor'];?>" required/>
+                                            <input class="form-control py-4" id="inputValor"  name="inputValor" type="text" placeholder="Digite o Preço (R$)" value="<?php echo $dados[0]['valor'];?>" required/>
                                         </div>
                                     </div>
                                 </div>

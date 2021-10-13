@@ -2,6 +2,7 @@
 include('./includes/verificarAcesso.php');
 verificarAcesso(3);
 include('./includes/header.php');
+$idEvento = $_GET['evento'];
 ?>
 <div style='background-image: url("./img/fundoLogin.jpg"); background-size: cover;height: 100%;'>
     <div class="container">

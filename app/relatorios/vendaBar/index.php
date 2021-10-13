@@ -49,18 +49,18 @@ $idSecretaria = $_SESSION["idSecretaria"];
                     <div class="chartArea">
                         <div class="chat" id="chart_div1"></div>
                     </div>
-                    <div class="chartArea">
+                    <!-- <div class="chartArea">
                         <div class="chat" id="chart_div3"></div>
-                    </div>
+                    </div> -->
                 </div>
-                <div class="col-md-6">
+                <!-- <div class="col-md-6">
                     <div class="chartArea">
                         <div class="chat" id="chart_div2"></div>
                     </div>
                     <div class="chartArea">
                         <div class="chat" id="chart_div4"></div>
                     </div>
-                </div>
+                </div> -->
             </div>
             <div class="row">
                 <div class="col-md-12">
@@ -76,11 +76,13 @@ $idSecretaria = $_SESSION["idSecretaria"];
                     <div class="row">
                         <div class="col-md-6" style="margin-top: 10px; text-align:center;">
                         <?php
-                            $consulta = "SELECT SUM(VendaBar.valor) as soma
-                            FROM VendaBar 
-                            JOIN Produto ON Produto.idProduto = VendaBar.idProduto
-                            WHERE Produto.produtor = 48
-                            GROUP BY Produto.produtor";
+                            if ($idEvento != ""){
+                                $consulta = "SELECT SUM(VendaBar.valor) as soma
+                                FROM VendaBar 
+                                JOIN Produto ON Produto.idProduto = VendaBar.idProduto
+                                WHERE VendaBar.idEvento = '$idEvento'
+                                GROUP BY VendaBar.idEvento";
+                            }
                             $dados = selecionar($consulta);
                             echo "<h5>Total Vendido: <span id='total'>R$". UsToBr($dados[0]['soma']) ."</span></h5>";
                         ?>
@@ -108,21 +110,19 @@ $idSecretaria = $_SESSION["idSecretaria"];
             WHERE VendaBar.idEvento = '$idEvento'
             GROUP BY Produto.idProduto
             ORDER BY total DESC";
-            $consulta3 = "SELECT COUNT(Ingresso.codigo) as quantidade, Vendedor.nome as vendedor FROM Ingresso JOIN Lote ON Lote.id = Ingresso.lote JOIN Vendedor ON Vendedor.id = Ingresso.vendedor WHERE Ingresso.evento = '$idEvento' AND Ingresso.validade != 'CANCELADO' GROUP BY Ingresso.vendedor";
-            $consulta4 = "SELECT SUM(Ingresso.valor) as valor, Vendedor.nome as vendedor FROM Ingresso JOIN Lote ON Lote.id = Ingresso.lote JOIN Vendedor ON Vendedor.id = Ingresso.vendedor WHERE Ingresso.evento = '$idEvento' AND Ingresso.validade != 'CANCELADO' GROUP BY Ingresso.vendedor";
         }
         // echo "Consulta: ". $consulta ."<br>";
         $obg = selecionar($consulta1);
         $graph1 = graph1($obg);
         array_push($graphs, $graph1);
-        $graph2 = graph2($obg);
-        array_push($graphs, $graph2);
-        $obg = selecionar($consulta3);
-        $graph3 = graph3($obg);
-        array_push($graphs, $graph3);
-        $obg = selecionar($consulta4);
-        $graph4 = graph4($obg);
-        array_push($graphs, $graph4);
+        // $graph2 = graph2($obg);
+        // array_push($graphs, $graph2);
+        // $obg = selecionar($consulta3);
+        // $graph3 = graph3($obg);
+        // array_push($graphs, $graph3);
+        // $obg = selecionar($consulta4);
+        // $graph4 = graph4($obg);
+        // array_push($graphs, $graph4);
         return json_encode($graphs);
     }
 

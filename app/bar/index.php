@@ -28,7 +28,7 @@
         $fichas = selecionar($consulta);
         $saldo = $fichas[0]['saldo'];
         $idCarteira = $fichas[0]['id'];
-        echo ('<br><h3>Ficha nº '. $id .', Saldo:R$ '. number_format($saldo, 2, ',', '.') .'</h3>');
+        echo ('<br><h3>Saldo:R$ '. number_format($saldo, 2, ',', '.') .'<br>Ficha nº '. $id .'</h3>');
         return $idCarteira;
     }
 
@@ -71,16 +71,16 @@
                 }
                 $categoriaAnterior = $categoria;
                 
-                echo('<div class="col s4 m2 push-m3">');  
+                echo('<div class="col s4 m2 push-m3" style="padding-left: 1px;padding-right: 1px;">');  
                     echo('<div class="produto">');  
                         echo ('<a name="'.$idProduto.'" href="venda.php?idProduto='.$idProduto.'&idCarteira='.$idCarteira.'&id='.$id.'">');
-                        echo('<h5 style="margin: 0 0 0 0.3em;width: 98px;height: 65px;font-size: large;">'.$nome.'</h5>');
+                        echo('<h5 style="margin: 0 0 0 0;width: 100%;height: 45px;font-size: initial;text-transform: uppercase;text-align: center;">'.$nome.'</h5>');
                         if ($idImagem != 0){
-                        echo('<div style="margin: auto;width:100px;height:100px;overflow: hidden;border: solid black 1px;border-radius: 8px;">');
-                        echo ("<img style='height: 98px;width: 98px;}' src='https://ingressozapp.com/app/bar/getImagem.php?id=$idImagem'>");
+                        echo('<div style="margin: auto;width:130px;height:130px;overflow: hidden;border: solid black 1px;border-radius: 8px;">');
+                        echo ("<img style='height: 130px;width: 130px;}' src='https://ingressozapp.com/app/bar/getImagem.php?id=$idImagem'>");
                         echo('</div>');
                         }
-                        echo('<h5 style="color: green;text-align: end;margin-bottom: auto;font-size: medium;">Valor: R$'.number_format($valor, 2, ',', '.').'</h5>');
+                        echo('<h5 style="color: green;text-align: center;margin-bottom: auto;font-size: medium;">Valor: R$'.number_format($valor, 2, ',', '.').'</h5>');
                         echo ('</a>');
                     echo('</div>');
                 echo('</div>');

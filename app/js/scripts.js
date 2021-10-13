@@ -32,7 +32,7 @@ var inputMsg = document.getElementById('inputMsg');
 //Script Selecionar Evento
 function selectevento(id){
     var idEvento = inputEvento.value;
-    var url = window.location.href;
+    var url = window.location.pathname;
     var nomeEvento = inputEvento.options[inputEvento.selectedIndex].text;
     window.location = "http://ingressozapp.com/app/assets/selecionarEvento.php?idEvento="+ idEvento + "&nomeEvento=" + nomeEvento + "&u=" + url;
 }
