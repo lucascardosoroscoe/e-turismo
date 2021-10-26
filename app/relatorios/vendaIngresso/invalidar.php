@@ -3,9 +3,13 @@
     verificarAcesso(2);
     
 
-    $id = $_GET['id'];
-    $consulta = "UPDATE `Ingresso` SET `validade`='CANCELADO' WHERE `codigo` = '$id'";
+    $id = $_POST['codigo'];
+    $selectMotivo = $_POST['selectMotivo'];
+    $motivoInvalidar = "Ingresso cancelado por " . $usuario . ", motivo: " . $selectMotivo;
+    $consulta = "UPDATE `Ingresso` SET `validade`='CANCELADO', `motivoInvalidar`='$motivoInvalidar' WHERE `codigo` = '$id'";
+    echo $consulta;
     $msg = executar($consulta);
 
     header('Location: index.php?msg='.$msg);
+
 ?>

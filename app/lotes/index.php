@@ -37,7 +37,7 @@ include('../includes/header.php');
                     <tbody id="tbody">
                         <?php
                             if($idEvento != ""){
-                                $consulta = "SELECT * FROM `Lote` WHERE `evento` = '$idEvento'";
+                                $consulta = "SELECT * FROM `Lote` WHERE `evento` = '$idEvento' AND validade != 'EXCLUIDO'";
                                 addTabela($consulta);
                             }
                         ?>
@@ -64,7 +64,7 @@ function addTabela($consulta){
         if($validade == "DISPONÍVEL"){
             echo ("<td style='display: flex;'><a href='editar.php?id=".$obj['id']."' class='iconeTabela'><i class='fas fa-user-edit'></i></a><a href='invalidar.php?id=".$obj['id']."' class='iconeTabela red'><i class='fas fa-user-times'></i></a></td>");  
         }else if($validade == "ESGOTADO"){
-            echo ("<td><a href='reativar.php?id=".$obj['id']."' style='margin-left: 15px;'>Reativar</a></td>");
+            echo ("<td><a href='reativar.php?id=".$obj['id']."' style='margin-left: 15px;'>Reativar</a><a href='excluir.php?id=".$obj['id']."' style='margin-left: 15px;'>Excluir</a></td>");
         }else if($validade == "EM BREVE"){
             echo ("<td><a href='reativar.php?id=".$obj['id']."' style='margin-left: 15px;'>Liberar</a></td>");
         }

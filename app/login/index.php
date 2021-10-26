@@ -29,7 +29,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label class="small mb-1" for="inputPassword">Senha</label>
-                                    <input class="form-control py-4" id="inputPassword" name="inputPassword" type="password" placeholder="Digite sua senha" />
+                                    <input class="form-control py-4" id="inputPassword" name="inputPassword" type="password" placeholder="Digite sua senha"  autocomplete="off"/>
                                 </div>
                                 <div class="form-group d-flex align-items-center justify-content-between mt-4 mb-0">
                                     <a class="small" href="password.php">Esqueceu sua senha?</a>

@@ -38,7 +38,7 @@ include('../includes/header.php');
                     </thead>
                     <tbody id="tbody">
                         <?php
-                            $consulta = "SELECT * FROM Produtor";
+                            $consulta = "SELECT * FROM Produtor WHERE validade = 'VALIDO'";
                             addTabela($consulta);
                         ?>
                     </tbody>
@@ -69,7 +69,7 @@ function addTabela($consulta){
         if($validade == "VALIDO"){
             echo ("<td style='display: flex;'>
             <a href='editar.php?id=".$obj['id']."' class='iconeTabela'><i class='fas fa-user-edit'></i></a>
-            <a href='invalidar.php?id=".$obj['id']."' class='iconeTabela red'><i class='fas fa-user-times'></i></a>");  
+            <a href='invalidar.php?id=".$obj['id']."' target='_blank'  class='iconeTabela red'><i class='fas fa-user-times'></i></a>");  
             if($tipoUsuario == 1){
                 echo ("<a href='acessar.php?id=".$obj['id']."&nome=".$obj['nome']."&email=".$obj['usuario']."' class='iconeTabela'>Acessar Como</a>");
             } 

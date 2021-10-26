@@ -16,7 +16,7 @@ function carregarPost(){
     global $codigo, $evento, $idLote, $nomeCliente, $telefone;
     
     $evento    =  $_POST['selectEvento'];
-    $idLote    =  $_POST["selectLote"];
+    // $idLote    =  $_POST["selectLote"];
     $nomeCliente   =  $_POST['inputNome'];
     $telefone  =  $_POST['inputTelefone'];
     $telefone = str_replace(" ", "", $telefone);
@@ -30,6 +30,10 @@ function carregarPost(){
     }
     // Verifica de Nome do Cliente, Lote e Telefone estão OK
     if($evento == "" || $idLote == "" || $nomeCliente == "" || $telefone == ""){
+        echo "Evento: " . $evento;
+        echo "idLote: " . $idLote;
+        echo "nomeCliente: " . $nomeCliente;
+        echo "telefone: " . $telefone;
         echo "Dados insuficientes para gerar o Ingresso";
         return false;
     }else{
@@ -119,16 +123,16 @@ function verificarIngresso(){
         $vendedor = $idUsuario;
     }
     $dados = selecionar($consulta);
-    if ($dados[0]['codigo'] == ""){
+    // if ($dados[0]['codigo'] == ""){
         if(gerarIngresso()){
             $local='https://ingressozapp.com/app/enviar.php?codigo='.$codigo;
             enviarIngresso(); 
         }
-    }else{
-        $local='https://ingressozapp.com/app/enviar.php?codigo='.$dados[0]['codigo'];
-        echo("<h3>Você já gerou um ingresso para " . $nomeCliente . " deste mesmo Evento . Caso esteja gerando um novo ingresso, para outro cliente, por favor volte e coloque um nome mais completo.<br><br>Caso esteja tentantando reenviar o ingresso pois errou o número do Whatsapp ao gerar o ingresso <a href='$local'>Clique aqui</a> </h3>");
+    // }else{
+    //     $local='https://ingressozapp.com/app/enviar.php?codigo='.$dados[0]['codigo'];
+    //     echo("<h3>Você já gerou um ingresso para " . $nomeCliente . " deste mesmo Evento . Caso esteja gerando um novo ingresso, para outro cliente, por favor volte e coloque um nome mais completo.<br><br>Caso esteja tentantando reenviar o ingresso pois errou o número do Whatsapp ao gerar o ingresso <a href='$local'>Clique aqui</a> </h3>");
 
-    }
+    // }
 }
 
 function gerarIngresso(){

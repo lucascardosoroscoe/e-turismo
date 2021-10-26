@@ -107,11 +107,11 @@ setlocale(LC_ALL, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
                         // echo('<a class="nav-link" href="'.$HTTP_HOST . "/app".'/relatorios/financeiro">Financeiro</a>');
                         echo('<a class="nav-link" href="'.$HTTP_HOST . "/app".'/relatorios/recebimento">Recebimentos</a>');
                         echo('<a class="nav-link" href="'.$HTTP_HOST . "/app".'/relatorios/vendaBar">Vendas no Bar</a>');
-                      if($tipoUsuario == 1){
-                        echo('<a class="nav-link" href="'.$HTTP_HOST . "/app".'/relatorios/pix">PIX</a>');
-                      }
+                      
                       echo('</nav></div>');
-
+                      if($tipoUsuario == 1){
+                        echo('<a class="nav-link" href="'.$HTTP_HOST . "/app".'/relatorios/pix"><div class="sb-nav-link-icon"><i class="fab fa-sellsy"></i></div>Vendas Woocomerce</a>');
+                      }
                       //Bar
                       echo('<div class="sb-sidenav-menu-heading">Bar</div>');
                       echo('<a class="nav-link" href="'.$HTTP_HOST . "/app".'/produtos"><div class="sb-nav-link-icon"><i class="fas fa-cocktail"></i></div>Produtos</a>');
@@ -205,6 +205,22 @@ setlocale(LC_ALL, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
 
   function selectLote(){
     global $idEvento, $idLote;
+      $consulta = "SELECT * FROM `Lote` WHERE `evento`= '$idEvento' AND `validade`= 'DISPONÍVEL'";
+    $dados = selecionar($consulta);
+    echo('<select class="form-control" name="selectLote" id="selectLote" onchange="selectlote(1)" form="emitir" required>');
+      echo('<option value="">Selecione o Lote</option>');
+      foreach ($dados as $lote) {
+        if($idLote == $lote['id']){
+          echo('<option value="'. $lote['id'] .'" selected>'. $lote['nome'] .' - R$'. $lote['valor'] .',00</option>');
+        }else{
+          echo('<option value="'. $lote['id'] .'">'. $lote['nome'] .' - R$'. $lote['valor'] .',00</option>');
+        }
+      }
+    echo('</select>');
+  }
+
+  function selecLote($idEvento){
+    global $idLote;
       $consulta = "SELECT * FROM `Lote` WHERE `evento`= '$idEvento' AND `validade`= 'DISPONÍVEL'";
     $dados = selecionar($consulta);
     echo('<select class="form-control" name="selectLote" id="selectLote" onchange="selectlote(1)" form="emitir" required>');

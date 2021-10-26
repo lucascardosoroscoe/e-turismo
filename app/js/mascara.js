@@ -30,7 +30,7 @@ $(document).ready(function(){
     
     $("#codigo").mask("AA.LLL.0000", options)
     
-    $("#inputTelefone").mask("(00) 0000-00009")
+    $("#inputTelefone").mask("(99) 99999-9999")
     
     $("#inputTelefone").blur(function(event){
         if ($(this).val().length == 15){

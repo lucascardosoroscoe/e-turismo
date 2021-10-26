@@ -42,6 +42,12 @@ include('../includes/header.php');
                                 WHERE ProdutorVendedor.idProdutor = '$idUsuario'
                                 GROUP BY Cliente.id";
                                 addTabela($consulta);
+                                $consulta = "SELECT Cliente.id, Cliente.nome, Cliente.telefone FROM Cliente 
+                                JOIN Ingresso ON Ingresso.idCliente = Cliente.id
+                                JOIN Evento ON Ingresso.evento = Evento.id 
+                                WHERE (Ingresso.vendedor = 1 OR Ingresso.vendedor = 2) AND Evento.produtor = $idUsuario
+                                GROUP BY Cliente.id";
+                                addTabela($consulta);
                             }else if($tipoUsuario == 3){
                                 $consulta = "SELECT Cliente.id, Cliente.nome, Cliente.telefone FROM Cliente 
                                 JOIN Ingresso ON Ingresso.idCliente = Cliente.id

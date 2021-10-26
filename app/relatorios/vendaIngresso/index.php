@@ -399,6 +399,7 @@ $idSecretaria = $_SESSION["idSecretaria"];
                     echo('<th>Código</th>');
                     echo('<th>Cliente</th>');
                     echo('<th>Valor</th>');
+                    echo('<th>Lote</th>');
                     echo('<th>Telefone</th>');
                     echo('<th>Vendedor</th>');
                     echo('<th>Data</th>');
@@ -408,15 +409,17 @@ $idSecretaria = $_SESSION["idSecretaria"];
                 echo('</thead>');
                 echo('<tbody id="tbody">');
                     if($idEvento == ""){
-                        $consulta = "SELECT Ingresso.codigo, Ingresso.data, Vendedor.nome as vendedor, Cliente.nome as cliente, Cliente.telefone as telefone, Ingresso.valor, Ingresso.validade 
+                        $consulta = "SELECT Ingresso.codigo, Ingresso.data, Vendedor.nome as vendedor, Cliente.nome as cliente, Cliente.telefone as telefone, Ingresso.valor, Ingresso.validade, Lote.nome as lote
                         FROM Ingresso JOIN Vendedor ON Ingresso.vendedor = Vendedor.id 
                         JOIN Cliente ON Ingresso.idCliente = Cliente.id
-                        WHERE Vendedor.produtor = '$idUsuario' AND Ingresso.validade != 'CANCELADO' ORDER BY Ingresso.codigo";
+                        JOIN Lote ON Ingresso.lote =  Lote.id
+                        WHERE Vendedor.produtor = '$idUsuario' AND Ingresso.validade != 'CANCELADO' ORDER BY Cliente.nome";
                     }else{
-                        $consulta = "SELECT Ingresso.codigo, Ingresso.data, Vendedor.nome as vendedor, Cliente.nome as cliente, Cliente.telefone as telefone, Ingresso.valor, Ingresso.validade 
+                        $consulta = "SELECT Ingresso.codigo, Ingresso.data, Vendedor.nome as vendedor, Cliente.nome as cliente, Cliente.telefone as telefone, Ingresso.valor, Ingresso.validade, Lote.nome as lote
                         FROM Ingresso JOIN Vendedor ON Ingresso.vendedor = Vendedor.id 
                         JOIN Cliente ON Ingresso.idCliente = Cliente.id
-                        WHERE Ingresso.evento = '$idEvento' AND Ingresso.validade != 'CANCELADO' ORDER BY Ingresso.codigo";
+                        JOIN Lote ON Ingresso.lote =  Lote.id
+                        WHERE Ingresso.evento = '$idEvento' AND Ingresso.validade != 'CANCELADO' ORDER BY Cliente.nome";
                     }
                     addtabela($consulta);
                 echo('</tbody>');
@@ -431,6 +434,7 @@ $idSecretaria = $_SESSION["idSecretaria"];
             echo ("<td>".$obj['codigo']."</td>");
             echo ("<td>".$obj['cliente']."</td>");
             echo ("<td>R$".UsToBr($obj['valor'])."</td>"); 
+            echo ("<td>".$obj['lote']."</td>");
             echo ("<td>".$obj['telefone']."</td>"); 
             echo ("<td>".$obj['vendedor']."</td>"); 
             echo ("<td>".$obj['data']."</td>"); 
@@ -438,7 +442,7 @@ $idSecretaria = $_SESSION["idSecretaria"];
             echo ("<td>".$validade."</td>");
             if($validade == "VALIDO"){
                 echo ("<td style='display: flex;'><a href='editar.php?id=".$obj['codigo']."' class='iconeTabela'><i class='fas fa-user-edit'></i></a>");  
-                echo ("<a href='invalidar.php?id=".$obj['codigo']."' class='iconeTabela red'><i class='fas fa-user-times'></i></a>");  
+                echo ("<a href='cancelar.php?id=".$obj['codigo']."' class='iconeTabela red'><i class='fas fa-user-times'></i></a>");  
                 echo ("<a href='../../enviar.php?codigo=".$obj['codigo']."' target='_blank' class='iconeTabela'><i class='far fa-copy'></i></a></td>");  
             }else{
                 echo ("<td><a href='reativar.php?id=".$obj['codigo']."' style='margin-left: 15px;'>Reativar</a></td>");

@@ -27,7 +27,7 @@ $count = 0;
                     carregarCabecalho(); 
                     carregarIngressos();
                     carregarTotal();
-                    carregarRecebimentos();
+                    // carregarRecebimentos();
                ?>
           </div>
      </div>
@@ -74,7 +74,7 @@ $count = 0;
                JOIN Evento ON Evento.id = Ingresso.evento
                JOIN Vendedor ON Vendedor.id = Ingresso.vendedor
                JOIN Cliente ON Cliente.id = Ingresso.idCliente
-               WHERE Vendedor.id = 1 AND Evento.id = $idEvento";
+               WHERE Vendedor.id = 1 AND Evento.id = $idEvento AND ( Ingresso.validade = 'VALIDO' OR Ingresso.validade = 'USADO' )";
                // Add lote depois
                // JOIN Lote ON Lote.id = Ingresso.lote
           }else if($tipoUsuario == 2){
@@ -84,7 +84,7 @@ $count = 0;
                JOIN Evento ON Evento.id = Ingresso.evento
                JOIN Vendedor ON Vendedor.id = Ingresso.vendedor
                JOIN Cliente ON Cliente.id = Ingresso.idCliente
-               WHERE Vendedor.id = 2 AND Evento.id = $idEvento";
+               WHERE Vendedor.id = 2 AND Evento.id = $idEvento AND ( Ingresso.validade = 'VALIDO' OR Ingresso.validade = 'USADO' )";
           }else if($tipoUsuario == 3){
                $consulta = "SELECT Ingresso.codigo, Ingresso.valor, Ingresso.validade, Ingresso.data,
                Evento.nome as evento, Vendedor.nome as vendedor, Cliente.nome as cliente, Cliente.telefone
@@ -92,7 +92,7 @@ $count = 0;
                JOIN Evento ON Evento.id = Ingresso.evento
                JOIN Vendedor ON Vendedor.id = Ingresso.vendedor
                JOIN Cliente ON Cliente.id = Ingresso.idCliente
-               WHERE Vendedor.id = $idUsuario AND Evento.id = $idEvento";
+               WHERE Vendedor.id = $idUsuario AND Evento.id = $idEvento AND ( Ingresso.validade = 'VALIDO' OR Ingresso.validade = 'USADO' )";
           }
 
           echo'<br><h3>Tabela de Ingressos</h3>';
@@ -103,6 +103,7 @@ $count = 0;
                               echo'<th>Código</th>';
                               echo'<th>Cliente</th>';
                               echo'<th>Valor</th>';
+                              echo'<th>Validade</th>';
                               // echo'<th>Lote</th>';
                          echo'</tr>';
                     echo'</thead>';
@@ -114,6 +115,7 @@ $count = 0;
                               echo ("<td>".$ingresso['codigo']."</td>");
                               echo ("<td>".$ingresso['cliente']."</td>");
                               echo ("<td>R$".number_format($ingresso['valor'], 2, ',', '.')."</td>");  
+                              echo ("<td>".$ingresso['validade']."</td>");
                               // echo ("<td>".$ingresso['lote']."</td>"); 
                          echo "</tr>";
                          $soma += floatval($ingresso['valor']);

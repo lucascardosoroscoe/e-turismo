@@ -23,13 +23,13 @@ $cliente = $ingresso[0]['cliente'];
 $evento = $ingresso[0]['evento'];
 $vendedor = $ingresso[0]['vendedor'];
 
-$msg = "🎉 ".$evento." 🎉
-Olá ".$cliente." você acaba de adquirir um ingresso, com o promoter ".$vendedor.", utilizando o aplicativo IngressoZapp!!!
+$msg = "🎉 *".$evento."* 🎉
+Olá *".$cliente."* você acaba de adquirir um ingresso, utilizando o aplicativo *IngressoZapp*!!!
 
-Para acessar seu ingresso salve o contato do promoter que te enviou esta mensagem e e clique no link: 
+Para acessar seu ingresso salve este número e clique no link: 
 https://ingressozapp.com/app/qr.php?codigo=".$codigo."
 
-Para entrar o evento apresente seu ingresso (CODIGO: ".$codigo.") e um documento original com foto.
+Para entrar no evento apresente seu ingresso (*CODIGO: ".$codigo."*) e um documento original com foto.
 
 ";
 $bar = "
@@ -49,7 +49,7 @@ $covid = "
 O IngressoZapp trabalha para uma retomada dos eventos segura. Sendo assim, caso você apresente sintomas e/ou teste positivo para COVID 19 após a sua participação em um evento, preencha o formulário abaixo para que possamos alertar os demais participantes, como uma estratégia de redução de riscos.
 https://IngressoZapp.com/app/covid";
 // $msg = $msg . $bar . $aviso;
-$msg = $msg . $aviso . $covid;
+$msg = $msg . $aviso;
 $msg =  urlencode ($msg);
 header("Location: https://api.whatsapp.com/send?phone=55".$telefone."&text=".$msg."");
     

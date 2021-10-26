@@ -90,7 +90,7 @@ $idSecretaria = $_SESSION["idSecretaria"];
         $dados = selecionar($consulta);
         foreach ($dados as $obj) {
             $validade = $obj['validade'] ;
-            if($validade == "VALIDO"){
+            if($validade == "VALIDO" || $validade == "USADO" ){
                 $somatotal = $somatotal + floatval($obj['valor']);
             }
         }

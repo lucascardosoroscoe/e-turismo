@@ -38,10 +38,10 @@ include('../includes/header.php');
                         <?php
                             if($tipoUsuario == 1){
                                 $consulta = "SELECT Evento.id, Evento.nome, Produtor.nome as produtor, Evento.data, Evento.descricao, Evento.validade
-                                FROM Evento JOIN Produtor ON Evento.produtor = Produtor.id";
+                                FROM Evento JOIN Produtor ON Evento.produtor = Produtor.id WHERE Evento.validade != 'EXCLUIDO'";
                                 addTabela($consulta);
                             }else if($tipoUsuario == 2){
-                                $consulta = "SELECT * FROM Evento WHERE produtor = '$idUsuario'";
+                                $consulta = "SELECT * FROM Evento WHERE produtor = '$idUsuario' AND validade != 'EXCLUIDO'";
                                 addTabela($consulta);
                             }
                         ?>
@@ -70,7 +70,7 @@ function addTabela($consulta){
         if($validade == "VALIDO"){
             echo ("<td style='display: flex;'><a href='editar.php?id=".$obj['id']."' class='iconeTabela'><i class='fas fa-user-edit'></i></a><a href='invalidar.php?id=".$obj['id']."' class='iconeTabela red'><i class='fas fa-user-times'></i></a><a href='detalhar.php?id=".$obj['id']."' class='iconeTabela'><i class='fas fa-eye'></i></a></td>");  
         }else{
-            echo ("<td><a href='reativar.php?id=".$obj['id']."' style='margin-left: 15px;'>Reativar</a></td>");
+            echo ("<td><a href='reativar.php?id=".$obj['id']."' style='margin-left: 15px;'>Reativar</a><a href='excluir.php?id=".$obj['id']."' class='red' style='margin-left: 15px;'>Excluir</a></td>");
         }
         echo "</tr>";
     }

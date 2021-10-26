@@ -44,9 +44,9 @@ include('../includes/header.php');
                     <tbody id="tbody">
                         <?php
                             if($tipoUsuario == 1){
-                                $consulta = "SELECT Produto.idProduto, Produtor.nome as produtor, Produto.categoria, Produto.nome, Produto.valor, Produto.estoque, Produto.validade FROM Produto JOIN Produtor ON Produtor.id = Produto.produtor WHERE 1 ORDER BY Produtor.nome, Produto.categoria, Produto.nome";
+                                $consulta = "SELECT Produto.idProduto, Produtor.nome as produtor, Produto.categoria, Produto.nome, Produto.valor, Produto.estoque, Produto.validade FROM Produto JOIN Produtor ON Produtor.id = Produto.produtor WHERE Produto.validade != 'EXCLUIDO' ORDER BY Produtor.nome, Produto.categoria, Produto.nome";
                             }else if($tipoUsuario == 2){
-                                $consulta = "SELECT * FROM `Produto` WHERE `produtor` = '$idUsuario' ORDER BY categoria, nome";
+                                $consulta = "SELECT * FROM `Produto` WHERE `produtor` = '$idUsuario' AND `validade` !='EXCLUIDO' ORDER BY categoria, nome";
                             }
                             addTabela($consulta);
                         ?>
@@ -77,7 +77,7 @@ function addTabela($consulta){
         if($validade == "VALIDO"){
             echo ("<td style='display: flex;'><a href='editar.php?id=".$obj['idProduto']."' class='iconeTabela'><i class='fas fa-user-edit'></i></a><a href='invalidar.php?id=".$obj['idProduto']."' class='iconeTabela red'><i class='fas fa-user-times'></i></a></td>");  
         }else{
-            echo ("<td><a href='reativar.php?id=".$obj['idProduto']."' style='margin-left: 15px;'>Reativar</a></td>");
+            echo ("<td><a href='reativar.php?id=".$obj['idProduto']."' style='margin-left: 15px;'>Reativar</a><a href='excluir.php?id=".$obj['idProduto']."' style='margin-left: 15px;'>Excluir</a></td>");
         }
         echo "</tr>";
     }

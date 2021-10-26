@@ -57,7 +57,7 @@ $idLote = $dados[0]['lote'];
 <?php
 function lote(){
     global $idEvento, $idLote;
-      $consulta = "SELECT * FROM `Lote` WHERE `evento`= '$idEvento' AND `validade`= 'DISPONÍVEL'";
+      $consulta = "SELECT * FROM `Lote` WHERE `evento`= '$idEvento' AND `validade`!= 'EXCLUIDO'";
     $dados = selecionar($consulta);
     echo('<select class="form-control" name="selectLote" id="selectLote" form="edit_evento" required>');
       echo('<option value="">Selecione o Lote</option>');

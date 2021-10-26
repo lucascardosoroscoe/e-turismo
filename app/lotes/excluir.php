@@ -4,7 +4,7 @@
     
 
     $id = $_GET['id'];
-    $consulta = "DELETE FROM `ProdutorVendedor` WHERE `idProdutor` = '$idUsuario' AND `idVendedor` = $id";
+    $consulta = "UPDATE `Lote` SET `validade`='EXCLUIDO' WHERE `id` = '$id'";
     $msg = executar($consulta);
 
     header('Location: index.php?msg='.$msg);
