@@ -56,7 +56,7 @@ include('./includes/header.php');
                         
                         <div id="ingressozapp" class="row">
                             <div class="col-lg-12">
-                                <h5 style="padding-top:50px; padding-bottom: 30px;">IngressoZapp - Intrudução</h5>
+                                <h5 style="padding-top:50px; padding-bottom: 30px;">IngressoZapp - Introdução</h5>
                             </div>
                             <div class="col-lg-4">
                                 <img src="img/ingressozapp.png" style="width:100%" alt="Imagem App Ingressozapp" srcset="">
