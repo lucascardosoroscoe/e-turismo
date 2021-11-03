@@ -37,7 +37,7 @@ $obj = $dados[0];
                                                 echo '<div class="col-md-12">';
                                                     echo '<div class="form-group">';
                                                         echo '<label class="small mb-1" for="selectLote">Selecione o Lote*</label>';
-                                                        selecLote($idEvento);
+                                                        selecLote($idEvento, $i);
                                                     echo '</div>';
                                                 echo '</div>';
                                             echo '</div>';

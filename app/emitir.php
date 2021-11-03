@@ -19,6 +19,7 @@ function carregarPost(){
     // $idLote    =  $_POST["selectLote"];
     $nomeCliente   =  $_POST['inputNome'];
     $telefone  =  $_POST['inputTelefone'];
+    $idLote  =  $_POST['selectLote'];
     $telefone = str_replace(" ", "", $telefone);
     $telefone = str_replace("(", "", $telefone);
     $telefone = str_replace(")", "", $telefone);

@@ -107,6 +107,9 @@ setlocale(LC_ALL, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
                         // echo('<a class="nav-link" href="'.$HTTP_HOST . "/app".'/relatorios/financeiro">Financeiro</a>');
                         echo('<a class="nav-link" href="'.$HTTP_HOST . "/app".'/relatorios/recebimento">Recebimentos</a>');
                         echo('<a class="nav-link" href="'.$HTTP_HOST . "/app".'/relatorios/vendaBar">Vendas no Bar</a>');
+                        if($tipoUsuario == 1){
+                          echo('<a class="nav-link" href="'.$HTTP_HOST . "/app".'/relatorios/dashboard">Dashboard</a>');
+                        }
                       
                       echo('</nav></div>');
                       if($tipoUsuario == 1){
@@ -207,7 +210,7 @@ setlocale(LC_ALL, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
     global $idEvento, $idLote;
       $consulta = "SELECT * FROM `Lote` WHERE `evento`= '$idEvento' AND `validade`= 'DISPONÍVEL'";
     $dados = selecionar($consulta);
-    echo('<select class="form-control" name="selectLote" id="selectLote" onchange="selectlote(1)" form="emitir" required>');
+    echo('<select class="form-control" name="selectLote" id="selectLote" onchange="selectlote(1)" form="emitir" style="height: 50px;" required>');
       echo('<option value="">Selecione o Lote</option>');
       foreach ($dados as $lote) {
         if($idLote == $lote['id']){
@@ -219,11 +222,27 @@ setlocale(LC_ALL, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
     echo('</select>');
   }
 
-  function selecLote($idEvento){
+  function selectCidade(){
+    global $cidade;
+    $consulta = "SELECT cidade, estado FROM `Evento` WHERE `validade`= 'DISPONÍVEL' ORDER BY estado, cidade";
+    $dados = selecionar($consulta);
+    echo('<select class="form-control" name="selectCidade" id="selectCidade" onchange="selectCidade()" required>');
+      echo('<option value="">Selecione a Cidade</option>');
+      foreach ($dados as $cidade) {
+        if($cidade == $cidade['cidade']){
+          echo('<option value="'. $cidade['cidade'] .'" selected>'. $cidade['estado'] .' - '. $cidade['cidade'] .'</option>');
+        }else{
+          echo('<option value="'. $cidade['cidade'] .'">'. $cidade['estado'] .' - '. $cidade['cidade'] .'</option>');
+        }
+      }
+    echo('</select>');
+  }
+
+  function selecLote($idEvento, $i){
     global $idLote;
       $consulta = "SELECT * FROM `Lote` WHERE `evento`= '$idEvento' AND `validade`= 'DISPONÍVEL'";
     $dados = selecionar($consulta);
-    echo('<select class="form-control" name="selectLote" id="selectLote" onchange="selectlote(1)" form="emitir" required>');
+    echo('<select class="form-control" name="selectLote" id="selectLote" onchange="selectlote(1)" form="emitir'.$i.'" required>');
       echo('<option value="">Selecione o Lote</option>');
       foreach ($dados as $lote) {
         if($idLote == $lote['id']){

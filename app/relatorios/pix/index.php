@@ -114,19 +114,19 @@ $idSecretaria = $_SESSION["idSecretaria"];
                 echo ("<td style='display: table; text-align:center;'><a href='emitir.php?id=".$obj['order_id']."' style='color: blue !important;'><i class='fas fa-ticket-alt'></i> Ingresso</a></td>");  
             }else if($obj['status'] == 'wc-completed'){
                 echo ("<td>Finalizado</td>");
-                echo ("<td style='display: table; text-align:center;'><a href='https://api.whatsapp.com/send?phone=".$obj['last_name']."' style='color: green !important;'><i class='fab fa-whatsapp'></i> Contato</a></td>");
+                echo ("<td style='display: table; text-align:center;'><a href='https://api.whatsapp.com/send?phone=55".$obj['last_name']."' style='color: green !important;'><i class='fab fa-whatsapp'></i> Contato</a></td>");
             }else if($obj['status'] == 'wc-on-hold'){
                 echo ("<td>Aguardando Pagamento</td>");
-                echo ("<td style='display: table; text-align:center;'><a href='https://api.whatsapp.com/send?phone=".$obj['last_name']."' style='color: green !important;'><i class='fab fa-whatsapp'></i> Contato</a></td>");
+                echo ("<td style='display: table; text-align:center;'><a href='https://api.whatsapp.com/send?phone=55".$obj['last_name']."' style='color: green !important;'><i class='fab fa-whatsapp'></i> Contato</a></td>");
             }else if($obj['status'] == 'wc-repasse'){
                 echo ("<td>Aguardando repasse</td>");
                 echo ("<td style='display: table; text-align:center;'><a href='confirmar.php?id=".$obj['order_id']."' style='color: blue !important;'><i class='fas fa-search-dollar'></i> Repasse</a></td>");
-            }else if($obj['status'] == 'wc-cancelled'){
+            }else if($obj['status'] == 'wc-cancelled' || $obj['status'] == 'wc-failed' ){
                 echo ("<td>Cancelado</td>");
-                echo ("<td style='display: table; text-align:center;'><a href='https://api.whatsapp.com/send?phone=".$obj['last_name']."' style='color: green !important;'><i class='fab fa-whatsapp'></i> Contato</a></td>");
+                echo ("<td style='display: table; text-align:center;'><a href='https://api.whatsapp.com/send?phone=55".$obj['last_name']."' style='color: green !important;'><i class='fab fa-whatsapp'></i> Contato</a></td>");
             }else if($obj['status'] == 'wc-pending'){
                 echo ("<td>Pagamento Pendente</td>");
-                echo ("<td style='display: table; text-align:center;'><a href='https://api.whatsapp.com/send?phone=".$obj['last_name']."' style='color: green !important;'><i class='fab fa-whatsapp'></i> Contato</a></td>");
+                echo ("<td style='display: table; text-align:center;'><a href='https://api.whatsapp.com/send?phone=55".$obj['last_name']."' style='color: green !important;'><i class='fab fa-whatsapp'></i> Contato</a></td>");
             }
             echo "</tr>";
         }

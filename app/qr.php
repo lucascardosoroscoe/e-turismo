@@ -20,6 +20,7 @@ $cliente = $ingresso['cliente'];
 $descricaoEvento = $ingresso['descricaoEvento'];
 $evento = $ingresso['evento'];
 $idEvento = $ingresso['idEvento'];
+$lote = $ingresso['lote'];
 $aux = 'qr_img0.50j/php/qr_img.php?';
 $aux .= 'd='.$codigo.'&';
 $aux .= 'e=H&';
@@ -39,8 +40,9 @@ $aux .= 't=P';
                         <?php
                             echo ("<img style='width: 100%;' src='getImagem.php?id=$idEvento'/>");
                             echo ('<img style="margin-left: 25%;" src="'.$aux.'" alt="" width="50%">');
-                            echo ('<h4 style="text-align: center;">'.$descricaoEvento.'</h4>');
-                            echo ('<h4>Cliente: '.$cliente.'</h4>');
+                            echo ('<h6 style="text-align: center;">'.$descricaoEvento.'</h6>');
+                            echo ('<h6>Cliente: '.$cliente.'</h6>');
+                            echo ('<h6>Lote: '.$lote.'</h6>');
                             
                             ?>
                         </div>

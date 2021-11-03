@@ -164,7 +164,7 @@ function getEventos(){
     $consulta = "SELECT COUNT(`id`) as number FROM `Evento` WHERE `validade` = 'VALIDO'";
     $dados = selecionar($consulta);
     $emAndamentoEventos = $dados[0]['number'];
-    $consulta = "SELECT COUNT(`id`) as number FROM `Evento` WHERE `validade` != 'VALIDO'";
+    $consulta = "SELECT COUNT(`id`) as number FROM `Evento` WHERE `validade` = 'INVALIDO'";
     $dados = selecionar($consulta);
     $finalizadosEventos = $dados[0]['number'];
     $totalEventos = $finalizadosEventos + $emAndamentoEventos;
@@ -195,7 +195,7 @@ function data2(){
     $consulta = "SELECT Produtor.estado, COUNT(Evento.id) as eventos
     FROM Produtor
     JOIN Evento ON Evento.produtor = Produtor.id
-    WHERE (Evento.validade = 'VALIDO' OR Evento.validade = 'INVALIDO') 
+    WHERE (Evento.validade = 'VALIDO') 
     GROUP BY Produtor.estado";
     $dados = selecionar($consulta);
     $arrayEstados = [];
