@@ -1,6 +1,6 @@
 <?php
 include('../app/includes/verificarAcesso.php');
-include('../app/includes/header.php');
+include('./header.php');
 $idEvento = $_GET['evento'];
 $consulta= "SELECT * FROM `Evento` WHERE id = $idEvento";
 $dados = selecionar($consulta);
@@ -9,7 +9,7 @@ $dataEvento = $dados[0]['data'];
 $descricaoEvento = $dados[0]['descricao'];
 ?>
     <div class="container">
-        <div class="row shadow-lg rounded-lg justify-content-center mt-5">
+        <div class="row shadow-lg rounded-lg justify-content-center mt-5" style="padding-top: 15px;">
             <div class="col-lg-5">
                 <div class="" style="margin-top: 0.7rem;">
                     <img src="../app/getImagem.php?id=<?php echo $idEvento;?>" alt="Imagem Evento" srcset="" style="width: 100%;">
@@ -74,8 +74,15 @@ $descricaoEvento = $dados[0]['descricao'];
     function checkForm() {
         // Fetching values from all input fields and storing them in variables.
         var inputTelefone = document.getElementById("inputTelefone").value;
+        var senderName = document.getElementById("senderName").value;
+        var split = senderName.split(' ');
         if(inputTelefone.length == 15){
-            document.getElementById("comprar").submit();
+            if(split.length > 1){
+                document.getElementById("comprar").submit();
+            }else{
+                $msg = 'Preencha com o seu nome completo';
+                alert($msg);
+            }
         }else{
             $msg = 'Telefone inválido, complete o telefone com o DDD e os 9 dígitos principais';
             alert($msg);

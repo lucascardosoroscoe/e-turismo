@@ -9,7 +9,7 @@ include('../includes/headerLogin.php');
                         <div class="card-header"><h3 class="text-center font-weight-light my-4">Recuperação de senha</h3></div>
                         <div class="card-body">
                             <div class="small mb-3 text-muted">Entre em contato com o número abaixo para recuperar sua senha:</div>
-                            <h2>(67) 99956-3326</h2>
+                            <h2>(67) 99965-4445</h2>
                             <!-- <div class="small mb-3 text-muted">Enter your email address and we will send you a link to reset your password.</div> -->
                             <form>
                                 <!-- <div class="form-group">

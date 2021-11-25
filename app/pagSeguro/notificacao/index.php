@@ -31,6 +31,7 @@
 
     if ($status == '3'){
         //Paga: 3 
+        //Cancelado: 7 (teste)
         getDadosTransacao($reference);
         if($statusAnterior == 1 || $statusAnterior == 2){
             for ($i=1; $i <= $itemQuantity; $i++) { 
@@ -38,8 +39,9 @@
             }
         }
     }
+
+    //Atualiza Status da Transação no banco de dados
     atualizarStatusBD($reference, $status);
-    
     function atualizarStatusBD($reference, $status){
         $data = date('Y-m-d h:i:s');
         $consulta = "UPDATE `PedidoPagSeguro` SET `updateAt`='$data',`status`='$status' WHERE `id` = '$reference'";
@@ -48,12 +50,13 @@
     }
 
     function getDadosTransacao($reference){
-        global $idLote, $itemAmount, $itemQuantity, $senderName, $telefone, $senderEmail, $statusAnterior, $evento;
+        global $idLote, $itemAmount, $itemQuantity, $senderName, $telefone, $senderEmail, $statusAnterior, $idEvento, $nomeEvento;
         $consulta = "SELECT PedidoPagSeguro.idLote, PedidoPagSeguro.itemAmount,  PedidoPagSeguro.itemQuantity,  
         PedidoPagSeguro.senderName,  PedidoPagSeguro.senderAreaCode,  PedidoPagSeguro.senderPhone,  PedidoPagSeguro.senderEmail,
-        PedidoPagSeguro.status, Lote.evento
+        PedidoPagSeguro.status, Lote.evento as idEvento, Evento.nome as nomeEvento
         FROM PedidoPagSeguro 
         JOIN Lote ON Lote.id = PedidoPagSeguro.idLote 
+        JOIN Evento ON Lote.evento = Evento.id
         WHERE PedidoPagSeguro.id = '$reference'";
         $dados = selecionar($consulta);
         $idLote = $dados[0]['idLote'];
@@ -65,15 +68,40 @@
         $telefone = $senderAreaCode . $senderPhone;
         $senderEmail = $dados[0]['senderEmail'];
         $statusAnterior = $dados[0]['status'];
-        $evento = $dados[0]['evento'];
+        $idEvento = $dados[0]['idEvento'];
+        $nomeEvento = $dados[0]['nomeEvento'];
+        getLote();
+    }
+
+    function getLote(){
+        global $idLote, $valor, $sexo, $quantidade, $vendidos;
+        $consulta = "SELECT * FROM Lote WHERE id='$idLote'";
+        $obj = selecionar($consulta);
+        $lote = $obj[0];
+        $valor     =  $lote['valor'];
+        $sexo      =  $lote['sexo'];
+        $quantidade=  $lote['quantidade'];
+        $vendidos  =  $lote['vendidos'];
+        $vendidos  =  $vendidos + 1 ;
+        if($valor == "" || $quantidade == ""){
+            echo "Dados insuficientes sobre o lote.";
+            return false;
+        }else{
+            // echo "Lote carregado com sucesso!";
+            return true;
+        }
     }
 
     function criarIngresso(){
-        global $idLote, $itemAmount, $senderName, $telefone, $senderEmail, $evento;
+        global $idLote, $itemAmount, $senderName, $telefone, $senderEmail, $idEvento, $nomeEvento;
+        //Se for novo cria o cliente, se ja tiver telefone, atualiza o nome e retorna o id do cliente
         $idCliente = getCliente($senderName, $telefone);
+        //Retorna um código de 6 dígitos nunca usado
         $codigo = gerarCodigo();
-        gerarIngresso($codigo, $evento, $idCliente, $itemAmount, $idLote);
-        $return = enviarIngresso($codigo, $senderEmail); 
+        //Gera o Ingresso
+        gerarIngresso($codigo, $idEvento, $idCliente, $itemAmount, $idLote);
+        //Envia o ingresso Gerado
+        $return = enviarIngresso($codigo, $senderEmail, $senderName, $idEvento, $nomeEvento); 
     }
 
     function getCliente($nomeCliente, $telefone){
@@ -107,21 +135,6 @@
         return $idCliente;
     }
 
-    function gerarIngresso($codigo, $evento, $idCliente, $valor, $idLote){
-        $consulta = "INSERT INTO Ingresso (codigo, evento, vendedor, idCliente, valor, lote) VALUES ('$codigo', '$evento', 1, '$idCliente', '$valor', '$idLote')";
-        // echo $consulta;
-        $msg = executar($consulta);
-        if($msg == "Sucesso!"){
-            atualizarVendidosLote(); 
-            // echo "Ingresso gerado.";
-            return true;
-        }else{
-            echo "Erro ao gerar Ingresso";
-            return false;
-        }
-        
-    }
-
     function gerarCodigo(){
         $codigo = 0;
         while ($codigo == 0) {
@@ -135,9 +148,85 @@
         }
         return $codigo;
     }
-    
 
-    function enviarIngresso($codigo, $senderEmail){
-        echo "oi";
+    function gerarIngresso($codigo, $idEvento, $idCliente, $valor, $idLote){
+        $consulta = "INSERT INTO Ingresso (codigo, evento, vendedor, idCliente, valor, lote) VALUES ('$codigo', '$idEvento', 1, '$idCliente', '$valor', '$idLote')";
+        $msg = executar($consulta);
+        if($msg == "Sucesso!"){
+            atualizarVendidosLote($idLote); 
+            return true;
+        }else{
+            echo "Erro ao gerar Ingresso";
+            return false;
+        }
+        
     }
+    
+    function atualizarVendidosLote($idLote){
+        global $vendidos, $idLote, $quantidade;
+        if($quantidade == $vendidos){
+            $consulta = "UPDATE Lote SET validade = 'ESGOTADO' WHERE id = $idLote ";
+            $msg = executar($consulta);
+            if($msg == 'Sucesso!'){
+                emailVirada();
+            }else{
+                echo "Falha ao invalidar Lote!!!<br>";
+            }
+        }
+        $consulta = "UPDATE `Lote` SET `vendidos`='$vendidos' WHERE `id` = '$idLote'";
+        $msg = executar($consulta);    
+    }
+
+    function enviarIngresso($codigo, $senderEmail, $senderName, $idEvento, $nomeEvento){
+        $assunto = "Seu Ingresso para o evento ".$nomeEvento." está aqui!!!";
+        $msg = "
+        <img style='width: 40%; margin-left:30%;' src='https://ingressozapp.com/app/getImagem.php?id=$idEvento'/>
+        <h1 style='text-align:center'>🎉 ".$nomeEvento." 🎉</h1><br>
+        <h3 style='text-align:center'>Olá ".$senderName." você acaba de adquirir um ingresso, utilizando o aplicativo IngressoZapp!!!</h3><br>
+        <br>
+        <h2 style='text-align:center' >Para acessar seu ingresso clique no link: <br>
+        https://ingressozapp.com/app/qr.php?codigo=".$codigo." </h2><br>
+        <br>
+        <h4 style='text-align:center'>Para entrar no evento apresente seu ingresso <b>(CODIGO: ".$codigo.")</b> e um documento original com foto.  <br>
+        <br>
+        ";
+        $aviso = "
+        🔐 AVISOS 🔐<br>
+        Lembramos que o QR CODE de verificação só poderá ser usado uma vez, sendo considerado INVÁLIDO numa segunda tentativa de entrada. Por isso, não compartilhe uma imagem do ingresso sem antes tampar completamente o QR CODE. <br>
+        Saiba mais sobre o aplicativo IngressoZapp e nosso sistema anti-fraude de gerenciamento de eventos em nosso site: www.ingressozapp.com <br></h4>
+        ";
+        $corpo = $msg . $aviso;
+        return enviaEmail($senderEmail, $senderName, $assunto, $corpo);
+    }
+
+    function enviaEmail($email, $nome, $assunto, $corpo){
+        require ("../../mail/PHPMailerAutoload.php");
+        $mail = new PHPMailer();
+        $mail->IsSMTP();
+        $mail->Host = 'smtp.gmail.com';
+        $mail->Port = '587';
+        $mail->SMTPSecure = 'tls';
+        $mail->SMTPAuth = true;
+
+        $mail->Username = "ingressozapp@gmail.com";
+        $mail->Password = "awzivqyjobvxpvjk";
+        $mail->From = 'ingressozapp@gmail.com';
+        $mail->Sender = 'ingressozapp@gmail.com';
+        $mail->FromName = 'IngressoZapp';
+
+        $mail->AddAddress($email, $nome);
+
+        $mail->IsHTML(true);
+        $mail->CharSet = 'utf-8';
+        $mail->Subject = $assunto;
+        $mail->Body = $corpo;
+        $mail->AltBody = 'Para ler este e-mail Ã© necessÃ¡rio um leitor de e-mail que suporte mensagens em HTML.';
+        $enviado = $mail->Send();
+        $mail->ClearAllRecipients();
+        $mail->ClearAttachments();
+        $mail->SMTPDebug = true;
+        return $enviado;
+    }
+
+
 ?>

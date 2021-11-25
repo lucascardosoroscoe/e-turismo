@@ -26,21 +26,23 @@ setlocale(LC_ALL, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
 ?>
 <body class="sb-nav-fixed">
     <!-- Barra Topo do Site -->
-      <nav class="sb-topnav navbar navbar-expand " style="background-color: #fff;">
+      <nav class="sb-topnav navbar navbar-expand " style="height:100px; background-color:#000;">
       <!-- navbar-dark bg-dark -->
         <!-- Título Site -->
         
-          <a class="navbar-brand" href="<?php echo $HTTP_HOST . "/app";?>/index.php"><img src="<?php echo $HTTP_HOST . "/app";?>/img/logo.png" alt="Soluções2c" srcset="" style="height:40px;"></a>
+          <a class="navbar-brand" href="<?php echo $HTTP_HOST . "/app";?>/index.php"><img src="<?php echo $HTTP_HOST . "/app";?>/img/logo.png" alt="IngressoZapp" srcset="" style="height:100px;"></a>
         <!-- Botão do Menu -->
-          <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button>
+          <!-- <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button> -->
         <!-- Barra de Pesquisa -->
           <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
             <!-- <div class="input-group">
               <?php //selectEvento();?>
             </div> -->
           </form>
+          <div style="width:-webkit-fill-available;"></div>
+          <a href="https://www.instagram.com/ingressozapp/" target="_blank"><img src="<?php echo $HTTP_HOST . "/app";?>/img/instagram-logo.png" alt="Instagram" style="height:60px;width:60px"></a>
         <!-- Menu de Usuário -->
-          <ul class="navbar-nav ml-auto ml-md-0">
+          <!-- <ul class="navbar-nav ml-auto ml-md-0">
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
@@ -50,13 +52,13 @@ setlocale(LC_ALL, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
                 <a class="dropdown-item" href="<?php echo $HTTP_HOST . "/app";?>/login">Login</a>
               </div>
             </li>
-          </ul>
+          </ul> -->
       </nav>
     <!-- Menu Lateral Esquerda -->
-      <div id="layoutSidenav">
-        <div id="layoutSidenav_nav">
-          <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
-            <div class="sb-sidenav-menu">
+      <div id="layoutSidenav" style="background-color: #333;">
+        <div id="layoutSidenav_nav" style="display: none; position:relative;">
+          <nav class="sb-sidenav accordion sb-sidenav-dark" style="display:none;" id="sidenavAccordion">
+             <div class="sb-sidenav-menu">
               <div class="nav">
               <?php
                 
@@ -142,14 +144,20 @@ setlocale(LC_ALL, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
                   ?>
                 </div>
                 <?php if($tipoUsuario != ''){echo $usuario;} ?>
-            </div>
+            </div> 
           </nav>
         </div>
 
 
-<div id="layoutSidenav_content">
+        <div id="layoutSidenav_content">
   <main class="fh">
-  
+<style>
+  @media (min-width: 992px) {
+    #layoutSidenav_content {
+      padding-left: 0 !important;
+    }
+  }
+</style>
 
 <?php
   function selectEvento(){

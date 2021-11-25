@@ -1,6 +1,6 @@
 <?php
     include('../includes/verificarAcesso.php');
-    
+    include('../includes/trello.php');
 
     $email = $_POST['inputEmailAddress'];
     $nome = $_POST['inputName'];
@@ -26,8 +26,13 @@
     }else{
         $msg = "A senha não condiz com a confirmação de Senha";
     }
-    echo $consulta;
-    echo $msg;
+    $data = date('Y-m-d');
+    $nomeCard = $nome . " - " . $cidade . '/' . $estado . ' (' . $telefone . ')';
+    $descricaoCard = "
+        telefone: $telefone \n
+        E-mail: $email
+    "; 
+    criarCard($nomeCard, $descricaoCard, $data, $idListaProdutorCriado);
 
    header('Location: index.php?msg='.$msg);
 ?>
