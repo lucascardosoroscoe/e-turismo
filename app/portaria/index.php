@@ -5,7 +5,7 @@
     include('../includes/header.php');
 
     $codigo    =  $_GET['codigo'];
-    $consulta = "SELECT Ingresso.codigo, Evento.id as idEvento, Evento.nome as evento, Vendedor.nome as vendedor, Cliente.nome as cliente, Ingresso.valor, Ingresso.validade, Ingresso.motivoInvalidar, Ingresso.data, Lote.nome as lote
+    $consulta = "SELECT Ingresso.codigo, Evento.id as idEvento, Evento.nome as evento, Vendedor.nome as vendedor, Cliente.nome as cliente, Ingresso.valor, Ingresso.validade, Ingresso.motivoInvalidar, Ingresso.data, Ingresso.horaLeitura, Lote.nome as lote
     FROM Ingresso 
     JOIN Evento ON Ingresso.evento = Evento.id
     JOiN Vendedor ON Ingresso.vendedor = Vendedor.id
@@ -16,16 +16,21 @@
     $obj = $dados[0];
     $valido = $obj['validade'];
     $evento = $obj['evento'];
+    $idEvento = $obj['idEvento'];
     $cliente = $obj['cliente'];
     $vendedor = $obj['vendedor'];
     $lote = $obj['lote'];
     $data = $obj['data'];
+    $horaLeitura = $obj['horaLeitura'];
     $valor = $obj['valor'];
     $motivo = $obj['motivoInvalidar'];
     if ($valido == ""){
         $valido = "NÃO ENCONTRADO";
     } else if($valido == "VALIDO"){
-        $consulta = "update Ingresso set validade = 'USADO' where codigo = '$codigo'";
+        $timezone = new DateTimeZone('America/Sao_Paulo');
+        $agora = new DateTime('now', $timezone);
+        $dataHora = $agora->format('d-m-Y H:i:s');
+        $consulta = "update Ingresso set validade = 'USADO', horaLeitura = '$dataHora' where codigo = '$codigo'";
         $msg = executar($consulta);
         if($msg != "Sucesso!"){
             echo "<h5>Falha ao invalidar ingresso</h5>";
@@ -46,7 +51,10 @@
                     echo ('<h6 class="text">Promoter: '.$vendedor.'</h6>');
                     echo ('<h6 class="text">Lote: '.$lote.' (R$'.$valor.',00)</h6>');
                     echo ('<h6 class="text">Data compra: '.$data.'</h6>');
-                    echo ("<img id='img' style='width: 100%;border-radius: 27px; border: solid 2px #000;' src='../getImagem.php?id=$idEvento'/>");
+                    if($valido == "USADO"){
+                        echo ('<h6 class="text">Horário de Validação: '.$horaLeitura.'</h6>');
+                    }
+                    echo ("<img id='img' style='width: 100%;border-radius: 27px; border: solid 2px #000;' src='https://ingressozapp.com/app/getImagem.php?id=$idEvento'/>");
                     
                 }else{
                     echo ('<h6 class="text">Suspeita de fraude!!! Ingresso não encontrado no sistema, verifique a conversa em que o promoter enviou a mensagem e chame o promoter para confirmar a versão do cliente.</h6>');

@@ -26,7 +26,7 @@ $vendedor = $ingresso[0]['vendedor'];
 $msg = "🎉 *".$evento."* 🎉
 Olá *".$cliente."* você acaba de adquirir um ingresso, utilizando o aplicativo *IngressoZapp*!!!
 
-Para acessar seu ingresso responda *OK* e clique no link: 
+Para acessar seu ingresso *salve esse número* e clique no link: 
 https://ingressozapp.com/app/qr.php?codigo=".$codigo."
 
 Para entrar no evento apresente seu ingresso (*CODIGO: ".$codigo."*) e um documento original com foto.

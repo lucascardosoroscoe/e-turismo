@@ -18,6 +18,9 @@ include('../includes/header.php');
                 <div class="col-md-8" style="float:left; margin-top: 5px;">
                     <input class="form-control" type="text" placeholder="Buscar..." style="margin-bottom: 5px" id="buscar" onkeyup="buscar()"/>
                 </div>
+                <div class="col-md-4" style="float:right; margin-top: 5px;">
+                    <?php selectEvento();?>
+                </div>
             </div>
             
             <div class="table-responsive table-hover">
@@ -49,15 +52,15 @@ include('../includes/header.php');
                     </tbody>
                 </table>
             </div>
-            <h5>Adicionar Vendedor Existente</h5>
-            <?php addVendedor();?>
+            <!-- <h5>Adicionar Vendedor Existente</h5>
+            <?php addVendedor();?> -->
         </div>
     </div>
 </div>
 
 <?php
 function addTabela($consulta){
-    global $msg;
+    global $msg, $idEvento;
     $usuarios = selecionar($consulta);
     foreach ($usuarios as $obj) {
         $nomeCompleto = explode(' ',trim($obj['nome']));
@@ -73,7 +76,7 @@ function addTabela($consulta){
         echo ("<td>".$obj['validade']."</td>");
         echo ("<td><a target='_blank' href='https://api.whatsapp.com/send?phone=55".$obj['telefone']."&text=".$mensagem."'>Contatar</a></td>");
         if($validade == "VALIDO"){
-            echo ("<td style='display: flex;'><a href='editar.php?id=".$obj['id']."' class='iconeTabela'><i class='fas fa-user-edit'></i></a><a href='invalidar.php?id=".$obj['id']."' class='iconeTabela red'><i class='fas fa-user-times'></i></a></td>");  
+            echo ("<td style='display: flex;'><a href='editar.php?id=".$obj['id']."' class='iconeTabela'><i class='fas fa-user-edit'></i></a><a href='invalidar.php?id=".$obj['id']."' class='iconeTabela red'><i class='fas fa-user-times'></i></a><a href='../../evento/?evento=".$idEvento."&promoter=".$obj['id']."' class='iconeTabela'><i class='fas fa-external-link-alt'></i></a></td>");  
         }else{
             echo ("<td><a href='reativar.php?id=".$obj['id']."' style='margin-left: 15px;'>Reativar</a></td>");
         }

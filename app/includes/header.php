@@ -44,7 +44,7 @@ setlocale(LC_ALL, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                <a class="dropdown-item" href="#">Configurações</a>
+                <a class="dropdown-item" href="<?php echo $HTTP_HOST . "/app";?>/config">Minha Conta</a>
                 <a class="dropdown-item" onclick="window.print()">Exportar PDF</a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="<?php echo $HTTP_HOST . "/app";?>/login">Login</a>
@@ -182,7 +182,7 @@ setlocale(LC_ALL, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
     global $tipoUsuario, $idUsuario;
     
     if($tipoUsuario == 1){
-      $consulta = "SELECT * FROM `Evento` WHERE validade = 'VALIDO' ORDER BY nome";
+      $consulta = "SELECT * FROM `Evento` WHERE validade = 'VALIDO' OR validade = 'INVALIDO' ORDER BY nome";
     }else if($tipoUsuario == 2){
       $consulta = "SELECT * FROM `Evento` WHERE `produtor`= '$idUsuario' AND validade = 'VALIDO'";
     }else if($tipoUsuario == 3){
@@ -207,8 +207,12 @@ setlocale(LC_ALL, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
 
 
   function selectLote(){
-    global $idEvento, $idLote;
+    global $idEvento, $idLote, $tipoUsuario;
+    if($tipoUsuario == '1' || $tipoUsuario == '2'){
+      $consulta = "SELECT * FROM `Lote` WHERE `evento`= '$idEvento' AND (`validade`= 'DISPONÍVEL' OR `validade`= 'EXCLUSIVO')";
+    }else{
       $consulta = "SELECT * FROM `Lote` WHERE `evento`= '$idEvento' AND `validade`= 'DISPONÍVEL'";
+    }
     $dados = selecionar($consulta);
     echo('<select class="form-control" name="selectLote" id="selectLote" onchange="selectlote(1)" form="emitir" style="height: 50px;" required>');
       echo('<option value="">Selecione o Lote</option>');
@@ -239,8 +243,12 @@ setlocale(LC_ALL, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
   }
 
   function selecLote($idEvento, $i){
-    global $idLote;
+    global $idLote, $tipoUsuario;
+    if($tipoUsuario == '1' || $tipoUsuario == '2'){
+      $consulta = "SELECT * FROM `Lote` WHERE `evento`= '$idEvento' AND (`validade`= 'DISPONÍVEL' OR `validade`= 'EXCLUSIVO')";
+    }else{
       $consulta = "SELECT * FROM `Lote` WHERE `evento`= '$idEvento' AND `validade`= 'DISPONÍVEL'";
+    }
     $dados = selecionar($consulta);
     echo('<select class="form-control" name="selectLote" id="selectLote" onchange="selectlote(1)" form="emitir'.$i.'" required>');
       echo('<option value="">Selecione o Lote</option>');

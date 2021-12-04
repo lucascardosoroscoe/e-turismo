@@ -11,13 +11,14 @@ include('./includes/header.php');
                         <h5 class="text-center font-weight-light my-4">Bem vindo ao Guia de utilização do aplicativo IngressoZapp!</h5>
                     </div>
                     <div class="card-body">
-                        <?
+                        <?php
                         if($idUsuario == ""){
                             echo '<a style="margin-bottom:10px;" class="btn btn-primary btn-block" href="login/index.php"><h6>Fazer login</h6></a>';
                         }else{
                             echo '<a style="margin-bottom:10px;" class="btn btn-primary btn-block"  href="ingresso.php"><h6>Emitir ingresso</h6></a>';
                         }
                         ?>
+                        
                         <div class="menuSelecaoGuias">
                             <div class="row">
                                 <div class="col-lg-4">
@@ -227,7 +228,6 @@ include('./includes/header.php');
         </div>
     </div>
 </div>
-
 <?php
 include('./includes/footer.php');
 ?>

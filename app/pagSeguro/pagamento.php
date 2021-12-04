@@ -5,7 +5,7 @@
     $url_base = "https://ws.pagseguro.uol.com.br/v2/";
 
     //Dados do Ingresso via POST
-    $itemId1 = $idLote; //Id do Lote
+    $itemId1 = $_POST['selectLote']; //Id do Lote
     $itemQuantity1 = $_POST['inputQuantidade']; //Quantidade
 
     //Pega dados necessários do Banco sobre o evento e lote;
@@ -27,13 +27,14 @@
     $itemDescription1 = "Ingresso ". $evento . "( ". $nomeLote . " )";
     //Valor do Lote
     $itemAmount1 = $valorLote . ".00";
-    $extraAmount = number_format($valorLote * $itemQuantity1 * 0.08, 2, '.', '') ;
+    $extraAmount = number_format($valorLote * $itemQuantity1 * 0.1, 2, '.', '') ;
     
 
     //Dados do Comprador via POST
     $senderName = $_POST['senderName'];
     $inputTelefone = $_POST['inputTelefone'];
     $senderEmail = $_POST['senderEmail'];
+    $promoter = $_POST['promoter'];
 
     //Formatar Telefone
     $senderAreaCode = 67;
@@ -113,9 +114,9 @@
     }
    
     function salvarDadosBanco(){
-        global $itemId1, $itemDescription1, $itemAmount1, $itemQuantity1, $reference, $senderName, $senderAreaCode, $senderPhone, $senderEmail, $extraAmount, $code; 
-        $consulta = "INSERT INTO `PedidoPagSeguro`(`idLote`, `itemDescription`, `itemAmount`, `itemQuantity`, `reference`, `senderName`, `senderAreaCode`, `senderPhone`, `senderEmail`, `extraAmount`, `code`) 
-        VALUES ('$itemId1', '$itemDescription1', '$itemAmount1', '$itemQuantity1', '$reference', '$senderName', '$senderAreaCode', '$senderPhone', '$senderEmail', '$extraAmount', '$code')";
+        global $itemId1, $itemDescription1, $itemAmount1, $itemQuantity1, $reference, $senderName, $senderAreaCode, $senderPhone, $senderEmail, $extraAmount, $code, $promoter; 
+        $consulta = "INSERT INTO `PedidoPagSeguro`(`idLote`, `itemDescription`, `itemAmount`, `itemQuantity`, `reference`, `senderName`, `senderAreaCode`, `senderPhone`, `senderEmail`, `extraAmount`, `code`, `promoter`) 
+        VALUES ('$itemId1', '$itemDescription1', '$itemAmount1', '$itemQuantity1', '$reference', '$senderName', '$senderAreaCode', '$senderPhone', '$senderEmail', '$extraAmount', '$code', '$promoter')";
         $msg = executar($consulta);
         if($msg == 'Sucesso!'){
             $consulta = "SELECT id FROM `PedidoPagSeguro` WHERE `senderEmail` = '$senderEmail' ORDER BY `id` DESC";

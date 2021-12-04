@@ -10,6 +10,7 @@ try {
 } catch (\Throwable $th) {
     throw $th;
 }
+$link = "https://ingressozapp.com/evento/?evento=".$idEvento."&promoter=".$idUsuario;
 ?>
 <div style='background-image: url("./img/fundoLogin.jpg"); background-size: cover;height: 100%;'>
     <div class="container">
@@ -23,7 +24,15 @@ try {
                         ?> , seja bem vindo ao IngressoZapp!
                     </div>
                     <div class="card-body">
-                        <h2>Emitir Ingresso</h2>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <h3>Emitir Ingresso</h3>
+                            </div>
+                            <div class="col-lg-6">
+                                <input type="hidden" id="linkPromoter" value="<?php echo $link;?>">
+                                <h6 style="margin-bottom:10px;" class="btn btn-primary btn-block" onclick="copiar()">Copiar Meu Link de Promoter</h6>
+                            </div>
+                        </div>
                         <form action="emitir.php" id="emitir" method="POST">
                             <div class="form-row">
                                 <div class="col-md-12">
@@ -68,15 +77,30 @@ try {
 </div>
 <script>
     function checkForm() {
-    // Fetching values from all input fields and storing them in variables.
-    var inputTelefone = document.getElementById("inputTelefone").value;
-    if(inputTelefone.length == 15){
-        document.getElementById("emitir").submit();
-    }else{
-        $msg = 'Telefone inválido, complete o telefone com o DDD e os 9 dígitos principais';
-        alert($msg);
+        // Fetching values from all input fields and storing them in variables.
+        var inputTelefone = document.getElementById("inputTelefone").value;
+        if(inputTelefone.length == 15){
+            document.getElementById("emitir").submit();
+        }else{
+            $msg = 'Telefone inválido, complete o telefone com o DDD e os 9 dígitos principais';
+            alert($msg);
+        }
     }
-}
+    function copiar() {
+    /* Get the text field */
+    var linkPromoter = document.getElementById("linkPromoter").value;
+    var evento = document.getElementById("selectEvento").value;
+
+    /* Alert the copied text */
+    if(evento == ""){
+        alert("Selecione o Evento");
+    }else{
+        /* Copy the text inside the text field */
+        navigator.clipboard.writeText(linkPromoter);
+        alert("Link de Promoter copiado com Sucesso!!!");
+    }
+    
+    }
 
 </script>
 <?php

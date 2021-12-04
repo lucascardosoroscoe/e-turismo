@@ -138,7 +138,7 @@ function verificarIngresso(){
 
 function gerarIngresso(){
     global $codigo, $evento, $vendedor, $idCliente, $telefone, $valor, $idLote;
-    $consulta = "INSERT INTO Ingresso (codigo, evento, vendedor, idCliente, valor, lote) VALUES ('$codigo', '$evento', '$vendedor', '$idCliente', '$valor', '$idLote')";
+    $consulta = "INSERT INTO Ingresso (codigo, evento, vendedor, idCliente, valor, lote, origem) VALUES ('$codigo', '$evento', '$vendedor', '$idCliente', '$valor', '$idLote', 1)";
     // echo $consulta;
     $msg = executar($consulta);
     if($msg == "Sucesso!"){

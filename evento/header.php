@@ -1,12 +1,28 @@
+<?php
+  include('../app/includes/verificarAcesso.php');
+  $idEvento = $_GET['evento'];
+  $promoter = $_GET['promoter'];
+  $consulta= "SELECT * FROM `Evento` WHERE id = $idEvento";
+  $dados = selecionar($consulta);
+  $nomeEvento = $dados[0]['nome'];
+  $dataEvento = $dados[0]['data'];
+  $descricaoEvento = $dados[0]['descricao'];
+?>
 <!DOCTYPE html>
   <html>
     <head>
       <meta charset="utf-8">
       <meta http-equiv="X-UA-Compatible" content="IE=edge" />
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-      <meta name="description" content="IngressoZapp" />
+      <meta name="description" content="Eu já garanti meu ingresso, bora??? garanta o seu também." />
       <meta name="author" content="Lucas Cardoso Roscoe" />
-      <title>IngressoZapp</title>
+      <meta property="og:description" content="Eu já garanti meu ingresso, bora??? Garanta o seu também."/>
+      <meta property="og:title" content="<?php echo $nomeEvento ?> - IngressoZapp"/>
+      <meta property="og:image" content="<?php echo $HTTP_HOST . "/app"?>/getImagem.php?id=<?php echo $idEvento;?>"/>
+      <meta name="twitter:url" content="https://ingressozapp.com/evento/?evento=<?php echo $idEvento?>&promoter=<?php echo $promoter?>">
+      <meta name="twitter:title" content="Eu já garanti meu ingresso, bora??? Garanta o seu também.">
+      <meta name="twitter:image" content="<?php echo $HTTP_HOST . "/app"?>/getImagem.php?id=<?php echo $idEvento;?>">
+      <title><?php echo $nomeEvento ?> - IngressoZapp</title>
       <link  rel="stylesheet" href="<?php echo $HTTP_HOST . "/app";?>/css/styles.css" />
       <link rel="stylesheet"  href="<?php echo $HTTP_HOST . "/app";?>/css/table.css">
       <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
@@ -17,6 +33,8 @@
     </head>
 
     <body>
+    <div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/pt_PT/sdk.js#xfbml=1&version=v12.0&appId=350396228785481&autoLogAppEvents=1" nonce="FMKMNtpB"></script>
 <?php
 
 
@@ -40,6 +58,7 @@ setlocale(LC_ALL, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
             </div> -->
           </form>
           <div style="width:-webkit-fill-available;"></div>
+          <img src="<?php echo $HTTP_HOST . "/app";?>getImagem.php?id=<?php echo $idEvento;?>" alt="Instagram" style="display:none;">
           <a href="https://www.instagram.com/ingressozapp/" target="_blank"><img src="<?php echo $HTTP_HOST . "/app";?>/img/instagram-logo.png" alt="Instagram" style="height:60px;width:60px"></a>
         <!-- Menu de Usuário -->
           <!-- <ul class="navbar-nav ml-auto ml-md-0">
@@ -218,7 +237,7 @@ setlocale(LC_ALL, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
     global $idEvento, $idLote;
       $consulta = "SELECT * FROM `Lote` WHERE `evento`= '$idEvento' AND `validade`= 'DISPONÍVEL'";
     $dados = selecionar($consulta);
-    echo('<select class="form-control" name="selectLote" id="selectLote" onchange="selectlote(1)" form="emitir" style="height: 50px;" required>');
+    echo('<select class="form-control" name="selectLote" id="selectLote"  form="comprar" style="height: 50px;" required>');
       echo('<option value="">Selecione o Lote</option>');
       foreach ($dados as $lote) {
         if($idLote == $lote['id']){
@@ -248,7 +267,7 @@ setlocale(LC_ALL, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
 
   function selecLote($idEvento, $i){
     global $idLote;
-      $consulta = "SELECT * FROM `Lote` WHERE `evento`= '$idEvento' AND `validade`= 'DISPONÍVEL'";
+    $consulta = "SELECT * FROM `Lote` WHERE `evento`= '$idEvento' AND `validade`= 'DISPONÍVEL'";
     $dados = selecionar($consulta);
     echo('<select class="form-control" name="selectLote" id="selectLote" onchange="selectlote(1)" form="emitir'.$i.'" required>');
       echo('<option value="">Selecione o Lote</option>');

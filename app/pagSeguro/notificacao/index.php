@@ -29,7 +29,7 @@
     $consulta = "INSERT INTO `PagSeguroRetornoLog`(`code`, `log`, `status`) VALUES ('$code' , '$json', '$status')";
     $msg = executar($consulta);
 
-    if ($status == '3'){
+    if ($status == '3' || $status == '4'){
         //Paga: 3 
         //Cancelado: 7 (teste)
         getDadosTransacao($reference);
@@ -50,13 +50,15 @@
     }
 
     function getDadosTransacao($reference){
-        global $idLote, $itemAmount, $itemQuantity, $senderName, $telefone, $senderEmail, $statusAnterior, $idEvento, $nomeEvento;
+        global $idLote, $itemAmount, $itemQuantity, $senderName, $telefone, $senderEmail, $statusAnterior, $idEvento, $nomeEvento, $promoter, $emailProdutor;
         $consulta = "SELECT PedidoPagSeguro.idLote, PedidoPagSeguro.itemAmount,  PedidoPagSeguro.itemQuantity,  
         PedidoPagSeguro.senderName,  PedidoPagSeguro.senderAreaCode,  PedidoPagSeguro.senderPhone,  PedidoPagSeguro.senderEmail,
-        PedidoPagSeguro.status, Lote.evento as idEvento, Evento.nome as nomeEvento
+        PedidoPagSeguro.status,PedidoPagSeguro.promoter, Lote.evento as idEvento, Evento.nome as nomeEvento,
+        Produtor.email as emailProdutor
         FROM PedidoPagSeguro 
         JOIN Lote ON Lote.id = PedidoPagSeguro.idLote 
         JOIN Evento ON Lote.evento = Evento.id
+        JOIN Produtor ON Evento.produtor = Produtor.id
         WHERE PedidoPagSeguro.id = '$reference'";
         $dados = selecionar($consulta);
         $idLote = $dados[0]['idLote'];
@@ -70,6 +72,8 @@
         $statusAnterior = $dados[0]['status'];
         $idEvento = $dados[0]['idEvento'];
         $nomeEvento = $dados[0]['nomeEvento'];
+        $promoter = $dados[0]['promoter'];
+        $emailProdutor = $dados[0]['emailProdutor'];
         getLote();
     }
 
@@ -93,15 +97,16 @@
     }
 
     function criarIngresso(){
-        global $idLote, $itemAmount, $senderName, $telefone, $senderEmail, $idEvento, $nomeEvento;
+        global $idLote, $itemAmount, $senderName, $telefone, $senderEmail, $idEvento, $nomeEvento, $promoter, $emailProdutor;
         //Se for novo cria o cliente, se ja tiver telefone, atualiza o nome e retorna o id do cliente
         $idCliente = getCliente($senderName, $telefone);
         //Retorna um código de 6 dígitos nunca usado
         $codigo = gerarCodigo();
         //Gera o Ingresso
-        gerarIngresso($codigo, $idEvento, $idCliente, $itemAmount, $idLote);
+        gerarIngresso($codigo, $idEvento, $idCliente, $itemAmount, $idLote, $promoter);
         //Envia o ingresso Gerado
         $return = enviarIngresso($codigo, $senderEmail, $senderName, $idEvento, $nomeEvento); 
+        // $return = emailProdutor($emailProdutor, $senderEmail, $senderName, $idEvento, $nomeEvento); 
     }
 
     function getCliente($nomeCliente, $telefone){
@@ -149,8 +154,11 @@
         return $codigo;
     }
 
-    function gerarIngresso($codigo, $idEvento, $idCliente, $valor, $idLote){
-        $consulta = "INSERT INTO Ingresso (codigo, evento, vendedor, idCliente, valor, lote) VALUES ('$codigo', '$idEvento', 1, '$idCliente', '$valor', '$idLote')";
+    function gerarIngresso($codigo, $idEvento, $idCliente, $valor, $idLote, $promoter){
+        if($promoter == ''){
+            $promoter = '1';
+        }
+        $consulta = "INSERT INTO Ingresso (codigo, evento, vendedor, idCliente, valor, lote, origem) VALUES ('$codigo', '$idEvento', '$promoter', '$idCliente', '$valor', '$idLote', 2)";
         $msg = executar($consulta);
         if($msg == "Sucesso!"){
             atualizarVendidosLote($idLote); 
@@ -197,6 +205,17 @@
         ";
         $corpo = $msg . $aviso;
         return enviaEmail($senderEmail, $senderName, $assunto, $corpo);
+    }
+    function emailProdutor($emailProdutor, $senderName, $idEvento, $nomeEvento){
+        $assunto = "Nova venda pelo site - ".$nomeEvento."!!!";
+        $msg = "
+        <img style='width: 40%; margin-left:30%;' src='https://ingressozapp.com/app/getImagem.php?id=$idEvento'/>
+        <h1 style='text-align:center'>🎉 ".$nomeEvento." 🎉</h1><br>
+        <h3 style='text-align:center'>Olá ".$senderName." você acaba de vender um ingresso, utilizando o aplicativo IngressoZapp!!!</h3><br>
+        <br>
+        <h3Cliente: ".$senderName."</h3><br>
+        <br>";
+        return enviaEmail($emailProdutor, $senderName, $assunto, $msg);
     }
 
     function enviaEmail($email, $nome, $assunto, $corpo){

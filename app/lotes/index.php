@@ -32,6 +32,7 @@ include('../includes/header.php');
                             <th>Vendidos</th>
                             <th>Validade</th>
                             <th></th>
+                            <th>Lote Exclusivo</th>
                         </tr>
                     </thead>
                     <tbody id="tbody">
@@ -54,20 +55,23 @@ function addTabela($consulta){
     $usuarios = selecionar($consulta);
     foreach ($usuarios as $obj) {
         echo "<tr>";
-        echo ("<td style='display:none;'>".$obj['id']."</td>"); 
-        echo ("<td>".$obj['nome']."</td>"); 
-        echo ("<td>R$".$obj['valor'].",00</td>"); 
-        echo ("<td>".$obj['quantidade']."</td>");
-        echo ("<td>".$obj['vendidos']."</td>");
-        $validade = $obj['validade'];
-        echo ("<td>".$validade."</td>");
-        if($validade == "DISPONÍVEL"){
-            echo ("<td style='display: flex;'><a href='editar.php?id=".$obj['id']."' class='iconeTabela'><i class='fas fa-user-edit'></i></a><a href='invalidar.php?id=".$obj['id']."' class='iconeTabela red'><i class='fas fa-user-times'></i></a></td>");  
-        }else if($validade == "ESGOTADO"){
-            echo ("<td><a href='reativar.php?id=".$obj['id']."' style='margin-left: 15px;'>Reativar</a><a href='excluir.php?id=".$obj['id']."' style='margin-left: 15px;'>Excluir</a></td>");
-        }else if($validade == "EM BREVE"){
-            echo ("<td><a href='reativar.php?id=".$obj['id']."' style='margin-left: 15px;'>Liberar</a></td>");
-        }
+            echo ("<td style='display:none;'>".$obj['id']."</td>"); 
+            echo ("<td>".$obj['nome']."</td>"); 
+            echo ("<td>R$".$obj['valor'].",00</td>"); 
+            echo ("<td>".$obj['quantidade']."</td>");
+            echo ("<td>".$obj['vendidos']."</td>");
+            $validade = $obj['validade'];
+            echo ("<td>".$validade."</td>");
+            if($validade == "DISPONÍVEL"){
+                echo ("<td style='display: flex;'><a href='editar.php?id=".$obj['id']."' class='iconeTabela'><i class='fas fa-user-edit'></i></a><a href='invalidar.php?id=".$obj['id']."' class='iconeTabela red'><i class='fas fa-user-times'></i></a></td>");  
+            }else if($validade == "ESGOTADO"){
+                echo ("<td><a href='reativar.php?id=".$obj['id']."' style='margin-left: 15px;'>Reativar</a><a href='excluir.php?id=".$obj['id']."' style='margin-left: 15px;'>Excluir</a></td>");
+            }else if($validade == "EM BREVE"){
+                echo ("<td><a href='reativar.php?id=".$obj['id']."' style='margin-left: 15px;'>Liberar</a></td>");
+            }else if($validade == "EXCLUSIVO"){
+                echo ("<td>EXCLUSIVO p/ PRODUTOR</td>");
+            }
+            echo ("<td><a href='exclusivo.php?id=".$obj['id']."' style='margin-left: 15px;'>Tornar Exclusivo</a></td>");
         echo "</tr>";
     }
 }

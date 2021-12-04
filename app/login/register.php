@@ -11,7 +11,7 @@ include('../includes/headerLogin.php');
                             <form>
                                 <div class="form-row">
                                 <div class="small mb-3 text-muted">Entre em contato com o número abaixo para recuperar sua senha:</div>
-                                <h2>(67) 99956-3326</h2>
+                                <h2>(67) 99965-4445</h2>
                                    <!--  <div class="col-md-12">
                                         <div class="form-group">
                                             <label class="small mb-1" for="inputFirstName">Nome</label>

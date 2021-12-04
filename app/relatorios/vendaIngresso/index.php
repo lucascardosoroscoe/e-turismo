@@ -409,13 +409,13 @@ $idSecretaria = $_SESSION["idSecretaria"];
                 echo('</thead>');
                 echo('<tbody id="tbody">');
                     if($idEvento == ""){
-                        $consulta = "SELECT Ingresso.codigo, Ingresso.data, Vendedor.nome as vendedor, Cliente.nome as cliente, Cliente.telefone as telefone, Ingresso.valor, Ingresso.validade, Lote.nome as lote
+                        $consulta = "SELECT Ingresso.codigo, Ingresso.origem, Ingresso.data, Vendedor.nome as vendedor, Cliente.nome as cliente, Cliente.telefone as telefone, Ingresso.valor, Ingresso.validade, Lote.nome as lote
                         FROM Ingresso JOIN Vendedor ON Ingresso.vendedor = Vendedor.id 
                         JOIN Cliente ON Ingresso.idCliente = Cliente.id
                         JOIN Lote ON Ingresso.lote =  Lote.id
                         WHERE Vendedor.produtor = '$idUsuario' AND Ingresso.validade != 'CANCELADO' ORDER BY Cliente.nome";
                     }else{
-                        $consulta = "SELECT Ingresso.codigo, Ingresso.data, Vendedor.nome as vendedor, Cliente.nome as cliente, Cliente.telefone as telefone, Ingresso.valor, Ingresso.validade, Lote.nome as lote
+                        $consulta = "SELECT Ingresso.codigo, Ingresso.origem, Ingresso.data, Vendedor.nome as vendedor, Cliente.nome as cliente, Cliente.telefone as telefone, Ingresso.valor, Ingresso.validade, Lote.nome as lote
                         FROM Ingresso JOIN Vendedor ON Ingresso.vendedor = Vendedor.id 
                         JOIN Cliente ON Ingresso.idCliente = Cliente.id
                         JOIN Lote ON Ingresso.lote =  Lote.id
@@ -432,11 +432,16 @@ $idSecretaria = $_SESSION["idSecretaria"];
         foreach ($dados as $obj) {
             echo "<tr>";
             echo ("<td>".$obj['codigo']."</td>");
+            if($obj['origem'] == 1){
+                $origem = "Promoter";
+            }else if($obj['origem'] == 2){
+                $origem = "Venda pelo Site";
+            }
             echo ("<td>".$obj['cliente']."</td>");
             echo ("<td>R$".UsToBr($obj['valor'])."</td>"); 
             echo ("<td>".$obj['lote']."</td>");
             echo ("<td>".$obj['telefone']."</td>"); 
-            echo ("<td>".$obj['vendedor']."</td>"); 
+            echo ("<td>".$origem." - ".$obj['vendedor']."</td>"); 
             echo ("<td>".$obj['data']."</td>"); 
             $validade = $obj['validade'];
             echo ("<td>".$validade."</td>");

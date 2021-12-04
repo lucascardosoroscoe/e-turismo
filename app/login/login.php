@@ -15,7 +15,7 @@ function verificarAdm(){
             $id = 0;
             $nome = "Roscoe";
             $type = '1';
-            login($id, $nome, $type, $email);
+            login($id, $nome, $type, $email, "adm");
         }else{
             loginIncorreto();
         }
@@ -37,7 +37,7 @@ function verificarProdutor(){
         $id = $dados[0]['id'];
         $nome = $dados[0]['nome'];
         $type = 2;
-        login($id, $nome, $type, $email);
+        login($id, $nome, $type, $email, 'prod');
     }else{
         verificarVendedor();
     }
@@ -54,7 +54,12 @@ function verificarVendedor(){
         $id = $dados[0]['id'];
         $nome = $dados[0]['nome'];
         $type = 3;
-        login($id, $nome, $type, $email);
+        if($inputPassword == 'ingressozapp'){
+            login($id, $nome, $type, $email, 'redefinir');
+        }else{
+            login($id, $nome, $type, $email, 'vend');
+        }
+        
     }else{
         loginIncorreto();
     }
@@ -66,7 +71,7 @@ function loginIncorreto(){
     header('Location: index.php?msg='.$msg);
 }
 
-function login($id, $nome, $type, $email){
+function login($id, $nome, $type, $email, $extra){
     $msg = "Sucesso!";
 
     $_SESSION["idUsuario"] = $id;
@@ -77,7 +82,11 @@ function login($id, $nome, $type, $email){
     $_SESSION["nCaixa"] = "0";
     $_SESSION["msg"] = "0";
     echo $_SESSION["tipoUsuario"];
-    header('Location: ../index.php?msg='.$msg);
+    if($extra == 'redefinir'){
+        header('Location: ../config/index.php?msg=Para ter mais segurança, troque a senha padrão, colocando uma senha só sua.');
+    }else{
+        header('Location: ../index.php?msg='.$msg);
+    }
 }
     
 ?>
