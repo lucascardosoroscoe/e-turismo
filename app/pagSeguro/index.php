@@ -121,7 +121,7 @@ if($dataInicial == ""){
             if($obj['status'] == '1'){
                 echo ("<td>Aguardando Pagamento</td>");
                 $msg = "Olá ".$nome." você tentou comprar ingressos para o evento ".$evento." mas não finalizou sua compra. Aconteceu algo? Gostaria de dar continuidade aqui mesmo pelo whats?";
-                echo ("<td style='display: inline-flex; text-align:center;'><a href='".$link.$msg."' style='color: green !important;' target='_blank'><i class='fab fa-whatsapp'></i></a><span class='espaco'></span><a href='emitir.php?id=".$obj['id']."' style='color: blue !important;'><i class='fas fa-ticket-alt'></i></a><span class='espaco'></span><a href='excluir.php?id=".$obj['id']."' style='color: red !important;'><i class='fas fa-trash-alt'></i></a></td>");  
+                echo ("<td style='display: inline-flex; text-align:center;'><a href='".$link.$msg."' style='color: green !important;' target='_blank'><i class='fab fa-whatsapp'></i></a><span class='espaco'></span><a href='visualizar.php?id=".$obj['id']."' style='color: blue !important;'><i class='fas fa-eye'></i></a><span class='espaco'></span><a href='excluir.php?id=".$obj['id']."' style='color: red !important;'><i class='fas fa-trash-alt'></i></a></td>");  
             }else if($obj['status'] == '2'){
                 echo ("<td>Em Análise</td>");
                 $msg = "Olá ".$nome." você está comprando ingressos para o evento ".$evento.", mas seu pagamento ainda está em análise. Por favor aguarde que o ingresso seja liberado.";
@@ -129,7 +129,7 @@ if($dataInicial == ""){
             }else if($obj['status'] == '3' || $obj['status'] == '4'){
                 echo ("<td>Pagamento Concluído</td>");
                 $msg = "Olá ".$nome." você comprou um ingresso com sucesso para o evento ".$evento." usando o IngressoZapp, estamos a disposição para te auxiliar caso tenha alguma dúvida";
-                echo ("<td style='display: inline-flex; text-align:center;'><a href='".$link.$msg."' style='color: green !important;' target='_blank'><i class='fab fa-whatsapp'></i></a></td>");
+                echo ("<td style='display: inline-flex; text-align:center;'><a href='".$link.$msg."' style='color: green !important;' target='_blank'><i class='fab fa-whatsapp'></i></a><span class='espaco'></span><a href='visualizar.php?id=".$obj['id']."' style='color: blue !important;'><i class='fas fa-eye'></i></a></td>");
             }else if($obj['status'] == '5'){
                 echo ("<td>Em disputa</td>");
                 $msg = "Olá ".$nome." você comprou um ingresso com sucesso para o evento ".$evento." usando o IngressoZapp, porém, você entrou em disputa perante nosso meio de pagamento, gostaríamos de entender um pouco mais do porque dessa solicitação. Para podermos dar continuidade ao procedimento.";
