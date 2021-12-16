@@ -113,6 +113,7 @@ setlocale(LC_ALL, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
                       
                       echo('</nav></div>');
                       if($tipoUsuario == 1){
+                        echo('<a class="nav-link" href="'.$HTTP_HOST . "/app".'/pagSeguro/"><div class="sb-nav-link-icon"><i class="fab fa-sellsy"></i></div>Transações PagSeguro</a>');
                         echo('<a class="nav-link" href="'.$HTTP_HOST . "/app".'/relatorios/pix"><div class="sb-nav-link-icon"><i class="fab fa-sellsy"></i></div>Vendas Woocomerce</a>');
                       }
                       //Bar
@@ -156,7 +157,7 @@ setlocale(LC_ALL, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
     global $tipoUsuario, $idEvento, $idUsuario;
     
     if($tipoUsuario == 1){
-      $consulta = "SELECT * FROM `Evento` WHERE validade = 'VALIDO' ORDER BY nome";
+      $consulta = "SELECT * FROM `Evento` WHERE validade = 'VALIDO' OR validade = 'INVALIDO' ORDER BY nome";
     }else if($tipoUsuario == 2){
       $consulta = "SELECT * FROM `Evento` WHERE `produtor`= '$idUsuario' AND validade = 'VALIDO'";
     }else if($tipoUsuario == 3){

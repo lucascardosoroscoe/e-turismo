@@ -13,13 +13,28 @@ if(carregarPost()){
 
 
 function carregarPost(){
-    global $codigo, $evento, $idLote, $nomeCliente, $telefone;
+    global $codigo, $evento, $idLote, $nomeCliente, $telefone, $tipoUsuario;
     
     $evento    =  $_POST['selectEvento'];
+    $consulta = "SELECT `validade` FROM `Evento` WHERE `id` = '$evento'";
+    $dados = selecionar($consulta);
+    $validadeEvento = $dados[0]['validade'];
+    if($validadeEvento != 'VALIDO'){
+        $evento = "";
+    }
     // $idLote    =  $_POST["selectLote"];
     $nomeCliente   =  $_POST['inputNome'];
     $telefone  =  $_POST['inputTelefone'];
     $idLote  =  $_POST['selectLote'];
+    $consulta = "SELECT `validade` FROM `Lote` WHERE `id` = '$idLote'";
+    $dados = selecionar($consulta);
+    $validadeEvento = $dados[0]['validade'];
+    if($validadeEvento != 'DISPONÍVEL'){
+        if($tipoUsuario != 1 && $validadeEvento != 'EXCLUSIVO'){
+            $idLote = "";
+        }
+    }
+    // $
     $telefone = str_replace(" ", "", $telefone);
     $telefone = str_replace("(", "", $telefone);
     $telefone = str_replace(")", "", $telefone);
@@ -31,11 +46,12 @@ function carregarPost(){
     }
     // Verifica de Nome do Cliente, Lote e Telefone estão OK
     if($evento == "" || $idLote == "" || $nomeCliente == "" || $telefone == ""){
-        echo "Evento: " . $evento;
-        echo "idLote: " . $idLote;
-        echo "nomeCliente: " . $nomeCliente;
-        echo "telefone: " . $telefone;
-        echo "Dados insuficientes para gerar o Ingresso";
+        echo "<h4>Evento: " . $evento ."<br>";
+        echo "idLote: " . $idLote ."<br>";
+        echo "nomeCliente: " . $nomeCliente ."<br>";
+        echo "telefone: " . $telefone ."<br>";
+        echo "Dados insuficientes para gerar o Ingresso, provavelmente o lote que você tentou vender já não está mais disponível.
+        <a href='index.php'>CLIQUE AQUI PARA VOLTAR NA PÁGINA DE EMISSÃO</a></h4>";
         return false;
     }else{
         $codigo = gerarCodigo();

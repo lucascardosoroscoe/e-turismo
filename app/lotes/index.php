@@ -71,7 +71,11 @@ function addTabela($consulta){
             }else if($validade == "EXCLUSIVO"){
                 echo ("<td>EXCLUSIVO p/ PRODUTOR</td>");
             }
-            echo ("<td><a href='exclusivo.php?id=".$obj['id']."' style='margin-left: 15px;'>Tornar Exclusivo</a></td>");
+            if($validade == "EXCLUSIVO"){
+                echo ("<td><a href='reativar.php?id=".$obj['id']."' style='margin-left: 15px;'>Reativar</a></td>");
+            }else{
+                echo ("<td><a href='exclusivo.php?id=".$obj['id']."' style='margin-left: 15px;'>Tornar Exclusivo</a></td>");
+            }
         echo "</tr>";
     }
 }
