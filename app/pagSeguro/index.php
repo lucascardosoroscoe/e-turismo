@@ -121,7 +121,7 @@ if($dataInicial == ""){
             if($obj['status'] == '1'){
                 echo ("<td>Aguardando Pagamento</td>");
                 $msg = "Olá ".$nome." você tentou comprar ingressos para o evento ".$evento." mas não finalizou sua compra. Aconteceu algo? Gostaria de dar continuidade aqui mesmo pelo whats?";
-                echo ("<td style='display: inline-flex; text-align:center;'><a href='".$link.$msg."' style='color: green !important;' target='_blank'><i class='fab fa-whatsapp'></i></a><span class='espaco'></span><a href='visualizar.php?id=".$obj['id']."' style='color: blue !important;'><i class='fas fa-eye'></i></a><span class='espaco'></span><a href='excluir.php?id=".$obj['id']."' style='color: red !important;'><i class='fas fa-trash-alt'></i></a></td>");  
+                echo ("<td style='display: inline-flex; text-align:center;'><a href='".$link.$msg."' style='color: green !important;' target='_blank'><i class='fab fa-whatsapp'></i></a><span class='espaco'></span><a href='visualizar.php?id=".$obj['id']."' style='color: blue !important;'><i class='fas fa-eye'></i></a><span class='espaco'></span><a href='excluir.php?id=".$obj['id']."' target='_blank' style='color: red !important;'><i class='fas fa-trash-alt'></i></a></td>");  
             }else if($obj['status'] == '2'){
                 echo ("<td>Em Análise</td>");
                 $msg = "Olá ".$nome." você está comprando ingressos para o evento ".$evento.", mas seu pagamento ainda está em análise. Por favor aguarde que o ingresso seja liberado.";
@@ -141,7 +141,7 @@ if($dataInicial == ""){
             }else if($obj['status'] == '7'){
                 echo ("<td>Cancelada</td>");
                 $msg = "Olá ".$nome." você tentou comprar ingressos para o evento ".$evento." mas teve seu pagamento cancelado pela operadora de cartão. Nesse caso, recomendamos dar continuidade aqui mesmo pelo whats, fazendo a compra do ingresso via PIX. Podemos prosseguir com a compra";
-                echo ("<td style='display: inline-flex; text-align:center;'><a href='".$link.$msg."' style='color: green !important;' target='_blank'><i class='fab fa-whatsapp'></i></a><span class='espaco'></span><a href='excluir.php?id=".$obj['id']."' style='color: red !important;'><i class='fas fa-trash-alt'></i></a></td>");
+                echo ("<td style='display: inline-flex; text-align:center;'><a href='".$link.$msg."' style='color: green !important;' target='_blank'><i class='fab fa-whatsapp'></i></a><span class='espaco'></span><a href='excluir.php?id=".$obj['id']."' target='_blank' style='color: red !important;'><i class='fas fa-trash-alt'></i></a></td>");
             }
             echo "</tr>";
         }

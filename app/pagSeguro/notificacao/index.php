@@ -33,7 +33,7 @@
         //Paga: 3 
         //Cancelado: 7 (teste)
         getDadosTransacao($reference);
-        if($statusAnterior == 1 || $statusAnterior == 2){
+        if($statusAnterior == 1 || $statusAnterior == 2 || $statusAnterior == 10){
             for ($i=1; $i <= $itemQuantity; $i++) { 
                 criarIngresso();
             }
