@@ -1,11 +1,12 @@
 $(document).ready(function(){
     $("#inputCpf").mask("000.000.000-00")
     $("#inputCnpj").mask("00.000.000/0000-00")
-    $("#inputValor").mask("999999990,00", {reverse: true})
+    // $("#inputValor").mask("999999990,00", {reverse: true})
     $("#inputLimite").mask("999999990", {reverse: true})
     $("#inputHodometro").mask("999999990", {reverse: true})
     $("#inputQuantidade").mask("999999990", {reverse: true})
     $("#cep").mask("00.000-000")
+    $("#inputCEP").mask("00.000-000")
     $("#dataNascimento").mask("00/00/0000")
     
     $("#rg").mask("999.999.999-W", {
@@ -37,6 +38,14 @@ $(document).ready(function(){
             $("#celular").mask("(00) 00000-0009")
         }else{
             $("#celular").mask("(00) 0000-00009")
+        }
+    })
+    $("#inputCPF").mask("000.000.000-00")
+    $("#inputCPF").blur(function(event){
+        if ($(this).val().length == 14){
+            $("#inputCPF").mask("000.000.000-00")
+        }else{
+            $("#inputCPF").mask("00.000.000/0000-00")
         }
     })
 })

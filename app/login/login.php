@@ -82,11 +82,10 @@ function login($id, $nome, $type, $email, $extra){
     $_SESSION["nCaixa"] = "0";
     $_SESSION["msg"] = "0";
     echo $_SESSION["tipoUsuario"];
-    if($extra == 'redefinir'){
-        header('Location: ../config/index.php?msg=Para ter mais segurança, troque a senha padrão, colocando uma senha só sua.');
-    }else{
+    echo $_SESSION["usuario"];
+
         header('Location: ../index.php?msg='.$msg);
-    }
+    
 }
     
 ?>

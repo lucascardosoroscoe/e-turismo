@@ -38,7 +38,7 @@ $telefone = $dados[0]['senderAreaCode'] .  $dados[0]['senderPhone'];
                         </div>
                         <div class="col-md-4" style="margin-top: 10px; text-align:center;">
                             <?php
-                                echo "<a href='emitir.php?idLote=".$idLote."&idEvento=".$idEvento."&nome=".$senderName."&telefone=".$telefone."' class='btn btnAdd' style='margin-left: 2px;color: #000;border-color: #000;'><i class='fas fa-user-plus'></i> Emitir Ingresso</a>";
+                                echo "<a href='emitir.php?idLote=".$idLote."&idEvento=".$idEvento."&nome=".$senderName."&telefone=".$telefone."&idPagSeguro=".$id."' class='btn btnAdd' style='margin-left: 2px;color: #000;border-color: #000;'><i class='fas fa-user-plus'></i> Emitir Ingresso</a>";
                             ?>
                             <div class="btn btnAdd" onclick="fnExcelReport('dataTable')" style="margin-left: 2px;color: #000;border-color: #000;"><i class="far fa-file-excel"></i> Exportar Excel</div>
                         </div>
@@ -164,7 +164,7 @@ $telefone = $dados[0]['senderAreaCode'] .  $dados[0]['senderPhone'];
             if($validade == "VALIDO"){
                 echo ("<td style='display: flex;'><a href='editar.php?id=".$obj['codigo']."' class='iconeTabela'><i class='fas fa-user-edit'></i></a>");  
                 echo ("<a href='cancelar.php?id=".$obj['codigo']."' class='iconeTabela red'><i class='fas fa-user-times'></i></a>");  
-                echo ("<a href='../../enviar.php?codigo=".$obj['codigo']."' target='_blank' class='iconeTabela'><i class='far fa-copy'></i></a></td>");  
+                echo ("<a href='../enviar.php?codigo=".$obj['codigo']."' target='_blank' class='iconeTabela'><i class='far fa-copy'></i></a></td>");  
             }else{
                 echo ("<td><a href='reativar.php?id=".$obj['codigo']."' style='margin-left: 15px;'>Reativar</a></td>");
             }

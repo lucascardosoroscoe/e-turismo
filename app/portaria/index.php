@@ -52,9 +52,10 @@
                     echo ('<h6 class="text">Lote: '.$lote.' (R$'.$valor.',00)</h6>');
                     echo ('<h6 class="text">Data compra: '.$data.'</h6>');
                     if($valido == "USADO"){
-                        echo ('<h6 class="text">Horário de Validação: '.$horaLeitura.'</h6>');
+                        $hora = gmdate('d-m-Y H:i:s', strtotime( $horaLeitura ) - 7200);
+                        echo ('<h6 class="text">Horário de Validação: '.$hora.' (Brasília)</h6>');
                     }
-                    echo ("<img id='img' style='width: 100%;border-radius: 27px; border: solid 2px #000;' src='https://ingressozapp.com/app/getImagem.php?id=$idEvento'/>");
+                    echo ("<img id='img' style='width: 100%;border-radius: 27px; border: solid 2px #000;' src='http://ingressozapp.com/app/getImagem.php?id=$idEvento'/>");
                     
                 }else{
                     echo ('<h6 class="text">Suspeita de fraude!!! Ingresso não encontrado no sistema, verifique a conversa em que o promoter enviou a mensagem e chame o promoter para confirmar a versão do cliente.</h6>');

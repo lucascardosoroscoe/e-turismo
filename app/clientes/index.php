@@ -17,6 +17,9 @@ include('../includes/header.php');
                 <div class="col-md-8" style="float:left; margin-top: 5px;">
                     <input class="form-control" type="text" placeholder="Buscar..." style="margin-bottom: 5px" id="buscar" onkeyup="buscar()"/>
                 </div>
+                <div class="col-md-4" style="float:left; margin-top: 5px;">
+                    <?php selectEvento(); ?>
+                </div>
             </div>
             <div class="table-responsive table-hover">
                 <table class="table tablesorter table-hover" id="dataTable" width="100%" cellspacing="0">
@@ -32,8 +35,14 @@ include('../includes/header.php');
                     <tbody id="tbody">
                         <?php
                             if($tipoUsuario == 1){
-                                $consulta = "SELECT * FROM Cliente";
-                                addTabela($consulta);
+                                if($idEvento == ""){
+                                }else{
+                                    $consulta = "SELECT Cliente.id, Cliente.nome, Cliente.telefone, Cliente.email
+                                    FROM Cliente
+                                    JOIN Ingresso ON Ingresso.idCliente = Cliente.id
+                                    WHERE Ingresso.evento = '$idEvento'";
+                                    addTabela($consulta);
+                                }
                             }else if($tipoUsuario == 2){
                                 $consulta = "SELECT Cliente.id, Cliente.nome, Cliente.telefone FROM Cliente 
                                 JOIN Ingresso ON Ingresso.idCliente = Cliente.id

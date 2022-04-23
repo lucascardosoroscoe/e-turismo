@@ -37,5 +37,5 @@ if($resetPasswordCheck == '1'){
     $msg = executar($consulta);
     $msg = "Dados alterados com Sucesso!!!";
 }
-header('Location: ../index.php?msg='.$msg);
+header('Location: ../../index.php?msg='.$msg);
 ?>   

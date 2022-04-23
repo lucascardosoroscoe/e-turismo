@@ -21,14 +21,19 @@ $idLote = $dados[0]['lote'];
                                 <input  name="codigo" type="hidden" value="<?php echo $id; ?>" required/>
                                 <input  name="idCliente" type="hidden" value="<?php echo $dados[0]['id']; ?>" required/>
                                 <input  name="telefoneAntigo" type="hidden" value="<?php echo $dados[0]['telefone']; ?>" required/>
-                                <div class="form-row">
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <label for="selectLote">Selecione o Lote*</label>
-                                            <?php lote(); ?>                                        
-                                        </div>
-                                    </div>
-                                </div>
+                                <?php
+                                if($tipoUsuario == 1){
+                                    echo '<div class="form-row">';
+                                    echo '<div class="col-md-12">';
+                                    echo '<div class="form-group">';
+                                        echo '<label for="selectLote">Selecione o Lote*</label>';
+                                            lote();                                        
+                                            echo '</div>';
+                                        echo '</div>';
+                                    echo '</div>';
+                                }
+                                ?>
+                                
                                 <div class="form-row">
                                     <div class="col-md-12">
                                         <div class="form-group">

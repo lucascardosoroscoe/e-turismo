@@ -1,6 +1,15 @@
 <?php
   include('../app/includes/verificarAcesso.php');
   $idEvento = $_GET['evento'];
+  if($idEvento == 232){
+    header('Location: https://ingressozapp.com/produtos/sextou-na-deck-18-02');
+  }else if($idEvento == 214){
+    header('Location: https://ingressozapp.com/produtos/vintage');
+  }else if($idEvento == 212){
+    header('Location: https://ingressozapp.com/produtos/off-dos-amigos/');
+  }else{
+    header('Location: https://ingressozapp.com/');
+  }
   $promoter = $_GET['promoter'];
   $consulta= "SELECT * FROM `Evento` WHERE id = $idEvento";
   $dados = selecionar($consulta);
@@ -19,59 +28,31 @@
       <meta property="og:description" content="Eu já garanti meu ingresso, bora??? Garanta o seu também."/>
       <meta property="og:title" content="<?php echo $nomeEvento ?> - IngressoZapp"/>
       <meta property="og:image" content="<?php echo $HTTP_HOST . "/app"?>/getImagem.php?id=<?php echo $idEvento;?>"/>
-      <meta name="twitter:url" content="https://ingressozapp.com/evento/?evento=<?php echo $idEvento?>&promoter=<?php echo $promoter?>">
+      <meta name="twitter:url" content="http://ingressozapp.com/evento/?evento=<?php echo $idEvento?>&promoter=<?php echo $promoter?>">
       <meta name="twitter:title" content="Eu já garanti meu ingresso, bora??? Garanta o seu também.">
       <meta name="twitter:image" content="<?php echo $HTTP_HOST . "/app"?>/getImagem.php?id=<?php echo $idEvento;?>">
       <title><?php echo $nomeEvento ?> - IngressoZapp</title>
       <link  rel="stylesheet" href="<?php echo $HTTP_HOST . "/app";?>/css/styles.css" />
-      <link rel="stylesheet"  href="<?php echo $HTTP_HOST . "/app";?>/css/table.css">
-      <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js" crossorigin="anonymous"></script>
-      <!-- <link rel="stylesheet" href="style1.css">
-      <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-      <script type="text/javascript" src="<?php echo $HTTP_HOST . "/app";?>/js/graph.js"></script> -->
     </head>
 
     <body>
-    <div id="fb-root"></div>
-<script async defer crossorigin="anonymous" src="https://connect.facebook.net/pt_PT/sdk.js#xfbml=1&version=v12.0&appId=350396228785481&autoLogAppEvents=1" nonce="FMKMNtpB"></script>
 <?php
 
 
 setlocale(LC_ALL, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
 
-// if ($validade == "VALIDO"){}else{header('Location: ../../produtor/login/');}
 ?>
 <body class="sb-nav-fixed">
     <!-- Barra Topo do Site -->
       <nav class="sb-topnav navbar navbar-expand " style="height:100px; background-color:#000;">
-      <!-- navbar-dark bg-dark -->
         <!-- Título Site -->
         
-          <a class="navbar-brand" href="<?php echo $HTTP_HOST . "/app";?>/index.php"><img src="<?php echo $HTTP_HOST . "/app";?>/img/logo.png" alt="IngressoZapp" srcset="" style="height:100px;"></a>
-        <!-- Botão do Menu -->
-          <!-- <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button> -->
-        <!-- Barra de Pesquisa -->
+          <a class="navbar-brand" href="<?php echo $HTTP_HOST . "/app";?>/index.php"><img src="<?php echo $HTTP_HOST . "/app";?>/img/logo.webp" alt="IngressoZapp" style="height:100px;"></a>
           <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
-            <!-- <div class="input-group">
-              <?php //selectEvento();?>
-            </div> -->
           </form>
           <div style="width:-webkit-fill-available;"></div>
-          <img src="<?php echo $HTTP_HOST . "/app";?>getImagem.php?id=<?php echo $idEvento;?>" alt="Instagram" style="display:none;">
-          <a href="https://www.instagram.com/ingressozapp/" target="_blank"><img src="<?php echo $HTTP_HOST . "/app";?>/img/instagram-logo.png" alt="Instagram" style="height:60px;width:60px"></a>
-        <!-- Menu de Usuário -->
-          <!-- <ul class="navbar-nav ml-auto ml-md-0">
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
-              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                <a class="dropdown-item" href="#">Configurações</a>
-                <a class="dropdown-item" onclick="window.print()">Exportar PDF</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="<?php echo $HTTP_HOST . "/app";?>/login">Login</a>
-              </div>
-            </li>
-          </ul> -->
+          <img src="<?php echo $HTTP_HOST . "/app";?>/getImagem.php?id=<?php echo $idEvento;?>" alt="Instagram" style="display:none;">
+          <a href="https://www.instagram.com/ingressozapp/" target="_blank"><img src="<?php echo $HTTP_HOST . "/app";?>/img/instagram-logo.webp" alt="Instagram" style="height:60px;width:60px"></a>
       </nav>
     <!-- Menu Lateral Esquerda -->
       <div id="layoutSidenav" style="background-color: #333;">
@@ -139,8 +120,6 @@ setlocale(LC_ALL, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
                       //Bar
                       echo('<div class="sb-sidenav-menu-heading">Bar</div>');
                       echo('<a class="nav-link" href="'.$HTTP_HOST . "/app".'/produtos"><div class="sb-nav-link-icon"><i class="fas fa-cocktail"></i></div>Produtos</a>');
-                      // echo('<a class="nav-link" href="'.$HTTP_HOST . "/app".'/caixa"><div class="sb-nav-link-icon"><i class="fas fa-cogs"></i></div>Caixa</a>');
-                      // echo('<a class="nav-link" href="'.$HTTP_HOST . "/app".'/cardapio"><div class="sb-nav-link-icon"><i class="fas fa-cogs"></i></div>Cadastro de Cardápio</a>');
                     }
                 }else{
                   echo('<a class="nav-link" href="'.$HTTP_HOST . "/app".'/login/"><div class="sb-nav-link-icon"><i class="fas fa-user fa-fw"></i></div>Login</a>');
@@ -249,22 +228,6 @@ setlocale(LC_ALL, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
     echo('</select>');
   }
 
-  function selectCidade(){
-    global $cidade;
-    $consulta = "SELECT cidade, estado FROM `Evento` WHERE `validade`= 'DISPONÍVEL' ORDER BY estado, cidade";
-    $dados = selecionar($consulta);
-    echo('<select class="form-control" name="selectCidade" id="selectCidade" onchange="selectCidade()" required>');
-      echo('<option value="">Selecione a Cidade</option>');
-      foreach ($dados as $cidade) {
-        if($cidade == $cidade['cidade']){
-          echo('<option value="'. $cidade['cidade'] .'" selected>'. $cidade['estado'] .' - '. $cidade['cidade'] .'</option>');
-        }else{
-          echo('<option value="'. $cidade['cidade'] .'">'. $cidade['estado'] .' - '. $cidade['cidade'] .'</option>');
-        }
-      }
-    echo('</select>');
-  }
-
   function selecLote($idEvento, $i){
     global $idLote;
     $consulta = "SELECT * FROM `Lote` WHERE `evento`= '$idEvento' AND `validade`= 'DISPONÍVEL'";
@@ -279,43 +242,5 @@ setlocale(LC_ALL, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
         }
       }
     echo('</select>');
-  }
-
-  function selectVendedor(){
-    global $tipoUsuario, $idUsuario;
-    
-    if($tipoUsuario == 1){
-      $consulta = "SELECT * FROM `Vendedor` WHERE validade = 'VALIDO' ORDER BY nome";
-      selectVend($consulta);
-    }else if($tipoUsuario == 2){
-      $consulta = "SELECT * FROM `Vendedor` WHERE `produtor`= '$idUsuario' AND validade = 'VALIDO' ORDER BY nome";
-      selectVend($consulta);
-    }
-   
-  }
-
-  function selectVend($consulta){
-    global $idVendedor;
-    $dados = selecionar($consulta);
-    echo('<select class="form-control" name="selectVendedor" id="selectVendedor" onchange="selectVendedor(1)"  form="emitir" required>');
-      echo('<option value="">Selecione o Vendedor</option>');
-      foreach ($dados as $vendedor) {
-        if($idVendedor == $vendedor['id']){
-          echo('<option value="'. $vendedor['id'] .'" selected>'. $vendedor['nome'] .'</option>');
-        }else{
-          echo('<option value="'. $vendedor['id'] .'">'. $vendedor['nome'] .'</option>');
-        }
-      }
-    echo('</select>');
-  }
-
-  function msgAutomatica(){
-    global $msg;
-    echo '<div class="row">';
-      echo '<div class="col-md-12">';
-        echo '<label class="small mb-1" for="inputMsg">Mensagem Automatizada</label>';
-        echo '<input class="form-control py-4" type="text" id="inputMsg" name="inputMsg" onchange="modificarMsg()" placeholder="Digite a mensagem para enviar via contato" value="'.$msg.'"></input>';
-      echo '</div>';
-    echo '</div>';
   }
 ?>

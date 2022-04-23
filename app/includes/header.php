@@ -8,6 +8,7 @@
       <meta name="author" content="Lucas Cardoso Roscoe" />
       <title>IngressoZapp</title>
       <link  rel="stylesheet" href="<?php echo $HTTP_HOST . "/app";?>/css/styles.css" />
+      <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">  -->   
       <link rel="stylesheet"  href="<?php echo $HTTP_HOST . "/app";?>/css/table.css">
       <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
       <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js" crossorigin="anonymous"></script>
@@ -26,23 +27,23 @@ setlocale(LC_ALL, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
 ?>
 <body class="sb-nav-fixed">
     <!-- Barra Topo do Site -->
-      <nav class="sb-topnav navbar navbar-expand " style="background-color: #fff;">
+      <nav class="sb-topnav navbar navbar-expand bg-dark">
       <!-- navbar-dark bg-dark -->
         <!-- Título Site -->
         
-          <a class="navbar-brand" href="<?php echo $HTTP_HOST . "/app";?>/index.php"><img src="<?php echo $HTTP_HOST . "/app";?>/img/logo.png" alt="Soluções2c" srcset="" style="height:40px;"></a>
+          <a class="navbar-brand" href="<?php echo $HTTP_HOST . "/app";?>/index.php"><img src="<?php echo $HTTP_HOST . "/app";?>/img/logo.png" alt="IngressoZapp" srcset="" style="height:60px;"></a>
         <!-- Botão do Menu -->
-          <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button>
+          <button class="btn btn-link btn-sm order-1 order-lg-0 text-white" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button>
         <!-- Barra de Pesquisa -->
           <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
             <!-- <div class="input-group">
               <?php //selectEvento();?>
             </div> -->
           </form>
-        <!-- Menu de Usuário -->
+        <!-- Menu de Usuário --> 
           <ul class="navbar-nav ml-auto ml-md-0">
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
+              <a class="nav-link dropdown-toggle text-primary" id="userDropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user fa-fw text-primary"></i></a>
               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
                 <a class="dropdown-item" href="<?php echo $HTTP_HOST . "/app";?>/config">Minha Conta</a>
                 <a class="dropdown-item" onclick="window.print()">Exportar PDF</a>
@@ -55,7 +56,7 @@ setlocale(LC_ALL, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
     <!-- Menu Lateral Esquerda -->
       <div id="layoutSidenav">
         <div id="layoutSidenav_nav">
-          <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+          <nav class="sb-sidenav accordion bg-dark" id="sidenavAccordion">
             <div class="sb-sidenav-menu">
               <div class="nav">
               <?php
@@ -80,23 +81,25 @@ setlocale(LC_ALL, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
                           echo('<a class="nav-link" href="'.$HTTP_HOST . "/app".'/clientes">Clientes</a>');
                       echo('</nav></div>');
                     }else if($tipoUsuario == 2){
-                      echo('<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">');
-                      echo('<div class="sb-nav-link-icon"><i class="fas fa-user-friends"></i></div>Usuários<div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>');
-                      echo('</a>');
-                      echo('<div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-parent="#sidenavAccordion"><nav class="sb-sidenav-menu-nested nav">');
-                        echo('<a class="nav-link" href="'.$HTTP_HOST . "/app".'/vendedores">Vendedores</a>');
-                        echo('<a class="nav-link" href="'.$HTTP_HOST . "/app".'/clientes">Clientes</a>');
-                      echo('</nav></div>');
+                      // echo('<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">');
+                      // echo('<div class="sb-nav-link-icon"><i class="fas fa-user-friends"></i></div>Usuários<div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>');
+                      // echo('</a>');
+                      // echo('<div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-parent="#sidenavAccordion"><nav class="sb-sidenav-menu-nested nav">');
+                      //   echo('<a class="nav-link" href="'.$HTTP_HOST . "/app".'/vendedores">Vendedores</a>');
+                      //   echo('<a class="nav-link" href="'.$HTTP_HOST . "/app".'/clientes">Clientes</a>');
+                      // echo('</nav></div>');
+                      echo('<a class="nav-link" href="'.$HTTP_HOST . "/app".'/vendedores"><div class="sb-nav-link-icon"><i class="fas fa-user-friends"></i></div>Vendedores</a>');
+                      echo('<a class="nav-link" href="'.$HTTP_HOST . "/app".'/clientes"><div class="sb-nav-link-icon"><i class="fas fa-user-friends"></i></div>Clientes</a>');
                     }else if($tipoUsuario == 3){
-                      echo('<a class="nav-link" href="'.$HTTP_HOST . "/app".'/clientes">Clientes</a>');
+                      echo('<a class="nav-link" href="'.$HTTP_HOST . "/app".'/clientes"><div class="sb-nav-link-icon"><i class="fas fa-user-friends"></i></div>Clientes</a>');
                     }
                     if($tipoUsuario == 2 || $tipoUsuario == 1){
                       //Eventos
-                      echo('<a class="nav-link" href="'.$HTTP_HOST . "/app".'/eventos"><div class="sb-nav-link-icon"><i class="fas fa-gas-pump"></i></div>Eventos</a>');
-                      echo('<a class="nav-link" href="'.$HTTP_HOST . "/app".'/lotes"><div class="sb-nav-link-icon"><i class="fas fa-gas-pump"></i></div>Lotes</a>');
+                      echo('<a class="nav-link" href="'.$HTTP_HOST . "/app".'/eventos"><div class="sb-nav-link-icon"><i class="far fa-calendar-alt"></i></div>Eventos</a>');
+                      echo('<a class="nav-link" href="'.$HTTP_HOST . "/app".'/lotes"><div class="sb-nav-link-icon"><i class="fas fa-ticket-alt"></i></div>Lotes</a>');
                       
                       // Custos
-                      echo('<a class="nav-link" href="'.$HTTP_HOST . "/app".'/custos"><div class="sb-nav-link-icon"><i class="fas fa-cogs"></i></div>Custos</a>');
+                      // echo('<a class="nav-link" href="'.$HTTP_HOST . "/app".'/custos"><div class="sb-nav-link-icon"><i class="fas fa-cogs"></i></div>Custos</a>');
 
                       //Relatórios
                       echo('<a class="nav-link collapsed" href="#produtividade" data-toggle="collapse" data-target="#collapse" aria-expanded="false" aria-controls="collapse">');
@@ -117,8 +120,8 @@ setlocale(LC_ALL, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
                         echo('<a class="nav-link" href="'.$HTTP_HOST . "/app".'/relatorios/pix"><div class="sb-nav-link-icon"><i class="fab fa-sellsy"></i></div>Vendas Woocomerce</a>');
                       }
                       //Bar
-                      echo('<div class="sb-sidenav-menu-heading">Bar</div>');
-                      echo('<a class="nav-link" href="'.$HTTP_HOST . "/app".'/produtos"><div class="sb-nav-link-icon"><i class="fas fa-cocktail"></i></div>Produtos</a>');
+                      // echo('<div class="sb-sidenav-menu-heading">Bar</div>');
+                      // echo('<a class="nav-link" href="'.$HTTP_HOST . "/app".'/produtos"><div class="sb-nav-link-icon"><i class="fas fa-cocktail"></i></div>Produtos</a>');
                       // echo('<a class="nav-link" href="'.$HTTP_HOST . "/app".'/caixa"><div class="sb-nav-link-icon"><i class="fas fa-cogs"></i></div>Caixa</a>');
                       // echo('<a class="nav-link" href="'.$HTTP_HOST . "/app".'/cardapio"><div class="sb-nav-link-icon"><i class="fas fa-cogs"></i></div>Cadastro de Cardápio</a>');
                     }
@@ -128,7 +131,7 @@ setlocale(LC_ALL, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
                 ?>
               </div>
             </div>
-            <div class="sb-sidenav-footer">
+            <div class="sb-sidenav-footer text-primary">
                 <div class="small">Logado como
                   <?php 
                     if($tipoUsuario == 1){
@@ -262,7 +265,7 @@ setlocale(LC_ALL, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
       }
     echo('</select>');
   }
-
+ 
   function selectVendedor(){
     global $tipoUsuario, $idUsuario;
     

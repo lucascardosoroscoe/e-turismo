@@ -16,10 +16,15 @@ $count = 0;
      </ol>
      <div class="card mb-4">
           <div class="card-header">
-               <img src="../img/logo.png" alt="" class="logo" style="float:left;">
-               <div style="float:right; width: 60%;">
-                    <h2>INGRESSOZAPP</h2>
-                    <h6 style="text-align: end;">LR Software - <?php echo $hoje ?></h6>
+               <div class="row">
+                    <div class="col-md-4">               
+                         <img src="../img/logo.png" alt="" class="logo" style="float:left; width: 200px!important">
+                    </div>
+                    <div class="col-md-4">
+                    </div>
+                    <div class="col-md-4">
+                         <h6 style="text-align: end;">LR Software - <?php echo $hoje ?></h6>
+                    </div>
                </div>
           </div>
           <div class="card-body">

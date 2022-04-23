@@ -15,7 +15,16 @@ include('../includes/header.php');
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label class="small mb-1" for="inputName">Nome do Evento*</label>
-                                            <input class="form-control py-4" id="inputName"  name="inputName" type="text" placeholder="Digite o Nome" required/>
+                                            <input class="form-control py-4" id="inputName"  name="inputName" type="text" placeholder="Digite o Nome" onchange="sugerirSlug()" required/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            Link do Evento* (letras minúsculas, sem caracteres especiais ou acentos, apenas '-')<br>
+                                            <label class="small mb-1" for="slug">ingressozapp.com/produtos/</label>
+                                            <input class="" id="slug"  name="slug" type="text" placeholder="Digite o link" required/>
                                         </div>
                                     </div>
                                 </div>
@@ -55,6 +64,15 @@ include('../includes/header.php');
             </div>
         </div>
     </div>
+    <script>
+        function sugerirSlug(){
+            var nome = document.getElementById('inputName').value;
+            var slug = nome.toLowerCase();
+            var er = /[^a-z0-9]/gi;
+		    slug = slug.replace(er, "-");
+            document.getElementById('slug').value = slug;
+        }
+    </script>
 <?php
 include('../includes/footer.php');
 ?>

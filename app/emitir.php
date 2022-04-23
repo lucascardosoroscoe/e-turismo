@@ -1,19 +1,21 @@
 <?php
 include('includes/verificarAcesso.php');
 verificarAcesso(3);
-
+$hash = bin2hex(openssl_random_pseudo_bytes(32));
 if(carregarPost()){
     if(getLote()){
         if(getCliente()){
             verificarIngresso();
         }
-    };
+    }else{
+        header('Location: ingresso.php?msg='.$msg);
+    }
 };
 
 
 
 function carregarPost(){
-    global $codigo, $evento, $idLote, $nomeCliente, $telefone, $tipoUsuario;
+    global $codigo, $evento, $idLote, $nomeCliente, $inputQuantidade, $telefone, $tipoUsuario, $inputEmail;
     
     $evento    =  $_POST['selectEvento'];
     $consulta = "SELECT `validade` FROM `Evento` WHERE `id` = '$evento'";
@@ -24,6 +26,8 @@ function carregarPost(){
     }
     // $idLote    =  $_POST["selectLote"];
     $nomeCliente   =  $_POST['inputNome'];
+    $inputEmail   =  $_POST['inputEmail'];
+    $inputQuantidade   =  $_POST['inputQuantidade'];
     $telefone  =  $_POST['inputTelefone'];
     $idLote  =  $_POST['selectLote'];
     $consulta = "SELECT `validade` FROM `Lote` WHERE `id` = '$idLote'";
@@ -54,7 +58,7 @@ function carregarPost(){
         <a href='index.php'>CLIQUE AQUI PARA VOLTAR NA PÁGINA DE EMISSÃO</a></h4>";
         return false;
     }else{
-        $codigo = gerarCodigo();
+        
         return true;
     }
 }
@@ -75,17 +79,25 @@ function gerarCodigo(){
 }
 
 function getLote(){
-    global $idLote, $valor, $sexo, $quantidade, $vendidos;
+    global $idLote, $valor, $sexo, $quantidade, $vendidos, $inputQuantidade, $vendas, $msg;
+    $consulta = "UPDATE `Lote` SET `vendidos`=(SELECT COUNT(Ingresso.codigo) FROM Ingresso WHERE Ingresso.lote = '$idLote') WHERE Lote.id = '$idLote'";
+    $msg = executar($consulta);   
     $consulta = "SELECT * FROM Lote WHERE id='$idLote'";
     $obj = selecionar($consulta);
     $lote = $obj[0];
     $valor     =  $lote['valor'];
     $sexo      =  $lote['sexo'];
     $quantidade=  $lote['quantidade'];
-    $vendidos  =  $lote['vendidos'];
-    $vendidos  =  $vendidos + 1 ;
+    $vendas  =  $lote['vendidos'];
+    if($vendas>=$quantidade){
+        $consulta = "UPDATE Lote SET validade = 'ESGOTADO' WHERE id = $idLote ";
+        $msg = executar($consulta);
+        $msg = "Atenção!!! Este lote acabou de se esgotar, selecione outro lote.";
+        return false;
+    }
+    $vendidos  =  $vendas + $inputQuantidade ;
     if($valor == "" || $quantidade == ""){
-        echo "Dados insuficientes sobre o lote.";
+        $msg = "Dados insuficientes sobre o lote.";
         return false;
     }else{
         // echo "Lote carregado com sucesso!";
@@ -94,11 +106,11 @@ function getLote(){
 }
 
 function getCliente(){
-    global $nomeCliente, $telefone, $idCliente;
+    global $nomeCliente, $telefone, $idCliente, $inputEmail;
     $consulta = "SELECT `id` FROM `Cliente` WHERE `telefone` = '$telefone'";
     $dados = selecionar($consulta);
     if($dados[0]['id'] == ""){
-        $consulta = "INSERT INTO `Cliente`(`nome`, `telefone`) VALUES ('$nomeCliente', '$telefone')";
+        $consulta = "INSERT INTO `Cliente`(`nome`, `telefone`, `email`) VALUES ('$nomeCliente', '$telefone', '$inputEmail')";
         echo "Criando Cliente: <br>Nome: ".$nomeCliente."<br>Telefone: ".$telefone."<br>";
         $msg = executar($consulta);
         if($msg == "Sucesso!"){
@@ -115,7 +127,7 @@ function getCliente(){
     }else{
         // echo "Cliente já existe no sistema.<br>";
         $idCliente = $dados[0]['id'];
-        $consulta = "UPDATE `Cliente` SET `nome`='$nomeCliente' WHERE `id` = '$idCliente'";
+        $consulta = "UPDATE `Cliente` SET `nome`='$nomeCliente',  `email`='$inputEmail' WHERE `id` = '$idCliente'";
         $msg = executar($consulta);
         if($msg == "Sucesso!"){
             // echo "Nome do Cliente atualizado com sucesso.<br>";
@@ -128,80 +140,61 @@ function getCliente(){
 }
 
 function verificarIngresso(){
-    global $tipoUsuario,$idUsuario, $evento, $idCliente, $vendedor, $codigo, $local, $nomeCliente;
+    global $tipoUsuario,$idUsuario, $vendidos, $quantidade, $inputQuantidade, $vendedor, $hash, $local, $idLote, $vendas;
     if($tipoUsuario == '1'){
-        $consulta = "SELECT * from Ingresso WHERE evento= '$evento' AND vendedor= '1' AND idCliente= '$idCliente'";
+        // $consulta = "SELECT * from Ingresso WHERE evento= '$evento' AND vendedor= '1' AND idCliente= '$idCliente'";
         $vendedor = 1;
     }else if($tipoUsuario == '2'){
-        $consulta = "SELECT * from Ingresso WHERE evento= '$evento' AND vendedor= '2' AND idCliente= '$idCliente'";
+        // $consulta = "SELECT * from Ingresso WHERE evento= '$evento' AND vendedor= '2' AND idCliente= '$idCliente'";
         $vendedor = 2;
     }else if($tipoUsuario == '3'){
-        $consulta = "SELECT * from Ingresso WHERE evento= '$evento' AND vendedor= '$idUsuario' AND idCliente= '$idCliente'";
+        // $consulta = "SELECT * from Ingresso WHERE evento= '$evento' AND vendedor= '$idUsuario' AND idCliente= '$idCliente'";
         $vendedor = $idUsuario;
     }
-    $dados = selecionar($consulta);
-    // if ($dados[0]['codigo'] == ""){
-        if(gerarIngresso()){
-            $local='https://ingressozapp.com/app/enviar.php?codigo='.$codigo;
-            enviarIngresso(); 
+    // $dados = selecionar($consulta);
+    if($vendidos <= $quantidade){
+        for ($i=0; $i < $inputQuantidade; $i++) { 
+            $gerado = gerarIngresso();
         }
-    // }else{
-    //     $local='https://ingressozapp.com/app/enviar.php?codigo='.$dados[0]['codigo'];
-    //     echo("<h3>Você já gerou um ingresso para " . $nomeCliente . " deste mesmo Evento . Caso esteja gerando um novo ingresso, para outro cliente, por favor volte e coloque um nome mais completo.<br><br>Caso esteja tentantando reenviar o ingresso pois errou o número do Whatsapp ao gerar o ingresso <a href='$local'>Clique aqui</a> </h3>");
-
-    // }
+    }else{
+        $msg =  "Não é possível gerar esta quantidade de ingressos para esse lote, ultimas unidades disponíveis";
+    }
+    if($gerado){
+        $local='http://ingressozapp.com/app/enviar.php?hash='.$hash;
+        enviarIngresso(); 
+    }else{
+        header('Location: ingresso.php?msg='.$msg);
+    }
 }
 
 function gerarIngresso(){
-    global $codigo, $evento, $vendedor, $idCliente, $telefone, $valor, $idLote;
-    $consulta = "INSERT INTO Ingresso (codigo, evento, vendedor, idCliente, valor, lote, origem) VALUES ('$codigo', '$evento', '$vendedor', '$idCliente', '$valor', '$idLote', 1)";
-    // echo $consulta;
+    global $codigo, $evento, $vendedor, $idCliente, $valor, $idLote, $hash, $msg;
+    $codigo = gerarCodigo();
+    if($vendedor == 1){
+        $origem = 2;
+    }else{
+        $origem = 1;
+    }
+    $consulta = "INSERT INTO Ingresso (codigo, evento, vendedor, idCliente, valor, lote, origem, hash) VALUES ('$codigo', '$evento', '$vendedor', '$idCliente', '$valor', '$idLote', '$origem', '$hash')";
+    // echo '<br>'.$consulta .'<br>';
     $msg = executar($consulta);
     if($msg == "Sucesso!"){
-        atualizarVendidosLote(); 
-        // echo "Ingresso gerado.";
         return true;
     }else{
-        echo "Erro ao gerar Ingresso";
+        $msg = "Erro ao gerar Ingresso";
         return false;
     }
-    
 }
 
-function atualizarVendidosLote(){
-    global $vendidos, $idLote, $quantidade;
-    if($quantidade == $vendidos){
-        $consulta = "UPDATE Lote SET validade = 'ESGOTADO' WHERE id = $idLote ";
-        $msg = executar($consulta);
-        if($msg == 'Sucesso!'){
-            emailVirada();
-        }else{
-            echo "Falha ao invalidar Lote!!!<br>";
-        }
-    }
-    $consulta = "UPDATE `Lote` SET `vendidos`='$vendidos' WHERE `id` = '$idLote'";
-    $msg = executar($consulta);    
-}
+
 
 function emailVirada(){
     echo "E-mail enviado";
 }
 
 function enviarIngresso(){
-    global $local, $codigo;
-    $msg = $_POST["msg"];
-    if (empty($msg)){
-        // echo '<br>'.$local;
-        header('Location: '.$local);
-    }else if ($msg == "1"){
-        $consulta = "UPDATE Ingresso SET validade = 'INVALIDO' WHERE codigo = '$codigo'";
-        $msg = executar($consulta);
-        if($msg == 'Sucesso!'){
-            echo("<h1>Ingresso gerado com sucesso, permitir entrada!!!!</h1>");
-        }else{
-            echo "<h5>Falha ao invalidar ingresso</h5>";
-        }
-    }
+    global $local;
+    header('Location: '.$local);
 }
 
 ?>

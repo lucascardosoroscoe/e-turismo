@@ -28,7 +28,7 @@ $_SESSION['evento'] = $evento;
 echo ('<div class="row">');
 echo ('<div class="col s12 m6 push-m3 ">');
 echo ("<img class='imgEvento' src='../getImagem.php?nome=$evento&produtor=$produtor'/>");
-
+echo ('<p style="text-align: center; font-size: 1em;">CODIGO: '.$descricao.'</p>');
 echo ('<h1 style="text-align: center; font-size: 2em;">'.$evento.'</h1>');
 echo ('<p style="text-align: center; font-size: 1em;">'.$descricao.'</p>');
 
@@ -98,7 +98,7 @@ function carregarLotes(){
 
 function gerarQR($id){
 //Criar QR Code Correto
-$codigo = "https://ingressozapp.com/convite/index.php?id=" . $id;
+$codigo = "http://ingressozapp.com/convite/index.php?id=" . $id;
 
 $aux = '../promoter/qr_img0.50j/php/qr_img.php?';
 $aux .= 'd='.$codigo.'&';
@@ -119,7 +119,7 @@ function gerarLink($stringLotes){
     $link = $link . "*Lotes:* " . $linha;
     $link = $link . $stringLotes. $linha;
     $link = $link . "*Ingressos:*";
-    $link = $link . " https://ingressozapp.com/convite/index.php?id=" . $id. "";
+    $link = $link . " http://ingressozapp.com/convite/index.php?id=" . $id. "";
     $link = "https://api.whatsapp.com/send?text=" . $link;
     return $link;
 }

@@ -111,22 +111,24 @@ $idSecretaria = $_SESSION["idSecretaria"];
             echo ("<td>".formatarData($obj['date_created'])."</td>"); 
             if($obj['status'] == 'wc-processing'){
                 echo ("<td>Aguardando Emissão</td>");
-                echo ("<td style='display: table; text-align:center;'><a href='emitir.php?id=".$obj['order_id']."' style='color: blue !important;'><i class='fas fa-ticket-alt'></i> Ingresso</a></td>");  
+                echo ("<td style='display: table; text-align:center;'><a target='_blank' href='emitir.php?id=".$obj['order_id']."' style='color: blue !important;'><i class='fas fa-ticket-alt'></i> Ingresso</a></td>");  
             }else if($obj['status'] == 'wc-completed'){
                 echo ("<td>Finalizado</td>");
-                echo ("<td style='display: table; text-align:center;'><a href='https://api.whatsapp.com/send?phone=55".$obj['last_name']."' style='color: green !important;'><i class='fab fa-whatsapp'></i> Contato</a></td>");
+                echo ("<td style='display: table; text-align:center;'><a target='_blank' href='https://api.whatsapp.com/send?phone=55".$obj['last_name']."' style='color: green !important;'><i class='fab fa-whatsapp'></i> Contato</a></td>");
             }else if($obj['status'] == 'wc-on-hold'){
                 echo ("<td>Aguardando Pagamento</td>");
-                echo ("<td style='display: table; text-align:center;'><a href='https://api.whatsapp.com/send?phone=55".$obj['last_name']."' style='color: green !important;'><i class='fab fa-whatsapp'></i> Contato</a></td>");
+                echo ("<td style='display: table; text-align:center;'><a target='_blank' href='https://api.whatsapp.com/send?phone=55".$obj['last_name']."' style='color: green !important;'><i class='fab fa-whatsapp'></i> Contato</a></td>");
             }else if($obj['status'] == 'wc-repasse'){
                 echo ("<td>Aguardando repasse</td>");
-                echo ("<td style='display: table; text-align:center;'><a href='confirmar.php?id=".$obj['order_id']."' style='color: blue !important;'><i class='fas fa-search-dollar'></i> Repasse</a></td>");
+                echo ("<td style='display: table; text-align:center;'><a target='_blank' href='confirmar.php?id=".$obj['order_id']."' style='color: blue !important;'><i class='fas fa-search-dollar'></i> Repasse</a></td>");
             }else if($obj['status'] == 'wc-cancelled' || $obj['status'] == 'wc-failed' ){
                 echo ("<td>Cancelado</td>");
-                echo ("<td style='display: table; text-align:center;'><a href='https://api.whatsapp.com/send?phone=55".$obj['last_name']."' style='color: green !important;'><i class='fab fa-whatsapp'></i> Contato</a></td>");
+                $msg = "Olá ".$obj['first_name'].", tudo bem? No dia ". formatarData($obj['date_created']) . " você tentou comprar ". $obj['product_qty']." ingressos - ". $obj['order_item_name'] ." totalizando R$" . UsToBr($obj['net_total']). ". Porém, essa compra foi cancelada. Gostaríamos de entender os motivos desse cancelamento e te ajudar caso esteja tendo dúvidas ao comprar. Aqui mesmo pelo whatsapp, posso te ajudar a concluir o processo de compra e já te envio o ingresso.";
+                $url = urlencode($msg);
+                echo ("<td style='display: table; text-align:center;'><a target='_blank' href='https://api.whatsapp.com/send?phone=55".$obj['last_name']."&text=".$url."' style='color: green !important;'><i class='fab fa-whatsapp'></i> Contato</a></td>");
             }else if($obj['status'] == 'wc-pending'){
                 echo ("<td>Pagamento Pendente</td>");
-                echo ("<td style='display: table; text-align:center;'><a href='https://api.whatsapp.com/send?phone=55".$obj['last_name']."' style='color: green !important;'><i class='fab fa-whatsapp'></i> Contato</a></td>");
+                echo ("<td style='display: table; text-align:center;'><a target='_blank' href='https://api.whatsapp.com/send?phone=55".$obj['last_name']."' style='color: green !important;'><i class='fab fa-whatsapp'></i> Contato</a></td>");
             }
             echo "</tr>";
         }

@@ -25,11 +25,11 @@ include('../includes/header.php');
                 <table class="table tablesorter table-hover" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                         <tr>
-                            <th style="display:none;">Id</th>
+                            <th>SKU</th>
                             <th>Lote</th>
                             <th>Valor</th>
                             <th>Quantidade</th>
-                            <th>Vendidos</th>
+                            <!-- <th>Vendidos</th> -->
                             <th>Validade</th>
                             <th></th>
                             <th>Lote Exclusivo</th>
@@ -45,6 +45,7 @@ include('../includes/header.php');
                     </tbody>
                 </table>
             </div>
+            Obs.: <b>Tornar Exclusivo</b> significa que apenas o produtor do Evento consegue visualizar e emitir ingressos desse lote, ideal para cortesias e ingressos de lotes com desconto no valor.
         </div>
     </div>
 </div>
@@ -55,15 +56,16 @@ function addTabela($consulta){
     $usuarios = selecionar($consulta);
     foreach ($usuarios as $obj) {
         echo "<tr>";
-            echo ("<td style='display:none;'>".$obj['id']."</td>"); 
+            echo ("<td>".$obj['id']."</td>"); 
             echo ("<td>".$obj['nome']."</td>"); 
             echo ("<td>R$".$obj['valor'].",00</td>"); 
             echo ("<td>".$obj['quantidade']."</td>");
-            echo ("<td>".$obj['vendidos']."</td>");
+            // echo ("<td>".$obj['vendidos']."</td>");
             $validade = $obj['validade'];
             echo ("<td>".$validade."</td>");
             if($validade == "DISPONÍVEL"){
-                echo ("<td style='display: flex;'><a href='editar.php?id=".$obj['id']."' class='iconeTabela'><i class='fas fa-user-edit'></i></a><a href='invalidar.php?id=".$obj['id']."' class='iconeTabela red'><i class='fas fa-user-times'></i></a></td>");  
+                // <a href='editar.php?id=".$obj['id']."' class='iconeTabela'><i class='fas fa-user-edit'></i></a>
+                echo ("<td style='display: flex;'><a href='invalidar.php?id=".$obj['id']."' class='iconeTabela red'><i class='fas fa-user-times'></i></a></td>");  
             }else if($validade == "ESGOTADO"){
                 echo ("<td><a href='reativar.php?id=".$obj['id']."' style='margin-left: 15px;'>Reativar</a><a href='excluir.php?id=".$obj['id']."' style='margin-left: 15px;'>Excluir</a></td>");
             }else if($validade == "EM BREVE"){

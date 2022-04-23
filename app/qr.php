@@ -1,9 +1,9 @@
 <?php
 include('includes/verificarAcesso.php');
-include('./includes/header.php');
+
 
 $codigo    = $_GET['codigo'];
-$consulta = "SELECT Ingresso.valor, Ingresso.validade, Ingresso.data, Ingresso.validade,
+$consulta = "SELECT Ingresso.valor, Ingresso.validade, Ingresso.data, Ingresso.validade, Ingresso.hash,
 Evento.id as idEvento, Evento.nome as evento, Evento.descricao as descricaoEvento,
 Vendedor.nome as vendedor, Cliente.nome as cliente, Cliente.telefone, Lote.nome as lote
 FROM Ingresso 
@@ -16,6 +16,12 @@ WHERE Ingresso.codigo = $codigo";
 $ingresso = selecionar($consulta);
 $ingresso = $ingresso[0];
 $evento = $ingresso['evento'];
+$hash = $ingresso['hash'];
+if($hash != ""){
+    header('Location: ./ingressos/?hash='.$hash);
+}else{
+    include('./includes/header.php');
+}
 $cliente = $ingresso['cliente'];
 $descricaoEvento = $ingresso['descricaoEvento'];
 $evento = $ingresso['evento'];

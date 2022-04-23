@@ -9,65 +9,83 @@
     $itemQuantity1 = $_POST['inputQuantidade']; //Quantidade
 
     //Pega dados necessários do Banco sobre o evento e lote;
-    $consulta = "SELECT Lote.nome as nomeLote, Lote.valor as valorLote, Lote.quantidade as quantidadeLote, 
-    Evento.nome as evento
+    $consulta = "SELECT Lote.nome as nomeLote, Lote.valor as valorLote, Lote.quantidade as quantidadeLote, Lote.vendidos,
+    Evento.nome as evento, Evento.id as idEvento
     FROM Lote 
     JOIN Evento ON Evento.id = Lote.evento
     WHERE Lote.id = '$itemId1'";
-    echo $consulta . "<br>";
     $dados = selecionar($consulta);
-    echo json_encode($dados) . "<br>";
     $nomeLote = $dados[0]['nomeLote'];
     $valorLote = $dados[0]['valorLote'];
     $quantidadeLote = $dados[0]['quantidadeLote'];
+    $vendidosLote = $dados[0]['vendidos'];
     $evento = $dados[0]['evento'];
+    $idEvento = $dados[0]['idEvento'];
 
+    //Dados do Comprador via POST
+    $senderName = $_POST['senderName'];
+    $inputTelefone = $_POST['inputTelefone'];
+    formatarTelefone($inputTelefone);
+    $senderEmail = $_POST['senderEmail'];
+    $promoter = $_POST['promoter'];
 
+    if($quantidadeLote <= $vendidosLote){
+        header('Location: http://ingressozapp.com/evento/?evento='.$idEvento.'&senderName='.$senderName.'&inputTelefone='.$inputTelefone.'&senderEmail='.$senderEmail);
+    }else{
+        descricao();
+
+        // //URL ENCODE
+        $itemId1 = myUrl($itemId1);
+        $itemDescription1 = myUrl($itemDescription1);
+        $itemAmount1 = myUrl($itemAmount1);
+        $itemQuantity1 = myUrl($itemQuantity1);
+        $senderName = myUrl($senderName);
+        $senderEmail = myUrl($senderEmail);
+
+        //Salvar transação no BD e pegar referência de todos os campos
+        $reference = salvarDadosBanco();
+        if($reference != 0){
+            $d = "&currency=BRL&itemId1=".$itemId1."&itemDescription1=".$itemDescription1."&itemAmount1=".$itemAmount1."&itemQuantity1=".$itemQuantity1."&reference=".$reference."&senderName=".$senderName."&senderAreaCode=".$senderAreaCode."&senderPhone=".$senderPhone."&senderEmail=".$senderEmail."&shippingAddressRequired=false&notificationURL=http://ingressozapp.com/app/pagSeguro/notificacao/&redirectURL=http://ingressozapp.com/app/pagSeguro/obrigado&extraAmount=".$extraAmount;
+            echo $d;
+            $response = callCurlPost("checkout", $d);
+            $xml = simplexml_load_string($response);
+            $json = json_encode($xml);
+            $array = json_decode($json,TRUE);
+            $code = $array['code'];
+            $link = "https://pagseguro.uol.com.br/v2/checkout/payment.html?code=". $code;
+        
+            $codigoSalvo = atualizarCodigo($code, $reference);
+            if($codigoSalvo == "Sucesso!"){
+                atulizarEstoque();
+                header('Location: '.$link);
+            }
+        }else{
+            echo "Erro ao salvar transação no banco de dados";
+        }
+    }
+
+    function descricao(){
+        global $itemDescription1, $evento, $nomeLote, $itemAmount1, $extraAmount, $valorLote, $itemQuantity1;
     //Descrição do Ingresso
     $itemDescription1 = "Ingresso ". $evento . "( ". $nomeLote . " )";
     //Valor do Lote
     $itemAmount1 = $valorLote . ".00";
     $extraAmount = number_format($valorLote * $itemQuantity1 * 0.1, 2, '.', '') ;
     
-
-    //Dados do Comprador via POST
-    $senderName = $_POST['senderName'];
-    $inputTelefone = $_POST['inputTelefone'];
-    $senderEmail = $_POST['senderEmail'];
-    $promoter = $_POST['promoter'];
-
-    //Formatar Telefone
-    $senderAreaCode = 67;
-    $senderPhone = 999654445;
-    formatarTelefone($inputTelefone);
-    
-    //URL ENCODE
-    $itemId1 = myUrl($itemId1);
-    $itemDescription1 = myUrl($itemDescription1);
-    $itemAmount1 = myUrl($itemAmount1);
-    $itemQuantity1 = myUrl($itemQuantity1);
-    $senderName = myUrl($senderName);
-    $senderEmail = myUrl($senderEmail);
-
-    //Salvar transação no BD e pegar referência de todos os campos
-    $reference = salvarDadosBanco();
-    if($reference != 0){
-        $d = "&currency=BRL&itemId1=".$itemId1."&itemDescription1=".$itemDescription1."&itemAmount1=".$itemAmount1."&itemQuantity1=".$itemQuantity1."&reference=".$reference."&senderName=".$senderName."&senderAreaCode=".$senderAreaCode."&senderPhone=".$senderPhone."&senderEmail=".$senderEmail."&shippingAddressRequired=false&notificationURL=https://ingressozapp.com/app/pagSeguro/notificacao/&redirectURL=https://ingressozapp.com/app/pagSeguro/obrigado&extraAmount=".$extraAmount;
-        echo $d;
-        $response = callCurlPost("checkout", $d);
-        $xml = simplexml_load_string($response);
-        $json = json_encode($xml);
-        $array = json_decode($json,TRUE);
-        $code = $array['code'];
-        $link = "https://pagseguro.uol.com.br/v2/checkout/payment.html?code=". $code;
-    
-        $codigoSalvo = atualizarCodigo($code, $reference);
-        if($codigoSalvo == "Sucesso!"){
-            header('Location: '.$link);
-        }
-    }else{
-        echo "Erro ao salvar transação no banco de dados";
     }
+    
+    function atulizarEstoque(){
+        global $itemId1, $vendidosLote, $itemQuantity1, $quantidadeLote;
+        $vendidosLote = $vendidosLote + $itemQuantity1;
+        if($vendidosLote > $quantidadeLote){
+            $consulta = "UPDATE `Lote` SET `vendidos`= '$vendidosLote' AND `validade` = 'ESGOTADO' WHERE `id` = '$itemId1'";
+        }else{
+            $consulta = "UPDATE `Lote` SET `vendidos`= '$vendidosLote'  WHERE `id` = '$itemId1'";
+        }
+        $msg = executar($consulta);
+    }
+
+    
     
 
     function callCurlPost($endpoint, $fields){

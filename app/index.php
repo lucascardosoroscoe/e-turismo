@@ -15,34 +15,38 @@ include('./includes/header.php');
                         if($idUsuario == ""){
                             echo '<a style="margin-bottom:10px;" class="btn btn-primary btn-block" href="login/index.php"><h6>Fazer login</h6></a>';
                         }else{
-                            echo '<a style="margin-bottom:10px;" class="btn btn-primary btn-block"  href="ingresso.php"><h6>Emitir ingresso</h6></a>';
+                            if($tipoUsuario != 1){
+                                echo '<a style="margin-bottom:10px;" class="btn btn-primary btn-block"  href="ingresso.php"><h6>Emitir ingresso</h6></a>';
+                            }else{
+                            echo '<a style="margin-bottom:10px;" class="btn btn-primary btn-block" href="login/index.php"><h6>Fazer login</h6></a>';
+                            }
                         }
                         ?>
-                        
+                         
                         <div class="menuSelecaoGuias">
                             <div class="row">
                                 <div class="col-lg-4">
                                     <a style="margin-bottom:10px;" class="btn btn-primary btn-block" href="#ingressozapp"><h6>IngressoZapp - Introdução <i class="fas fa-sort-down"></i></h6></a>
                                 </div>
                                 <div class="col-lg-4">
-                                    <a style="margin-bottom:10px;" class="btn btn-primary btn-block" href="#promoter"><h6>Promoter - Venda de Ingressos <i class="fas fa-sort-down"></i></h6></a>
+                                    <a style="margin-bottom:10px;" class="btn btn-primary btn-block" href="./produtores/adicionar.php"><h6><i class='fas fa-user-plus'></i> Produtor - Inscrição no IngressoZapp</h6></a>
                                 </div>
                                 <div class="col-lg-4">
-                                    <a style="margin-bottom:10px;" class="btn btn-primary btn-block" href="#intro"><h6>Produtor - Inscrição no IngressoZapp <i class="fas fa-sort-down"></i></h6></a>
+                                    <a style="margin-bottom:10px;" class="btn btn-primary btn-block" href="./vendas"><h6><i class="fas fa-tachometer-alt"></i> Acompanhar Minhas Vendas</i></h6></a>
                                 </div>
-                            </div>
+                            </div> 
                             <div class="row">
                                 <div class="col-lg-4">
-                                    <a style="margin-bottom:10px;" class="btn btn-primary btn-block" href="#barIntro"><h6>Bar - Introdução <i class="fas fa-sort-down"></i></h6></a>
+                                    <a style="margin-bottom:10px;" class="btn btn-primary btn-block" href="./eventos"><h6><i class="far fa-calendar-alt"></i> Meus Eventos</h6></a>
                                 </div>
                                 <div class="col-lg-4">
-                                    <a style="margin-bottom:10px;" class="btn btn-primary btn-block" href="#caixa"><h6>Caixa - Carregando Saldo <i class="fas fa-sort-down"></i></h6></a>
+                                    <a style="margin-bottom:10px;" class="btn btn-primary btn-block" href="./vendedores"><h6><i class="fas fa-user-friends"></i> Meus Vendedores</h6></a>
                                 </div>
                                 <div class="col-lg-4">
-                                    <a style="margin-bottom:10px;" class="btn btn-primary btn-block" href="#bar"><h6>Bar - Entrega dos Produtos <i class="fas fa-sort-down"></i></h6></a>
-                                </div>
+                                    <a style="margin-bottom:10px;" class="btn btn-primary btn-block" href="./clientes"><h6><i class="fas fa-user-friends"></i> Meus Clientes</h6></a>
+                                </div> 
                             </div>
-                            <div class="row">
+                            <!-- <div class="row">
                                 <div class="col-lg-4">
                                     <a style="margin-bottom:10px;" class="btn btn-primary btn-block" href="#portaria"><h6>Portaria - Conferência de Ingressos <i class="fas fa-sort-down"></i></h6></a>
                                 </div>
@@ -52,13 +56,13 @@ include('./includes/header.php');
                                 <div class="col-lg-4">
                                     <a style="margin-bottom:10px;" class="btn btn-primary btn-block" href="#produtor"><h6>Produtor - Dicas <i class="fas fa-sort-down"></i></h6></a>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                         
                         <div id="ingressozapp" class="row">
-                            <div class="col-lg-12">
+                            <!-- <div class="col-lg-12">
                                 <h5 style="padding-top:50px; padding-bottom: 30px;">IngressoZapp - Introdução</h5>
-                            </div>
+                            </div> -->
                             <div class="col-lg-4">
                                 <img src="img/ingressozapp.png" style="width:100%" alt="Imagem App Ingressozapp" srcset="">
                             </div>
@@ -73,7 +77,7 @@ include('./includes/header.php');
                                 </p>
                             </div>
                         </div>
-                        <div id="promoter" class="row">
+                        <!-- <div id="promoter" class="row">
                             <div class="col-lg-12">
                                 <h5 style="padding-top:50px; padding-bottom: 30px;"> Promoter - Venda de ingressos</h5>
                             </div>
@@ -220,7 +224,7 @@ include('./includes/header.php');
                                     O aplicativo além de permitir ao produtor acompanhar em tempo real a venda dos ingressos, monitora individualmente o desempenho de seus vendedores, e, ainda gera informações importantes para as estratégias de Marketing adotadas por ele, faz o cadastro dos produtos e vendas do bar em tempo real, online, com ou sem o uso de um cartão físico com a tecnologia QR CODE disponibilizados para os produtores pela Empresa, elimina a logística de distribuição e reposição de ingresso, extingue o custo de impressão dos ingressos físicos, impede fraudes, permite um maior e melhor controle de disponibilidade dos lotes a venda e, ainda constrói um banco de dados organizado dos clientes, facilitando o marketing para os eventos futuros. Unindo a venda dos Ingressos, vendas do bar e o controle de custos do seu evento, tenha relatórios completos do seu resultado financeiro. Evite surpresas e tenha mais assertividade em sua estratégia com o IngressoZapp.<br>
                                 </p>
                             </div>
-                        </div>
+                        </div> -->
                                           
                     </div>
                 </div>

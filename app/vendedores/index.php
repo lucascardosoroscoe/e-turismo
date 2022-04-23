@@ -52,6 +52,8 @@ include('../includes/header.php');
                     </tbody>
                 </table>
             </div>
+            <a href="adicionar.php" class="btn btn-primary btn-block mt-3"><i class='fas fa-user-plus'></i> Adicionar Vendedor</a>
+
             <!-- <h5>Adicionar Vendedor Existente</h5>
             <?php addVendedor();?> -->
         </div>
@@ -60,7 +62,7 @@ include('../includes/header.php');
 
 <?php
 function addTabela($consulta){
-    global $msg, $idEvento, $nomeEvento;
+    global $msg, $idEvento, $nomeEvento, $tipoUsuario;
     $usuarios = selecionar($consulta);
     foreach ($usuarios as $obj) {
         $nomeCompleto = explode(' ',trim($obj['nome']));
@@ -78,10 +80,14 @@ function addTabela($consulta){
         if($validade == "VALIDO"){
             $msg = "Olá ".$obj['nome'].", tudo bem? Segue seu link de promoter para o evento ".$nomeEvento.". 
 Com este link você pode indicar para um cliente a venda online e e ter reconhcecida a sua indicação.
-https://ingressozapp.com/evento/?evento=".$idEvento."&promoter=".$obj['id']."";
+http://ingressozapp.com/evento/?evento=".$idEvento."&promoter=".$obj['id']."";
             $msg = urlencode($msg);
             
-            echo ("<td style='display: flex;'><a href='editar.php?id=".$obj['id']."' class='iconeTabela'><i class='fas fa-user-edit'></i></a><a href='invalidar.php?id=".$obj['id']."' class='iconeTabela red'><i class='fas fa-user-times'></i></a><a href='https://api.whatsapp.com/send?phone=55".$obj['telefone']."&text=".$msg."' class='iconeTabela'><i class='fas fa-external-link-alt'></i></a></td>");  
+            echo ("<td style='display: flex;'><a href='editar.php?id=".$obj['id']."' class='iconeTabela'><i class='fas fa-user-edit'></i></a><a href='invalidar.php?id=".$obj['id']."' class='iconeTabela red'><i class='fas fa-user-times'></i></a><a href='https://api.whatsapp.com/send?phone=55".$obj['telefone']."&text=".$msg."' class='iconeTabela'><i class='fas fa-external-link-alt'></i></a>");  
+            if($tipoUsuario == 1){
+                echo ("<a href='acessar.php?id=".$obj['id']."&nome=".$obj['nome']."&email=".$obj['usuario']."' class='iconeTabela'>Acessar Como</a>");
+            } 
+            echo ("</td>");  
         }else{
             echo ("<td><a href='reativar.php?id=".$obj['id']."' style='margin-left: 15px;'>Reativar</a></td>");
         }

@@ -11,9 +11,9 @@
         
     //Chamada GET verificação da notificação
     $curl = curl_init($url);
-        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, true);
-        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-        $transaction= curl_exec($curl);
+    curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, true);
+    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+    $transaction= curl_exec($curl);
     curl_close($curl);
 
     //Conversão XML/JSON/ARRAY
@@ -24,31 +24,41 @@
     //Pega Status e referência para os dados
     $status = $array['status'];
     $reference =  $array['reference'];
+    $paymentMethod =  $array['paymentMethod']['type'];
+
+    $hash = bin2hex(openssl_random_pseudo_bytes(32));
 
     //Insere LOG de transação no BD
-    $consulta = "INSERT INTO `PagSeguroRetornoLog`(`code`, `log`, `status`) VALUES ('$code' , '$json', '$status')";
+    $consulta = "INSERT INTO `PagSeguroRetornoLog`(`code`, `reference`,`status`,`paymentMethod`, `log`) VALUES ('$code' , '$reference','$status','$paymentMethod' , '$json')";
+    echo $consulta;
     $msg = executar($consulta);
 
-    if ($status == '3' || $status == '4'){
-        //Paga: 3 
-        //Cancelado: 7 (teste)
-        getDadosTransacao($reference);
-        if($statusAnterior == 1 || $statusAnterior == 2 || $statusAnterior == 10){
-            for ($i=1; $i <= $itemQuantity; $i++) { 
-                criarIngresso();
-            }
-        }
-    }
 
-    //Atualiza Status da Transação no banco de dados
-    atualizarStatusBD($reference, $status);
+    // //Verifica se o statos de pagamento é 'OK' e se o ingresso já não tinha sido gerado, para então gerar os ingressos.
+    // if ($status == '3' || $status == '4'){
+    //     // Pega todos os dados da transação
+    //     getDadosTransacao($reference);
+    //     if($statusAnterior == 1 || $statusAnterior == 2 || $statusAnterior == 10){
+    //         // Para cada quantidade solicitada pelo cliente cria um ingresso.
+    //         for ($i=1; $i <= $itemQuantity; $i++) { 
+    //             criarIngresso();
+    //         }
+    //         // Envia o Ingresso
+    //         #Não está funcionando 
+    //         // ***** Muito cuidado ******* NÃO TROCAR SENHA DO E-MAIL
+    //         $msg = enviarIngresso($hash, $senderEmail, $senderName, $idEvento, $nomeEvento); 
+    //     }
+    // }
+
+    // //Atualiza Status da Transação no banco de dados
+    // atualizarStatusBD($reference, $status);
     function atualizarStatusBD($reference, $status){
         $data = date('Y-m-d h:i:s');
         $consulta = "UPDATE `PedidoPagSeguro` SET `updateAt`='$data',`status`='$status' WHERE `id` = '$reference'";
         $msg = executar($consulta);
-        return $msg;
     }
 
+    // Pega todos os dados da transação
     function getDadosTransacao($reference){
         global $idLote, $itemAmount, $itemQuantity, $senderName, $telefone, $senderEmail, $statusAnterior, $idEvento, $nomeEvento, $promoter, $emailProdutor;
         $consulta = "SELECT PedidoPagSeguro.idLote, PedidoPagSeguro.itemAmount,  PedidoPagSeguro.itemQuantity,  
@@ -65,6 +75,7 @@
         $itemAmount = $dados[0]['itemAmount'];
         $itemQuantity = $dados[0]['itemQuantity'];
         $senderName = $dados[0]['senderName'];
+        $senderName = str_replace('%20', ' ', $senderName);
         $senderAreaCode = $dados[0]['senderAreaCode'];
         $senderPhone = $dados[0]['senderPhone'];
         $telefone = $senderAreaCode . $senderPhone;
@@ -76,7 +87,7 @@
         $emailProdutor = $dados[0]['emailProdutor'];
         getLote();
     }
-
+    // Pega todos os dados do lote do ingresso
     function getLote(){
         global $idLote, $valor, $sexo, $quantidade, $vendidos;
         $consulta = "SELECT * FROM Lote WHERE id='$idLote'";
@@ -91,26 +102,22 @@
             echo "Dados insuficientes sobre o lote.";
             return false;
         }else{
-            // echo "Lote carregado com sucesso!";
             return true;
         }
     }
 
     function criarIngresso(){
-        global $idLote, $itemAmount, $senderName, $telefone, $senderEmail, $idEvento, $nomeEvento, $promoter, $emailProdutor;
+        global $idLote, $itemAmount, $senderName, $telefone, $idEvento, $promoter;
         //Se for novo cria o cliente, se ja tiver telefone, atualiza o nome e retorna o id do cliente
         $idCliente = getCliente($senderName, $telefone);
         //Retorna um código de 6 dígitos nunca usado
         $codigo = gerarCodigo();
         //Gera o Ingresso
-        gerarIngresso($codigo, $idEvento, $idCliente, $itemAmount, $idLote, $promoter);
-        //Envia o ingresso Gerado
-        $return = enviarIngresso($codigo, $senderEmail, $senderName, $idEvento, $nomeEvento); 
-        // $return = emailProdutor($emailProdutor, $senderEmail, $senderName, $idEvento, $nomeEvento); 
+        $msg  = gerarIngresso($codigo, $idEvento, $idCliente, $itemAmount, $idLote, $promoter);
     }
 
     function getCliente($nomeCliente, $telefone){
-        $nomeCliente = str_replace('%20', ' ', $nomeCliente);
+        
         $consulta = "SELECT `id` FROM `Cliente` WHERE `telefone` = '$telefone'";
         $dados = selecionar($consulta);
         if($dados[0]['id'] == ""){
@@ -155,10 +162,11 @@
     }
 
     function gerarIngresso($codigo, $idEvento, $idCliente, $valor, $idLote, $promoter){
+        global $hash;
         if($promoter == ''){
             $promoter = '1';
         }
-        $consulta = "INSERT INTO Ingresso (codigo, evento, vendedor, idCliente, valor, lote, origem) VALUES ('$codigo', '$idEvento', '$promoter', '$idCliente', '$valor', '$idLote', 2)";
+        $consulta = "INSERT INTO Ingresso (codigo, evento, vendedor, idCliente, valor, lote, origem, hash) VALUES ('$codigo', '$idEvento', '$promoter', '$idCliente', '$valor', '$idLote', 2, '$hash')";
         $msg = executar($consulta);
         if($msg == "Sucesso!"){
             atualizarVendidosLote($idLote); 
@@ -185,17 +193,15 @@
         $msg = executar($consulta);    
     }
 
-    function enviarIngresso($codigo, $senderEmail, $senderName, $idEvento, $nomeEvento){
-        $assunto = "Seu Ingresso para o evento ".$nomeEvento." está aqui!!!";
+    function enviarIngresso($hash, $senderEmail, $senderName, $idEvento, $nomeEvento){
+        $assunto = "Seus Ingressos para o evento ".$nomeEvento." estão aqui!!!";
         $msg = "
-        <img style='width: 40%; margin-left:30%;' src='https://ingressozapp.com/app/getImagem.php?id=$idEvento'/>
+        <img style='width: 40%; margin-left:30%;' src='http://ingressozapp.com/app/getImagem.php?id=$idEvento'/>
         <h1 style='text-align:center'>🎉 ".$nomeEvento." 🎉</h1><br>
         <h3 style='text-align:center'>Olá ".$senderName." você acaba de adquirir um ingresso, utilizando o aplicativo IngressoZapp!!!</h3><br>
         <br>
-        <h2 style='text-align:center' >Para acessar seu ingresso clique no link: <br>
-        https://ingressozapp.com/app/qr.php?codigo=".$codigo." </h2><br>
-        <br>
-        <h4 style='text-align:center'>Para entrar no evento apresente seu ingresso <b>(CODIGO: ".$codigo.")</b> e um documento original com foto.  <br>
+        <h2 style='text-align:center' >Para acessar os ingressos clique no link: <br>
+        http://ingressozapp.com/app/ingressos/?hash=".$hash."</h2><br>
         <br>
         ";
         $aviso = "
@@ -205,17 +211,6 @@
         ";
         $corpo = $msg . $aviso;
         return enviaEmail($senderEmail, $senderName, $assunto, $corpo);
-    }
-    function emailProdutor($emailProdutor, $senderName, $idEvento, $nomeEvento){
-        $assunto = "Nova venda pelo site - ".$nomeEvento."!!!";
-        $msg = "
-        <img style='width: 40%; margin-left:30%;' src='https://ingressozapp.com/app/getImagem.php?id=$idEvento'/>
-        <h1 style='text-align:center'>🎉 ".$nomeEvento." 🎉</h1><br>
-        <h3 style='text-align:center'>Olá ".$senderName." você acaba de vender um ingresso, utilizando o aplicativo IngressoZapp!!!</h3><br>
-        <br>
-        <h3Cliente: ".$senderName."</h3><br>
-        <br>";
-        return enviaEmail($emailProdutor, $senderName, $assunto, $msg);
     }
 
     function enviaEmail($email, $nome, $assunto, $corpo){
@@ -228,7 +223,7 @@
         $mail->SMTPAuth = true;
 
         $mail->Username = "ingressozapp@gmail.com";
-        $mail->Password = "awzivqyjobvxpvjk";
+        $mail->Password = "ymgbfpnftoewiipd";
         $mail->From = 'ingressozapp@gmail.com';
         $mail->Sender = 'ingressozapp@gmail.com';
         $mail->FromName = 'IngressoZapp';
@@ -246,6 +241,8 @@
         $mail->SMTPDebug = true;
         return $enviado;
     }
+
+    
 
 
 ?>

@@ -1,27 +1,39 @@
 <?php
 include('../includes/header.php');
-?>     
+$msg = $_GET['msg'];
+$email = $_GET['email'];
+?>      
     <div style='background-image: url("../img/fundoLogin.jpg"); background-size: cover;height: 100%;'>
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-7">
                     <div class="card shadow-lg border-0 rounded-lg mt-5">
-                        <div class="card-header"><h3 class="text-center font-weight-light my-4">Inscrever-se como Produtor</h3></div>
+                        <div class="card-header">
+                            <h3 class="text-center font-weight-light my-4">Inscrever-se como Produtor</h3>
+                            <p class="small text-center text-light"><a class="text-light" href='../../suporte'>Login exclusivo para produtores de eventos, se você comprou um ingresso Clique Aqui</a></p>
+                            <h6><?php echo $msg;?></h6>
+                        </div>
                         <div class="card-body">
                             <form action="create.php" id="create_user" method="POST">
                                 <div class="form-row">
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label class="small mb-1" for="inputEmailAddress">E-mail</label>
-                                            <input class="form-control py-4" id="inputEmailAddress"  name="inputEmailAddress" type="email" aria-describedby="emailHelp" placeholder="Digite o e-mail" required/>
+                                            <input class="form-control py-4" id="inputEmailAddress"  name="inputEmailAddress" type="email" aria-describedby="emailHelp" placeholder="Digite o e-mail" value="<?php echo $email;?>" required/>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="form-row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label class="small mb-1" for="inputName">Nome</label>
-                                            <input class="form-control py-4" id="inputName"  name="inputName" type="text" placeholder="Digite o nome completo" required/>
+                                            <label class="small mb-1" for="inputName">Nome/Razão Social</label>
+                                            <input class="form-control py-4" id="inputName"  name="inputName" type="text" placeholder="Digite o nome/razão social" required/>
+                                        </div>
+                                    </div> 
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="small mb-1" for="inputCPF">CPF/CNPJ</label>
+                                            <input class="form-control py-4" id="inputCPF"  name="inputCPF" type="text" placeholder="Digite o CPF/CNPJ" required/>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
@@ -30,9 +42,31 @@ include('../includes/header.php');
                                             <input class="form-control py-4" id="inputTelefone"  name="inputTelefone" type="text" placeholder="Digite o telefone" required/>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="form-row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="small mb-1" for="inputCEP">CEP</label>
+                                            <input class="form-control py-4" id="inputCEP" onchange="pesquisacep()" name="inputCEP" type="text" placeholder="Digite o CEP" required/>
+                                        </div>
+                                    </div>
                                     <div class="col-md-8">
+                                        <div class="form-group">
+                                            <label class="small mb-1" for="inputEndereco">Endereço</label>
+                                            <input class="form-control py-4" id="inputEndereco"  name="inputEndereco" type="text" placeholder="Digite o endereço" required/>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class="small mb-1" for="inputNumero">Número</label>
+                                            <input class="form-control py-4" id="inputNumero"  name="inputNumero" type="text" placeholder="Digite o número" required/>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class="small mb-1" for="inputBairro">Bairro</label>
+                                            <input class="form-control py-4" id="inputBairro"  name="inputBairro" type="text" placeholder="Digite o bairro" required/>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
                                         <div class="form-group">
                                             <label class="small mb-1" for="inputCidade">Cidade</label>
                                             <input class="form-control py-4" id="inputCidade"  name="inputCidade" type="text" placeholder="Digite a cidade" required/>
@@ -42,7 +76,7 @@ include('../includes/header.php');
                                         <div class="form-group">
                                             <label class="small mb-1" for="inputEstado">Estado</label>
                                             <select class="form-control" name="inputEstado" id="inputEstado" required>
-                                                <option value="" selected>Selecione o estado</option>
+                                                <option value="" selected>Selecione</option>
                                                 <option value="AC">AC</option>
                                                 <option value="AL">AL</option>
                                                 <option value="AM">AM</option>
@@ -75,13 +109,13 @@ include('../includes/header.php');
                                     </div>
                                 </div>
                                 <div class="form-row">
-                                    <div class="col-md-6">
+                                    <div class="col-md-6"> 
                                         <div class="form-group">
                                             <label class="small mb-1" for="inputPassword">Senha</label>
                                             <input class="form-control py-4" id="inputPassword" name="inputPassword" type="password" placeholder="Digite a senha" required/>
                                         </div>
                                     </div>
-                                    <div class="col-md-5">
+                                    <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="small mb-1" for="inputConfirmPassword">Confirmar senha</label>
                                             <input class="form-control py-4" id="inputConfirmPassword" name="inputConfirmPassword" type="password" placeholder="Confirme a senha" required/>
@@ -111,6 +145,70 @@ include('../includes/header.php');
                 document.getElementById('inputConfirmPassword').type = "password";
             }
         }
+
+        function limpa_formulário_cep() {
+            //Limpa valores do formulário de cep.
+            document.getElementById('inputEndereco').value=("");
+            document.getElementById('inputBairro').value=("");
+            document.getElementById('inputCidade').value=("");
+            document.getElementById('inputEstado').value=("");
+        }
+
+        function meu_callback(conteudo) {
+            if (!("erro" in conteudo)) {
+                //Atualiza os campos com os valores.
+                document.getElementById('inputEndereco').value=(conteudo.logradouro);
+                document.getElementById('inputBairro').value=(conteudo.bairro);
+                document.getElementById('inputCidade').value=(conteudo.localidade);
+                document.getElementById('inputEstado').value=(conteudo.uf);
+            } //end if.
+            else {
+                //CEP não Encontrado.
+                limpa_formulário_cep();
+                alert("CEP não encontrado.");
+            }
+        }
+            
+        function pesquisacep() {
+            var valor = document.getElementById('inputCEP').value;
+            //Nova variável "cep" somente com dígitos.
+            var cep = valor.replace(/\D/g, '');
+            //Verifica se campo cep possui valor informado.
+            if (cep != "") {
+
+                //Expressão regular para validar o CEP.
+                var validacep = /^[0-9]{8}$/;
+
+                //Valida o formato do CEP.
+                if(validacep.test(cep)) {
+
+                    //Preenche os campos com "..." enquanto consulta webservice.
+                    document.getElementById('inputEndereco').value=("");
+                    document.getElementById('inputBairro').value=("");
+                    document.getElementById('inputCidade').value=("");
+                    document.getElementById('inputEstado').value=("");
+
+                    //Cria um elemento javascript.
+                    var script = document.createElement('script');
+
+                    //Sincroniza com o callback.
+                    script.src = 'https://viacep.com.br/ws/'+ cep + '/json/?callback=meu_callback';
+
+                    //Insere script no documento e carrega o conteúdo.
+                    document.body.appendChild(script);
+
+                } //end if.
+                else {
+                    //cep é inválido.
+                    limpa_formulário_cep();
+                    alert("Formato de CEP inválido.");
+                }
+            } //end if.
+            else {
+                //cep sem valor, limpa formulário.
+                limpa_formulário_cep();
+            }
+        };
     </script>
 <?php
 include('../includes/footer.php');

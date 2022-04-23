@@ -20,14 +20,21 @@ if($telefone == $telefoneAntigo){
     modificarCliente($codigo, $telefone, $idCliente, $inputName);
 }
 
-$consulta = "SELECT * FROM `Lote` WHERE `id` = '$selectLote'";
-$dados = selecionar($consulta);
-$valor = $dados[0]['valor'];
-$consulta = "UPDATE `Ingresso` SET `valor`='$valor',`lote`='$selectLote' WHERE `codigo` = '$codigo'";
-$msg = executar($consulta);
-if($msg == "Sucesso!"){
+if($tipoUsuario == 1){
+    $consulta = "SELECT * FROM `Lote` WHERE `id` = '$selectLote'";
+    $dados = selecionar($consulta);
+    $valor = $dados[0]['valor'];
+    $consulta = "UPDATE `Ingresso` SET `valor`='$valor',`lote`='$selectLote' WHERE `codigo` = '$codigo'";
+    $msg = executar($consulta);
+    if($msg == "Sucesso!"){
+        header('Location: index.php?msg='.$msg);
+    }
+}else{
     header('Location: index.php?msg='.$msg);
+
 }
+
+
 
 
 function modificarCliente($codigo, $telefone, $idCliente, $inputName){

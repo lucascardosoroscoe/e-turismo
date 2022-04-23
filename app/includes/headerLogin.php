@@ -26,13 +26,12 @@ setlocale(LC_ALL, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
 ?>
 <body class="sb-nav-fixed">
     <!-- Barra Topo do Site -->
-      <nav class="sb-topnav navbar navbar-expand " style="background-color: #fff;">
+      <nav class="sb-topnav navbar navbar-expand bg-dark">
       <!-- navbar-dark bg-dark -->
         <!-- Título Site -->
         
           <a class="navbar-brand" href="<?php echo $HTTP_HOST . "/app";?>/index.php"><img src="<?php echo $HTTP_HOST . "/app";?>/img/logo.png" alt="Soluções2c" srcset="" style="height:40px;"></a>
         <!-- Botão do Menu -->
-          <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button>
         <!-- Barra de Pesquisa -->
           <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
             <!-- <div class="input-group">
@@ -53,33 +52,7 @@ setlocale(LC_ALL, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
           </ul>
       </nav>
     <!-- Menu Lateral Esquerda -->
-      <div id="layoutSidenav">
-        <div id="layoutSidenav_nav">
-          <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
-            <div class="sb-sidenav-menu">
-              <div class="nav">
-              </div>
-            </div>
-            <div class="sb-sidenav-footer">
-                <div class="small">Logado como
-                  <?php 
-                    if($tipoUsuario == 1){
-                      echo " Administrador:";
-                    }else if($tipoUsuario == 2){
-                      echo " Produtor";
-                    }else if($tipoUsuario == 3){
-                      echo " Promoter:";
-                    }else if($tipoUsuario == 4){
-                      echo " Cliente:";
-                    }
-                  ?>
-                </div>
-                <?php if($tipoUsuario != ''){echo $usuario;} ?>
-            </div>
-          </nav>
-        </div>
-
-
-<div id="layoutSidenav_content">
-  <main class="fh">
+      <div>
+      <div>
+      <main class="fh">
   

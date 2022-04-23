@@ -5,5 +5,5 @@
     $id = $_POST['id'];
     echo $selectCaixa;
     $_SESSION["nCaixa"] = $nCaixa;
-    header('Location: https://ingressozapp.com/app/caixa/index.php?id=' . $id);
+    header('Location: http://ingressozapp.com/app/caixa/index.php?id=' . $id);
 ?>

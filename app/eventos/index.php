@@ -29,6 +29,7 @@ include('../includes/header.php');
                             }
                             ?>
                             <th>Data</th>
+                            <th>Link</th>
                             <th>Descrição</th>
                             <th>Validade</th>
                             <th></th>
@@ -37,7 +38,7 @@ include('../includes/header.php');
                     <tbody id="tbody">
                         <?php
                             if($tipoUsuario == 1){
-                                $consulta = "SELECT Evento.id, Evento.nome, Produtor.nome as produtor, Evento.data, Evento.descricao, Evento.validade
+                                $consulta = "SELECT Evento.id, Evento.nome, Evento.slug, Produtor.nome as produtor, Evento.data, Evento.descricao, Evento.validade
                                 FROM Evento JOIN Produtor ON Evento.produtor = Produtor.id WHERE Evento.validade != 'EXCLUIDO'";
                                 addTabela($consulta);
                             }else if($tipoUsuario == 2){
@@ -64,11 +65,12 @@ function addTabela($consulta){
             echo ("<td>".$obj['produtor']."</td>"); 
         }
         echo ("<td>".$obj['data']."</td>");
+        echo ("<td><a href='https://ingressozapp.com/produtos/".$obj['slug']."'>ingressozapp.com/produtos/".$obj['slug']."</a></td>");
         echo ("<td>".$obj['descricao']."</td>");
         $validade = $obj['validade'];
         echo ("<td>".$obj['validade']."</td>");
         if($validade == "VALIDO"){
-            echo ("<td style='display: flex;'><a href='editar.php?id=".$obj['id']."' class='iconeTabela'><i class='fas fa-user-edit'></i></a><a href='invalidar.php?id=".$obj['id']."' class='iconeTabela red'><i class='fas fa-user-times'></i></a><a href='../../evento/?evento=".$obj['id']."' class='iconeTabela'><i class='fas fa-eye'></i></a></td>");  
+            echo ("<td style='display: flex;'><a href='editar.php?id=".$obj['id']."' class='iconeTabela'><i class='fas fa-user-edit'></i></a><a href='invalidar.php?id=".$obj['id']."' class='iconeTabela red'><i class='fas fa-user-times'></i></a></td>");  
         }else{
             echo ("<td><a href='reativar.php?id=".$obj['id']."' style='margin-left: 15px;'>Reativar</a><a href='excluir.php?id=".$obj['id']."' class='red' style='margin-left: 15px;'>Excluir</a></td>");
         }

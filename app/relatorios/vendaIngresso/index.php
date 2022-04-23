@@ -14,10 +14,19 @@ $nomeSecretaria = $_SESSION["nomeSecretaria"];
 $idSecretaria = $_SESSION["idSecretaria"];
 ?>
 <div class="container-fluid">
+
     <ol class="breadcrumb mb-4" style="margin-top: 20px !important">
-        <?php 
-        selectEvento();
-        ?>
+        <div class="d-flex w-100 ">
+            <div style="width:50%">
+                <?php 
+                    selectEvento();
+                ?>
+            </div>
+            <div style="width:50%">
+                <div class="btn btnAdd" onclick="fnExcelReport('dataTable')" style="margin-left: 2px;color: #000;border-color: #000;"><i class="far fa-file-excel"></i> Exportar Excel</div>
+            </div>
+        </div>
+        
         <!-- <form action="veiculo.php" method="get">
             <input type="date" name="dataInicial" id="dataInicial" value="<?php echo $dataInicial;?>">
             <input type="date" name="dataFinal" id="dataFinal" value="<?php echo $dataFinal;?>">
@@ -35,78 +44,71 @@ $idSecretaria = $_SESSION["idSecretaria"];
             ?>
         </div>
         <div class="card-body" style="background-color: #eee;">
-            <div id="graphsList" style="display:none;"><?php echo getGraphs();?></div>
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="chartArea">
-                        <div class="chat" id="chart_div5"></div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="chartArea">
-                        <div class="chat" id="chart_div1"></div>
-                    </div>
-                    <div class="chartArea">
-                        <div class="chat" id="chart_div2"></div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="chartArea">
-                        <div class="chat" id="chart_div3"></div>
-                    </div>
-                    <div class="chartArea">
-                        <div class="chat" id="chart_div4"></div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="chartArea">
-                        <div class="chat" id="chart_div6"></div>
-                    </div>
-                    <div class="chartArea">
-                        <div class="chat" id="chart_div7"></div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- <div class="row">
-                <div class="col-md-6">
-                    <div class="chartArea">
-                        <div class="chat" id="chart_div6"></div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="chartArea">
-                        <div class="chat" id="chart_div7"></div>
-                    </div>
-                </div>
-            </div> -->
-            <div class="row">
-                <div class="col-md-12">
-                    
-                    <h3 style="margin-top: 20px;">DETALHAMENTO DE VENDAS</h3>
-                    <div class="row">
-                        <div class="col-md-8" style="float:left; margin-top: 5px;">
-                            <input class="form-control" type="text" placeholder="Buscar..." style="margin-bottom: 5px" id="buscar" onkeyup="buscar()"/>
-                        </div>
-                        <div class="col-md-4" style="margin-top: 10px; text-align:center;">
-                            <div class="btn btnAdd" onclick="fnExcelReport('dataTable')" style="margin-left: 2px;color: #000;border-color: #000;"><i class="far fa-file-excel"></i> Exportar Excel</div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6" style="margin-top: 10px; text-align:center;">
-                            <h5>Numero de Ingressos: <span id='qIngressos'>R$</span></h5>
-                        </div>
-                        <div class="col-md-6" style="margin-top: 10px; text-align:center;">
-                            <h5>Total Faturado: <span id='total'>R$</span></h5>
-                        </div>
-                    </div>
-                    <?php 
-                        addTabelaVendas();
-                    ?>
-                </div>
-            </div>
+        <?php
+            if($idEvento ==""){
+                echo '<h2 class="text-center">Selecione o Evento</h2>';
+            }else{
+                echo '<div id="graphsList" style="display:none;">';
+                echo getGraphs();
+                echo'</div>';
+                echo '<div class="row">';
+                echo '<div class="col-md-12">';
+                echo '<div class="chartArea">';
+                echo '<div class="chat" id="chart_div5"></div>';
+                echo '</div>';
+                echo '</div>';
+                echo '</div>';
+                echo '<div class="row">';
+                echo '<div class="col-md-4">';
+                echo '<div class="chartArea">';
+                echo '<div class="chat" id="chart_div1"></div>';
+                echo '</div>';
+                echo '<div class="chartArea">';
+                echo '<div class="chat" id="chart_div2"></div>';
+                echo '</div>';
+                echo '</div>';
+                echo '<div class="col-md-4">';
+                echo '<div class="chartArea">';
+                echo '<div class="chat" id="chart_div3"></div>';
+                echo '</div>';
+                echo '<div class="chartArea">';
+                echo '<div class="chat" id="chart_div4"></div>';
+                echo '</div>';
+                echo '</div>';
+                echo '<div class="col-md-4">';
+                echo '<div class="chartArea">';
+                echo '<div class="chat" id="chart_div6"></div>';
+                echo '</div>';
+                echo '<div class="chartArea">';
+                echo '<div class="chat" id="chart_div7"></div>';
+                echo '</div>';
+                echo '</div>';
+                echo '</div>';
+                
+                echo '<div class="row">';
+                echo '<div class="col-md-12">';
+                        
+                echo '<h3 style="margin-top: 20px;">DETALHAMENTO DE VENDAS</h3>';
+                echo '<div class="row">';
+                echo '<div class="col-md-8" style="float:left; margin-top: 5px;">';
+                echo '<input class="form-control" type="text" placeholder="Buscar..." style="margin-bottom: 5px" id="buscar" onkeyup="buscar()"/>';
+                echo '</div>';
+                echo '<div class="col-md-4" style="margin-top: 10px; text-align:center;">';
+                echo '</div>';
+                echo '</div>';
+                echo '<div class="row">';
+                echo '<div class="col-md-6" style="margin-top: 10px; text-align:center;">';
+                echo '<h5>Numero de Ingressos: <span id="qIngressos">R$</span></h5>';
+                echo '</div>';
+                echo '<div class="col-md-6" style="margin-top: 10px; text-align:center;">';
+                echo '<h5>Total Faturado: <span id="total">R$</span></h5>';
+                echo '</div>';
+                echo '</div>';
+                addTabelaVendas();
+                echo '</div>';
+                echo '</div>';
+            }
+        ?>
 
         </div>
     </div>
@@ -354,7 +356,6 @@ $idSecretaria = $_SESSION["idSecretaria"];
           
         return $graph;
     }
-
     function graph7($obg){
         $columns = [
             ['string', 'Data'],
@@ -391,40 +392,37 @@ $idSecretaria = $_SESSION["idSecretaria"];
     }
 
     function addTabelaVendas(){
-        global $idEvento, $idUsuario;
-        echo('<div class="table-responsive">');
-            echo('<table id="dataTable" class="table  tablesorter table-hover" width="100%" cellspacing="0">');
-                echo('<thead>');
-                    echo('<tr>');
-                    echo('<th>Código</th>');
-                    echo('<th>Cliente</th>');
-                    echo('<th>Valor</th>');
-                    echo('<th>Lote</th>');
-                    echo('<th>Telefone</th>');
-                    echo('<th>Vendedor</th>');
-                    echo('<th>Data</th>');
-                    echo('<th>Validade</th>');
-                    echo('<th></th>');
-                    echo('</tr>');
-                echo('</thead>');
-                echo('<tbody id="tbody">');
-                    if($idEvento == ""){
-                        $consulta = "SELECT Ingresso.codigo, Ingresso.origem, Ingresso.data, Vendedor.nome as vendedor, Cliente.nome as cliente, Cliente.telefone as telefone, Ingresso.valor, Ingresso.validade, Lote.nome as lote
-                        FROM Ingresso JOIN Vendedor ON Ingresso.vendedor = Vendedor.id 
-                        JOIN Cliente ON Ingresso.idCliente = Cliente.id
-                        JOIN Lote ON Ingresso.lote =  Lote.id
-                        WHERE Vendedor.produtor = '$idUsuario' AND Ingresso.validade != 'CANCELADO' ORDER BY Cliente.nome";
-                    }else{
-                        $consulta = "SELECT Ingresso.codigo, Ingresso.origem, Ingresso.data, Vendedor.nome as vendedor, Cliente.nome as cliente, Cliente.telefone as telefone, Ingresso.valor, Ingresso.validade, Lote.nome as lote
-                        FROM Ingresso JOIN Vendedor ON Ingresso.vendedor = Vendedor.id 
-                        JOIN Cliente ON Ingresso.idCliente = Cliente.id
-                        JOIN Lote ON Ingresso.lote =  Lote.id
-                        WHERE Ingresso.evento = '$idEvento' AND Ingresso.validade != 'CANCELADO' ORDER BY Cliente.nome";
-                    }
-                    addtabela($consulta);
-                echo('</tbody>');
-            echo('</table>');
-        echo('</div>');
+        global $idEvento, $idUsuario, $tipoUsuario;
+        if($idEvento != ""){
+            echo('<div class="table-responsive">');
+                echo('<table id="dataTable" class="table  tablesorter table-hover" width="100%" cellspacing="0">');
+                    echo('<thead>');
+                        echo('<tr>');
+                        echo('<th>Código</th>');
+                        echo('<th>Cliente</th>');
+                        echo('<th>Valor</th>');
+                        echo('<th>Lote</th>');
+                        echo('<th>Telefone</th>');
+                        echo('<th>Vendedor</th>');
+                        echo('<th>Data</th>');
+                        echo('<th>Validade</th>');
+                        echo('<th></th>');
+                        echo('</tr>');
+                    echo('</thead>');
+                    echo('<tbody id="tbody">');
+                        
+                            $consulta = "SELECT Ingresso.codigo, Ingresso.origem, Ingresso.data, Vendedor.nome as vendedor, Cliente.nome as cliente, Cliente.telefone as telefone, Ingresso.valor, Ingresso.validade, Lote.nome as lote
+                            FROM Ingresso JOIN Vendedor ON Ingresso.vendedor = Vendedor.id 
+                            JOIN Cliente ON Ingresso.idCliente = Cliente.id
+                            JOIN Lote ON Ingresso.lote =  Lote.id
+                            WHERE Ingresso.evento = '$idEvento' AND Ingresso.validade != 'CANCELADO' ORDER BY Cliente.nome";
+                            addtabela($consulta);
+                        
+                        
+                    echo('</tbody>');
+                echo('</table>');
+            echo('</div>');
+        }
     }
 
     function addtabela($consulta){

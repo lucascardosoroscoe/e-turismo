@@ -58,7 +58,7 @@
                     */  
                     echo ('<button type="submit" name="emitir" class="btn">Emitir Relatório</button>');
                 echo('</form>');
-                echo ('<br><a href="https://ingressozapp.com/produtor/" class="btn">Voltar</a>');
+                echo ('<br><a href="http://ingressozapp.com/produtor/" class="btn">Voltar</a>');
             echo ('</div>');
         echo ('</div>');
     

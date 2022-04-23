@@ -26,6 +26,15 @@ $dados = selecionar($consulta);
                                 <div class="form-row">
                                     <div class="col-md-12">
                                         <div class="form-group">
+                                            Link do Evento* (letras minúsculas, sem caracteres especiais ou acentos, apenas '-')<br>
+                                            <label class="small mb-1" for="slug">ingressozapp.com/produtos/</label>
+                                            <input class="" id="slug"  name="slug" type="text" placeholder="Digite o link" value="<?php echo $dados[0]['slug']; ?>" required/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
                                             <label for="inputImagem">Imagem de Capa (Carregar apenas se for trocar)</label>
                                             <input style="padding: 4px;" class="form-control" name="inputImagem" type="file" id="inputImagem"> 
                                         </div>
@@ -59,6 +68,16 @@ $dados = selecionar($consulta);
             </div>
         </div>
     </div>
+    <script>
+        sugerirSlug();
+        function sugerirSlug(){
+            var nome = document.getElementById('inputName').value;
+            var slug = nome.toLowerCase();
+            var er = /[^a-z0-9]/gi;
+		    slug = slug.replace(er, "-");
+            document.getElementById('slug').value = slug;
+        }
+    </script>
 <?php
 include('../includes/footer.php');
 ?>

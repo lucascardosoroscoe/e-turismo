@@ -54,6 +54,6 @@ if ($validade == "VALIDO"){
      
 
 }else {
-     header('Location: https://ingressozapp.com/produtor/login/');
+     header('Location: http://ingressozapp.com/produtor/login/');
 }
 ?>
