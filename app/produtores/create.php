@@ -24,6 +24,7 @@
             if($msg != "Sucesso!"){
                 $msg = "Erro ao criar Usuário, por favor contate o suporte!!";
             }
+            verificarProdutor();
         }else{
             $msg = "E-mail do Usuário já cadastrado. ";
         }
@@ -38,5 +39,38 @@
     "; 
     criarCard($nomeCard, $descricaoCard, $data, $idListaProdutorCriado);
 
-   header('Location: index.php?msg='.$msg);
+
+    function verificarProdutor(){
+        global $email, $inputPassword;
+        $consulta = "SELECT `id`, `nome`, `senha` FROM `Produtor` WHERE `email` = '$email'";
+        echo $consulta;
+        $dados = selecionar($consulta);
+        echo json_encode($dados);
+        $hash = $dados[0]['senha'];
+        echo $hash;
+        $valid = password_verify($inputPassword, $hash);
+        if ($valid == 1){
+            $id = $dados[0]['id'];
+            $nome = $dados[0]['nome'];
+            $type = 2;
+            login($id, $nome, $type, $email, 'prod');
+        }
+    }
+    function login($id, $nome, $type, $email, $extra){
+        $msg = "Sucesso!";
+    
+        $_SESSION["idUsuario"] = $id;
+        $_SESSION["usuario"] = $nome;
+        $_SESSION["tipoUsuario"] = $type;
+        $_SESSION["emailUsuario"] = $email;
+        $_SESSION["idLote"] = "0";
+        $_SESSION["nCaixa"] = "0";
+        $_SESSION["msg"] = "0";
+        echo $_SESSION["tipoUsuario"];
+        echo $_SESSION["usuario"];
+    
+        header('Location: ../eventos/adicionar.php');
+        
+    }
+
 ?>

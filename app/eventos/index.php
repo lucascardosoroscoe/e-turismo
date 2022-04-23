@@ -65,7 +65,7 @@ function addTabela($consulta){
             echo ("<td>".$obj['produtor']."</td>"); 
         }
         echo ("<td>".$obj['data']."</td>");
-        echo ("<td><a href='https://ingressozapp.com/produtos/".$obj['slug']."'>ingressozapp.com/produtos/".$obj['slug']."</a></td>");
+        echo ("<td><a href='https://ingressozapp.com/eventos/".$obj['slug']."'>ingressozapp.com/eventos/".$obj['slug']."</a></td>");
         echo ("<td>".$obj['descricao']."</td>");
         $validade = $obj['validade'];
         echo ("<td>".$obj['validade']."</td>");

@@ -4390,6 +4390,9 @@ input[type=button].btn-block {
 .card-header:first-child {
   border-radius: 20px 20px 0 0;
 }
+.card-footer:first-child {
+  border-radius: 0px 0px 20px 20px;
+}
 
 .card-footer {
   padding: 0.75rem 1.25rem;
@@ -4397,7 +4400,10 @@ input[type=button].btn-block {
   border-top: 1px solid rgba(0, 0, 0, 0.125);
 }
 .card-footer:last-child {
-  border-radius: 0 0 calc(0.25rem - 1px) calc(0.25rem - 1px);
+  border-radius: 0px 0px 20px 20px;
+}
+.card-footer:first-child {
+  border-radius: 0px 0px 20px 20px;
 }
 
 .card-header-tabs {

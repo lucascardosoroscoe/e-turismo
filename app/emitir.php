@@ -140,30 +140,36 @@ function getCliente(){
 }
 
 function verificarIngresso(){
-    global $tipoUsuario,$idUsuario, $vendidos, $quantidade, $inputQuantidade, $vendedor, $hash, $local, $idLote, $vendas;
+    global $tipoUsuario,$idUsuario, $vendidos, $quantidade, $inputQuantidade, $vendedor, $hash, $local, $idCliente, $idLote, $vendas;
     if($tipoUsuario == '1'){
-        // $consulta = "SELECT * from Ingresso WHERE evento= '$evento' AND vendedor= '1' AND idCliente= '$idCliente'";
+        $consulta = "SELECT * from Ingresso WHERE lote = '$idLote' AND vendedor= '1' AND idCliente= '$idCliente'";
         $vendedor = 1;
     }else if($tipoUsuario == '2'){
-        // $consulta = "SELECT * from Ingresso WHERE evento= '$evento' AND vendedor= '2' AND idCliente= '$idCliente'";
+        $consulta = "SELECT * from Ingresso WHERE lote = '$idLote' AND vendedor= '2' AND idCliente= '$idCliente'";
         $vendedor = 2;
     }else if($tipoUsuario == '3'){
-        // $consulta = "SELECT * from Ingresso WHERE evento= '$evento' AND vendedor= '$idUsuario' AND idCliente= '$idCliente'";
+        $consulta = "SELECT * from Ingresso WHERE lote = '$idLote' AND vendedor= '$idUsuario' AND idCliente= '$idCliente'";
         $vendedor = $idUsuario;
     }
-    // $dados = selecionar($consulta);
-    if($vendidos <= $quantidade){
-        for ($i=0; $i < $inputQuantidade; $i++) { 
-            $gerado = gerarIngresso();
+    $dados = selecionar($consulta);
+    if ($dados[0]['codigo'] == ""){
+        if($vendidos <= $quantidade){
+            for ($i=0; $i < $inputQuantidade; $i++) { 
+                $gerado = gerarIngresso();
+            }
+        }else{
+            $msg =  "Não é possível gerar esta quantidade de ingressos para esse lote, ultimas unidades disponíveis";
+        }
+        if($gerado){
+            $local='http://ingressozapp.com/app/enviar.php?hash='.$hash;
+            enviarIngresso(); 
+        }else{
+            header('Location: ingresso.php?msg='.$msg);
         }
     }else{
-        $msg =  "Não é possível gerar esta quantidade de ingressos para esse lote, ultimas unidades disponíveis";
-    }
-    if($gerado){
+        $hash = $dados[0]['hash'];
         $local='http://ingressozapp.com/app/enviar.php?hash='.$hash;
         enviarIngresso(); 
-    }else{
-        header('Location: ingresso.php?msg='.$msg);
     }
 }
 

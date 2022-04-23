@@ -1,5 +1,6 @@
 <?php
 include('../app/includes/headerLogin.php');
+$msg = $_GET['msg'];
 ?>     
     <div style='background-image: url("../app/assets/img/fundoLogin.jpg"); background-size: cover;height: 100%;'>
         <div class="container">
@@ -9,9 +10,9 @@ include('../app/includes/headerLogin.php');
                         <div class="card-header">
                             <h3 class="text-center font-weight-light my-4">Segunda Via</h3>
                             <h6 class="text-center font-weight-light">Preencha com os dados a seguir para pegar a segunda via do seu ingresso</h6>
+                            <?php echo '<h6 class="text-center font-weight-light">'.$msg.'</h6>';?>
                         </div>
                         <div class="card-body">
-                            <!-- <div class="small mb-3 text-muted">Enter your email address and we will send you a link to reset your password.</div> -->
                             <form action="recuperar.php" id="recuperar" method="POST">
                                 <div class="form-group">
                                     <label class="small mb-1" for="inputEmailAddress">E-mail</label>

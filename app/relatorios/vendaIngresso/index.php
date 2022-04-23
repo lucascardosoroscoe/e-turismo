@@ -48,6 +48,29 @@ $idSecretaria = $_SESSION["idSecretaria"];
             if($idEvento ==""){
                 echo '<h2 class="text-center">Selecione o Evento</h2>';
             }else{
+                echo '<div class="row">';
+                echo '<div class="col-md-12">';
+                        
+                echo '<h3 style="margin-top: 20px;">DETALHAMENTO DE VENDAS</h3>';
+                echo '<div class="row">';
+                echo '<div class="col-md-8" style="float:left; margin-top: 5px;">';
+                echo '<input class="form-control" type="text" placeholder="Buscar..." style="margin-bottom: 5px" id="buscar" onkeyup="buscar()"/>';
+                echo '</div>';
+                echo '<div class="col-md-4" style="margin-top: 10px; text-align:center;">';
+                echo '</div>';
+                echo '</div>';
+                echo '<div class="row">';
+                echo '<div class="col-md-6" style="margin-top: 10px; text-align:center;">';
+                echo '<h5>Numero de Ingressos: <span id="qIngressos">R$</span></h5>';
+                echo '</div>';
+                echo '<div class="col-md-6" style="margin-top: 10px; text-align:center;">';
+                echo '<h5>Total Faturado: <span id="total">R$</span></h5>';
+                echo '</div>';
+                echo '</div>';
+                addTabelaVendas();
+                echo '</div>';
+                echo '</div>';
+                
                 echo '<div id="graphsList" style="display:none;">';
                 echo getGraphs();
                 echo'</div>';
@@ -85,28 +108,7 @@ $idSecretaria = $_SESSION["idSecretaria"];
                 echo '</div>';
                 echo '</div>';
                 
-                echo '<div class="row">';
-                echo '<div class="col-md-12">';
-                        
-                echo '<h3 style="margin-top: 20px;">DETALHAMENTO DE VENDAS</h3>';
-                echo '<div class="row">';
-                echo '<div class="col-md-8" style="float:left; margin-top: 5px;">';
-                echo '<input class="form-control" type="text" placeholder="Buscar..." style="margin-bottom: 5px" id="buscar" onkeyup="buscar()"/>';
-                echo '</div>';
-                echo '<div class="col-md-4" style="margin-top: 10px; text-align:center;">';
-                echo '</div>';
-                echo '</div>';
-                echo '<div class="row">';
-                echo '<div class="col-md-6" style="margin-top: 10px; text-align:center;">';
-                echo '<h5>Numero de Ingressos: <span id="qIngressos">R$</span></h5>';
-                echo '</div>';
-                echo '<div class="col-md-6" style="margin-top: 10px; text-align:center;">';
-                echo '<h5>Total Faturado: <span id="total">R$</span></h5>';
-                echo '</div>';
-                echo '</div>';
-                addTabelaVendas();
-                echo '</div>';
-                echo '</div>';
+                
             }
         ?>
 

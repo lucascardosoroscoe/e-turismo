@@ -24,6 +24,7 @@
     $log =  file_get_contents('php://input');
     
     $server = json_encode($_SERVER, true);
+    $msg = salvarLog("Teste", "Teste");
     $msg = salvarLog($log, $server);
     
     if($msg == "Sucesso!"){
@@ -48,7 +49,7 @@
         
     }else{
         $msg = "Erro ao registrar log";
-        echo $msg;
+        $msg = salvarLog($msg, $server);
     }
 
     function getVendedor($coupon){
@@ -242,44 +243,46 @@
         <h1 style='text-align:center'>🎉 ".$nomeEvento." 🎉</h1><br>
         <h3 style='text-align:center'>Olá ".$senderName." você acaba de adquirir um ingresso, utilizando o aplicativo IngressoZapp!!!</h3><br>
         <br>
-        <h2 style='text-align:center' >Para acessar os ingressos clique no link: <br>
-        http://ingressozapp.com/app/ingressos/?hash=".$hash."</h2><br>
+        <h2 style='text-align:center' >Para acessar os ingressos clique no Botão: <br></h2>
+        <a href='http://ingressozapp.com/app/ingressos/?hash=".$hash."' style='color: #fff;background-color: #000000;padding: 20px 50px;margin-top: 20px !important;border-radius: 24px;font-size: large; text-decoration: none;display: block;'>Visualizar Ingresso</a><br>
         <br>
         ";
-        $aviso = "
-        🔐 AVISOS 🔐<br>
-        Lembramos que o QR CODE de verificação só poderá ser usado uma vez, sendo considerado INVÁLIDO numa segunda tentativa de entrada. Por isso, não compartilhe uma imagem do ingresso sem antes tampar completamente o QR CODE. <br>
-        Saiba mais sobre o aplicativo IngressoZapp e nosso sistema anti-fraude de gerenciamento de eventos em nosso site: www.ingressozapp.com <br></h4>
-        ";
-        $corpo = $msg . $aviso;
-        return enviaEmail($senderEmail, $senderName, $assunto, $corpo);
+        return enviaEmail($senderEmail, $senderName, $assunto, $msg);
     }
 
     function enviaEmail($email, $nome, $assunto, $corpo){
         global $mail;
-        $mail->Host = 'smtp.gmail.com';
-        $mail->Port = '587';
-        $mail->SMTPSecure = 'tls';
+
+
+        $mail->SMTPDebug = 2;
+        $mail->Host = 'smtp.hostinger.com';
+        $mail->Port = 587;
         $mail->SMTPAuth = true;
 
-        $mail->Username = "ingressozapp@gmail.com";
-        $mail->Password = "ymgbfpnftoewiipd";
-        $mail->From = 'ingressozapp@gmail.com';
-        $mail->Sender = 'ingressozapp@gmail.com';
-        $mail->FromName = 'IngressoZapp';
 
+        $mail->Username = 'ingresso@ingressozapp.com';
+        $mail->Password = '@Baba123258';
+
+
+        $mail->setFrom('ingresso@ingressozapp.com', 'IngressoZapp');
+        $mail->addReplyTo('ingresso@ingressozapp.com', 'IngressoZapp');
         $mail->AddAddress($email, $nome);
 
-        $mail->IsHTML(true);
-        $mail->CharSet = 'utf-8';
+
+        $mail->Subject = 'Testing PHPMailer';
         $mail->Subject = $assunto;
+        $mail->msgHTML(file_get_contents('message.html'), __DIR__);
+        $mail->IsHTML(true);
         $mail->Body = $corpo;
-        $mail->AltBody = 'Para ler este e-mail Ã© necessÃ¡rio um leitor de e-mail que suporte mensagens em HTML.';
-        $enviado = $mail->Send();
+        //$mail->addAttachment('test.txt');
+        if (!$mail->send()) {
+            echo 'Mailer Error: ' . $mail->ErrorInfo;
+        } else {
+            echo 'The email message was sent.';
+        }
         $mail->ClearAllRecipients();
         $mail->ClearAttachments();
         $mail->SMTPDebug = true;
-        return $enviado;
     }
 
 

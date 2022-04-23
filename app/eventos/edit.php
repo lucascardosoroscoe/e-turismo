@@ -40,8 +40,13 @@ if($imagem['tmp_name'] != "") {
     $consulta = "UPDATE `Evento` SET `nome`='$nome',`data`='$data',`descricao`='$descricao',`slug`='$slug' WHERE `id` = '$id'";
     $msg = executar($consulta);
 }
-editarEventoWP($nome, $descricao, $id, $slug);
-header('Location: index.php?msg='.$msg);
+try {
+    editarEventoWP($nome, $descricao, $id, $slug);
+    header('Location: index.php?msg='.$msg);
+} catch (\Throwable $th) {
+    header('Location: https://api.whatsapp.com/send?phone=5567999854042&text=Oi%2C%20tudo%20bem%3F%20Estava%20editando%20um%20evento%20com%20meu%20usuário%20no%20App%2C%20mas%20deu%20um%20erro%2C%20poderia%20me%20ajudar%3F');
+}
+
 
 function editarEventoWP($nomeEvento, $descricao, $id, $slug){
     global $woocommerce, $nomeFinal;

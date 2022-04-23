@@ -15,16 +15,16 @@ include('./includes/header.php');
                             if($idUsuario == ""){
                                 echo '<a style="margin-bottom:10px;" class="btn btn-primary btn-block mb-3" href="login/index.php"><h6>Fazer login</h6></a>';
                             }else{
-                                echo '<div class="row">';
-                                    echo '<div class="col-lg-6 mb-3"><a class="btn btn-primary btn-block" href="ingresso.php"><i class="fas fa-ticket-alt"></i> Emitir ingresso</a></div>';
-                                    echo '<div class="col-lg-6 mb-3"><a class="btn btn-primary btn-block" href="./eventos/adicionar.php"><i class="fas fa-plus"></i> Criar Evento</a></div>';
+                                echo '<div class="row mb-3">';
+                                    echo '<div class="col-lg-6"><a class="btn btn-primary btn-block" href="ingresso.php"><i class="fas fa-ticket-alt"></i> Emitir ingresso</a></div>';
+                                    echo '<div class="col-lg-6"><a class="btn btn-primary btn-block" href="./eventos/adicionar.php"><i class="fas fa-plus"></i> Criar Evento</a></div>';
                                 echo '</div>';
                             }
                         ?>
                         <div class="row">
                             <?php
                                 if($tipoUsuario == 2){
-                                    $consulta = "SELECT Evento.id, Evento.nome, Evento.slug, Evento.data, Evento.descricao, Evento.validade, (SELECT SUM(valor) FROM Ingresso WHERE Ingresso.evento = Evento.id AND (Ingresso.validade = 'USADO' OR Ingresso.validade = 'VALIDO')) as vendas, (SELECT COUNT(valor) FROM Ingresso WHERE Ingresso.evento = Evento.id AND (Ingresso.validade = 'USADO' OR Ingresso.validade = 'VALIDO')) as quantidade, (SELECT COUNT(id) FROM Lote WHERE Lote.evento = Evento.id) as lotes FROM Evento WHERE produtor = '$idUsuario' AND validade != 'EXCLUIDO' ORDER BY data DESC";
+                                    $consulta = "SELECT Evento.id, Evento.nome, Evento.slug, Evento.data, Evento.descricao, (SELECT SUM(valor) FROM Ingresso WHERE Ingresso.evento = Evento.id AND (Ingresso.validade = 'USADO' OR Ingresso.validade = 'VALIDO')) as vendas, (SELECT COUNT(valor) FROM Ingresso WHERE Ingresso.evento = Evento.id AND (Ingresso.validade = 'USADO' OR Ingresso.validade = 'VALIDO')) as quantidade, (SELECT COUNT(id) FROM Lote WHERE Lote.evento = Evento.id) as lotes FROM Evento WHERE produtor = '$idUsuario' AND validade != 'EXCLUIDO' ORDER BY data DESC";
                                     addTabela($consulta);
                                 }
                             ?>

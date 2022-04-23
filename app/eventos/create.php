@@ -1,11 +1,14 @@
 <?php
+    // Verifica Acesso do Produtor á Página 
     include('../includes/verificarAcesso.php');
     verificarAcesso(2);
+
+    //Integração com o Trello para criar o evento no Pipeline
     include('../includes/trello.php');
+
+    // Composer + Conexão com o Woocommerce
     require '../../vendor/autoload.php';
-
     use Automattic\WooCommerce\Client;
-
     $woocommerce = new Client(
         'https://ingressozapp.com', 
         'ck_e9ce6160638444022e13079c5d45ce47c18edd28', 
@@ -17,6 +20,7 @@
     );
     
 
+    // Pega dados do Produtor
     $produtor = $idUsuario;
     $consulta = "SELECT * FROM `Produtor` WHERE id = '$produtor'";
     $dados = selecionar($consulta);
@@ -24,13 +28,15 @@
     $telefoneProdutor = $dados[0]['telefone'];
     $cidadeProdutor = $dados[0]['cidade'];
     $estadoProdutor = $dados[0]['estado'];
+
+    // Pegar dados do Evento 
     $nome = $_POST['inputName'];
     $slug = $_POST['slug'];
     $imagem      = $_FILES["inputImagem"];
     $descricao   = $_POST['inputDescricao'];
     $data        = $_POST['inputData'];
 
-
+    // Verifica se o Evento tem imagem
     if($imagem != NULL) { 
         $nomeFinal = time().'.jpg';
         if (move_uploaded_file($imagem['tmp_name'], $nomeFinal)) {
@@ -40,26 +46,45 @@
         }
     }
 
-    // Criar Evento
-    $consulta = "insert into Evento (nome, slug, produtor, imagem, data, descricao) values ('$nome', '$slug', '$produtor', '$mysqlImg', '$data', '$descricao')";
-    $msg = executar($consulta);
-    if($msg != "Sucesso!"){
-            $msg = "Erro ao criar Evento, por favor contate o suporte!!";
+    // verificar se já existe evento com o mesmo nome
+    $consulta = "SELECT * FROM `Evento` WHERE `nome` = '$nome'";
+    $dados = selecionar($consulta);
+    if($dados[0]['id'] == ""){
+        // Criar Evento no App
+        $consulta = "insert into Evento (nome, slug, produtor, imagem, data, descricao) values ('$nome', '$slug', '$produtor', '$mysqlImg', '$data', '$descricao')";
+        $msg = executar($consulta);
+        if($msg != "Sucesso!"){
+                $msg = "Erro ao criar Evento, por favor contate o suporte!!";
+        }
+
+        // Pegar Id do Evento
+        $idEvento = getIdEvento();
+
+        // Criar Evento no Wordpress
+        try {
+            $eventoWP =  criarEventoWP($nome, $descricao, $idEvento, $slug);
+            echo json_encode($eventoWP);
+            $idWP = $eventoWP->id;
+            atualizarIdWP($idEvento, $idWP);
+            // Criar card no trello
+            criarCardTrello();
+
+            // Redirecionar Para Lotes
+            header('Location: ../lotes/index.php?evento='.$idEvento);
+        } catch (\Throwable $th) {
+            header('Location: https://api.whatsapp.com/send?phone=5567999854042&text=Oi%2C%20tudo%20bem%3F%20Estava%20criando%20um%20evento%20com%20meu%20usuário%20no%20App%2C%20mas%20deu%20um%20erro%2C%20poderia%20me%20ajudar%3F');
+        }
+        
+
+    }else{
+        $msg = "Já existe um evento cadastrado na plataforma com esse nome, por favor utilize um nome diferente";
+        header('Location: ./adicionar.php?msg='.$msg);
+
     }
 
-    // Pegar Id do Evento
-    $idEvento = getIdEvento();
 
-    // Criar Evento no Wordpress
-    $eventoWP =  criarEventoWP($nome, $descricao, $idEvento, $slug);
-    // echo json_encode($eventoWP);
-    $idWP = $eventoWP->id;
-    atualizarIdWP($idEvento, $idWP);
-    // Criar card no trello
-    criarCardTrello();
-
-    // Redirecionar Para Lotes
-    header('Location: ../lotes/index.php?evento='.$idEvento);
+    
+    
  
     function atualizarIdWP($idEvento, $idWP){
         $consulta = "UPDATE `Evento` SET `idWP`= '$idWP' WHERE `id` = '$idEvento'";
@@ -131,4 +156,4 @@
         $idEvento = $dados[0]['id'];
         return $idEvento;
     }
-?>
+?> 
