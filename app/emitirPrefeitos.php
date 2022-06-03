@@ -1,29 +1,56 @@
 <?php
 include('includes/verificarAcesso.php');
 verificarAcesso(3);
-$hash = bin2hex(openssl_random_pseudo_bytes(32));
-if(carregarPost()){
-    if(getLote()){
-        if(getCliente()){
-            verificarIngresso();
-        }
-    }else{
-        header('Location: ingresso.php?msg='.$msg);
+
+$consulta = "SELECT * FROM `ClientePrefeitos` WHERE status = 0";
+$dados = selecionar($consulta);
+$cliente = $dados[0];
+    $hash = bin2hex(openssl_random_pseudo_bytes(32));
+    $evento    =  392;
+    $nomeCliente   =  $cliente['nome'];
+    $inputEmail   =  $cliente['email'];
+    $inputQuantidade   =  1;
+    $telefone  =  $cliente['telefone'];
+    $tipo = $cliente['tipo'];
+    if($tipo == 1){
+        $idLote  = 7909;
+    }else if($tipo == 2){
+        $idLote  = 7892;
+    }else if($tipo == 3){
+        $idLote  = 7902;
+    }else if($tipo == 4){
+        $idLote  = 7893;
     }
-};
+    $consulta = "SELECT * FROM `Cliente` WHERE `nome` = '$nomeCliente' AND `telefone` = '$telefone' AND `email` = '$inputEmail'";
+    $dados = selecionar($consulta);
+    // if($dados[0]['id'] == ''){
+        if(getLote()){
+            if(getCliente()){
+                verificarIngresso();
+                $idCli = $cliente['id'];
+                $consulta = "UPDATE `ClientePrefeitos` SET `status`= 1 WHERE `id` = '$idCli'";
+                $msg = executar($consulta);
+                $msg = "Foi " .$cliente['nome']."<br>";
+                header('Location: emitirPrefeitos.php?msg='.$msg);
+            }
+        }else{
+            header('Location: ingresso.php?msg='.$msg);
+        }
+    // }else{
+    //     $idCli = $cliente['id'];
+    //     $consulta = "UPDATE `ClientePrefeitos` SET `status`= 1 WHERE `id` = '$idCli'";
+    //     $msg = executar($consulta);
+    //     $msg = "Não foi " .$cliente['nome']."<br>";
+    //     echo $msg;
+    // }
+    
+
 
 
 
 function carregarPost(){
-    global $codigo, $evento, $idLote, $nomeCliente, $inputQuantidade, $telefone, $tipoUsuario, $inputEmail;
+    global $codigo, $evento, $idLote, $nomeCliente, $inputQuantidade, $telefone, $tipoUsuario, $inputEmail, $hash;
     
-    $evento    =  $_POST['selectEvento'];
-    $consulta = "SELECT `validade` FROM `Evento` WHERE `id` = '$evento'";
-    $dados = selecionar($consulta);
-    $validadeEvento = $dados[0]['validade'];
-    if($validadeEvento != 'VALIDO'){
-        $evento = "";
-    }
     // $idLote    =  $_POST["selectLote"];
     $nomeCliente   =  $_POST['inputNome'];
     $inputEmail   =  $_POST['inputEmail'];
@@ -140,7 +167,7 @@ function getCliente(){
 }
 
 function verificarIngresso(){
-    global $tipoUsuario,$idUsuario, $vendidos, $quantidade, $inputQuantidade, $vendedor, $hash, $local, $idCliente, $idLote, $vendas;
+    global $tipoUsuario,$idUsuario, $vendidos, $quantidade, $inputQuantidade, $vendedor, $hash, $local, $idCliente, $idLote, $inputEmail, $nomeCliente, $codigo;
     if($tipoUsuario == '1'){
         $consulta = "SELECT * from Ingresso WHERE lote = '$idLote' AND vendedor= '1' AND idCliente= '$idCliente'";
         $vendedor = 1;
@@ -162,7 +189,7 @@ function verificarIngresso(){
         }
         if($gerado){
             $local='http://ingressozapp.com/app/enviar.php?hash='.$hash;
-            enviarIngresso($local); 
+            enviarIngresso($hash, $inputEmail, $nomeCliente, 392, $codigo); 
         }else{
             header('Location: ingresso.php?msg='.$msg);
         }
@@ -188,13 +215,56 @@ function gerarIngresso(){
 }
 
 
-
-function emailVirada(){
-    echo "E-mail enviado";
+function enviarIngresso($hash, $senderEmail, $senderName, $idEvento, $codigo){
+    $assunto = "Seus Ingressos para o evento Prefeitos do Futuro 2022 estão aqui!!!";
+    $msg = "
+    <img style='width: 40%; margin-left:30%;' src='http://ingressozapp.com/app/getImagem.php?id=$idEvento'/>
+    <h1 style='text-align:center'>🎉 Prefeitos do Futuro 2022 🎉</h1><br>
+    <h3 style='text-align:center'>Olá ".$senderName." você está recebendo nesta mensagem o Qr Code de acesso ao evento Prefeitos do Futuro 2022, que acontece de 18 a 20 de maio, no Centro de Convenções Brasil 21 Localização: https://goo.gl/maps/isgpwtyZoLRULzbS8
+    <br><br>O evento começa às 08h e termina às 18h todos os dias<br><br>
+    Pedimos desculpas pelo envio com os dados incorretos do acesso ao evento Prefeitos do Futuro, favor desconsiderar o email onde consta o nome de outra pessoa.Para acessar seu passaporte salve esse número e clique no link: <br>
+    http://ingressozapp.com/app/ingressos/?hash=".$hash."</h2><br>
+    Nos dias 18 e 19, quarta e quinta, teremos coquetéis de confraternização com shows especiais das 18:15 às 20:15 no mesmo local do evento.   <br>
+    Para entrar no evento apresente seu ingresso (CODIGO: ".$codigo.") e um documento original com foto no credenciamento na entrada do Centro de Convenções Brasil 21, teremos balcões de atendimento separados por: PREFEITOS, SECRETÁRIOS E ASSESSORES, CONVIDADOS E PALESTRANTES.<br>
+    Para evitar filas, você poderá retirar seu kit e fazer o seu credenciamento com este Qr Code já no dia 17/05, terça-feira, das 15h às 19h no próprio Centro de Convenções Brasil 21.
+    <br>
+    ";
+    $aviso = "
+    🔐 AVISOS 🔐<br>
+    Lembramos que o QR CODE de verificação só poderá ser usado uma vez, sendo considerado INVÁLIDO numa segunda tentativa de entrada. Por isso, não compartilhe uma imagem do ingresso sem antes tampar completamente o QR CODE. <br>
+    Saiba mais sobre o aplicativo IngressoZapp e nosso sistema anti-fraude de gerenciamento de eventos em nosso site: www.ingressozapp.com <br></h4>
+    ";
+    $corpo = $msg . $aviso;
+    return enviaEmail($senderEmail, $senderName, $assunto, $corpo);
 }
 
-function enviarIngresso($local){
-    header('Location: '.$local);
+function enviaEmail($email, $nome, $assunto, $corpo){
+    require ("./mail/PHPMailerAutoload.php");
+    $mail = new PHPMailer();
+    $mail->IsSMTP();
+    $mail->Host = 'smtp.gmail.com';
+    $mail->Port = '587';
+    $mail->SMTPSecure = 'tls';
+    $mail->SMTPAuth = true;
+
+    $mail->Username = "ingressozapp@gmail.com";
+    $mail->Password = "ymgbfpnftoewiipd";
+    $mail->From = 'ingressozapp@gmail.com';
+    $mail->Sender = 'ingressozapp@gmail.com';
+    $mail->FromName = 'IngressoZapp';
+
+    $mail->AddAddress($email, $nome);
+
+    $mail->IsHTML(true);
+    $mail->CharSet = 'utf-8';
+    $mail->Subject = $assunto;
+    $mail->Body = $corpo;
+    $mail->AltBody = 'Para ler este e-mail Ã© necessÃ¡rio um leitor de e-mail que suporte mensagens em HTML.';
+    $enviado = $mail->Send();
+    $mail->ClearAllRecipients();
+    $mail->ClearAttachments();
+    $mail->SMTPDebug = true;
+    return $enviado;
 }
 
 function segundaVia($ingresso){

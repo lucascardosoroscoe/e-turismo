@@ -101,6 +101,12 @@ Array.from(document.getElementsByClassName("text")).forEach(
 );
 </script>
 <style>
+    button {
+        font-size: xxx-large;
+    }
+    span {
+        font-size: xxx-large;
+    }
     h5 {
         font-size: 1.6em !important;
     }

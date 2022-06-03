@@ -2,6 +2,11 @@
 include('../includes/verificarAcesso.php');
 verificarAcesso(2);
 include('../includes/header.php');
+
+
+$consulta = "SELECT slug FROM Evento WHERE id = '$idEvento'";
+$evento = selecionar($consulta);
+    $slug = $evento[0]['slug'];
 ?>
 <div class="container-fluid">
     <!-- Tabela dos veículos-->
@@ -32,6 +37,7 @@ include('../includes/header.php');
                             <th>Nome</th>
                             <th>Telefone</th>
                             <th>Validade</th>
+                            <th>Link Indicação</th>
                             <th>Whatsapp</th>
                             <th></th>
                         </tr>
@@ -62,8 +68,9 @@ include('../includes/header.php');
 
 <?php
 function addTabela($consulta){
-    global $msg, $idEvento, $nomeEvento, $tipoUsuario;
+    global $msg, $idEvento, $nomeEvento, $tipoUsuario, $slug;
     $usuarios = selecionar($consulta);
+    
     foreach ($usuarios as $obj) {
         $nomeCompleto = explode(' ',trim($obj['nome']));
         $primeiroNome = $nomeCompleto[0];
@@ -76,6 +83,7 @@ function addTabela($consulta){
         echo ("<td>".$obj['telefone']."</td>");
         $validade = $obj['validade'];
         echo ("<td>".$obj['validade']."</td>");
+        echo ("<td>https://ingressozapp.com/eventos/".$slug."/?wt_coupon=".$obj['usuario']."</td>");
         echo ("<td><a target='_blank' href='https://api.whatsapp.com/send?phone=55".$obj['telefone']."&text=".$mensagem."'>Contatar</a></td>");
         if($validade == "VALIDO"){
             $msg = "Olá ".$obj['nome'].", tudo bem? Segue seu link de promoter para o evento ".$nomeEvento.". 

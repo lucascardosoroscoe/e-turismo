@@ -21,7 +21,7 @@ var reordenar = function() {
     setTimeout(function () {
         console.log('atualizando');
         update();
-    }, 200);
+    }, 2000);
     
 };
 
@@ -114,6 +114,13 @@ function createButtons(){
 
 function update(){
     html.get('#paginaAtual').innerHTML = estado.page;
+    filtrarTabela(filtro);
+}
+
+function irParaPagina(){
+    var pagina = parseInt(document.getElementById('selectPagina').value);
+    html.get('#paginaAtual').innerHTML = pagina;
+    estado.page = pagina;
     filtrarTabela(filtro);
 }
 

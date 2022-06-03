@@ -73,7 +73,7 @@ $count = 0;
           global $tipoUsuario, $idEvento, $idUsuario, $soma, $count;
 
           if($tipoUsuario == 1){
-               $consulta = "SELECT Ingresso.codigo, Ingresso.valor, Ingresso.validade, Ingresso.data,
+               $consulta = "SELECT Ingresso.codigo, Ingresso.origem, Ingresso.valor, Ingresso.validade, Ingresso.data,
                Evento.nome as evento, Vendedor.nome as vendedor, Cliente.nome as cliente, Cliente.telefone
                FROM Ingresso 
                JOIN Evento ON Evento.id = Ingresso.evento
@@ -83,7 +83,7 @@ $count = 0;
                // Add lote depois
                // JOIN Lote ON Lote.id = Ingresso.lote
           }else if($tipoUsuario == 2){
-               $consulta = "SELECT Ingresso.codigo, Ingresso.valor, Ingresso.validade, Ingresso.data,
+               $consulta = "SELECT Ingresso.codigo, Ingresso.origem, Ingresso.valor, Ingresso.validade, Ingresso.data,
                Evento.nome as evento, Vendedor.nome as vendedor, Cliente.nome as cliente, Cliente.telefone
                FROM Ingresso 
                JOIN Evento ON Evento.id = Ingresso.evento
@@ -91,7 +91,7 @@ $count = 0;
                JOIN Cliente ON Cliente.id = Ingresso.idCliente
                WHERE Vendedor.id = 2 AND Evento.id = $idEvento AND ( Ingresso.validade = 'VALIDO' OR Ingresso.validade = 'USADO' )";
           }else if($tipoUsuario == 3){
-               $consulta = "SELECT Ingresso.codigo, Ingresso.valor, Ingresso.validade, Ingresso.data,
+               $consulta = "SELECT Ingresso.codigo, Ingresso.origem, Ingresso.valor, Ingresso.validade, Ingresso.data,
                Evento.nome as evento, Vendedor.nome as vendedor, Cliente.nome as cliente, Cliente.telefone
                FROM Ingresso 
                JOIN Evento ON Evento.id = Ingresso.evento
@@ -118,7 +118,11 @@ $count = 0;
                     foreach ($ingressos as $ingresso) {
                          echo "<tr>";
                               echo ("<td>".$ingresso['codigo']."</td>");
-                              echo ("<td>".$ingresso['cliente']."</td>");
+                              if($ingresso['origem'] == 2){
+                                   echo ("<td>Venda pelo site</td>");
+                              }else{
+                                   echo ("<td>".$ingresso['cliente']."</td>");
+                              }
                               echo ("<td>R$".number_format($ingresso['valor'], 2, ',', '.')."</td>");  
                               echo ("<td>".$ingresso['validade']."</td>");
                               // echo ("<td>".$ingresso['lote']."</td>"); 

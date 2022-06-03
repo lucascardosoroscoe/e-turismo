@@ -12,7 +12,7 @@ $email = $_GET['email'];
                     <div class="card shadow-lg border-0 rounded-lg mt-5">
                         <div class="card-header"><h3 class="text-center font-weight-light my-4">Agendar Consultoria Gratuita</h3><br><h6><?php echo $msg;?></h6></div>
                         <div class="card-body">
-                            <form action="create.php" id="create_user" method="POST">
+                            <form action="createAgendamento.php" id="createAgendamento" method="POST">
                                 <div class="form-row">
                                     <div class="col-md-12">
                                         <div class="form-group">
@@ -34,6 +34,7 @@ $email = $_GET['email'];
                                             <input class="form-control py-4" id="inputTelefone"  name="inputTelefone" type="text" placeholder="Digite o telefone" required/>
                                         </div>
                                     </div>
+                                    <p class="small mb-1">Agende para uma data entre 01 e 30 de junho com pelo menos 1 dia útil de antecedência</p>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="small mb-1" for="inputData">Data</label>

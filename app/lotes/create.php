@@ -70,9 +70,11 @@
         $lotes = selecionar($consulta);
         $options = "";
         foreach ($lotes as $lote) {
-            $options = $options . $lote['nome'] . ' - R$' . $lote['valor'] . '|';
+            $nomeLote = $lote['nome'];
+            $nomeLote = rtrim($nomeLote, " ");
+            $options = $options . $nomeLote . ' - R$' . $lote['valor'] . '|';
         }
-
+ 
 
         $data = [
             'attributes' => [

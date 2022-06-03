@@ -1,6 +1,15 @@
- 
+<?php
+include('../app/includes/header.php');
+?>
+<!-- <div class="header">
+    <img src="../app/img/logoEscura.png" id="logo" style="margin: auto;"></div>
+</div> -->
+<!-- <div class="body"> -->
+    <div id="reader" width="600px"></div>
+<!-- </div> -->
+<!-- <div class="footer">
 
-<div id="reader" width="600px"></div>
+</div> -->
 <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
 <script>
 var status = 0;
@@ -34,3 +43,26 @@ html5QrcodeScanner.render(onScanSuccess, onScanFailure);
 
 
 </script>
+<style>
+    /* button {
+        font-size: 30px;
+    }
+    span {
+        font-size: 30px;    
+    }
+    img {
+        width: 400px;
+    }
+    select {
+        font-size: 30px;    
+    }
+    input {
+        font-size: 430px;
+    }
+    #reader__dashboard_section_swaplink {
+        display: none;
+    } */
+</style>
+<?php
+include('../app/includes/footer.php');
+?>

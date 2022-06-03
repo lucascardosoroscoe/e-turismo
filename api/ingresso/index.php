@@ -17,35 +17,56 @@
             'version' => 'wc/v3',
         ]
     );
-
-
+ 
+    //Dados da integração
     $promoter = 1;
     $secret = 'ingressozapp258mudancastatus';
     $log =  file_get_contents('php://input');
     
+    // salvar Log 
     $server = json_encode($_SERVER, true);
-    $msg = salvarLog("Teste", "Teste");
     $msg = salvarLog($log, $server);
     
+    // Se Log foi salvo corretamente 
     if($msg == "Sucesso!"){
         $pedido = json_decode($log, true);
+        $servidor = json_decode($server, true);
         $numeroPedido = $pedido['id'];
-        if(verificarPedido($numeroPedido)){
+        $payment_url = $servidor['HTTP_X_WC_WEBHOOK_SOURCE'];
+        $msg = salvarLog("URL DO SITE", $payment_url);
+        if($payment_url == "https://ingressozapp.com/"){
+            if(verificarPedido($numeroPedido)){
+                // Pagamento Realizado - Processando entrega do Pedido
+                if($pedido['status'] == "processing"){
+                    // Emitir Ingresso
+                    $hash = bin2hex(openssl_random_pseudo_bytes(32));
+                    $idPedido = $pedido['id'];
+                    getDadosComprador();
+                    $itens = $pedido['line_items'];
+                    $coupon = $pedido['coupon_lines'][0]['code'];
+                    if($coupon != ""){
+                        getVendedor($coupon);
+                    }
+                    gerarIngressos();
+                    enviarIngresso($hash, $senderEmail, $senderName, $idEvento, $nomeEvento);
+                } 
+            }
+        }
+        if($payment_url == "https://prefeitosdofuturo.com.br/"){
+            $promoter = 956;
             // Pagamento Realizado - Processando entrega do Pedido
             if($pedido['status'] == "processing"){
                 // Emitir Ingresso
                 $hash = bin2hex(openssl_random_pseudo_bytes(32));
                 $idPedido = $pedido['id'];
-                getDadosComprador();
+                getDadosCompradorCorreto();
                 $itens = $pedido['line_items'];
                 $coupon = $pedido['coupon_lines'][0]['code'];
-                if($coupon != ""){
-                    getVendedor($coupon);
-                }
                 gerarIngressos();
                 enviarIngresso($hash, $senderEmail, $senderName, $idEvento, $nomeEvento);
             } 
         }
+        
         
     }else{
         $msg = "Erro ao registrar log";
@@ -103,6 +124,14 @@
         $comprador = $pedido['billing'];
         $senderName = $comprador['first_name'];
         $telefone = $comprador['last_name'];
+        $senderEmail = $comprador['email'];
+    }
+    function getDadosCompradorCorreto(){
+        global $pedido, $senderName, $telefone, $senderEmail;
+        $comprador = $pedido['billing'];
+        $senderName = $comprador['first_name'];
+        $senderName = $senderName . " " . $comprador['last_name'];
+        $telefone = $comprador['phone'];
         $senderEmail = $comprador['email'];
     }
     function salvarLog($log, $server){

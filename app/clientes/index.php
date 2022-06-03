@@ -26,9 +26,11 @@ include('../includes/header.php');
                     <thead>
                         <tr>
                             <th style="display:none;">Id</th>
+                            <th>N</th>
                             <th>Nome</th>
-                            <th>Telefone</th>
                             <th>Whatsapp</th>
+                            <th>Telefone</th>
+                            
                             <th></th>
                         </tr>
                     </thead>
@@ -40,7 +42,7 @@ include('../includes/header.php');
                                     $consulta = "SELECT Cliente.id, Cliente.nome, Cliente.telefone, Cliente.email
                                     FROM Cliente
                                     JOIN Ingresso ON Ingresso.idCliente = Cliente.id
-                                    WHERE Ingresso.evento = '$idEvento'";
+                                    WHERE Ingresso.evento = '$idEvento' GROUP BY Cliente.telefone";
                                     addTabela($consulta);
                                 }
                             }else if($tipoUsuario == 2){
@@ -49,24 +51,31 @@ include('../includes/header.php');
                                 JOIN Vendedor ON Ingresso.vendedor = Vendedor.id
                                 JOIN ProdutorVendedor ON Vendedor.id = ProdutorVendedor.idVendedor
                                 WHERE ProdutorVendedor.idProdutor = '$idUsuario'
-                                GROUP BY Cliente.id";
+                                GROUP BY Cliente.telefone";
                                 addTabela($consulta);
                                 $consulta = "SELECT Cliente.id, Cliente.nome, Cliente.telefone FROM Cliente 
                                 JOIN Ingresso ON Ingresso.idCliente = Cliente.id
                                 JOIN Evento ON Ingresso.evento = Evento.id 
-                                WHERE (Ingresso.vendedor = 1 OR Ingresso.vendedor = 2) AND Evento.produtor = $idUsuario
-                                GROUP BY Cliente.id";
+                                WHERE (Ingresso.vendedor = 1 OR Ingresso.vendedor = 2) AND Evento.produtor = $idUsuario GROUP BY Cliente.telefone
+                               ";
                                 addTabela($consulta);
                             }else if($tipoUsuario == 3){
                                 $consulta = "SELECT Cliente.id, Cliente.nome, Cliente.telefone FROM Cliente 
                                 JOIN Ingresso ON Ingresso.idCliente = Cliente.id
                                 WHERE Ingresso.vendedor = '$idUsuario'
-                                GROUP BY Cliente.id";
+                                GROUP BY Cliente.telefone";
                                 addTabela($consulta);
                             }
                         ?>
                     </tbody>
                 </table>
+                <div class="form-row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                                <input class="form-control py-4" id="selectPagina"  name="selectPagina" type="text" placeholder="Ir Para Página" onchange="irParaPagina()" required/>
+                            </div>
+                        </div>
+                    </div>        
             </div>
         </div>
     </div>
@@ -76,18 +85,20 @@ include('../includes/header.php');
 function addTabela($consulta){
     global $msg;
     $usuarios = selecionar($consulta);
+    $n = 0;
     foreach ($usuarios as $obj) {
+        $n = $n +1;
         echo "<tr>";
             echo ("<td style='display:none;'>".$obj['id']."</td>");
+            echo ("<td>".$n."</td>");
             echo ("<td>".$obj['nome']."</td>"); 
-            echo ("<td>".$obj['telefone']."</td>");
             $nomeCompleto = explode(' ',trim($obj['nome']));
             $primeiroNome = $nomeCompleto[0];
             $mensagem = "Oi ".$primeiroNome.", tudo bem? " . $msg;
 
             $mensagem = urlencode($mensagem);
             echo ("<td><a target='_blank' href='https://api.whatsapp.com/send?phone=55".$obj['telefone']."&text=".$mensagem."'>Contatar</a></td>");
-        
+            echo ("<td>".$obj['telefone']."</td>");
             echo ("<td style='display: flex;'><a href='editar.php?id=".$obj['id']."' class='iconeTabela'><i class='fas fa-user-edit'></i></a></td>");  
         echo "</tr>";
     }

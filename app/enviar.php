@@ -32,7 +32,7 @@ if($codigo == ""){
     $msg = "🎉 *".$evento."* 🎉
 Olá *".$cliente."* você acaba de adquirir ingressos utilizando o aplicativo *IngressoZapp*!!!
     
-Para acessar seus ingressos  clique no link: 
+Para acessar seu ingresso *salve esse número* e clique no link: 
 http://ingressozapp.com/app/ingressos/?hash=".$hash."
     
 Para entrar no evento apresente um print do QR CODE de cada um dos seus ingressos (disponível no link acima) e um documento original com foto.
@@ -63,6 +63,22 @@ http://ingressozapp.com/app/qr.php?codigo=".$codigo."
 Para entrar no evento apresente seu ingresso (*CODIGO: ".$codigo."*) e um documento original com foto.
     
     ";
+    if($idUsuario == 524){
+        $msg = "🎉 Prefeitos do Futuro 2022 🎉
+        
+Olá ".$cliente." você está recebendo nesta mensagem o Qr Code de acesso ao evento Prefeitos do Futuro 2022, que acontece de 18 a 20 de maio, no Centro de Convenções Brasil 21
+Localização: https://goo.gl/maps/isgpwtyZoLRULzbS8
+O evento começa às 08h e termina às 18h todos os dias
+        
+Para acessar seu passaporte salve esse número e clique no link: 
+http://ingressozapp.com/app/qr.php?codigo=".$codigo."
+        
+Nos dias 18 e 19, quarta e quinta, teremos coquetéis de confraternização com shows especiais das 18:15 às 20:15 no mesmo local do evento.
+        
+Para entrar no evento apresente seu ingresso (CODIGO: ".$codigo.") e um documento original com foto no credenciamento na entrada do Centro de Convenções Brasil 21, teremos balcões de atendimento separados por: PREFEITOS, SECRETÁRIOS E ASSESSORES, CONVIDADOS E PALESTRANTES.
+        
+Para evitar filas, você poderá retirar seu kit e fazer o seu credenciamento com este Qr Code já no dia 17/05, terça-feira, das 15h às 19h no próprio Centro de Convenções Brasil 21.";
+    }
 }
 
 $bar = "
@@ -95,7 +111,7 @@ function enviarIngresso($hash, $senderEmail, $senderName, $idEvento, $nomeEvento
     <h1 style='text-align:center'>🎉 ".$nomeEvento." 🎉</h1><br>
     <h3 style='text-align:center'>Olá ".$senderName." você acaba de adquirir um ingresso, utilizando o aplicativo IngressoZapp!!!</h3><br>
     <br>
-    <h2 style='text-align:center' >Para acessar os ingressos clique no link: <br>
+    <h2 style='text-align:center' >Para acessar os ingressos salve o número que te enviou essa mensagem e clique no link: <br>
     http://ingressozapp.com/app/ingressos/?hash=".$hash."</h2><br>
     <br>
     ";

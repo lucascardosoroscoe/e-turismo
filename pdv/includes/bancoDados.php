@@ -1,7 +1,7 @@
 <?php
     session_start();
     //Conexão com o o Banco de dados
-    $servidorBanco = '127.0.0.1:3306';
+    $servidorBanco = '185.212.71.102:3306';
     $senhaBanco ='vjdC7p5XBy';
     $usuarioBanco ='u989688937_IHLyR';
     $bdados ='u989688937_WtNbV';
@@ -59,5 +59,4 @@
         mysqli_close($conexao);
         return $dados;
     }
-    selecionar("SELECT * FROM Evento");
 ?>

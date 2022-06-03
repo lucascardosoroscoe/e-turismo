@@ -2,7 +2,10 @@
 include('../includes/verificarAcesso.php');
 verificarAcesso(2);
 include('../includes/header.php');
-
+$eventoId = $_GET['evento'];
+if($eventoId != ""){
+    $idEvento = $eventoId;
+}
 ?>
 <div class="container-fluid">
     <!-- Tabela dos veículos-->

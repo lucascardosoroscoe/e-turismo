@@ -39,7 +39,7 @@
         $consulta = "SELECT `idWP` FROM `Evento` WHERE `id` = '$idEvento'";
         $dados = selecionar($consulta);
         $idWP = $dados[0]['idWP'];
-
+        $nome = rtrim($nome, " ");
         $valorFinal = $valor * 1.1;
         $data = [
             'regular_price' => strval($valorFinal),

@@ -63,7 +63,6 @@
         // Criar Evento no Wordpress
         try {
             $eventoWP =  criarEventoWP($nome, $descricao, $idEvento, $slug);
-            echo json_encode($eventoWP);
             $idWP = $eventoWP->id;
             atualizarIdWP($idEvento, $idWP);
             // Criar card no trello
@@ -129,11 +128,10 @@
                         'Lote 2', 
                         'Lote 3'
                     ]
-                ]
+                ] 
             ],
             
         ];
-        // echo json_encode($data);
         return $woocommerce->post('products', $data);
     }
 
