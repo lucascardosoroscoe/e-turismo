@@ -107,9 +107,11 @@ setlocale(LC_ALL, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
                       echo('</a>');
                       echo('<div class="collapse" id="collapse" aria-labelledby="headingOne" data-parent="#sidenavAccordion"><nav class="sb-sidenav-menu-nested nav">');
                         echo('<a class="nav-link" href="'.$HTTP_HOST . "/app".'/relatorios/vendaIngresso">Venda de Ingressos</a>');
+                        echo('<a class="nav-link" href="'.$HTTP_HOST . "/app".'/relatorios/vendaOnline">Venda Online</a>');
                         // echo('<a class="nav-link" href="'.$HTTP_HOST . "/app".'/relatorios/financeiro">Financeiro</a>');
                         echo('<a class="nav-link" href="'.$HTTP_HOST . "/app".'/relatorios/recebimento">Recebimentos</a>');
-                        echo('<a class="nav-link" href="'.$HTTP_HOST . "/app".'/relatorios/vendaBar">Vendas no Bar</a>');
+                        // echo('<a class="nav-link" href="'.$HTTP_HOST . "/app".'/relatorios/vendaBar">Vendas no Bar</a>');
+
                         if($tipoUsuario == 1){
                           echo('<a class="nav-link" href="'.$HTTP_HOST . "/app".'/relatorios/dashboard">Dashboard</a>');
                         }
@@ -180,24 +182,37 @@ setlocale(LC_ALL, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
           echo('<option value="'. $evento['id'] .'">'. $evento['nome'] .'</option>');
         }
       }
+
+      if($tipoUsuario == 2){
+        $consulta = "SELECT  Evento.id, Evento.nome FROM `Evento` JOIN Coprodutor ON Coprodutor.idEvento = Evento.id WHERE Coprodutor.idProdutor = '$idUsuario'";
+        $dados = selecionar($consulta);
+        foreach ($dados as $evento) {
+          if($idEvento == $evento['id']){
+            echo('<option value="'. $evento['id'] .'" selected>'. $evento['nome'] .'</option>');
+          }else{
+            echo('<option value="'. $evento['id'] .'">'. $evento['nome'] .'</option>');
+          }
+        }
+      }
+      
     echo('</select>');
   }
   function selecEvento($idEvento){
     global $tipoUsuario, $idUsuario;
-    
-    if($tipoUsuario == 1){
-      $consulta = "SELECT * FROM `Evento` WHERE validade = 'VALIDO' OR validade = 'INVALIDO' ORDER BY nome";
-    }else if($tipoUsuario == 2){
-      $consulta = "SELECT * FROM `Evento` WHERE `produtor`= '$idUsuario' AND validade = 'VALIDO'";
-    }else if($tipoUsuario == 3){
-      $consulta = "SELECT Evento.id, Evento.nome FROM Evento 
-      JOIN Produtor ON Evento.produtor = Produtor.id
-      JOIN ProdutorVendedor ON ProdutorVendedor.idProdutor = Produtor.id
-      JOIN Vendedor ON ProdutorVendedor.idVendedor = Vendedor.id
-      WHERE Vendedor.id = '$idUsuario' AND Produtor.validade = 'VALIDO' AND Evento.validade = 'VALIDO'";
-    }
-    $dados = selecionar($consulta);
     echo('<select class="form-control" name="selectEvento" id="selectEvento" onchange="selectevento(1)"  form="emitir" required>');
+
+      if($tipoUsuario == 1){
+        $consulta = "SELECT * FROM `Evento` WHERE validade = 'VALIDO' OR validade = 'INVALIDO' ORDER BY nome";
+      }else if($tipoUsuario == 2){
+        $consulta = "SELECT * FROM `Evento` WHERE `produtor`= '$idUsuario' AND validade = 'VALIDO'";
+      }else if($tipoUsuario == 3){
+        $consulta = "SELECT Evento.id, Evento.nome FROM Evento 
+        JOIN Produtor ON Evento.produtor = Produtor.id
+        JOIN ProdutorVendedor ON ProdutorVendedor.idProdutor = Produtor.id
+        JOIN Vendedor ON ProdutorVendedor.idVendedor = Vendedor.id
+        WHERE Vendedor.id = '$idUsuario' AND Produtor.validade = 'VALIDO' AND Evento.validade = 'VALIDO'";
+      }
+      $dados = selecionar($consulta);
       echo('<option value="">Selecione o Evento</option>');
       foreach ($dados as $evento) {
         if($idEvento == $evento['id']){
@@ -206,6 +221,20 @@ setlocale(LC_ALL, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
           echo('<option value="'. $evento['id'] .'">'. $evento['nome'] .'</option>');
         }
       }
+
+      if($tipoUsuario == 2){
+        $consulta = "SELECT Evento.id, Evento.nome FROM `Evento` JOIN Coprodutor ON Coprodutor.idEvento = Evento.id WHERE Coprodutor.idProdutor = '$idUsuario'";
+        $dados = selecionar($consulta);
+        foreach ($dados as $evento) {
+          if($idEvento == $evento['id']){
+            echo('<option value="'. $evento['id'] .'" selected>'. $evento['nome'] .'</option>');
+          }else{
+            echo('<option value="'. $evento['id'] .'">'. $evento['nome'] .'</option>');
+          }
+        }
+      }
+      
+
     echo('</select>');
   }
 

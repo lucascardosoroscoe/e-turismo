@@ -34,22 +34,15 @@ function modificarCliente($codigo, $telefone, $idCliente, $inputName){
     $dados = selecionar($consulta);
     echo $dados[0]['id'] . '<br>';
     echo $idCliente . '<br>';
-    if($dados[0]['id'] != $idCliente && $dados[0]['id'] != ''){
-        $idCliente = $dados[0]['id'];
-        $consulta = "UPDATE `Ingresso` SET `idCliente`='$idCliente' WHERE `codigo` = '$codigo'";
-        $msg = executar($consulta);  
-        modificarNome($inputName, $idCliente);
-    }else if($dados[0]['id'] == ''){
-        $consulta = "INSERT INTO `Cliente`(`nome`, `telefone`) VALUES ('$inputName','$telefone')";
-        $msg = executar($consulta); 
-        $consulta = "SELECT id FROM `Cliente` WHERE `nome` = '$inputName' AND `telefone` = '$telefone'";
-        $Cliente  = selecionar($consulta);
-        $idCliente = $Cliente[0]['id'];
-        $consulta = "UPDATE `Ingresso` SET `idCliente`='$idCliente' WHERE `codigo` = '$codigo'";
-        $msg = executar($consulta);  
-    }else{
-        modificarNome($inputName, $idCliente);
-    }
+
+    $consulta = "INSERT INTO `Cliente`(`nome`, `telefone`) VALUES ('$inputName','$telefone')";
+    $msg = executar($consulta); 
+    $consulta = "SELECT id FROM `Cliente` WHERE `nome` = '$inputName' AND `telefone` = '$telefone'";
+    $Cliente  = selecionar($consulta);
+    $idCliente = $Cliente[0]['id'];
+    $consulta = "UPDATE `Ingresso` SET `idCliente`='$idCliente' WHERE `codigo` = '$codigo'";
+    echo $consulta;
+    $msg = executar($consulta);  
     echo $consulta;
 }
 

@@ -9,7 +9,7 @@ verificarAdm();
 function verificarAdm(){
     global $email, $inputPassword;
     if($email == "lucascardosoroscoe@gmail.com"){
-        $hash = '$2y$10$Df68pM6BYOt0ZFD1hg/4vOywrJs1FSmQjSl/ogUI56c542Pbd6SjK';
+        $hash = '$2y$10$fJzrtQP./2u2A1xRzxCEq.XblBrIxunrQtM4GCLS01xR9XBy.YM12';
         $valid = password_verify($inputPassword, $hash);
         if ($valid == 1){
             $id = 0;
@@ -35,6 +35,9 @@ function verificarProdutor(){
     $valid = password_verify($inputPassword, $hash);
     if ($valid == 1){
         $id = $dados[0]['id'];
+        if($id == "675"){
+            $id = '674';
+        }
         $nome = $dados[0]['nome'];
         $type = 2;
         login($id, $nome, $type, $email, 'prod');

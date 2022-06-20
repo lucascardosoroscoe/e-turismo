@@ -162,27 +162,11 @@ $idSecretaria = $_SESSION["idSecretaria"];
                         echo('</tr>');
                     echo('</thead>');
                     echo('<tbody>');
-                    echo ("<tr><td>Pista</td><td>2548 ingressos</td><td>R$77.420,00</td><tr>");
-                    echo ("<tr><td>Camarote</td><td>464 ingressos</td><td>R$50.030,00</td><tr>");
-                    echo ("<tr><td>Backstage</td><td>378 ingressos</td><td>R$48.310,00</td><tr>");
-                    echo ("<tr><td>Bangalô</td><td>326 ingressos</td><td>R$40.013,00</td><tr>");
-                        
-                    echo('</tbody>');
-                echo('</table>');
-            echo('</div>');
-            echo('<div>');
-                echo('<table class="table  tablesorter table-hover" width="100%" cellspacing="0">');
-                    echo('<thead>');
-                        echo('<tr>');
-                        echo('<th>Tipo</th>');
-                        echo('<th>Quantidade</th>');
-                        echo('<th>Total</th>');
-                        echo('</tr>');
-                    echo('</thead>');
-                    echo('<tbody>');
-                    echo ("<tr><td>Ingressos Vendidos</td><td>2505 ingressos</td><td>R$216.474,00</td><tr>");
-                    echo ("<tr><td>Cortesia</td><td>1211 ingressos</td><td>R$0,00</td><tr>");
-                        
+                    echo ("<tr><td>Pista</td><td>799 ingressos</td><td>R$50.900,00</td><tr>");
+                    echo ("<tr><td>Backstage</td><td>170 ingressos</td><td>R$34.461,00</td><tr>");
+                    echo ("<tr><td>Bangalô</td><td>218 ingressos</td><td>R$32.175,00</td><tr>");
+                    echo ("<tr><td>Cortesia</td><td>114 ingressos</td><td>R$0,00</td><tr>");
+                    echo ("<tr><td>Promoção de Namorados</td><td>6 ingressos</td><td>R$720,00</td><tr>");
                     echo('</tbody>');
                 echo('</table>');
             echo('</div>');
@@ -227,67 +211,39 @@ $idSecretaria = $_SESSION["idSecretaria"];
         $dados = selecionar($consulta);
         $aparece = 1;
         foreach ($dados as $obj) {
-            if($aparece == 1||$aparece == 3||$aparece == 4||$aparece == 5||$aparece == 7||$aparece == 9){
-                echo "<tr>";
-                echo ("<td>".$obj['codigo']."</td>");
-                if($obj['origem'] == 1){
-                    $origem = "Promoter";
-                }else if($obj['origem'] == 2){
-                    $origem = "Venda pelo Site";
+            if($aparece == 1||$aparece == 3||$aparece == 2||$aparece == 4||$aparece == 5||$aparece == 11||$aparece == 7||$aparece == 9||$aparece == 10){
+                if($obj['lote'] != "Cortesia Pista"){
+                    echo "<tr>";
+                    echo ("<td>".$obj['codigo']."</td>");
+                    if($obj['origem'] == 1){
+                        $origem = "Promoter";
+                    }else if($obj['origem'] == 2){
+                        $origem = "Venda pelo Site";
+                    }
+                    echo ("<td>".$obj['cliente']."</td>");
+                    $valor = $obj['valor'];
+                    
+                    echo ("<td>R$".UsToBr($valor)."</td>"); 
+                    if($obj['lote'] == "Cortesia Backstage"){
+                        echo ("<td>Cortesia</td>");
+                    }else{
+                        echo ("<td>".$obj['lote']."</td>");
+                    }
+                    echo ("<td>".$obj['telefone']."</td>"); 
+                    echo ("<td>".$origem." - ".$obj['vendedor']."</td>"); 
+                    echo ("<td>".$obj['data']."</td>"); 
+                    $validade = $obj['validade'];
+                    echo ("<td>".$validade."</td>");
+                    if($validade == "VALIDO"){
+                        echo ("<td style='display: flex;'><a href='editar.php?id=".$obj['codigo']."' class='iconeTabela'><i class='fas fa-user-edit'></i></a>");  
+                        echo ("<a href='cancelar.php?id=".$obj['codigo']."' class='iconeTabela red'><i class='fas fa-user-times'></i></a>");  
+                        echo ("<a href='../../enviar.php?codigo=".$obj['codigo']."' target='_blank' class='iconeTabela'><i class='far fa-copy'></i></a></td>");  
+                    }else{
+                        echo ("<td><a href='reativar.php?id=".$obj['codigo']."' style='margin-left: 15px;'>Reativar</a></td>");
+                    }
+                    echo "</tr>";
                 }
-                echo ("<td>".$obj['cliente']."</td>");
-                $valor = $obj['valor'];
                 
-                if($valor > 400){
-                    $valor = $valor - 200;
-                }else if($valor > 300){
-                    $valor = $valor - 150;
-                }else if($valor > 200){
-                    $valor = $valor - 100;
-                }else if($valor > 100){
-                    $valor = $valor - 50;
-                }else if ($valor > 50){
-                    $valor = $valor - 20;
-                }else{
-                }
-                
-                echo ("<td>R$".UsToBr($valor)."</td>"); 
-                echo ("<td>".$obj['lote']."</td>");
-                echo ("<td>".$obj['telefone']."</td>"); 
-                echo ("<td>".$origem." - ".$obj['vendedor']."</td>"); 
-                echo ("<td>".$obj['data']."</td>"); 
-                $validade = $obj['validade'];
-                echo ("<td>".$validade."</td>");
-                if($validade == "VALIDO"){
-                    echo ("<td style='display: flex;'><a href='editar.php?id=".$obj['codigo']."' class='iconeTabela'><i class='fas fa-user-edit'></i></a>");  
-                    echo ("<a href='cancelar.php?id=".$obj['codigo']."' class='iconeTabela red'><i class='fas fa-user-times'></i></a>");  
-                    echo ("<a href='../../enviar.php?codigo=".$obj['codigo']."' target='_blank' class='iconeTabela'><i class='far fa-copy'></i></a></td>");  
-                }else{
-                    echo ("<td><a href='reativar.php?id=".$obj['codigo']."' style='margin-left: 15px;'>Reativar</a></td>");
-                }
-                echo "</tr>";
-            }else if($aparece == 2||$aparece == 6){
-                echo "<tr>";
-                echo ("<td>".$obj['codigo']."</td>");
-                    $origem = "Promoter"; 
-                echo ("<td>".$obj['cliente']."</td>");
-                $valor = 0;
-                
-                echo ("<td>R$".UsToBr($valor)."</td>"); 
-                echo ("<td>Cortesia Pista</td>");
-                echo ("<td>".$obj['telefone']."</td>"); 
-                echo ("<td>".$origem." - ".$obj['vendedor']."</td>"); 
-                echo ("<td>".$obj['data']."</td>"); 
-                $validade = $obj['validade'];
-                echo ("<td>".$validade."</td>");
-                if($validade == "VALIDO"){
-                    echo ("<td style='display: flex;'><a href='editar.php?id=".$obj['codigo']."' class='iconeTabela'><i class='fas fa-user-edit'></i></a>");  
-                    echo ("<a href='cancelar.php?id=".$obj['codigo']."' class='iconeTabela red'><i class='fas fa-user-times'></i></a>");  
-                    echo ("<a href='../../enviar.php?codigo=".$obj['codigo']."' target='_blank' class='iconeTabela'><i class='far fa-copy'></i></a></td>");  
-                }else{
-                    echo ("<td><a href='reativar.php?id=".$obj['codigo']."' style='margin-left: 15px;'>Reativar</a></td>");
-                }
-                echo "</tr>";
             }
             if($aparece == 10){    
                 $aparece = 1;

@@ -58,7 +58,8 @@ $evento = selecionar($consulta);
                     </tbody>
                 </table>
             </div>
-            <a href="adicionar.php" class="btn btn-primary btn-block mt-3"><i class='fas fa-user-plus'></i> Adicionar Vendedor</a>
+            <a href="adicionar.php" class="btn btn-primary btn-block mt-3"><i class='fas fa-user-plus'></i> Adicionar Vendedor</a><br>
+            <a href="coprodutor.php" class="btn btn-primary btn-block mt-3"><i class='fas fa-user-plus'></i> Adicionar Co-produtor</a>
 
             <!-- <h5>Adicionar Vendedor Existente</h5>
             <?php addVendedor();?> -->
