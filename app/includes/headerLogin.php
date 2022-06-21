@@ -7,13 +7,10 @@
       <meta name="description" content="IngressoZapp" />
       <meta name="author" content="Lucas Cardoso Roscoe" />
       <title>IngressoZapp</title>
+      <link rel="icon" type="imagem/png" href="<?php echo $HTTP_HOST . "/app";?>/img/logo.jpeg" />
       <link  rel="stylesheet" href="<?php echo $HTTP_HOST . "/app";?>/css/styles.css" />
-      <link rel="stylesheet"  href="<?php echo $HTTP_HOST . "/app";?>/css/table.css">
       <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
       <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js" crossorigin="anonymous"></script>
-      <!-- <link rel="stylesheet" href="style1.css">
-      <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-      <script type="text/javascript" src="<?php echo $HTTP_HOST . "/app";?>/js/graph.js"></script> -->
     </head>
 
     <body>

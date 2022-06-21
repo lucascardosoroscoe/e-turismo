@@ -22,7 +22,7 @@ include('../includes/headerLogin.php');
                                         <option value="4">Cliente - Comprei um Ingresso</option>
                                     </select>
                                 </div>
-                                <button class="btn btn-primary"  type="submit" >Enviar e-mail de recuperação</button>
+                                <button class="btn btn-primary"  onclick="enviarForm()" >Enviar e-mail de recuperação</button>
                             </form>
                         </div>
                         <div class="card-footer text-center">

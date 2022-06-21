@@ -60,7 +60,7 @@ $dados = selecionar($consulta);
                                 <?php
                                     //Se for tipo 1 -> Selecionar Produtor
                                 ?>
-                                <div class="form-group mt-4 mb-0"><button class="btn btn-primary btn-block" type="submit" >Editar Evento</button></div>
+                                <div class="form-group mt-4 mb-0"><button class="btn btn-primary btn-block" onclick="enviarForm()" >Editar Evento</button></div>
                             </form>
                         </div>
                     </div>

@@ -22,7 +22,7 @@ $msg = $_GET['msg'];
                                     <label class="small mb-1" for="pedido">Número do Pedido</label>
                                     <input class="form-control py-4" id="pedido" name="pedido" type="number" placeholder="Digite o número do Pedido" />
                                 </div>
-                                <button class="btn btn-primary"  type="submit" >Pegar minha segunda via</button>
+                                <button class="btn btn-primary"  onclick="enviarForm()" >Pegar minha segunda via</button>
                             </form>
                         </div>
                     </div>

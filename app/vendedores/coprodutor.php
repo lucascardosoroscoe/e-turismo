@@ -15,7 +15,7 @@ $evento = selecionar($consulta);
             <i class="fas fa-table mr-1"></i>
             COPRODUTORES
             <div class="btn btnAdd" onclick="fnExcelReport('dataTable')" style="margin-left: 2px;"><i class="far fa-file-excel"></i> Exportar Excel</div>
-            <a href='adicionar.php'><div class="btn btnAdd"><i class='fas fa-user-plus'></i> Adicionar</div></a>
+            <a href='addCoprodutor.php'><div class="btn btnAdd"><i class='fas fa-user-plus'></i> Adicionar</div></a>
         </div>
         <div class="card-body">
             Um Co-produtor detém acesso administrativo para adicionar/editar/excluir lotes, ingressos do seu evento como 'Vendedor Oficial' e acessar relatórios de vendas do evento selecionado.

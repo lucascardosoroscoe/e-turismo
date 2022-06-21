@@ -39,7 +39,7 @@ $dados = selecionar($consulta);
                                         </div>
                                     </div>
                                 </div>
-                                <div class="form-group mt-4 mb-0"><button class="btn btn-primary btn-block" type="submit" >Editar Lote</button></div>
+                                <div class="form-group mt-4 mb-0"><button class="btn btn-primary btn-block" onclick="enviarForm()" >Editar Lote</button></div>
                             </form>
                         </div>
                     </div>

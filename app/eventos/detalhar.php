@@ -22,7 +22,7 @@ $produtor = $obj['produtor'];
                                 echo ("<br><h4>Descrição do Evento: ".$obj['descricao']."</h4>"); 
                                 echo ("<br><h4>Validade do Evento: ".$obj['validade']."</h4>");
                             ?>
-                            <div class="form-group mt-4 mb-0"><a class="btn btn-primary btn-block" href="./index.php" type="submit" >Voltar</a></div>
+                            <div class="form-group mt-4 mb-0"><a class="btn btn-primary btn-block" href="./index.php" >Voltar</a></div>
                         </div>
                     </div>
                 </div>

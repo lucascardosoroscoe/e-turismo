@@ -19,17 +19,7 @@ include('../includes/header.php');
                     JOIN Cliente ON Cliente.id = Ingresso.idCliente
                     JOIN Lote ON Lote.id = Ingresso.lote
                     WHERE Ingresso.hash = '$hash' ORDER BY Ingresso.codigo";
-                    // echo "Teste: ".$consulta;
-                    // $consulta = "SELECT Ingresso.codigo, Ingresso.valor, Ingresso.validade, Ingresso.data, Ingresso.validade, Ingresso.msgTitularidade,
-                    // Evento.id as idEvento, Evento.nome as evento, Evento.descricao as descricaoEvento,
-                    // Vendedor.nome as vendedor, Cliente.nome as cliente, Cliente.telefone, Cliente.telefone as idCliente, Lote.nome as lote
-                    // FROM Ingresso 
-                    // JOIN Hash ON Hash.hash = Ingresso.hash 
-                    // JOIN Evento ON Evento.id = Ingresso.evento
-                    // JOIN Vendedor ON Vendedor.id = Ingresso.vendedor
-                    // JOIN Cliente ON Cliente.id = Ingresso.idCliente
-                    // JOIN Lote ON Lote.id = Ingresso.lote
-                    // WHERE Hash.hash = '$hash' AND Hash.id = '$id'";
+                    
                     $ingressos = selecionar($consulta);
                     // echo json_encode($ingressos);
                     $contagem = 1;
@@ -99,17 +89,17 @@ include('../includes/header.php');
                                             echo('Altere o nome e o número de telefone a cima em seguida clique em "Solicitar Modificação de Titularidade" para mudar a titularidade de seu ingresso.
                                                 Atenção: Para mudar a titularidade é obrigatório que também mude o telefone, por quetões de segurança apenas a primeira troca de titularidade é automatizada e gratuita, muita atenção ao realizar este procedimento.');
                                             if($msgTitularidade == ""){
-                                                echo ('<div class="form-group mt-4 mb-0"><button class="btn btn-primary btn-block" type="submit" >Solicitar Modificação de Titularidade</button></div>');
+                                                echo ('<div class="form-group mt-4 mb-0"><button class="btn btn-primary btn-block" onclick="enviarForm()" >Solicitar Modificação de Titularidade</button></div>');
                                             }else{
                                                 echo ('<h6>Por motivos de segurança apenas a 1ª transferência é gratiuta, e simplificada. As demais transferências devem passar por uma supervisão da equipe IngressoZapp<br>
                                                 Por gerar um suporte extra, essa mudança vai ter um custo de R$5,00, pago via PIX.</h6>');
-                                                echo ('<a href="https://api.whatsapp.com/send?phone=5567993481631&text=Ol%C3%A1%2C%20tudo%20bem%3F%20Gostaria%20de%20solicitar%20uma%20transfer%C3%AAncia%20de%20titularidade%20do%20meu%20ingresso." class="btn btn-primary" type="submit" >Solicitar Modificação de Titularidade</a>');
+                                                echo ('<a href="https://api.whatsapp.com/send?phone=5567993481631&text=Ol%C3%A1%2C%20tudo%20bem%3F%20Gostaria%20de%20solicitar%20uma%20transfer%C3%AAncia%20de%20titularidade%20do%20meu%20ingresso." class="btn btn-primary" onclick="enviarForm()" >Solicitar Modificação de Titularidade</a>');
                                             }
                                         echo ('</form>');
                                     }
                                 }else if($validade == 'USADO'){
                                     echo ('<br><h3 style="text-align: center;">Ingresso Já usado Anteriormente</h3><br>');
-                                    $hora = gmdate('d-m-Y H:i:s', strtotime( $horaLeitura ) - 7200);
+                                    $hora = gmdate('d-m-Y H:i:s', strtotime( $horaLeitura ));
                                     echo ('<h6 style="text-align: center;">Hora de Uso: '.$hora.' (Brasília)</h6><br>');
                                 }else if($validade == 'CANCELADO'){
                                     echo ('<br><h3 style="text-align: center;">Ingresso Cancelado</h3><br>');

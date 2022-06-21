@@ -35,9 +35,6 @@ function verificarProdutor(){
     $valid = password_verify($inputPassword, $hash);
     if ($valid == 1){
         $id = $dados[0]['id'];
-        if($id == "675"){
-            $id = '674';
-        }
         $nome = $dados[0]['nome'];
         $type = 2;
         login($id, $nome, $type, $email, 'prod');

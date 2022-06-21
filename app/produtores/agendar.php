@@ -48,7 +48,7 @@ $email = $_GET['email'];
                                         </div>
                                     </div>
                                 </div>
-                                <div class="form-group mt-4 mb-0"><button class="btn btn-primary btn-block" type="submit" >Confirmar Inscrição</button></div>
+                                <div class="form-group mt-4 mb-0"><button class="btn btn-primary btn-block" onclick="enviarForm()" >Confirmar Inscrição</button></div>
                             </form>
                         </div>
                     </div>

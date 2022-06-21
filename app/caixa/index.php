@@ -21,7 +21,7 @@ $nCaixa = $_SESSION["nCaixa"];
                                     echo ('<div class="col-md-12">');
                                         selectCaixa();
                                     echo ('</div>');
-                                    echo ('<div class="form-group mt-4 mb-0"><button class="btn btn-primary btn-block adicionarDiv" type="submit" >Selecionar</button></div>');
+                                    echo ('<div class="form-group mt-4 mb-0"><button class="btn btn-primary btn-block adicionarDiv" onclick="enviarForm()" >Selecionar</button></div>');
                                     echo ('<br><a class="btn btn-primary btn-block adicionarDiv" href="adicionar.php" >Adicionar</a>');
                                 echo ('</form>');
                             echo ('</div>');

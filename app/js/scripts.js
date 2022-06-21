@@ -28,6 +28,7 @@ var inputEvento = document.getElementById('selectEvento');
 var inputVendedor = document.getElementById('selectVendedor');
 var inputLote   = document.getElementById('selectLote');
 var inputMsg = document.getElementById('inputMsg');
+var clicado = 0;
 
 //Script Selecionar Evento
 function selectevento(id){
@@ -64,4 +65,19 @@ function adicionarlote() {
     }else{
         window.location.href = "./adicionar.php?id=" + idEvento;
     }
+}
+
+function enviarForm(){
+    if(clicado == 0){
+        document.getElementsByTagName("form")[0].submit;
+        clicado = 1;
+        document.body.style.cursor = 'wait';
+        setTimeout(ativarButton, 5000);
+    }else{
+        alert("Aguarde para clicar novamente");
+    }
+}
+function ativarButton() {
+    clicado = 0;
+    document.body.style.cursor = 'default';
 }

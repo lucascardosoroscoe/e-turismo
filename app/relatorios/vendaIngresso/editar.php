@@ -51,7 +51,7 @@ $idLote = $dados[0]['lote'];
                                     </div>
                                 </div>
                                 
-                                <div class="form-group mt-4 mb-0"><button class="btn btn-primary btn-block" type="submit" >Editar</button></div>
+                                <div class="form-group mt-4 mb-0"><button class="btn btn-primary btn-block" onclick="enviarForm()" >Editar</button></div>
                             </form>
                         </div>
                     </div>

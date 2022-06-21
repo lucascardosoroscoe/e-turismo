@@ -1,6 +1,8 @@
 <?php
+    // Includes
     include('../includes/verificarAcesso.php');
     include('../includes/trello.php');
+    // Recebe o POST
     $email = $_POST['inputEmailAddress'];
     $nome = $_POST['inputName'];
     $telefone = $_POST['inputTelefone'];
@@ -14,6 +16,7 @@
     $inputNumero = $_POST['inputNumero'];
     $inputBairro = $_POST['inputBairro'];
 
+    // Verifica se senha condiz com confirmação
     if($inputPassword == $inputConfirmPassword){
         $hash = password_hash($inputPassword, PASSWORD_DEFAULT);
         $consulta = "SELECT `id` FROM `Produtor` WHERE `usuario` = '$email'";
@@ -31,34 +34,31 @@
     }else{
         $msg = "A senha não condiz com a confirmação de Senha";
     }
-    $data = date('Y-m-d');
-    $nomeCard = $nome . " - " . $cidade . '/' . $estado . ' (' . $telefone . ')';
-    $descricaoCard = "
-        telefone: $telefone \n
-        E-mail: $email
-    "; 
-    criarCard($nomeCard, $descricaoCard, $data, $idListaProdutorCriado);
+
+    // Criar CARD Trello
+    try {
+        $data = date('Y-m-d');
+        $nomeCard = $nome . " - " . $cidade . '/' . $estado . ' (' . $telefone . ')';
+        $descricaoCard = "
+            telefone: $telefone \n
+            E-mail: $email
+        "; 
+        criarCard($nomeCard, $descricaoCard, $data, $idListaProdutorCriado);
+    } catch (\Throwable $th) {}
+    
 
 
     function verificarProdutor(){
         global $email, $inputPassword;
-        $consulta = "SELECT `id`, `nome`, `senha` FROM `Produtor` WHERE `email` = '$email'";
-        echo $consulta;
+        $consulta = "SELECT `id`, `nome`, `senha` FROM `Produtor` WHERE `usuario` = '$email'";
         $dados = selecionar($consulta);
-        echo json_encode($dados);
         $hash = $dados[0]['senha'];
-        echo $hash;
-        $valid = password_verify($inputPassword, $hash);
-        if ($valid == 1){
-            $id = $dados[0]['id'];
-            $nome = $dados[0]['nome'];
-            $type = 2;
-            login($id, $nome, $type, $email, 'prod');
-        }
+        $id = $dados[0]['id'];
+        $nome = $dados[0]['nome'];
+        $type = 2;
+        login($id, $nome, $type, $email, 'prod');
     }
     function login($id, $nome, $type, $email, $extra){
-        $msg = "Sucesso!";
-    
         $_SESSION["idUsuario"] = $id;
         $_SESSION["usuario"] = $nome;
         $_SESSION["tipoUsuario"] = $type;

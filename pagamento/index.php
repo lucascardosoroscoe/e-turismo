@@ -275,7 +275,7 @@
                   <label for="cc-estado" class="form-label">Estado (Ex: MS)</label>
                   <input type="text" class="form-control" id="cc-estado" name="cc-estado" placeholder="" required>
                 </div>
-                <button class="btn btn-primary" id="botaoCartao" type="submit">Concluir Compra</button>
+                <button class="btn btn-primary" id="botaoCartao" onclick="enviarForm()">Concluir Compra</button>
                 </form>
               </div>
               <div class="row gy-3 mt-3" id="menu_boleto" style="display:none;">

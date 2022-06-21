@@ -36,7 +36,7 @@ include('./header.php');
                                 </div>
                                 
                             </div>
-                            <button class="form-group mt-4 mb-0 btn btn-primary btn-block" type="submit" >Ganhar Ingressos</button>
+                            <button class="form-group mt-4 mb-0 btn btn-primary btn-block" onclick="enviarForm()" >Ganhar Ingressos</button>
                         </form>
                         <br>
                         <?php

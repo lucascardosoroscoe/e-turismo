@@ -21,7 +21,7 @@ include('../../includes/header.php');
                                         </div>
                                     </div>
                                 </div>
-                                <div class="form-group mt-4 mb-0"><button class="btn btn-primary btn-block" type="submit" >Adicionar Recebimento</button></div>
+                                <div class="form-group mt-4 mb-0"><button class="btn btn-primary btn-block" onclick="enviarForm()" >Adicionar Recebimento</button></div>
                             </form>
                         </div>
                     </div>

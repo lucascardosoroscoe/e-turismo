@@ -21,7 +21,7 @@ $idSecretaria = $_SESSION["idSecretaria"];
         <form action="index.php" method="get">
             <input type="date" name="dataInicial" id="dataInicial" value="<?php echo $dataInicial;?>">
             <input type="date" name="dataFinal" id="dataFinal" value="<?php echo $dataFinal;?>">
-            <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button>
+            <button onclick="enviarForm()" class="btn btn-primary"><i class="fas fa-search"></i></button>
         </form>
     </ol>
 

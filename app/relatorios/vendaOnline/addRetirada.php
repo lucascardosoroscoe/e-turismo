@@ -108,7 +108,7 @@ $valor = calcularValor();
                                     
                                 </div>
                                 <h6 class="font-weight-light">Aviso*: O pagamento será feito um dia útil após a solicitação de retirada. Pedidos realizados na sexta-feira ou fim de semana serão executados no primeiro dia útil da outra semana até às 18:00. Em caso de Dúvidas <a href="https://api.whatsapp.com/send?phone=5567999854042&text=Ol%C3%A1%2C%20gostaria%20de%20tirar%20uma%20d%C3%BAvida%20sobre%20minha%20retirada%20de%20dinheiro%20das%20vendas%20online%20nana%20plataforma%3A%20*DIGITE%20SUA%20D%C3%9AVIDA%20ABAIXO*">Clique Aqui</a></h6>
-                                <div class="form-group mt-4 mb-0"><button class="btn btn-primary btn-block" type="submit" >Solicitar Retirada</button></div>
+                                <div class="form-group mt-4 mb-0"><button class="btn btn-primary btn-block" onclick="enviarForm()" >Solicitar Retirada</button></div>
                             </form>
                         </div>
                     </div>

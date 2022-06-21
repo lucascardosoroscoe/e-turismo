@@ -54,7 +54,7 @@ $dados = selecionar($conculta);
                                         </div>
                                     </div>
                                 </div>
-                                <div class="form-group mt-4 mb-0"><button class="btn btn-primary btn-block" type="submit" >Editar Produtor</button></div>
+                                <div class="form-group mt-4 mb-0"><button class="btn btn-primary btn-block" onclick="enviarForm()" >Editar Produtor</button></div>
                             
                             </form>
                         </div>

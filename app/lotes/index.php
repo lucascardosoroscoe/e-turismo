@@ -2,9 +2,13 @@
 include('../includes/verificarAcesso.php');
 verificarAcesso(2);
 include('../includes/header.php');
-$eventoId = $_GET['evento'];
+$eventoId = $_GET['id'];
+if($eventoId == ""){
+    $eventoId = $_GET['evento'];
+}
 if($eventoId != ""){
     $idEvento = $eventoId;
+    $_SESSION["idEvento"] = $idEvento;
 }
 ?>
 <div class="container-fluid">

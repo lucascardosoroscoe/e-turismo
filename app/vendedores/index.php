@@ -119,7 +119,7 @@ function addVendedor(){
             echo ('<option value="'.$id.'">'.$nome.' ('.$email.')</option>');
         }   
         echo'</select>';
-        echo'<div class="form-group mt-4 mb-0"><button class="btn btn-primary btn-block" type="submit" >Adicionar Vendedor</button></div>';
+        echo'<div class="form-group mt-4 mb-0"><button class="btn btn-primary btn-block" onclick="enviarForm()" >Adicionar Vendedor</button></div>';
     echo'</form>';
 }
 

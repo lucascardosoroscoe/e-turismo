@@ -34,7 +34,7 @@
                                 </div>
                                 <div class="form-group d-flex align-items-center justify-content-between mt-4 mb-0">
                                     <a class="small" href="password.php">Esqueceu sua senha?</a>
-                                    <button class="btn btn-primary"  type="submit" >Login</button>
+                                    <button class="btn btn-primary"  onclick="enviarForm()" >Login</button>
                                 </div><br>
                                 <div class="small text-center"><a href="https://ingressozapp.com/nao-recebi-ingresso/">Comprou um Ingresso? Acesse aqui!</a></div>
 

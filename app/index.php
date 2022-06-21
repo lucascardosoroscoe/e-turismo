@@ -26,6 +26,8 @@ include('./includes/header.php');
                                 if($tipoUsuario == 2){
                                     $consulta = "SELECT Evento.id, Evento.nome, Evento.slug, Evento.data, Evento.descricao, Evento.validade, (SELECT SUM(valor) FROM Ingresso WHERE Ingresso.evento = Evento.id AND (Ingresso.validade = 'USADO' OR Ingresso.validade = 'VALIDO')) as vendas, (SELECT COUNT(valor) FROM Ingresso WHERE Ingresso.evento = Evento.id AND (Ingresso.validade = 'USADO' OR Ingresso.validade = 'VALIDO')) as quantidade, (SELECT COUNT(id) FROM Lote WHERE Lote.evento = Evento.id) as lotes FROM Evento WHERE produtor = '$idUsuario' AND validade != 'EXCLUIDO' ORDER BY data DESC";
                                     addTabela($consulta);
+                                    $consulta = "SELECT Evento.id, Evento.nome, Evento.slug, Evento.data, Evento.descricao, Evento.validade, (SELECT SUM(valor) FROM Ingresso WHERE Ingresso.evento = Evento.id AND (Ingresso.validade = 'USADO' OR Ingresso.validade = 'VALIDO')) as vendas, (SELECT COUNT(valor) FROM Ingresso WHERE Ingresso.evento = Evento.id AND (Ingresso.validade = 'USADO' OR Ingresso.validade = 'VALIDO')) as quantidade, (SELECT COUNT(id) FROM Lote WHERE Lote.evento = Evento.id) as lotes FROM Evento JOIN Coprodutor ON Evento.id = Coprodutor.idEvento WHERE Coprodutor.idProdutor = '$idUsuario' AND Evento.validade != 'EXCLUIDO' ORDER BY Evento.data DESC";
+                                    addTabela($consulta);
                                 }
                             ?>
                         </div>

@@ -12,7 +12,7 @@ include('../includes/header.php');
                             Um Co-produtor detém acesso administrativo para adicionar/editar/excluir lotes, ingressos do seu evento como 'Vendedor Oficial' e acessar relatórios de vendas do evento selecionado.
                         </div>
                         <div class="card-body">
-                            <form action="createCoprodutor.php" id="create_user" method="POST">
+                            <form action="createCoprodutor.php" id="emitir" method="POST">
                                 <div class="form-row">
                                     <div class="col-md-12">
                                         <div class="form-group">
@@ -33,7 +33,7 @@ include('../includes/header.php');
                                         </div>
                                     </div>
                                 </div>
-                                <div class="form-group mt-4 mb-0"><button class="btn btn-primary btn-block" type="submit" >Adicionar Co-Produtor</button></div>
+                                <div class="form-group mt-4 mb-0"><button class="btn btn-primary btn-block" onclick="enviarForm()" >Adicionar Co-Produtor</button></div>
                             </form>
                         </div>
                     </div>

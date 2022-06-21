@@ -53,7 +53,7 @@ echo ('<div id="divpicpay">');
         echo ('<option value="9">10</option>');
         echo ('</select><br>');
 
-        echo ('<br><br><button type="submit" name="btn-cadastrar" class="btn">Comprar Ingressos</button>');
+        echo ('<br><br><button onclick="enviarForm()" name="btn-cadastrar" class="btn">Comprar Ingressos</button>');
     echo ('</form>');
     
 

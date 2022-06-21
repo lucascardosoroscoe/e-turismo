@@ -33,7 +33,7 @@
                     echo ('<option value="INVALIDO">Ingressos Inválidos</option>');
                     echo ('</select><br><br>');
                     */  
-                    echo ('<button type="submit" name="emitir" class="btn">Emitir Relatório</button>');
+                    echo ('<button onclick="enviarForm()" name="emitir" class="btn">Emitir Relatório</button>');
                 echo('</form>');
                 echo ('<br><br><h5>Escolha dentre as opções abaixo e emita seu relatório de vendas no bar:</h5>');
                 echo ('<form action="relBar.php" id="relBar" method="POST">');
@@ -56,7 +56,7 @@
                     echo ('<option value="INVALIDO">Ingressos Inválidos</option>');
                     echo ('</select><br><br>');
                     */  
-                    echo ('<button type="submit" name="emitir" class="btn">Emitir Relatório</button>');
+                    echo ('<button onclick="enviarForm()" name="emitir" class="btn">Emitir Relatório</button>');
                 echo('</form>');
                 echo ('<br><a href="http://ingressozapp.com/produtor/" class="btn">Voltar</a>');
             echo ('</div>');

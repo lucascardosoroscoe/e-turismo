@@ -21,7 +21,7 @@ $msg = $_GET['msg'];
                                     <label class="small mb-1" for="inputSenha2">Repita sua senha</label>
                                     <input class="form-control py-4" id="inputSenha2" name="inputSenha2" type="password" placeholder="Repita sua senha" />
                                 </div>
-                                <button class="btn btn-primary"  type="submit" >Alterar Senha</button>
+                                <button class="btn btn-primary"  onclick="enviarForm()" >Alterar Senha</button>
                             </form>
                         </div>
                         
