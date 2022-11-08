@@ -1,6 +1,11 @@
 <?php
     include('../../includes/verificarAcesso.php');
 
+    //Insere LOG de transação no BD
+    $consulta = "INSERT INTO `PagSeguroRetornoLog`(`code`, `reference`,`status`,`paymentMethod`, `log`) VALUES ('teste' , 'teste','teste','teste' , 'teste')";
+    echo $consulta;
+    $msg = executar($consulta);
+
     //Credenciais de acesso PagSeguro
     $email = 'ingressozapp@gmail.com';
     $token = '0aec9415-f791-4876-a53b-118e007a7069102be8bb4222b8075142ac82ffa3aa9ed3bf-824d-4710-a323-028af0311dab';
@@ -17,7 +22,7 @@
     curl_close($curl);
 
     //Conversão XML/JSON/ARRAY
-    $xml = simplexml_load_string($transaction);
+    $xml = simplexml_load_string($transaction); 
     $json = json_encode($xml);
     $array = json_decode($json,TRUE);
 
@@ -32,26 +37,26 @@
     $consulta = "INSERT INTO `PagSeguroRetornoLog`(`code`, `reference`,`status`,`paymentMethod`, `log`) VALUES ('$code' , '$reference','$status','$paymentMethod' , '$json')";
     echo $consulta;
     $msg = executar($consulta);
+ 
 
+    //Verifica se o statos de pagamento é 'OK' e se o ingresso já não tinha sido gerado, para então gerar os ingressos.
+    if ($status == '3' || $status == '4'){
+        // Pega todos os dados da transação
+        getDadosTransacao($reference);
+        if($statusAnterior == 1 || $statusAnterior == 2 || $statusAnterior == 10){
+            // Para cada quantidade solicitada pelo cliente cria um ingresso.
+            for ($i=1; $i <= $itemQuantity; $i++) { 
+                criarIngresso();
+            }
+            // Envia o Ingresso
+            #Não está funcionando 
+            // ***** Muito cuidado ******* NÃO TROCAR SENHA DO E-MAIL
+            $msg = enviarIngresso($hash, $senderEmail, $senderName, $idEvento, $nomeEvento); 
+        }
+    } 
 
-    // //Verifica se o statos de pagamento é 'OK' e se o ingresso já não tinha sido gerado, para então gerar os ingressos.
-    // if ($status == '3' || $status == '4'){
-    //     // Pega todos os dados da transação
-    //     getDadosTransacao($reference);
-    //     if($statusAnterior == 1 || $statusAnterior == 2 || $statusAnterior == 10){
-    //         // Para cada quantidade solicitada pelo cliente cria um ingresso.
-    //         for ($i=1; $i <= $itemQuantity; $i++) { 
-    //             criarIngresso();
-    //         }
-    //         // Envia o Ingresso
-    //         #Não está funcionando 
-    //         // ***** Muito cuidado ******* NÃO TROCAR SENHA DO E-MAIL
-    //         $msg = enviarIngresso($hash, $senderEmail, $senderName, $idEvento, $nomeEvento); 
-    //     }
-    // }
-
-    // //Atualiza Status da Transação no banco de dados
-    // atualizarStatusBD($reference, $status);
+    //Atualiza Status da Transação no banco de dados
+    atualizarStatusBD($reference, $status);
     function atualizarStatusBD($reference, $status){
         $data = date('Y-m-d h:i:s');
         $consulta = "UPDATE `PedidoPagSeguro` SET `updateAt`='$data',`status`='$status' WHERE `id` = '$reference'";
@@ -196,12 +201,12 @@
     function enviarIngresso($hash, $senderEmail, $senderName, $idEvento, $nomeEvento){
         $assunto = "Seus Ingressos para o evento ".$nomeEvento." estão aqui!!!";
         $msg = "
-        <img style='width: 40%; margin-left:30%;' src='http://ingressozapp.com/app/getImagem.php?id=$idEvento'/>
+        <img style='width: 40%; margin-left:30%;' src='https://ingressozapp.com/app/getImagem.php?id=$idEvento'/>
         <h1 style='text-align:center'>🎉 ".$nomeEvento." 🎉</h1><br>
         <h3 style='text-align:center'>Olá ".$senderName." você acaba de adquirir um ingresso, utilizando o aplicativo IngressoZapp!!!</h3><br>
         <br>
         <h2 style='text-align:center' >Para acessar os ingressos clique no link: <br>
-        http://ingressozapp.com/app/ingressos/?hash=".$hash."</h2><br>
+        https://ingressozapp.com/app/ingressos/?hash=".$hash."</h2><br>
         <br>
         ";
         $aviso = "

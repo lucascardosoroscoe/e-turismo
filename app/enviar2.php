@@ -28,7 +28,7 @@ $msg = "🎉 *".$evento."* 🎉
 Olá *".$cliente."* você acaba de adquirir ingressos utilizando o aplicativo *IngressoZapp*!!!
 
 Para acessar seus ingressos *salve esse número* e clique no link: 
-http://ingressozapp.com/app/ingressos/?hash=".$hash."
+https://ingressozapp.com/app/ingressos/?hash=".$hash."
 
 Para entrar no evento apresente um print do QR CODE de cada um dos seus ingressos (disponível no link acima) e um documento original com foto.
 
@@ -37,7 +37,7 @@ $bar = "
 🍻 BAR INGRESSOZAPP 🍻
 Você pode garantir 5% de desconto para todas as compras no bar do evento via PIX e ainda ganhar tempo para aproveitar a experiência, evitando filas.
 Basta acessar o link abaixo para adicionar um crédito antecipado:
-http://ingressozapp.com/produtos/credito-no-bar-ingressozapp/
+https://ingressozapp.com/produtos/credito-no-bar-ingressozapp/
 ";
 $aviso = "
 🔐 AVISOS 🔐
@@ -48,7 +48,7 @@ Saiba mais sobre o aplicativo IngressoZapp e nosso sistema anti-fraude de gerenc
 $covid = "
 ⚠️ PANDEMIA ⚠️
 O IngressoZapp trabalha para uma retomada dos eventos segura. Sendo assim, caso você apresente sintomas e/ou teste positivo para COVID 19 após a sua participação em um evento, preencha o formulário abaixo para que possamos alertar os demais participantes, como uma estratégia de redução de riscos.
-http://ingressoZapp.com/app/covid";
+https://ingressozapp.com/app/covid";
 // $msg = $msg . $bar . $aviso;
 $msg = $msg . $aviso;
 $msg =  urlencode ($msg);

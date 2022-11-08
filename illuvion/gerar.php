@@ -127,12 +127,12 @@
     function enviarIngresso($hash, $senderEmail, $senderName, $idEvento, $nomeEvento){
         $assunto = "Seus Ingressos para o evento ".$nomeEvento." estão aqui!!!";
         $msg = "
-        <img style='width: 40%; margin-left:30%;' src='http://ingressozapp.com/app/getImagem.php?id=$idEvento'/>
+        <img style='width: 40%; margin-left:30%;' src='https://ingressozapp.com/app/getImagem.php?id=$idEvento'/>
         <h1 style='text-align:center'>🎉 ".$nomeEvento." 🎉</h1><br>
         <h3 style='text-align:center'>Olá ".$senderName." você acaba de adquirir um ingresso, utilizando o aplicativo IngressoZapp!!!</h3><br>
         <br>
         <h2 style='text-align:center' >Para acessar os ingressos clique no link: <br>
-        http://ingressozapp.com/app/ingressos/?hash=".$hash."</h2><br>
+        https://ingressozapp.com/app/ingressos/?hash=".$hash."</h2><br>
         <br>
         ";
         $aviso = "

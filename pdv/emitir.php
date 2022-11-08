@@ -118,7 +118,7 @@ function verificarIngresso(){
         $msg =  "Não é possível gerar esta quantidade de ingressos para esse lote, ultimas unidades disponíveis";
     }
     if($gerado){
-        $local='http://ingressozapp.com/pdv/ingressos/?hash='.$hash;
+        $local='https://ingressozapp.com/pdv/ingressos/?hash='.$hash;
         enviarIngresso(); 
     }else{
         header('Location: ingresso.php?msg='.$msg);

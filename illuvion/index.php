@@ -42,11 +42,11 @@ include('./header.php');
                         <?php
                             $texto  = 'Eu já garanti meu ingresso, bora???
                             Garanta o seu também: 
-                            http://ingressozapp.com/evento/?evento='.$idEvento.'&promoter='.$promoter;
+                            https://ingressozapp.com/evento/?evento='.$idEvento.'&promoter='.$promoter;
                             $url = urldecode($texto);
                         ?>
                         <div>
-                            <div class="fb-like" data-href="http://ingressozapp.com/evento/?evento=<?php echo $idEvento?>&promoter=<?php echo $promoter?>" data-width="200" data-layout="button" data-action="recommend" data-size="small" data-share="true"></div>
+                            <div class="fb-like" data-href="https://ingressozapp.com/evento/?evento=<?php echo $idEvento?>&promoter=<?php echo $promoter?>" data-width="200" data-layout="button" data-action="recommend" data-size="small" data-share="true"></div>
                         </div>
                         <br><a href="https://api.whatsapp.com/send?text=<?php echo $url;?>" target="_blank" style="float: right;"><h6><i class="fab fa-whatsapp"></i> Enviar no Whatsapp</h6></a>
                     </div>

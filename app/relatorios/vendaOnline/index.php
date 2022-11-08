@@ -1,6 +1,6 @@
 <?php
 include('../../includes/verificarAcesso.php');
-verificarAcesso(3);
+verificarAcesso(2);
 include('../../includes/header.php');
 $dataInicial = $_GET['dataInicial'];
 $dataFinal = $_GET['dataFinal'];

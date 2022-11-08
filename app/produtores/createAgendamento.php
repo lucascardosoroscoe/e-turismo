@@ -12,7 +12,7 @@
     $inputPassword = "ingressozapp";
     $inputCPF = "000000";
     $inputCEP = "000000";
-    $inputEndereco = "Não informado";
+    $inputEndereco = "Não informado"; 
     $inputNumero = "Não informado";
     $inputBairro = "Não informado";
 

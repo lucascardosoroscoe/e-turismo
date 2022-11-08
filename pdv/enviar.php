@@ -33,7 +33,7 @@ if($codigo == ""){
 Olá *".$cliente."* você acaba de adquirir ingressos utilizando o aplicativo *IngressoZapp*!!!
     
 Para acessar seus ingressos  clique no link: 
-http://ingressozapp.com/app/ingressos/?hash=".$hash."
+https://ingressozapp.com/app/ingressos/?hash=".$hash."
     
 Para entrar no evento apresente um print do QR CODE de cada um dos seus ingressos (disponível no link acima) e um documento original com foto.
     
@@ -58,7 +58,7 @@ Para entrar no evento apresente um print do QR CODE de cada um dos seus ingresso
 Olá *".$cliente."* você acaba de adquirir um ingresso, utilizando o aplicativo *IngressoZapp*!!!
     
 Para acessar seu ingresso *salve esse número* e clique no link: 
-http://ingressozapp.com/app/qr.php?codigo=".$codigo."
+https://ingressozapp.com/app/qr.php?codigo=".$codigo."
     
 Para entrar no evento apresente seu ingresso (*CODIGO: ".$codigo."*) e um documento original com foto.
     
@@ -69,7 +69,7 @@ $bar = "
 🍻 BAR INGRESSOZAPP 🍻
 Você pode garantir 5% de desconto para todas as compras no bar do evento via PIX e ainda ganhar tempo para aproveitar a experiência, evitando filas.
 Basta acessar o link abaixo para adicionar um crédito antecipado:
-http://ingressozapp.com/produtos/credito-no-bar-ingressozapp/
+https://ingressozapp.com/produtos/credito-no-bar-ingressozapp/
 ";
 $aviso = "
 🔐 AVISOS 🔐
@@ -80,7 +80,7 @@ Saiba mais sobre o aplicativo IngressoZapp e nosso sistema anti-fraude de gerenc
 $covid = "
 ⚠️ PANDEMIA ⚠️
 O IngressoZapp trabalha para uma retomada dos eventos segura. Sendo assim, caso você apresente sintomas e/ou teste positivo para COVID 19 após a sua participação em um evento, preencha o formulário abaixo para que possamos alertar os demais participantes, como uma estratégia de redução de riscos.
-http://ingressoZapp.com/app/covid";
+https://ingressozapp.com/app/covid";
 // $msg = $msg . $bar . $aviso;
 $msg = $msg . $aviso;
 $msg =  urlencode ($msg);
@@ -91,12 +91,12 @@ header("Location: https://api.whatsapp.com/send?phone=55".$telefone."&text=".$ms
 function enviarIngresso($hash, $senderEmail, $senderName, $idEvento, $nomeEvento){
     $assunto = "Seus Ingressos para o evento ".$nomeEvento." estão aqui!!!";
     $msg = "
-    <img style='width: 40%; margin-left:30%;' src='http://ingressozapp.com/app/getImagem.php?id=$idEvento'/>
+    <img style='width: 40%; margin-left:30%;' src='https://ingressozapp.com/app/getImagem.php?id=$idEvento'/>
     <h1 style='text-align:center'>🎉 ".$nomeEvento." 🎉</h1><br>
     <h3 style='text-align:center'>Olá ".$senderName." você acaba de adquirir um ingresso, utilizando o aplicativo IngressoZapp!!!</h3><br>
     <br>
     <h2 style='text-align:center' >Para acessar os ingressos clique no link: <br>
-    http://ingressozapp.com/app/ingressos/?hash=".$hash."</h2><br>
+    https://ingressozapp.com/app/ingressos/?hash=".$hash."</h2><br>
     <br>
     ";
     $aviso = "

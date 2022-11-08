@@ -161,7 +161,7 @@ function verificarIngresso(){
             $msg =  "Não é possível gerar esta quantidade de ingressos para esse lote, ultimas unidades disponíveis";
         }
         if($gerado){
-            $local='http://ingressozapp.com/app/enviar.php?hash='.$hash;
+            $local='https://ingressozapp.com/app/enviar.php?hash='.$hash;
             enviarIngresso($local); 
         }else{
             header('Location: ingresso.php?msg='.$msg);
@@ -201,7 +201,7 @@ function segundaVia($ingresso){
     include('./includes/header.php');
     $hash = $ingresso['hash'];
     $idEvento = $ingresso['evento'];
-    $local='http://ingressozapp.com/app/enviar.php?hash='.$hash;
+    $local='https://ingressozapp.com/app/enviar.php?hash='.$hash;
     echo '<div class="container">';
         echo '<div class="row justify-content-center">';
             echo '<div class="col-lg-9">';

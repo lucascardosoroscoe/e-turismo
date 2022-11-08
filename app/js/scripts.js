@@ -35,27 +35,27 @@ function selectevento(id){
     var idEvento = inputEvento.value;
     var url = window.location.pathname;
     var nomeEvento = inputEvento.options[inputEvento.selectedIndex].text;
-    window.location = "http://ingressozapp.com/app/assets/selecionarEvento.php?idEvento="+ idEvento + "&nomeEvento=" + nomeEvento + "&u=" + url;
+    window.location = "https://ingressozapp.com/app/assets/selecionarEvento.php?idEvento="+ idEvento + "&nomeEvento=" + nomeEvento + "&u=" + url;
 }
 function selectVendedor(id){
     var idVendedor = inputVendedor.value;
     var url = window.location.href;
     var nomeVendedor = inputVendedor.options[inputVendedor.selectedIndex].text;
-    window.location = "http://ingressozapp.com/app/assets/selecionarVendedor.php?idVendedor="+ idVendedor + "&nomeVendedor=" + nomeVendedor + "&u=" + url;
+    window.location = "https://ingressozapp.com/app/assets/selecionarVendedor.php?idVendedor="+ idVendedor + "&nomeVendedor=" + nomeVendedor + "&u=" + url;
 }
 
 //Script Selecionar Evento
 function selectlote(id){
     var idLote = inputLote.value;
     var url = window.location.href;
-    window.location = "http://ingressozapp.com/app/assets/selecionarLotes.php?idLote="+ idLote + "&u=" + url;
+    window.location = "https://ingressozapp.com/app/assets/selecionarLotes.php?idLote="+ idLote + "&u=" + url;
 }
 
 //Mensagem Automação
 function modificarMsg(){
     var msg = inputMsg.value;
     var url = window.location.href;
-    window.location = "http://ingressozapp.com/app/assets/definirMsg.php?msg="+ msg + "&u=" + url;
+    window.location = "https://ingressozapp.com/app/assets/definirMsg.php?msg="+ msg + "&u=" + url;
 }
 
 function adicionarlote() {
@@ -67,14 +67,27 @@ function adicionarlote() {
     }
 }
 
-function enviarForm(){
+function enviarForm(){ 
     if(clicado == 0){
         document.getElementsByTagName("form")[0].submit;
         clicado = 1;
         document.body.style.cursor = 'wait';
-        setTimeout(ativarButton, 5000);
+        setTimeout(ativarButton, 15000);
+        try {
+            document.getElementById('addEvento').textContent = 'Carregando, aguarde...';
+        } catch (error) {
+            console.log(error);
+        }
     }else{
         alert("Aguarde para clicar novamente");
+    }
+}
+
+function voltarTexto(){
+    try {
+        document.getElementById('addEvento').textContent = 'Carregando, aguarde...';
+    } catch (error) {
+        console.log(error);
     }
 }
 function ativarButton() {

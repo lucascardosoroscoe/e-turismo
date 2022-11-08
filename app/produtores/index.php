@@ -65,7 +65,18 @@ function addTabela($consulta){
         $primeiroNome = $nomeCompleto[0];
         $mensagem = "Oi ".$primeiroNome.", tudo bem? " . $msg;
         $mensagem = urlencode($mensagem);
-        echo ("<td><a target='_blank' href='https://api.whatsapp.com/send?phone=55".$obj['telefone']."&text=".$mensagem."'>Contatar</a></td>");
+        // $
+        $telefone = $obj['telefone'];
+        $telefone = str_replace(" ", "", $telefone);
+        $telefone = str_replace("(", "", $telefone);
+        $telefone = str_replace(")", "", $telefone);
+        $telefone = str_replace("-", "", $telefone);
+        $telefone = str_replace("+55", "", $telefone);
+        $prim = substr($telefone,0,1);
+        if($prim == 0){
+            $telefone = substr($telefone,1,11);
+        }
+        echo ("<td><a href='https://api.whatsapp.com/send?phone=55".$telefone."&text=".$mensagem."'>Contatar</a></td>");
         if($validade == "VALIDO"){
             echo ("<td style='display: flex;'>
             <a href='editar.php?id=".$obj['id']."' class='iconeTabela'><i class='fas fa-user-edit'></i></a>

@@ -98,7 +98,7 @@ function carregarLotes(){
 
 function gerarQR($id){
 //Criar QR Code Correto
-$codigo = "http://ingressozapp.com/convite/index.php?id=" . $id;
+$codigo = "https://ingressozapp.com/convite/index.php?id=" . $id;
 
 $aux = '../promoter/qr_img0.50j/php/qr_img.php?';
 $aux .= 'd='.$codigo.'&';
@@ -119,7 +119,7 @@ function gerarLink($stringLotes){
     $link = $link . "*Lotes:* " . $linha;
     $link = $link . $stringLotes. $linha;
     $link = $link . "*Ingressos:*";
-    $link = $link . " http://ingressozapp.com/convite/index.php?id=" . $id. "";
+    $link = $link . " https://ingressozapp.com/convite/index.php?id=" . $id. "";
     $link = "https://api.whatsapp.com/send?text=" . $link;
     return $link;
 }

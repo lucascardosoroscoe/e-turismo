@@ -118,12 +118,12 @@
     function enviarIngresso($hash, $senderEmail, $senderName, $idEvento, $nomeEvento){
         $assunto = "Seus Ingressos para o evento ".$nomeEvento." estão aqui!!!";
         $msg = "
-        <img style='width: 40%; margin-left:30%;' src='http://ingressozapp.com/app/getImagem.php?id=$idEvento'/>
+        <img style='width: 40%; margin-left:30%;' src='https://ingressozapp.com/app/getImagem.php?id=$idEvento'/>
         <h1 style='text-align:center'>🎉 ".$nomeEvento." 🎉</h1><br>
         <h3 style='text-align:center'>Olá ".$senderName." você acaba de trocar seu ingresso, do evento Só Track Boa Campo Grande 2020 para o eventos Vintage Culture em Campo grande dia 11/03, utilizando o aplicativo IngressoZapp!!!</h3><br>
         <br>
         <h2 style='text-align:center' >Para acessar os ingressos clique no link: <br>
-        http://ingressozapp.com/app/ingressos/?hash=".$hash."</h2><br>
+        https://ingressozapp.com/app/ingressos/?hash=".$hash."</h2><br>
         <br>
         ";
         $aviso = "

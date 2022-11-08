@@ -1,15 +1,6 @@
 <?php
   include('../app/includes/verificarAcesso.php');
   $idEvento = $_GET['evento'];
-  if($idEvento == 232){
-    header('Location: https://ingressozapp.com/produtos/sextou-na-deck-18-02');
-  }else if($idEvento == 214){
-    header('Location: https://ingressozapp.com/produtos/vintage');
-  }else if($idEvento == 212){
-    header('Location: https://ingressozapp.com/produtos/off-dos-amigos/');
-  }else{
-    header('Location: https://ingressozapp.com/');
-  }
   $promoter = $_GET['promoter'];
   $consulta= "SELECT * FROM `Evento` WHERE id = $idEvento";
   $dados = selecionar($consulta);
@@ -28,7 +19,7 @@
       <meta property="og:description" content="Eu já garanti meu ingresso, bora??? Garanta o seu também."/>
       <meta property="og:title" content="<?php echo $nomeEvento ?> - IngressoZapp"/>
       <meta property="og:image" content="<?php echo $HTTP_HOST . "/app"?>/getImagem.php?id=<?php echo $idEvento;?>"/>
-      <meta name="twitter:url" content="http://ingressozapp.com/evento/?evento=<?php echo $idEvento?>&promoter=<?php echo $promoter?>">
+      <meta name="twitter:url" content="https://ingressozapp.com/evento/?evento=<?php echo $idEvento?>&promoter=<?php echo $promoter?>">
       <meta name="twitter:title" content="Eu já garanti meu ingresso, bora??? Garanta o seu também.">
       <meta name="twitter:image" content="<?php echo $HTTP_HOST . "/app"?>/getImagem.php?id=<?php echo $idEvento;?>">
       <title><?php echo $nomeEvento ?> - IngressoZapp</title>

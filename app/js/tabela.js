@@ -222,7 +222,7 @@ function fnExcelReport(id){
 
 function totalTabela(preco){
     preco = preco.replace(/[^\d]+/g,'');
-    preco = parseInt(preco);
+    preco = parseFloat(preco);
     soma = (soma + preco);
     quantidade = quantidade + 1;
     somaFianl = soma/100;

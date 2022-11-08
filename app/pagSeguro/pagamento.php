@@ -30,7 +30,7 @@
     $promoter = $_POST['promoter'];
 
     if($quantidadeLote <= $vendidosLote){
-        header('Location: http://ingressozapp.com/evento/?evento='.$idEvento.'&senderName='.$senderName.'&inputTelefone='.$inputTelefone.'&senderEmail='.$senderEmail);
+        header('Location: https://ingressozapp.com/evento/?evento='.$idEvento.'&senderName='.$senderName.'&inputTelefone='.$inputTelefone.'&senderEmail='.$senderEmail);
     }else{
         descricao();
 
@@ -45,7 +45,7 @@
         //Salvar transação no BD e pegar referência de todos os campos
         $reference = salvarDadosBanco();
         if($reference != 0){
-            $d = "&currency=BRL&itemId1=".$itemId1."&itemDescription1=".$itemDescription1."&itemAmount1=".$itemAmount1."&itemQuantity1=".$itemQuantity1."&reference=".$reference."&senderName=".$senderName."&senderAreaCode=".$senderAreaCode."&senderPhone=".$senderPhone."&senderEmail=".$senderEmail."&shippingAddressRequired=false&notificationURL=http://ingressozapp.com/app/pagSeguro/notificacao/&redirectURL=http://ingressozapp.com/app/pagSeguro/obrigado&extraAmount=".$extraAmount;
+            $d = "&currency=BRL&itemId1=".$itemId1."&itemDescription1=".$itemDescription1."&itemAmount1=".$itemAmount1."&itemQuantity1=".$itemQuantity1."&reference=".$reference."&senderName=".$senderName."&senderAreaCode=".$senderAreaCode."&senderPhone=".$senderPhone."&senderEmail=".$senderEmail."&shippingAddressRequired=false&notificationURL=https://ingressozapp.com/app/pagSeguro/notificacao/&redirectURL=https://ingressozapp.com/app/pagSeguro/obrigado&extraAmount=".$extraAmount;
             echo $d;
             $response = callCurlPost("checkout", $d);
             $xml = simplexml_load_string($response);

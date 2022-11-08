@@ -211,7 +211,7 @@ $idSecretaria = $_SESSION["idSecretaria"];
         $dados = selecionar($consulta);
         $aparece = 1;
         foreach ($dados as $obj) {
-            if($aparece == 1||$aparece == 3||$aparece == 2||$aparece == 4||$aparece == 5||$aparece == 11||$aparece == 7||$aparece == 9||$aparece == 10){
+            if($aparece == 1||$aparece == 3||$aparece == 5||$aparece == 11||$aparece == 7||$aparece == 10){
                 if($obj['lote'] != "Cortesia Pista"){
                     echo "<tr>";
                     echo ("<td>".$obj['codigo']."</td>");
@@ -245,7 +245,7 @@ $idSecretaria = $_SESSION["idSecretaria"];
                 }
                 
             }
-            if($aparece == 10){    
+            if($aparece == 11){    
                 $aparece = 1;
             }else{
                 $aparece = $aparece + 1;

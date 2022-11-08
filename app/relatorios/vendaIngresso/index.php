@@ -121,40 +121,35 @@ $idSecretaria = $_SESSION["idSecretaria"];
     function getGraphs(){
         $graphs = [];
         global $idEvento, $idUsuario;
-        if($idEvento == ""){
-            $consulta1 = "SELECT COUNT(Ingresso.codigo) as quantidade, Lote.nome as lote FROM Ingresso JOIN Lote ON Lote.id = Ingresso.lote JOIN Vendedor ON Vendedor.id = Ingresso.vendedor WHERE Vendedor.produtor = '$idUsuario' AND Ingresso.validade != 'CANCELADO' GROUP BY Ingresso.lote";
-            $consulta2 = "SELECT SUM(Ingresso.valor) as valor, Lote.nome as lote FROM Ingresso JOIN Lote ON Lote.id = Ingresso.lote JOIN Vendedor ON Vendedor.id = Ingresso.vendedor WHERE Vendedor.produtor = '$idUsuario' AND Ingresso.validade != 'CANCELADO' GROUP BY Ingresso.lote";
-            $consulta3 = "SELECT COUNT(Ingresso.codigo) as quantidade, Vendedor.nome as vendedor FROM Ingresso JOIN Lote ON Lote.id = Ingresso.lote JOIN Vendedor ON Vendedor.id = Ingresso.vendedor WHERE Vendedor.produtor = '$idUsuario' AND Ingresso.validade != 'CANCELADO' GROUP BY Ingresso.vendedor";
-            $consulta4 = "SELECT SUM(Ingresso.valor) as valor, Vendedor.nome as vendedor FROM Ingresso JOIN Lote ON Lote.id = Ingresso.lote JOIN Vendedor ON Vendedor.id = Ingresso.vendedor WHERE Vendedor.produtor = '$idUsuario' AND Ingresso.validade != 'CANCELADO' GROUP BY Ingresso.vendedor";
-            $consulta5 = "SELECT count(Ingresso.codigo) as quantidade, sum(Ingresso.valor) AS valor, Ingresso.data FROM JOIN Lote ON Lote.id = Ingresso.lote Ingresso JOIN Vendedor ON Vendedor.id = Ingresso.vendedor WHERE Vendedor.produtor = '$idUsuario' AND Ingresso.validade != 'CANCELADO' GROUP BY Ingresso.data ORDER BY Ingresso.data";
-        }else{
+        if($idEvento != ""){
             $consulta1 = "SELECT COUNT(Ingresso.codigo) as quantidade, Lote.nome as lote  FROM `Ingresso` JOIN Lote ON Lote.id = Ingresso.lote WHERE Ingresso.evento = '$idEvento' AND Ingresso.validade != 'CANCELADO' GROUP BY Ingresso.lote";
             $consulta2 = "SELECT SUM(Ingresso.valor) as valor, Lote.nome as lote  FROM `Ingresso` JOIN Lote ON Lote.id = Ingresso.lote WHERE Ingresso.evento = '$idEvento' AND Ingresso.validade != 'CANCELADO' GROUP BY Ingresso.lote";
             $consulta3 = "SELECT COUNT(Ingresso.codigo) as quantidade, Vendedor.nome as vendedor FROM Ingresso JOIN Lote ON Lote.id = Ingresso.lote JOIN Vendedor ON Vendedor.id = Ingresso.vendedor WHERE Ingresso.evento = '$idEvento' AND Ingresso.validade != 'CANCELADO' GROUP BY Ingresso.vendedor";
             $consulta4 = "SELECT SUM(Ingresso.valor) as valor, Vendedor.nome as vendedor FROM Ingresso JOIN Lote ON Lote.id = Ingresso.lote JOIN Vendedor ON Vendedor.id = Ingresso.vendedor WHERE Ingresso.evento = '$idEvento' AND Ingresso.validade != 'CANCELADO' GROUP BY Ingresso.vendedor";
-            $consulta5 = "SELECT count(Ingresso.codigo) as quantidade, sum(Ingresso.valor) AS valor, data FROM `Ingresso` JOIN Lote ON Lote.id = Ingresso.lote WHERE Ingresso.evento = '$idEvento' AND Ingresso.validade != 'CANCELADO' GROUP BY Ingresso.data ORDER BY Ingresso.data";
+            $consulta5 = "SELECT Ingresso.codigo, Ingresso.valor, Ingresso.created_at as data FROM `Ingresso` JOIN Lote ON Lote.id = Ingresso.lote WHERE Ingresso.evento = '$idEvento' AND Ingresso.validade != 'CANCELADO' ORDER BY Ingresso.created_at";
+            // echo "Consulta: ". $consulta ."<br>";
+            $obg = selecionar($consulta1);
+            $graph1 = graph1($obg);
+            array_push($graphs, $graph1);
+            $obg = selecionar($consulta2);
+            $graph2 = graph2($obg);
+            array_push($graphs, $graph2);
+            $obg = selecionar($consulta3);
+            $graph3 = graph3($obg);
+            array_push($graphs, $graph3);
+            $obg = selecionar($consulta4);
+            $graph4 = graph4($obg);
+            array_push($graphs, $graph4);
+            $obg = selecionar($consulta5);
+            $graph5 = graph5($obg);
+            array_push($graphs, $graph5);
+            $graph6 = graph6($obg);
+            array_push($graphs, $graph6);
+            $graph7 = graph7($obg);
+            array_push($graphs, $graph7);
+            return json_encode($graphs);
         }
-        // echo "Consulta: ". $consulta ."<br>";
-        $obg = selecionar($consulta1);
-        $graph1 = graph1($obg);
-        array_push($graphs, $graph1);
-        $obg = selecionar($consulta2);
-        $graph2 = graph2($obg);
-        array_push($graphs, $graph2);
-        $obg = selecionar($consulta3);
-        $graph3 = graph3($obg);
-        array_push($graphs, $graph3);
-        $obg = selecionar($consulta4);
-        $graph4 = graph4($obg);
-        array_push($graphs, $graph4);
-        $obg = selecionar($consulta5);
-        $graph5 = graph5($obg);
-        array_push($graphs, $graph5);
-        $graph6 = graph6($obg);
-        array_push($graphs, $graph6);
-        $graph7 = graph7($obg);
-        array_push($graphs, $graph7);
-        return json_encode($graphs);
+        
     }
 
     function graph1($obg){
@@ -299,9 +294,27 @@ $idSecretaria = $_SESSION["idSecretaria"];
         ];
         
         $rows = [];
+        $dataAnterior = "";
+        $contagem = 0;
+        $valor = 0;
         foreach ($obg as $row) {
-            $row = [ $row['data'], floatval($row['quantidade']), floatval($row['valor'])];
-            array_push($rows, $row);
+            $dataGTM0 = $row['data'];
+            $dataMS = date('d/m/Y', strtotime( $dataGTM0 ) - (60*60*4));
+            if($dataAnterior == "" || $dataAnterior == $dataMS){
+                $contagem = $contagem + 1;
+                $valor = $valor + $row['valor'];
+            }else{
+                $valorNovo = $row['valor'] + 0;
+                $row = [ $dataAnterior, $contagem, $valor];
+                array_push($rows, $row);
+                $contagem = 1;
+                $valor = $valorNovo;
+            }
+            $dataAnterior = $dataMS;
+        }
+        if($obg[0] != ""){ 
+            $array = [ $dataMS, $contagem, $valor];
+            array_push($rows, $array);
         }
 
         $options = (object) [
@@ -413,7 +426,7 @@ $idSecretaria = $_SESSION["idSecretaria"];
                     echo('</thead>');
                     echo('<tbody id="tbody">');
                         
-                            $consulta = "SELECT Ingresso.codigo, Ingresso.origem, Ingresso.data, Vendedor.nome as vendedor, Cliente.nome as cliente, Cliente.telefone as telefone, Ingresso.valor, Ingresso.validade, Lote.nome as lote
+                            $consulta = "SELECT Ingresso.codigo, Ingresso.origem, Ingresso.pedido, Ingresso.created_at as data, Vendedor.nome as vendedor, Cliente.nome as cliente, Cliente.telefone as telefone, Ingresso.valor, Ingresso.validade, Lote.nome as lote
                             FROM Ingresso JOIN Vendedor ON Ingresso.vendedor = Vendedor.id 
                             JOIN Cliente ON Ingresso.idCliente = Cliente.id
                             JOIN Lote ON Ingresso.lote =  Lote.id
@@ -422,36 +435,48 @@ $idSecretaria = $_SESSION["idSecretaria"];
                         
                         
                     echo('</tbody>');
-                echo('</table>');
+                echo('</table>'); 
             echo('</div>');
         }
     }
 
     function addtabela($consulta){
+        global $tipoUsuario;
         $dados = selecionar($consulta);
         foreach ($dados as $obj) {
             echo "<tr>";
             echo ("<td>".$obj['codigo']."</td>");
-            if($obj['origem'] == 1){
-                $origem = "Promoter";
-            }else if($obj['origem'] == 2){
-                $origem = "Venda pelo Site";
-            }
             echo ("<td>".$obj['cliente']."</td>");
             echo ("<td>R$".UsToBr($obj['valor'])."</td>"); 
             echo ("<td>".$obj['lote']."</td>");
             echo ("<td>".$obj['telefone']."</td>"); 
-            echo ("<td>".$origem." - ".$obj['vendedor']."</td>"); 
-            echo ("<td>".$obj['data']."</td>"); 
+            if($obj['origem'] == 1){
+                $origem = "Promoter";
+                echo ("<td>".$origem." - ".$obj['vendedor']."</td>"); 
+
+            }else if($obj['origem'] == 2){
+                $origem = "Venda pelo Site";
+                echo ("<td>".$origem." - ".$obj['vendedor']." - Pedido: ".$obj['pedido']."</td>"); 
+            }else if($obj['origem'] == 3){
+                $origem = "Ingresso Impresso";
+                echo ("<td>".$origem."</td>"); 
+            }
+            $dataGTM0 = $obj['data'];
+            $dataMS = date('d/m/Y', strtotime( $dataGTM0 ) - (60*60*4));
+            echo ("<td>".$dataMS."</td>"); 
             $validade = $obj['validade'];
             echo ("<td>".$validade."</td>");
             if($validade == "VALIDO"){
                 echo ("<td style='display: flex;'><a href='editar.php?id=".$obj['codigo']."' class='iconeTabela'><i class='fas fa-user-edit'></i></a>");  
                 echo ("<a href='cancelar.php?id=".$obj['codigo']."' class='iconeTabela red'><i class='fas fa-user-times'></i></a>");  
+                if($tipoUsuario == 1){
+                    echo ("<a href='usado.php?id=".$obj['codigo']."' style='margin-left: 15px;'>Baixar</a>");
+                }
                 echo ("<a href='../../enviar.php?codigo=".$obj['codigo']."' target='_blank' class='iconeTabela'><i class='far fa-copy'></i></a></td>");  
             }else{
                 echo ("<td><a href='reativar.php?id=".$obj['codigo']."' style='margin-left: 15px;'>Reativar</a></td>");
             }
+            
             echo "</tr>";
         }
     }

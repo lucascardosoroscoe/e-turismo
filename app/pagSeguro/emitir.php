@@ -145,11 +145,11 @@ function verificarIngresso(){
     $dados = selecionar($consulta);
     // if ($dados[0]['codigo'] == ""){
         if(gerarIngresso()){
-            $local='http://ingressozapp.com/app/enviar.php?codigo='.$codigo;
+            $local='https://ingressozapp.com/app/enviar.php?codigo='.$codigo;
             enviarIngresso(); 
         }
     // }else{
-    //     $local='http://ingressozapp.com/app/enviar.php?codigo='.$dados[0]['codigo'];
+    //     $local='https://ingressozapp.com/app/enviar.php?codigo='.$dados[0]['codigo'];
     //     echo("<h3>Você já gerou um ingresso para " . $nomeCliente . " deste mesmo Evento . Caso esteja gerando um novo ingresso, para outro cliente, por favor volte e coloque um nome mais completo.<br><br>Caso esteja tentantando reenviar o ingresso pois errou o número do Whatsapp ao gerar o ingresso <a href='$local'>Clique aqui</a> </h3>");
 
     // }

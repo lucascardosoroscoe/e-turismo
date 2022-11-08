@@ -22,7 +22,7 @@
       <meta property="og:description" content="Eu já garanti meu ingresso, bora??? Garanta o seu também."/>
       <meta property="og:title" content="IngressoZapp<?php echo ' - ' . $nome ?>"/>
       <meta property="og:image" content="<?php echo $HTTP_HOST . "/app"?>/img/logo.png"/>
-      <meta name="twitter:url" content="http://ingressozapp.com/eventos/?produtor=<?php echo $idProdutor?>">
+      <meta name="twitter:url" content="https://ingressozapp.com/eventos/?produtor=<?php echo $idProdutor?>">
       <meta name="twitter:title" content="Eu já garanti meu ingresso, bora??? Garanta o seu também.">
       <meta name="twitter:image" content="<?php echo $HTTP_HOST . "/app"?>/img/logo.png">
       <title>IngressoZapp<?php echo ' - ' . $nome ?></title>

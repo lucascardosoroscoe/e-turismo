@@ -27,8 +27,16 @@
     $valor   = $_POST['inputValor'];
     $quantidade        = $_POST['inputQuantidade'];
 
+    //Verifica se o Evento já tem idWP
+    $consulta = "SELECT idWP, nome FROM Evento WHERE id = '$idEvento'";
+    $dados = selecionar($consulta);
+    if($dados[0]['idWP'] == ""){
+        $nomeEvento = $dados[0]['nome'];
+        eventoIdWP();
+    }    
+
     // Verifica se o Lote já existe
-    $consulta = "SELECT * FROM Lote WHERE evento = '$idEvento' AND nome = '$nome'";
+    $consulta = "SELECT * FROM Lote WHERE evento = '$idEvento' AND nome = '$nome' AND validade != 'EXCLUIDO'";
     $dados = selecionar($consulta);
     if($dados[0]['id'] == ""){
         // Criar Lote
@@ -37,7 +45,9 @@
         if($msg == "Sucesso!"){
             // Criar Lote WP 
             try {
-                criarLoteWP();
+                if(intval($valor) != 0){
+                    criarLoteWP();
+                }
                 header('Location: index.php?msg='.$msg);
             } catch (\Throwable $th) {
                 header('Location: https://api.whatsapp.com/send?phone=5567999854042&text=Oi%2C%20tudo%20bem%3F%20Estava%20criando%20um%20lote%20para%20meu%20evento%20no%20App%2C%20mas%20deu%20um%20erro%2C%20poderia%20me%20ajudar%3F');
@@ -47,11 +57,27 @@
             header('Location: https://api.whatsapp.com/send?phone=5567999854042&text=Oi%2C%20tudo%20bem%3F%20Estava%20criando%20um%20lote%20para%20meu%20evento%20no%20App%2C%20mas%20deu%20um%20erro%2C%20poderia%20me%20ajudar%3F');
         }  
     }else{
-        $msg = "Já existe um lote cadastrado na plataforma com esse nome, por favor utilize um nome diferente";
+        $msg = "Já existe um lote cadastrado no seu evento com esse nome, por favor utilize um nome diferente";
         header('Location: ./adicionar.php?msg='.$msg);
     }
     
+    function eventoIdWP(){
+        global $woocommerce, $idEvento, $nomeEvento, $idWP;
+        $data = [
+            'search' => $nomeEvento,
+        ];
+        $produto = $woocommerce->get('products', $data);
+        $server = json_encode($produto, true);
+        $produto = json_decode($server, true);
+        $idWP = $produto[0]['id'];
+        atualizarIdWP($idEvento, $idWP);
+    }
  
+    function atualizarIdWP($idEvento, $idWP){
+        $consulta = "UPDATE `Evento` SET `idWP`= '$idWP' WHERE `id` = '$idEvento'";
+        $msg = executar($consulta);
+    }
+
     function criarLoteWP(){
         global $idEvento;
         

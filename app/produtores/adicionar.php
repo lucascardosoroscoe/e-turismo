@@ -15,10 +15,21 @@ $email = $_GET['email'];
                         </div>
                         <div class="card-body">
                             <form action="create.php" id="create_user" method="POST">
+                                <div class="row-produtor">
+                                    <label class="small mb-1" for="inputEmailAddress">Selecione a opção que melhor te descreve:*</label><br>
+
+                                    <input type="radio" id="produtor" name="eprodutor" value="1" required>
+                                    <label for="produtor">Sou produtor (Faço eventos)</label><br>
+                                    <input type="radio" id="promoter" name="eprodutor" value="" onclick="selectPromoter()">
+                                    <label for="promoter">Sou promoter (Divulgo eventos)</label><br>
+                                    <input type="radio" id="cliente" name="eprodutor" value="" onclick="selectCliente()">
+                                    <label for="cliente">Sou cliente (comprei um ingresso)</label>
+
+                                </div>
                                 <div class="form-row">
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <label class="small mb-1" for="inputEmailAddress">E-mail</label>
+                                            <label class="small mb-1" for="inputEmailAddress">E-mail*</label>
                                             <input class="form-control py-4" id="inputEmailAddress"  name="inputEmailAddress" type="email" aria-describedby="emailHelp" placeholder="Digite o e-mail" value="<?php echo $email;?>" required/>
                                         </div>
                                     </div>
@@ -26,55 +37,55 @@ $email = $_GET['email'];
                                 <div class="form-row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label class="small mb-1" for="inputName">Nome/Razão Social</label>
+                                            <label class="small mb-1" for="inputName">Nome/Razão Social*</label>
                                             <input class="form-control py-4" id="inputName"  name="inputName" type="text" placeholder="Digite o nome/razão social" required/>
                                         </div>
                                     </div> 
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label class="small mb-1" for="inputCPF">CPF/CNPJ</label>
+                                            <label class="small mb-1" for="inputCPF">CPF/CNPJ*</label>
                                             <input class="form-control py-4" id="inputCPF"  name="inputCPF" type="text" placeholder="Digite o CPF/CNPJ" required/>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label class="small mb-1" for="inputTelefone">Telefone</label>
+                                            <label class="small mb-1" for="inputTelefone">Telefone*</label>
                                             <input class="form-control py-4" id="inputTelefone"  name="inputTelefone" type="text" placeholder="Digite o telefone" required/>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label class="small mb-1" for="inputCEP">CEP</label>
+                                            <label class="small mb-1" for="inputCEP">CEP*</label>
                                             <input class="form-control py-4" id="inputCEP" onchange="pesquisacep()" name="inputCEP" type="text" placeholder="Digite o CEP" required/>
                                         </div>
                                     </div>
                                     <div class="col-md-8">
                                         <div class="form-group">
-                                            <label class="small mb-1" for="inputEndereco">Endereço</label>
+                                            <label class="small mb-1" for="inputEndereco">Endereço*</label>
                                             <input class="form-control py-4" id="inputEndereco"  name="inputEndereco" type="text" placeholder="Digite o endereço" required/>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label class="small mb-1" for="inputNumero">Número</label>
+                                            <label class="small mb-1" for="inputNumero">Número*</label>
                                             <input class="form-control py-4" id="inputNumero"  name="inputNumero" type="text" placeholder="Digite o número" required/>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label class="small mb-1" for="inputBairro">Bairro</label>
+                                            <label class="small mb-1" for="inputBairro">Bairro*</label>
                                             <input class="form-control py-4" id="inputBairro"  name="inputBairro" type="text" placeholder="Digite o bairro" required/>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label class="small mb-1" for="inputCidade">Cidade</label>
+                                            <label class="small mb-1" for="inputCidade">Cidade*</label>
                                             <input class="form-control py-4" id="inputCidade"  name="inputCidade" type="text" placeholder="Digite a cidade" required/>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label class="small mb-1" for="inputEstado">Estado</label>
+                                            <label class="small mb-1" for="inputEstado">Estado*</label>
                                             <select class="form-control" name="inputEstado" id="inputEstado" required>
                                                 <option value="" selected>Selecione</option>
                                                 <option value="AC">AC</option>
@@ -111,13 +122,13 @@ $email = $_GET['email'];
                                 <div class="form-row">
                                     <div class="col-md-6"> 
                                         <div class="form-group">
-                                            <label class="small mb-1" for="inputPassword">Senha</label>
+                                            <label class="small mb-1" for="inputPassword">Senha*</label>
                                             <input class="form-control py-4" id="inputPassword" name="inputPassword" type="password" placeholder="Digite a senha" required/>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label class="small mb-1" for="inputConfirmPassword">Confirmar senha</label>
+                                            <label class="small mb-1" for="inputConfirmPassword">Confirmar senha*</label>
                                             <input class="form-control py-4" id="inputConfirmPassword" name="inputConfirmPassword" type="password" placeholder="Confirme a senha" required/>
                                         </div>
                                     </div>
@@ -134,6 +145,21 @@ $email = $_GET['email'];
     </div>
     <script>
         let ativo = false;
+
+        function selectPromoter(){
+            if(confirm("Para fazer seu cadastro como promoter solicite que o dono do evento que faça sua inscrição. Clique OK para ser direcionado ao nosso suporte.")){
+                location.href = 'https://ingressozapp.com/suporte/';
+            };
+            document.getElementById('promoter').checked = false;
+        }
+
+        function selectCliente(){
+            if(confirm("Como cliente você não precisa de login e senha para acessar seus ingressos. O ingresso chega no e-mail. Caso não receba entre em contato com o número (67)99348-1631 ou clique ok e siga as instruções do guia para emissão de segunda via do seu ingresso")){
+                location.href = 'https://ingressozapp.com/nao-recebi-ingresso/';
+            };
+            document.getElementById('cliente').checked = false;
+        }
+
         function changeView(){
             if(ativo == false){
                 ativo = true;

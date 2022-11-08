@@ -59,7 +59,7 @@ if($eventoId != ""){
 
 <?php
 function addTabela($consulta){
-    
+    global $tipoUsuario;
     $usuarios = selecionar($consulta);
     foreach ($usuarios as $obj) {
         echo "<tr>";
@@ -80,11 +80,20 @@ function addTabela($consulta){
             }else if($validade == "EXCLUSIVO"){
                 echo ("<td>EXCLUSIVO p/ PRODUTOR</td>");
             }
-            if($validade == "EXCLUSIVO"){
-                echo ("<td><a href='reativar.php?id=".$obj['id']."' style='margin-left: 15px;'>Reativar</a></td>");
+            if($tipoUsuario == 1){
+                if($validade == "EXCLUSIVO"){
+                    echo ("<td><a href='reativar.php?id=".$obj['id']."' style='margin-left: 15px;'>Reativar</a><a href='editar.php?id=".$obj['id']."' class='iconeTabela'><i class='fas fa-user-edit'></i></a></td>");
+                }else{
+                    echo ("<td><a href='exclusivo.php?id=".$obj['id']."' style='margin-left: 15px;'>Tornar Exclusivo</a><a href='editar.php?id=".$obj['id']."' class='iconeTabela'><i class='fas fa-user-edit'></i></a></td>");
+                }
             }else{
-                echo ("<td><a href='exclusivo.php?id=".$obj['id']."' style='margin-left: 15px;'>Tornar Exclusivo</a></td>");
+                if($validade == "EXCLUSIVO"){
+                    echo ("<td><a href='reativar.php?id=".$obj['id']."' style='margin-left: 15px;'>Reativar</a></td>");
+                }else{
+                    echo ("<td><a href='exclusivo.php?id=".$obj['id']."' style='margin-left: 15px;'>Tornar Exclusivo</a></td>");
+                }
             }
+            
         echo "</tr>";
     }
 }

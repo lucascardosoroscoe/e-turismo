@@ -2,7 +2,7 @@
 include('../includes/verificarAcesso.php');
 verificarAcesso(2);
 include('../includes/header.php');
-
+$msg = $_GET['msg'];
 ?>
 <div class="container-fluid">
     <!-- Tabela dos veículos-->
@@ -15,6 +15,11 @@ include('../includes/header.php');
         </div>
         <div class="card-body">
             <div class="col-md-8" style="float:left; margin-top: 5px;">
+                <?php
+                    if($msg!=""){
+                        echo '<h6>'.$msg .'</h6><br>';
+                    }
+                ?>
                 <input class="form-control" type="text" placeholder="Buscar..." style="margin-bottom: 5px" id="buscar" onkeyup="buscar()"/>
             </div>
             <div class="table-responsive table-hover">
@@ -39,10 +44,10 @@ include('../includes/header.php');
                         <?php
                             if($tipoUsuario == 1){
                                 $consulta = "SELECT Evento.id, Evento.nome, Evento.slug, Produtor.nome as produtor, Evento.data, Evento.descricao, Evento.validade
-                                FROM Evento JOIN Produtor ON Evento.produtor = Produtor.id WHERE Evento.validade != 'EXCLUIDO'";
+                                FROM Evento JOIN Produtor ON Evento.produtor = Produtor.id WHERE Evento.validade != 'EXCLUIDO' ORDER BY Evento.validade DESC, Evento.data";
                                 addTabela($consulta);
                             }else if($tipoUsuario == 2){
-                                $consulta = "SELECT * FROM Evento WHERE produtor = '$idUsuario' AND validade != 'EXCLUIDO'";
+                                $consulta = "SELECT * FROM Evento WHERE produtor = '$idUsuario' AND validade != 'EXCLUIDO' ORDER BY Evento.validade DESC, Evento.data";
                                 addTabela($consulta);
                             }
                         ?>
@@ -52,12 +57,12 @@ include('../includes/header.php');
         </div>
     </div>
 </div>
-
+ 
 <?php
 function addTabela($consulta){
     global $tipoUsuario;
     $usuarios = selecionar($consulta);
-    foreach ($usuarios as $obj) {
+    foreach ($usuarios as $obj) { 
         echo "<tr>";
         echo ("<td style='display:none;'>".$obj['id']."</td>"); 
         echo ("<td>".$obj['nome']."</td>"); 

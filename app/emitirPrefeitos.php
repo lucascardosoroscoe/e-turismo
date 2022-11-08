@@ -188,7 +188,7 @@ function verificarIngresso(){
             $msg =  "Não é possível gerar esta quantidade de ingressos para esse lote, ultimas unidades disponíveis";
         }
         if($gerado){
-            $local='http://ingressozapp.com/app/enviar.php?hash='.$hash;
+            $local='https://ingressozapp.com/app/enviar.php?hash='.$hash;
             enviarIngresso($hash, $inputEmail, $nomeCliente, 392, $codigo); 
         }else{
             header('Location: ingresso.php?msg='.$msg);
@@ -218,12 +218,12 @@ function gerarIngresso(){
 function enviarIngresso($hash, $senderEmail, $senderName, $idEvento, $codigo){
     $assunto = "Seus Ingressos para o evento Prefeitos do Futuro 2022 estão aqui!!!";
     $msg = "
-    <img style='width: 40%; margin-left:30%;' src='http://ingressozapp.com/app/getImagem.php?id=$idEvento'/>
+    <img style='width: 40%; margin-left:30%;' src='https://ingressozapp.com/app/getImagem.php?id=$idEvento'/>
     <h1 style='text-align:center'>🎉 Prefeitos do Futuro 2022 🎉</h1><br>
     <h3 style='text-align:center'>Olá ".$senderName." você está recebendo nesta mensagem o Qr Code de acesso ao evento Prefeitos do Futuro 2022, que acontece de 18 a 20 de maio, no Centro de Convenções Brasil 21 Localização: https://goo.gl/maps/isgpwtyZoLRULzbS8
     <br><br>O evento começa às 08h e termina às 18h todos os dias<br><br>
     Pedimos desculpas pelo envio com os dados incorretos do acesso ao evento Prefeitos do Futuro, favor desconsiderar o email onde consta o nome de outra pessoa.Para acessar seu passaporte salve esse número e clique no link: <br>
-    http://ingressozapp.com/app/ingressos/?hash=".$hash."</h2><br>
+    https://ingressozapp.com/app/ingressos/?hash=".$hash."</h2><br>
     Nos dias 18 e 19, quarta e quinta, teremos coquetéis de confraternização com shows especiais das 18:15 às 20:15 no mesmo local do evento.   <br>
     Para entrar no evento apresente seu ingresso (CODIGO: ".$codigo.") e um documento original com foto no credenciamento na entrada do Centro de Convenções Brasil 21, teremos balcões de atendimento separados por: PREFEITOS, SECRETÁRIOS E ASSESSORES, CONVIDADOS E PALESTRANTES.<br>
     Para evitar filas, você poderá retirar seu kit e fazer o seu credenciamento com este Qr Code já no dia 17/05, terça-feira, das 15h às 19h no próprio Centro de Convenções Brasil 21.
@@ -271,7 +271,7 @@ function segundaVia($ingresso){
     include('./includes/header.php');
     $hash = $ingresso['hash'];
     $idEvento = $ingresso['evento'];
-    $local='http://ingressozapp.com/app/enviar.php?hash='.$hash;
+    $local='https://ingressozapp.com/app/enviar.php?hash='.$hash;
     echo '<div class="container">';
         echo '<div class="row justify-content-center">';
             echo '<div class="col-lg-9">';

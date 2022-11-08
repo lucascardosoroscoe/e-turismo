@@ -34,27 +34,27 @@ function selectevento(id){
     var idEvento = inputEvento.value;
     var url = window.location.pathname;
     var nomeEvento = inputEvento.options[inputEvento.selectedIndex].text;
-    window.location = "http://ingressozapp.com/app/assets/selecionarEvento.php?idEvento="+ idEvento + "&nomeEvento=" + nomeEvento + "&u=" + url;
+    window.location = "https://ingressozapp.com/app/assets/selecionarEvento.php?idEvento="+ idEvento + "&nomeEvento=" + nomeEvento + "&u=" + url;
 }
 function selectVendedor(id){
     var idVendedor = inputVendedor.value;
     var url = window.location.href;
     var nomeVendedor = inputVendedor.options[inputVendedor.selectedIndex].text;
-    window.location = "http://ingressozapp.com/app/assets/selecionarVendedor.php?idVendedor="+ idVendedor + "&nomeVendedor=" + nomeVendedor + "&u=" + url;
+    window.location = "https://ingressozapp.com/app/assets/selecionarVendedor.php?idVendedor="+ idVendedor + "&nomeVendedor=" + nomeVendedor + "&u=" + url;
 }
 
 //Script Selecionar Evento
 function selectlote(id){
     var idLote = inputLote.value;
     var url = window.location.href;
-    window.location = "http://ingressozapp.com/app/assets/selecionarLotes.php?idLote="+ idLote + "&u=" + url;
+    window.location = "https://ingressozapp.com/app/assets/selecionarLotes.php?idLote="+ idLote + "&u=" + url;
 }
 
 //Mensagem Automação
 function modificarMsg(){
     var msg = inputMsg.value;
     var url = window.location.href;
-    window.location = "http://ingressozapp.com/app/assets/definirMsg.php?msg="+ msg + "&u=" + url;
+    window.location = "https://ingressozapp.com/app/assets/definirMsg.php?msg="+ msg + "&u=" + url;
 }
 
 function adicionarlote() {

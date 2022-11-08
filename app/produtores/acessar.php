@@ -10,9 +10,6 @@ login($id, $nome, $type, $email);
 
 function login($id, $nome, $type, $email){
     $msg = "Sucesso!";
-    if($id == "675"){
-        $id = '674';
-    }
     $_SESSION["idUsuario"] = $id;
     $_SESSION["usuario"] = $nome;
     $_SESSION["tipoUsuario"] = $type;

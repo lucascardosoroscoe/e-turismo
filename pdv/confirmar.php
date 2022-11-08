@@ -145,7 +145,7 @@ function verificarIngresso(){
         $msg = gerarIngresso();
     }
     if($msg){
-        $local='http://ingressozapp.com/app/enviar2.php?hash='.$hash;
+        $local='https://ingressozapp.com/app/enviar2.php?hash='.$hash;
         // echo $local;
         enviarIngresso(); 
     }

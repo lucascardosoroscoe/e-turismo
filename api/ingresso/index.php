@@ -20,7 +20,10 @@
  
     //Dados da integração
     $promoter = 1;
+    // conferir o Secret para dar mais segurança
     $secret = 'ingressozapp258mudancastatus';
+
+
     $log =  file_get_contents('php://input');
     
     // salvar Log 
@@ -35,26 +38,44 @@
         $payment_url = $servidor['HTTP_X_WC_WEBHOOK_SOURCE'];
         $msg = salvarLog("URL DO SITE", $payment_url);
         if($payment_url == "https://ingressozapp.com/"){
+            //Verifica se já foi gerado ingresso para esse pedido e garante que o ingresso não foi gerado novamente
             if(verificarPedido($numeroPedido)){
                 // Pagamento Realizado - Processando entrega do Pedido
                 if($pedido['status'] == "processing"){
                     // Emitir Ingresso
+                    //Gerar Hash Identificados dos ingressos
                     $hash = bin2hex(openssl_random_pseudo_bytes(32));
+
+                    // Pegar dados do pedido e do comprador
                     $idPedido = $pedido['id'];
                     getDadosComprador();
                     $itens = $pedido['line_items'];
                     $coupon = $pedido['coupon_lines'][0]['code'];
                     if($coupon != ""){
-                        getVendedor($coupon);
+                        if($coupon == "PANTANAL10"||$coupon == "PANTA10"){
+                            $desconto = "1";
+                        }else{
+                            getVendedor($coupon);
+                        }
                     }
                     gerarIngressos();
                     enviarIngresso($hash, $senderEmail, $senderName, $idEvento, $nomeEvento);
                 } 
             }
-        }
-        if($payment_url == "https://prefeitosdofuturo.com.br/"){
+        }else if($payment_url == "https://prefeitosdofuturo.com.br/"){
             $promoter = 956;
             // Pagamento Realizado - Processando entrega do Pedido
+            if($pedido['status'] == "processing"){
+                // Emitir Ingresso
+                $hash = bin2hex(openssl_random_pseudo_bytes(32));
+                $idPedido = $pedido['id'];
+                getDadosCompradorCorreto();
+                $itens = $pedido['line_items'];
+                $coupon = $pedido['coupon_lines'][0]['code'];
+                gerarIngressos();
+                enviarIngresso($hash, $senderEmail, $senderName, $idEvento, $nomeEvento);
+            } 
+        }else{
             if($pedido['status'] == "processing"){
                 // Emitir Ingresso
                 $hash = bin2hex(openssl_random_pseudo_bytes(32));
@@ -102,20 +123,43 @@
     }
 
     function gerarIngressos(){
-        global $idLote, $itemAmount, $itemQuantity, $senderName, $telefone, $senderEmail, $idEvento, $itens, $nomeEvento;
+        global $idLote, $itemAmount, $itemQuantity, $valor, $desconto, $telefone, $senderEmail, $idEvento, $itens, $nomeEvento;
         // Para cada Item do carrinho acessa os dados 
         foreach ($itens as $item) { 
             $itemQuantity = $item['quantity'];
+            $itemAmount = $item['price'];
+            // $msg = salvarLog("Valor do Produto", $itemAmount);
             $idLote = $item['sku'];
+            if($desconto == '1'){
+                if($idLote == '8517'){
+                    $idLote = 8526;
+                }else if($idLote == '8520'){
+                    $idLote = 8527;
+                }else if($idLote == '8521'){
+                    $idLote = 8529;
+                }else if($idLote == '8518'){
+                    $idLote = 8528;
+                }else if($idLote == '8523'){
+                    $idLote = 8528;
+                }else if($idLote == '8524'){
+                    $idLote = 8530;
+                }
+            }
             if(getLote()){
-                // Para cada quantidade solicitada pelo cliente cria um ingresso.
-                for ($i=1; $i <= $itemQuantity; $i++) { 
-                    criarIngresso();
+                if($valor<$itemAmount){
+                    // Para cada quantidade solicitada pelo cliente cria um ingresso.
+                    // $msg = salvarLog("Valor CORRETO", $valor);
+                    for ($i=1; $i <= $itemQuantity; $i++) { 
+                        criarIngresso();
+                    }
+                }else{
+                    $msg = salvarLog("Valor do lote SKU acima do permitido para gerar ingresso", $valor);
                 }
             }else{
                 echo "<h1>Erro ao pegar dados do Lote</h1>";
             }
         }
+            
         
     }
 
@@ -206,12 +250,13 @@
     }
 
     function gerarIngresso($codigo, $idEvento, $idCliente, $valor, $idLote, $promoter){
-        global $hash, $numeroPedido, $idVendedor;
+        global $hash, $numeroPedido, $idVendedor, $vendidos;
         if($idVendedor == ''){
             $promoter = '1';
         }else{
             $promoter = $idVendedor;
         }
+        $vendidos ++;
         $consulta = "INSERT INTO Ingresso (codigo, evento, vendedor, idCliente, pedido, valor, lote, origem, hash) VALUES ('$codigo', '$idEvento', '$promoter', '$idCliente', '$numeroPedido', '$valor', '$idLote', 2, '$hash')";
         $msg = executar($consulta);
         if($msg == "Sucesso!"){
@@ -231,7 +276,7 @@
     }
     function atualizarVendidosLote($idLote){
         global $vendidos, $idLote, $quantidade;
-        if($quantidade < $vendidos){
+        if($quantidade <= $vendidos){
             $consulta = "UPDATE Lote SET validade = 'ESGOTADO' WHERE id = $idLote ";
             $msg = executar($consulta);
             if($msg == 'Sucesso!'){
@@ -252,7 +297,7 @@
     }
 
     function esgotarWP(){
-        global $idLote, $woocommerce;
+        global $idLote, $woocommerce, $idEvento;
         
         $consulta = "SELECT * FROM `Lote` WHERE `id` = '$idLote'";
         $dados = selecionar($consulta);
@@ -268,12 +313,12 @@
     function enviarIngresso($hash, $senderEmail, $senderName, $idEvento, $nomeEvento){
         $assunto = "Seus Ingressos para o evento ".$nomeEvento." estão aqui!!!";
         $msg = "
-        <img style='width: 40%; margin-left:30%;' src='http://ingressozapp.com/app/getImagem.php?id=$idEvento'/>
+        <img style='width: 40%; margin-left:30%;' src='https://ingressozapp.com/app/getImagem.php?id=$idEvento'/>
         <h1 style='text-align:center'>🎉 ".$nomeEvento." 🎉</h1><br>
         <h3 style='text-align:center'>Olá ".$senderName." você acaba de adquirir um ingresso, utilizando o aplicativo IngressoZapp!!!</h3><br>
         <br>
         <h2 style='text-align:center' >Para acessar os ingressos clique no Botão: <br></h2>
-        <a href='http://ingressozapp.com/app/ingressos/?hash=".$hash."' style='color: #fff;background-color: #000000;padding: 20px 50px;margin-top: 20px !important;border-radius: 24px;font-size: large; text-decoration: none;display: block;'>Visualizar Ingresso</a><br>
+        <a href='https://ingressozapp.com/app/ingressos/?hash=".$hash."' style='color: #fff;background-color: #000000;padding: 20px 50px;margin-top: 20px !important;border-radius: 24px;font-size: large; text-decoration: none;display: block;'>Visualizar Ingresso</a><br>
         <br>
         ";
         return enviaEmail($senderEmail, $senderName, $assunto, $msg);

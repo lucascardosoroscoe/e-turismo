@@ -78,7 +78,7 @@ $hoje = date('d/m/Y h:m', strtotime("-3 hour"))
           echo ("<h5>Valor Total: R$".$soma."<br>Quantidade: ".$count." ingressos.</h5>"); 
         
           echo ('<br><button onclick="window.print()" class="btn">Imprimir</button>');
-          echo ('<br><br><a href="http://ingressozapp.com/produtor/" class="btn">Voltar</a>');
+          echo ('<br><br><a href="https://ingressozapp.com/produtor/" class="btn">Voltar</a>');
      
 
           
@@ -107,7 +107,7 @@ for(var i = 1; i < table.rows.length; i++)
 }
 function pegarValor(rIndex){
      var codigo = table.rows[rIndex].cells[0].innerHTML;
-     window.location.href = "http://ingressozapp.com/produtor/detalhar/ingresso.php?codigo=" + codigo;
+     window.location.href = "https://ingressozapp.com/produtor/detalhar/ingresso.php?codigo=" + codigo;
 }
 
 </script>

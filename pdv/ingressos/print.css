@@ -1,0 +1,46 @@
+ @media print {
+    .page {
+        width: 10cm;
+        max-height: 10.0cm; 
+        padding: 20px;
+        margin: 20px auto;
+        background: white;
+        display: flex;
+    }
+} 
+.notImprime
+    {
+        display: none;
+    }
+    .imprime {
+        visibility: visible;
+    }
+    .btn{
+        display: none;
+    }
+    .page {
+        width: 102mm;
+        max-height: 48,mm; 
+        padding: 4mm;
+        margin-top: 3.13mm;
+        margin-bottom: 0px;
+        margin-right: 4mm;
+        margin-left: 0px;
+        padding-left: 0px;
+        background: white;
+        display: flex;
+    }
+    .fvl {
+        margin-top: 55px;
+        margin-left: -20px;
+        transform: rotate(270deg);
+        height: 30px;
+    }
+    .line{
+        display: flex;
+        margin-top: 3px;
+    }
+    .direita{
+        width: 100px;
+        margin-right:20px;
+    }

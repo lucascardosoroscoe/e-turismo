@@ -46,19 +46,21 @@ include('../includes/header.php');
                                     addTabela($consulta);
                                 }
                             }else if($tipoUsuario == 2){
-                                $consulta = "SELECT Cliente.id, Cliente.nome, Cliente.telefone FROM Cliente 
-                                JOIN Ingresso ON Ingresso.idCliente = Cliente.id
-                                JOIN Vendedor ON Ingresso.vendedor = Vendedor.id
-                                JOIN ProdutorVendedor ON Vendedor.id = ProdutorVendedor.idVendedor
-                                WHERE ProdutorVendedor.idProdutor = '$idUsuario'
-                                GROUP BY Cliente.telefone";
-                                addTabela($consulta);
-                                $consulta = "SELECT Cliente.id, Cliente.nome, Cliente.telefone FROM Cliente 
-                                JOIN Ingresso ON Ingresso.idCliente = Cliente.id
-                                JOIN Evento ON Ingresso.evento = Evento.id 
-                                WHERE (Ingresso.vendedor = 1 OR Ingresso.vendedor = 2) AND Evento.produtor = $idUsuario GROUP BY Cliente.telefone
-                               ";
-                                addTabela($consulta);
+                                if($idEvento == ""){
+                                    $consulta = "SELECT Cliente.id, Cliente.nome, Cliente.telefone FROM Cliente 
+                                    JOIN Ingresso ON Ingresso.idCliente = Cliente.id
+                                    JOIN Evento ON Ingresso.evento = Evento.id 
+                                    WHERE Evento.produtor = $idUsuario GROUP BY Cliente.telefone
+                                   ";
+                                    addTabela($consulta);
+                                }else{
+                                    $consulta = "SELECT Cliente.id, Cliente.nome, Cliente.telefone, Cliente.email
+                                    FROM Cliente
+                                    JOIN Ingresso ON Ingresso.idCliente = Cliente.id
+                                    WHERE Ingresso.evento = '$idEvento' GROUP BY Cliente.telefone";
+                                    addTabela($consulta);
+                                }
+                               
                             }else if($tipoUsuario == 3){
                                 $consulta = "SELECT Cliente.id, Cliente.nome, Cliente.telefone FROM Cliente 
                                 JOIN Ingresso ON Ingresso.idCliente = Cliente.id
@@ -94,10 +96,11 @@ function addTabela($consulta){
             echo ("<td>".$obj['nome']."</td>"); 
             $nomeCompleto = explode(' ',trim($obj['nome']));
             $primeiroNome = $nomeCompleto[0];
-            $mensagem = "Oi ".$primeiroNome.", tudo bem? " . $msg;
+            // $mensagem = "Oi ".$primeiroNome.", tudo bem? " . $msg;
+            $mensagem = $msg;
 
             $mensagem = urlencode($mensagem);
-            echo ("<td><a target='_blank' href='https://api.whatsapp.com/send?phone=55".$obj['telefone']."&text=".$mensagem."'>Contatar</a></td>");
+            echo ("<td><a href='https://api.whatsapp.com/send?phone=55".$obj['telefone']."&text=".$mensagem."'>Contatar</a></td>");
             echo ("<td>".$obj['telefone']."</td>");
             echo ("<td style='display: flex;'><a href='editar.php?id=".$obj['id']."' class='iconeTabela'><i class='fas fa-user-edit'></i></a></td>");  
         echo "</tr>";

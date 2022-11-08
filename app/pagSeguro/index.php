@@ -62,6 +62,7 @@ if($dataInicial == ""){
                     echo('<tr>');
                     echo('<th style="display:none;">id</th>');
                     echo('<th>Descrição</th>');
+                    echo('<th>Código</th>');
                     echo('<th>Cliente</th>');
                     echo('<th>Telefone</th>');
                     echo('<th>Quant.</th>');
@@ -76,7 +77,7 @@ if($dataInicial == ""){
                 echo('</thead>');
                 echo('<tbody id="tbody">');
                     if($idEvento == ""){
-                        $consulta = "SELECT PedidoPagSeguro.id, PedidoPagSeguro.itemDescription, PedidoPagSeguro.itemAmount, PedidoPagSeguro.itemQuantity, PedidoPagSeguro.senderName, PedidoPagSeguro.senderAreaCode, PedidoPagSeguro.senderPhone, PedidoPagSeguro.senderEmail, PedidoPagSeguro.extraAmount, PedidoPagSeguro.createAt, PedidoPagSeguro.status,
+                        $consulta = "SELECT PedidoPagSeguro.id, PedidoPagSeguro.code, PedidoPagSeguro.itemDescription, PedidoPagSeguro.itemAmount, PedidoPagSeguro.itemQuantity, PedidoPagSeguro.senderName, PedidoPagSeguro.senderAreaCode, PedidoPagSeguro.senderPhone, PedidoPagSeguro.senderEmail, PedidoPagSeguro.extraAmount, PedidoPagSeguro.createAt, PedidoPagSeguro.status,
                         Lote.nome as lote, Evento.nome as evento                        
                         FROM PedidoPagSeguro
                         JOIN Lote ON Lote.id = PedidoPagSeguro.idLote 
@@ -84,7 +85,7 @@ if($dataInicial == ""){
                         WHERE `createAt` >= '$dataInicial' AND `createAt` <= '$dataFinal' AND PedidoPagSeguro.status != '10'
                         ORDER BY PedidoPagSeguro.createAt DESC";
                     }else{
-                        $consulta = "SELECT PedidoPagSeguro.id, PedidoPagSeguro.itemDescription, PedidoPagSeguro.itemAmount, PedidoPagSeguro.itemQuantity, PedidoPagSeguro.senderName, PedidoPagSeguro.senderAreaCode, PedidoPagSeguro.senderPhone, PedidoPagSeguro.senderEmail, PedidoPagSeguro.extraAmount, PedidoPagSeguro.createAt, PedidoPagSeguro.status,
+                        $consulta = "SELECT PedidoPagSeguro.id, PedidoPagSeguro.code, PedidoPagSeguro.itemDescription, PedidoPagSeguro.itemAmount, PedidoPagSeguro.itemQuantity, PedidoPagSeguro.senderName, PedidoPagSeguro.senderAreaCode, PedidoPagSeguro.senderPhone, PedidoPagSeguro.senderEmail, PedidoPagSeguro.extraAmount, PedidoPagSeguro.createAt, PedidoPagSeguro.status,
                         Lote.nome as lote, Evento.nome as evento                        
                         FROM PedidoPagSeguro
                         JOIN Lote ON Lote.id = PedidoPagSeguro.idLote 
@@ -105,6 +106,7 @@ if($dataInicial == ""){
             echo ("<td style='display:none;'>".$obj['id']."</td>");
             $evento = $obj['evento'];
             echo ("<td>".$obj['itemQuantity']." ingressos - ".$evento." (".$obj['lote'].")</td>"); 
+            echo ("<td>".$obj['code']."</td>");
             $nome = urldecode($obj['senderName']);
             echo ("<td>".$nome." (".$obj['senderEmail'].")</td>"); 
             $telefone = $obj['senderAreaCode'] . $obj['senderPhone'];

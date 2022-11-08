@@ -28,7 +28,9 @@
     $idEvento = $dados[0]['evento'];
     $valor = $dados[0]['valor'];
     $quantidade = $dados[0]['quantidade'];
-    ativarLoteWP();
+    if(intval($valor) != 0){
+        ativarLoteWP();
+    }
     
     header('Location: index.php?msg='.$msg);
 

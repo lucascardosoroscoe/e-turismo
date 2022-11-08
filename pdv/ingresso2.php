@@ -10,7 +10,7 @@ try {
 } catch (\Throwable $th) {
     throw $th;
 }
-$link = "http://ingressozapp.com/evento/?evento=".$idEvento."&promoter=".$idUsuario;
+$link = "https://ingressozapp.com/evento/?evento=".$idEvento."&promoter=".$idUsuario;
 ?>
 <div style='background-image: url("./img/fundoLogin.jpg"); background-size: cover;height: 100%;'>
     <div class="container">

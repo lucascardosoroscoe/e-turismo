@@ -1,10 +1,8 @@
 <?php
+    set_time_limit(120);
     // Verifica Acesso do Produtor á Página 
     include('../includes/verificarAcesso.php');
     verificarAcesso(2);
-
-    //Integração com o Trello para criar o evento no Pipeline
-    include('../includes/trello.php');
 
     // Composer + Conexão com o Woocommerce
     require '../../vendor/autoload.php';
@@ -18,9 +16,8 @@
             'version' => 'wc/v3',
         ]
     );
-    
 
-    // Pega dados do Produtor
+    // Pega dados do Produtor //OK
     $produtor = $idUsuario;
     $consulta = "SELECT * FROM `Produtor` WHERE id = '$produtor'";
     $dados = selecionar($consulta);
@@ -29,32 +26,34 @@
     $cidadeProdutor = $dados[0]['cidade'];
     $estadoProdutor = $dados[0]['estado'];
 
-    // Pegar dados do Evento 
+    // Pegar dados do Evento //OK
     $nome = $_POST['inputName'];
     $slug = $_POST['slug'];
+    $selectEstilo = $_POST['selectEstilo'];
     $imagem      = $_FILES["inputImagem"];
     $descricao   = $_POST['inputDescricao'];
     $data        = $_POST['inputData'];
 
-    // Verifica se o Evento tem imagem
+    // Verifica se o Evento tem imagem e transforma no formato SQL. Pode ser o problema...
     if($imagem != NULL) { 
         $nomeFinal = time().'.jpg';
         if (move_uploaded_file($imagem['tmp_name'], $nomeFinal)) {
             $tamanhoImg = filesize($nomeFinal); 
-    
             $mysqlImg = addslashes(fread(fopen($nomeFinal, "r"), $tamanhoImg)); 
         }
     }
 
     // verificar se já existe evento com o mesmo nome
-    $consulta = "SELECT * FROM `Evento` WHERE `nome` = '$nome'";
+    $consulta = "SELECT * FROM `Evento` WHERE `nome` = '$nome' AND validade = 'VALIDO'";
     $dados = selecionar($consulta);
     if($dados[0]['id'] == ""){
         // Criar Evento no App
-        $consulta = "insert into Evento (nome, slug, produtor, imagem, data, descricao) values ('$nome', '$slug', '$produtor', '$mysqlImg', '$data', '$descricao')";
+        $consulta = "insert into Evento (nome, slug, produtor, imagem, data, descricao, idEstilo) values ('$nome', '$slug', '$produtor', '$mysqlImg', '$data', '$descricao', '$selectEstilo')";
         $msg = executar($consulta);
         if($msg != "Sucesso!"){
-                $msg = "Erro ao criar Evento, por favor contate o suporte!!";
+                $msg = "Erro ao salvar o evento no Banco de Dados, por favor contate o suporte!!";
+                header('Location: ./index.php?msg='.$msg);
+
         }
 
         // Pegar Id do Evento
@@ -62,22 +61,17 @@
 
         // Criar Evento no Wordpress
         try {
-            $eventoWP =  criarEventoWP($nome, $descricao, $idEvento, $slug);
-            $idWP = $eventoWP->id;
-            atualizarIdWP($idEvento, $idWP);
-            // Criar card no trello
-            criarCardTrello();
-
-            // Redirecionar Para Lotes
-            header('Location: ../lotes/index.php?evento='.$idEvento);
+            $eventoWP =  criarEventoWP($nome, $descricao, $idEvento, $slug, $selectEstilo);
         } catch (\Throwable $th) {
-            header('Location: https://api.whatsapp.com/send?phone=5567999854042&text=Oi%2C%20tudo%20bem%3F%20Estava%20criando%20um%20evento%20com%20meu%20usuário%20no%20App%2C%20mas%20deu%20um%20erro%2C%20poderia%20me%20ajudar%3F');
         }
-        
 
+        header('Location: ../lotes/index.php?evento='.$idEvento);
+    }else if($dados[0]['id'] == $idUsuario){
+        $msg = "O evento " . $dados[0]['nome'] .' já está criado.';
+        header('Location: ./index.php?msg='.$msg);
     }else{
-        $msg = "Já existe um evento cadastrado na plataforma com esse nome, por favor utilize um nome diferente";
-        header('Location: ./adicionar.php?msg='.$msg);
+        $msg = "Já existe um evento cadastrado na plataforma com esse nome e esse evento pertence a outro produtor";
+        header('Location: ./index.php?msg='.$msg);
 
     }
 
@@ -85,12 +79,15 @@
     
     
  
-    function atualizarIdWP($idEvento, $idWP){
-        $consulta = "UPDATE `Evento` SET `idWP`= '$idWP' WHERE `id` = '$idEvento'";
-        $msg = executar($consulta);
+    
+    function selecionarEstilo($estilo){
+        $consulta = "SELECT categoria FROM EstiloMusical WHERE id = '$estilo'";
+        $dados = selecionar($consulta);
+        return $dados[0]['categoria'];
     }
-    function criarEventoWP($nomeEvento, $descricao, $idEvento, $slug){
+    function criarEventoWP($nomeEvento, $descricao, $idEvento, $slug, $estilo){
         global $woocommerce, $nomeFinal;
+        $idEstilo = selecionarEstilo($estilo);
         $link = 'https://ingressozapp.com/app/eventos/'.$nomeFinal;
         $descricao = $descricao . '
 
@@ -110,8 +107,12 @@
             'virtual' => true,
             'categories' => [
                 [
+                    
                     'id' => 39
-                ]
+                ],
+                [
+                    'id' => $idEstilo
+                ],
             ],
             'images' => [
                 [
@@ -143,7 +144,6 @@
             descrição do Evento: $descricao
             imagem: ingressozapp.com/app/getImagem.php?id=$idEvento
         "; 
-        criarCard($nomeCard, $descricaoCard, $data, $idListaEventoCadastrado);
     }
 
     function getIdEvento(){

@@ -84,12 +84,12 @@ function addTabela($consulta){
         echo ("<td>".$obj['telefone']."</td>");
         $validade = $obj['validade'];
         echo ("<td>".$obj['validade']."</td>");
-        echo ("<td>https://ingressozapp.com/eventos/".$slug."/?wt_coupon=".$obj['usuario']."</td>");
+        echo ("<td>https://ingressozapp.com/eventos/".$slug."/?cupom=".$obj['usuario']."</td>");
         echo ("<td><a target='_blank' href='https://api.whatsapp.com/send?phone=55".$obj['telefone']."&text=".$mensagem."'>Contatar</a></td>");
         if($validade == "VALIDO"){
             $msg = "Olá ".$obj['nome'].", tudo bem? Segue seu link de promoter para o evento ".$nomeEvento.". 
 Com este link você pode indicar para um cliente a venda online e e ter reconhcecida a sua indicação.
-http://ingressozapp.com/evento/?evento=".$idEvento."&promoter=".$obj['id']."";
+https://ingressozapp.com/evento/?evento=".$idEvento."&promoter=".$obj['id']."";
             $msg = urlencode($msg);
             
             echo ("<td style='display: flex;'><a href='editar.php?id=".$obj['id']."' class='iconeTabela'><i class='fas fa-user-edit'></i></a><a href='invalidar.php?id=".$obj['id']."' class='iconeTabela red'><i class='fas fa-user-times'></i></a><a href='https://api.whatsapp.com/send?phone=55".$obj['telefone']."&text=".$msg."' class='iconeTabela'><i class='fas fa-external-link-alt'></i></a>");  

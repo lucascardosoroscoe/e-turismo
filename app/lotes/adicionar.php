@@ -11,7 +11,7 @@ $msg = $_GET['msg'];
                     <div class="card shadow-lg border-0 rounded-lg mt-5">
                         <div class="card-header">
                             <h3 class="text-center font-weight-light my-4">Adicionar Lote</h3>
-                            <h5 class="text-center font-weight-light my-4 text-warning"><?php echo $msg;?></h5>
+                            <h6 class="text-center font-weight-light my-4 text-warning"><?php echo $msg;?></h6>
                         </div>
                         <div class="card-body">
                             <form action="create.php" id="create_lote" method="POST" enctype="multipart/form-data">

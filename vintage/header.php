@@ -18,7 +18,7 @@
       <meta property="og:description" content="Eu já garanti meu ingresso, bora??? Garanta o seu também."/>
       <meta property="og:title" content="<?php echo $nomeEvento ?> - IngressoZapp"/>
       <meta property="og:image" content="<?php echo $HTTP_HOST . "/app"?>/getImagem.php?id=<?php echo $idEvento;?>"/>
-      <meta name="twitter:url" content="http://ingressozapp.com/evento/?evento=<?php echo $idEvento?>&promoter=<?php echo $promoter?>">
+      <meta name="twitter:url" content="https://ingressozapp.com/evento/?evento=<?php echo $idEvento?>&promoter=<?php echo $promoter?>">
       <meta name="twitter:title" content="Eu já garanti meu ingresso, bora??? Garanta o seu também.">
       <meta name="twitter:image" content="<?php echo $HTTP_HOST . "/app"?>/getImagem.php?id=<?php echo $idEvento;?>">
       <title><?php echo $nomeEvento ?> - IngressoZapp</title>
