@@ -156,6 +156,9 @@
         if($promoter == ''){
             $promoter = '1';
         }
+        if($idEvento == 578){
+            $valor = $valor * 0.95;
+        }
         $consulta = "INSERT INTO Ingresso (codigo, evento, vendedor, idCliente, valor, lote, origem, hash) VALUES ('$codigo', '$idEvento', '$promoter', '$idCliente', '$valor', '$idLote', 2, '$hash')";
         $msg = executar($consulta);
         if($msg == "Sucesso!"){

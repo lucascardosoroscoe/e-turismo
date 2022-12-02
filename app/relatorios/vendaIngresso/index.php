@@ -474,7 +474,6 @@ $idSecretaria = $_SESSION["idSecretaria"];
                 }
                 echo ("<a href='../../enviar.php?codigo=".$obj['codigo']."' target='_blank' class='iconeTabela'><i class='far fa-copy'></i></a></td>");  
             }else{
-                echo ("<td><a href='reativar.php?id=".$obj['codigo']."' style='margin-left: 15px;'>Reativar</a></td>");
             }
             
             echo "</tr>";

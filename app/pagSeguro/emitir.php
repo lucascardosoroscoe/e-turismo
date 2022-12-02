@@ -157,6 +157,9 @@ function verificarIngresso(){
 
 function gerarIngresso(){
     global $codigo, $evento, $vendedor, $idCliente, $telefone, $valor, $idLote;
+    if($evento == 578){
+        $valor = $valor * 0.95;
+    }
     $consulta = "INSERT INTO Ingresso (codigo, evento, vendedor, idCliente, valor, lote, origem) VALUES ('$codigo', '$evento', '$vendedor', '$idCliente', '$valor', '$idLote', 2)";
     // echo $consulta;
     $msg = executar($consulta);

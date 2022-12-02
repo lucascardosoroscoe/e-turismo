@@ -56,9 +56,9 @@ function addTabela($consulta){
         echo "<tr>";
         echo ("<td style='display:none;'>".$obj['id']."</td>"); 
         echo ("<td>".$obj['usuario']."</td>"); 
-        echo ("<td>".$obj['nome']."</td>"); 
+        echo ("<td>".$obj['nome']." - ".$obj['CPF']."</td>"); 
         echo ("<td>".$obj['telefone']."</td>");
-        echo ("<td>".$obj['cidade'].", ".$obj['estado']."</td>");
+        echo ("<td>".$obj['endereco'].", ".$obj['numero'].", ".$obj['cidade'].", ".$obj['estado']."</td>");
         $validade = $obj['validade'];
         echo ("<td>".$obj['validade']."</td>");
         $nomeCompleto = explode(' ',trim($obj['nome']));

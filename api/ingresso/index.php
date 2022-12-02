@@ -58,8 +58,10 @@
                             getVendedor($coupon);
                         }
                     }
-                    gerarIngressos();
-                    enviarIngresso($hash, $senderEmail, $senderName, $idEvento, $nomeEvento);
+                    if(gerarIngressos()){
+                        enviarIngresso($hash, $senderEmail, $senderName, $idEvento, $nomeEvento);
+                        statusCompleted();
+                    };
                 } 
             }
         }else if($payment_url == "https://prefeitosdofuturo.com.br/"){
@@ -152,8 +154,15 @@
                     for ($i=1; $i <= $itemQuantity; $i++) { 
                         criarIngresso();
                     }
+                    return true;
+                }else if($idEvento == '632'||$idEvento == '744'){
+                    for ($i=1; $i <= $itemQuantity; $i++) { 
+                        criarIngresso();
+                    }
+                    return true;
                 }else{
                     $msg = salvarLog("Valor do lote SKU acima do permitido para gerar ingresso", $valor);
+                    return false;
                 }
             }else{
                 echo "<h1>Erro ao pegar dados do Lote</h1>";
@@ -308,6 +317,16 @@
         } catch (Throwable $th) {
             //throw $th;
         }
+    }
+
+    function statusCompleted(){
+        global $woocommerce, $pedido;
+        $idPedido =  $pedido['id'];
+        $data = [
+            'status' => 'completed'
+        ];
+        $string = 'orders/'. $idPedido;
+        $woocommerce->put($string, $data);
     }
 
     function enviarIngresso($hash, $senderEmail, $senderName, $idEvento, $nomeEvento){

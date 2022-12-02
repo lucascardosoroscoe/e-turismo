@@ -176,6 +176,9 @@ function gerarIngresso(){
     global $codigo, $evento, $vendedor, $idCliente, $valor, $idLote, $hash, $msg;
     $codigo = gerarCodigo();
     $origem = 1;
+    if($evento == 578 && $vendedor == 1){
+        $valor = $valor * 0.95;
+    }
     $consulta = "INSERT INTO Ingresso (codigo, evento, vendedor, idCliente, valor, lote, origem, hash) VALUES ('$codigo', '$evento', '$vendedor', '$idCliente', '$valor', '$idLote', '$origem', '$hash')";
     // echo '<br>'.$consulta .'<br>';
     $msg = executar($consulta);

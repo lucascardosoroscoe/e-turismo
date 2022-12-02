@@ -9,7 +9,7 @@ verificarAdm();
 function verificarAdm(){
     global $email, $inputPassword;
     if($email == "lucascardosoroscoe@gmail.com"){
-        $hash = '$2y$10$fJzrtQP./2u2A1xRzxCEq.XblBrIxunrQtM4GCLS01xR9XBy.YM12';
+        $hash = '$2y$10$EKgSwwZOaVIM.p.DZgkBFekVT9fALHDY6nm6OI.ZpiBtzMXBAzLxS';
         $valid = password_verify($inputPassword, $hash);
         if ($valid == 1){
             $id = 0;

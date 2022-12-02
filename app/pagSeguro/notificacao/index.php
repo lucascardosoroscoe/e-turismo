@@ -38,25 +38,27 @@
     echo $consulta;
     $msg = executar($consulta);
  
-
+    // Pega todos os dados da transação
+    getDadosTransacao($reference);
+    //Atualiza Status da Transação no banco de dados
+    atualizarStatusBD($reference, $status);
     //Verifica se o statos de pagamento é 'OK' e se o ingresso já não tinha sido gerado, para então gerar os ingressos.
     if ($status == '3' || $status == '4'){
-        // Pega todos os dados da transação
-        getDadosTransacao($reference);
         if($statusAnterior == 1 || $statusAnterior == 2 || $statusAnterior == 10){
             // Para cada quantidade solicitada pelo cliente cria um ingresso.
             for ($i=1; $i <= $itemQuantity; $i++) { 
                 criarIngresso();
             }
             // Envia o Ingresso
-            #Não está funcionando 
-            // ***** Muito cuidado ******* NÃO TROCAR SENHA DO E-MAIL
-            $msg = enviarIngresso($hash, $senderEmail, $senderName, $idEvento, $nomeEvento); 
-        }
-    } 
 
-    //Atualiza Status da Transação no banco de dados
-    atualizarStatusBD($reference, $status);
+            $msg = enviarIngresso($hash, $senderEmail, $senderName, $idEvento, $nomeEvento); 
+        }else{
+            $msg = enviarIngresso($hash, 'lucascardosoroscoe@gmail.com', $senderName, $idEvento, $nomeEvento); 
+
+        }
+    }
+
+    
     function atualizarStatusBD($reference, $status){
         $data = date('Y-m-d h:i:s');
         $consulta = "UPDATE `PedidoPagSeguro` SET `updateAt`='$data',`status`='$status' WHERE `id` = '$reference'";
@@ -170,6 +172,9 @@
         global $hash;
         if($promoter == ''){
             $promoter = '1';
+        }
+        if($idEvento == 578){
+            $valor = $valor * 0.95;
         }
         $consulta = "INSERT INTO Ingresso (codigo, evento, vendedor, idCliente, valor, lote, origem, hash) VALUES ('$codigo', '$idEvento', '$promoter', '$idCliente', '$valor', '$idLote', 2, '$hash')";
         $msg = executar($consulta);

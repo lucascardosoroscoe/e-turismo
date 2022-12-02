@@ -27,6 +27,7 @@ include('../includes/header.php');
                     foreach ($ingressos as $ingresso) {
                         $evento = $ingresso['evento'];
                         $codigo = $ingresso['codigo'];
+                        $valor = $ingresso['valor'];
                         $validade = $ingresso['validade'];
                         $motivoInvalidar = $ingresso['motivoInvalidar'];
                         $horaLeitura = $ingresso['horaLeitura'];
@@ -59,10 +60,10 @@ include('../includes/header.php');
                                     echo ('<h6 style="text-align: center;">CODIGO: '.$codigo.'</h6><br>');
                                     echo ('<h6 style="text-align: center;">'.$descricaoEvento.'</h6><br>');
                                     echo ('<h6>Lote: '.$lote.'</h6><br>');
-                                    if($idLote == 7982){ 
+                                    if($valor == 0){ 
                                         echo ('<h6>Nome do Titular do Ingresso: '.$cliente.'</h6>');
                                         echo ('<h6>Telefone: '.$telefone.'</h6>');
-                                        echo ('<h6>Atenção!!! O ingresso de cortesia é pessoal e intransferível, por favor lembre-se de apresentar seu documento.</h6><br>');
+                                        echo ('<h6>Atenção!!! O ingresso de cortesia é pessoal e intransferível, é obrigatória a apresentação de documento na portaria do evento.</h6><br>');
                                     
                                     }else{ 
                                         echo ('<form action="edit.php" id="edit_evento" method="POST" enctype="multipart/form-data">');
