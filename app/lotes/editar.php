@@ -27,7 +27,7 @@ $dados = selecionar($consulta);
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label class="small mb-1" for="inputValor">Preço de Venda*</label>
-                                            <input class="form-control py-4" id="inputValor"  name="inputValor" type="text" placeholder="Digite o Preço (R$)" value="<?php echo $dados[0]['valor'];?>" required/>
+                                            <input class="form-control py-4" id="inputValor"  name="inputValor" type="number" min="0" max="10000" step="0.01" placeholder="Digite o Preço (R$)" value="<?php echo $dados[0]['valor'];?>" required/>
                                         </div>
                                     </div>
                                 </div>
@@ -35,7 +35,7 @@ $dados = selecionar($consulta);
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label class="small mb-1" for="inputQuantidade">Quantidade de Ingressos Disponíveis*</label>
-                                            <input class="form-control py-4" id="inputQuantidade"  name="inputQuantidade" type="text" placeholder="Digite o Nome" value="<?php echo $dados[0]['quantidade'];?>" required/>
+                                            <input class="form-control py-4" id="inputQuantidade"  name="inputQuantidade" type="number"  min="1" max="1000000" step="1"placeholder="Digite o Nome" value="<?php echo $dados[0]['quantidade'];?>" required/>
                                         </div>
                                     </div>
                                 </div>

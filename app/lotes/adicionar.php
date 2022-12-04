@@ -16,7 +16,7 @@ $msg = $_GET['msg'];
                         <div class="card-body">
                             <form action="create.php" id="create_lote" method="POST" enctype="multipart/form-data">
                                 <div class="form-row">
-                                    <div class="col-md-12">
+                                    <div class="col-md-12"> 
                                         <div class="form-group"> 
                                             <label class="small mb-1" for="inputName">Nome do Lote*</label>
                                             <input class="form-control py-4" id="inputName"  name="inputName" type="text" placeholder="Digite o Nome" required/>
@@ -27,7 +27,7 @@ $msg = $_GET['msg'];
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label class="small mb-1" for="inputValor">Preço de Venda*</label>
-                                            <input class="form-control py-4" id="inputValor"  name="inputValor" type="text" placeholder="Digite o Preço (R$)" required/>
+                                            <input class="form-control py-4" id="inputValor"  name="inputValor" type="number"  min="0" max="10000"  step="0.01" placeholder="Digite o Preço (R$)" required/>
                                         </div>
                                     </div>
                                 </div>
@@ -35,7 +35,7 @@ $msg = $_GET['msg'];
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label class="small mb-1" for="inputQuantidade">Quantidade de Ingressos Disponíveis*</label>
-                                            <input class="form-control py-4" id="inputQuantidade"  name="inputQuantidade" type="text" placeholder="Digite a Quantidade" required/>
+                                            <input class="form-control py-4" id="inputQuantidade"  name="inputQuantidade" type="number"  min="1" max="1000000" step="1" placeholder="Digite a Quantidade" required/>
                                         </div>
                                     </div>
                                 </div>
