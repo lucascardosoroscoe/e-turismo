@@ -246,10 +246,11 @@ setlocale(LC_ALL, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
     echo('<select class="form-control" name="selectLote" id="selectLote" onchange="selectlote(1)" form="emitir" style="height: 50px;" required>');
       echo('<option value="">Selecione o Lote</option>');
       foreach ($dados as $lote) {
+        $valor = number_format(floatval($lote['valor']),2,',','.');
         if($idLote == $lote['id']){
-          echo('<option value="'. $lote['id'] .'" selected>'. $lote['nome'] .' - R$'. $lote['valor'] .',00</option>');
+          echo('<option value="'. $lote['id'] .'" selected>'. $lote['nome'] .' - R$'. $valor .'</option>');
         }else{
-          echo('<option value="'. $lote['id'] .'">'. $lote['nome'] .' - R$'. $lote['valor'] .',00</option>');
+          echo('<option value="'. $lote['id'] .'">'. $lote['nome'] .' - R$'. $valor .'</option>');
         }
       }
     echo('</select>');
@@ -282,10 +283,11 @@ setlocale(LC_ALL, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
     echo('<select class="form-control" name="selectLote" id="selectLote" onchange="selectlote(1)" form="emitir'.$i.'" required>');
       echo('<option value="">Selecione o Lote</option>');
       foreach ($dados as $lote) {
+        $valor = number_format(floatval($lote['valor']),2,',','.');
         if($idLote == $lote['id']){
-          echo('<option value="'. $lote['id'] .'" selected>'. $lote['nome'] .' - R$'. $lote['valor'] .',00</option>');
+          echo('<option value="'. $lote['id'] .'" selected>'. $lote['nome'] .' - R$'. $valor .',00</option>');
         }else{
-          echo('<option value="'. $lote['id'] .'">'. $lote['nome'] .' - R$'. $lote['valor'] .',00</option>');
+          echo('<option value="'. $lote['id'] .'">'. $lote['nome'] .' - R$'. $valor .',00</option>');
         }
       }
     echo('</select>');
