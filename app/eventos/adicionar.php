@@ -19,7 +19,7 @@ $msg = $_GET['msg'];
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label class="small mb-1" for="inputName">Nome do Evento*</label>
-                                            <input class="form-control py-4" id="inputName"  name="inputName" type="text" placeholder="Digite o Nome" onchange="sugerirSlug()" required/>
+                                            <input class="form-control py-4" id="inputName"  name="inputName" type="text" placeholder="Digite o Nome" onchange="sugerirSlug()" onclick="voltarTexto()" required/>
                                         </div>
                                     </div>
                                 </div>
@@ -27,7 +27,7 @@ $msg = $_GET['msg'];
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             Link do Evento: www.ingressozapp.com/eventos/<span id='slugTxt'></span></label>
-                                            <input class="" id="slug"  name="slug" type="hidden" onclick="voltarTexto()" placeholder="Digite o link" required/>
+                                            <input class="" id="slug"  name="slug" type="hidden" placeholder="Digite o link" required/>
                                         </div>
                                     </div>
                                 </div> 
@@ -53,7 +53,7 @@ $msg = $_GET['msg'];
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label class="small mb-1" for="inputImagem">Imagem de Capa (JPEG/PNG) obs.: Até 900px de altura ou largura*</label>
-                                            <input style="padding: 4px;" class="form-control" onclick="voltarTexto()" name="inputImagem" type="file" id="inputImagem"  accept="image/jpeg, image/png"required> 
+                                            <input style="padding: 4px;" class="form-control" onclick="voltarTexto()" name="inputImagem" type="file" id="inputImagem"  accept="image/jpeg, image/png" required> 
                                         </div>
                                     </div>
                                 </div>
