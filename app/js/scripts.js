@@ -28,6 +28,7 @@ var inputEvento = document.getElementById('selectEvento');
 var inputVendedor = document.getElementById('selectVendedor');
 var inputLote   = document.getElementById('selectLote');
 var inputMsg = document.getElementById('inputMsg');
+
 var clicado = 0;
 
 //Script Selecionar Evento
@@ -70,13 +71,15 @@ function adicionarlote() {
 function enviarForm(){ 
     if(clicado == 0){
         document.getElementsByTagName("form")[0].submit;
-        clicado = 1;
-        document.body.style.cursor = 'wait';
-        setTimeout(ativarButton, 15000);
-        try {
-            document.getElementById('addEvento').textContent = 'Carregando, aguarde...';
-        } catch (error) {
-            console.log(error);
+        if(document.getElementById('inputName').value!=''||document.getElementById('selectEstilo').value!=''||document.getElementById('inputData').value!=''){
+            clicado = 1;
+            document.body.style.cursor = 'wait';
+            setTimeout(ativarButton, 15000);
+            try {
+                document.getElementById('addEvento').textContent = 'Criando evento, não recarregue a página,  pode levar algum tempo';
+            } catch (error) {
+                console.log(error);
+            }
         }
     }else{
         alert("Aguarde para clicar novamente");
@@ -85,7 +88,7 @@ function enviarForm(){
 
 function voltarTexto(){
     try {
-        document.getElementById('addEvento').textContent = 'Carregando, aguarde...';
+        document.getElementById('addEvento').textContent = 'Criar Evento';
     } catch (error) {
         console.log(error);
     }
@@ -93,4 +96,46 @@ function voltarTexto(){
 function ativarButton() {
     clicado = 0;
     document.body.style.cursor = 'default';
+}
+
+
+var inputFonte = document.getElementById('selectFonte');
+function selectfonte(){
+    var fonte = inputFonte.value;
+    if (fonte == 'Banner/Flyer/Impressos'){
+        exibirMedium();
+        mudarTexto('Breve Descrição do artigo Impresso (opcional)', 'Ex: Flyer Principal');
+    }else if (fonte == 'Disparo Whatsapp'||fonte == 'Disparo E-mail'){
+        exibirMedium();
+        mudarTexto('Nome da Lista (opcional)', 'Ex: Clientes Evento Anterior');
+    }else if (fonte == 'Facebook/Instagram Orgânico'){
+        exibirMedium();
+        mudarTexto('Perfil (opcional)', 'Ex: Instagram @ingressozapp');
+    }else if (fonte == 'Facebook/Instagram Impulsionamento'){
+        ocultarMedium();
+
+    }else if (fonte == 'Google/Youtube Ads'){
+        ocultarMedium();
+
+    }else if (fonte == 'Linktree'){
+        exibirMedium();
+        mudarTexto('Perfil (opcional)', 'Ex: Linktree @ingressozapp');
+    }else if (fonte == 'Outdoor'){
+        exibirMedium();
+        mudarTexto('Localização (opcional)', 'Ex: Afonso Pena');
+    }else if (fonte == 'Tik Tok'){
+        exibirMedium();
+        mudarTexto('Perfil (opcional)', 'Ex: Tik Tok @ingressozapp');
+    }
+}
+function mudarTexto(descricao, placeholder){
+    document.getElementById('labelMedium').innerHTML = descricao;
+    document.getElementById('inputMedium').placeholder = placeholder;
+}
+
+function exibirMedium(){
+    document.getElementById('divMedium').style.display = 'block';
+}
+function ocultarMedium(){
+    document.getElementById('divMedium').style.display = 'none';
 }
