@@ -12,7 +12,7 @@ if($hash != ""){
 // Se o ingresso chega com código
 }else if($codigo != ""){
     selectCodigo();
-    $url = "https://ingressozapp.com/app/ingressos/?hash=".$hash;
+    $url = "https://ingressozapp.com/app/qr.php?codigo=".$codigo;
 }
 
 if($email!=''){

@@ -208,7 +208,7 @@
             
             return false;
         }else{
-            if($validade!= 'VALIDO'){
+            if($validade!= 'DISPONÍVEL'){
                 $msg = 'Ingresso vendido pelo site para um lote que não está mais válido no app. favor verificar o lote no wp-admin e no app. Caso esteja realmente desativado no app. Desative imediatamente no wo-admin. <br>'.
                 'SKU: ' . $idLote . '<br>' .
                 'Valor no app: ' . $valor . '<br>' .
