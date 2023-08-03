@@ -3,7 +3,6 @@
     require '../../vendor/autoload.php';
 
     use Automattic\WooCommerce\Client;
-    use Netflie\WhatsAppCloudApi\WhatsAppCloudApi;
 
     $woocommerce = new Client(
         'https://ingressozapp.com', 
@@ -13,92 +12,63 @@
             'wp_api' => true,
             'version' => 'wc/v3',
         ]
-    );
- 
-    // Instantiate the WhatsAppCloudApi super class.
-    $whatsapp_cloud_api = new WhatsAppCloudApi([
-        'from_phone_number_id' => '109747672212218',
-        'access_token' => 'EAASzZC83aS7EBO4I0MhKe9hSKN8YShyk17WxGouQj8uXHifiKgNxQ9DVwewJJB5KtaWQt5wzSehuV10N1sz8JNarMVxuTx16oo7GkEE5zCGJIVgNJHPbV0MuP95GmbaB4LGmdTZBzthJs8ZByNZCxltsWMMH0NJ2zutGZBuqzwsl9siZBMsUCwls0jq9gRYj4E3AWygOHwDHdPi6LzHF6jZCjnPcu5q9jxJZCQZDZD',
-    ]);
-
-    //Dados da integração
-    $promoter = 1;
-    // conferir o Secret para dar mais segurança
-    $secret = 'ingressozapp258mudancastatus';
-
-
-    $log =  file_get_contents('php://input');
+    ); 
     
-    // salvar Log 
-    $server = json_encode($_SERVER, true);
-    
-    $pedido = json_decode($log, true);
-    $servidor = json_decode($server, true);
-    $numeroPedido = $pedido['id'];
-    $payment_url = $servidor['HTTP_X_WC_WEBHOOK_SOURCE'];
-    $msg = salvarLog($log, $server, $numeroPedido, $payment_url);
-    // Se Log foi salvo corretamente 
-    if($msg == "Sucesso!"){
-        if($payment_url == "https://ingressozapp.com/"){
-            //Verifica se já foi gerado ingresso para esse pedido e garante que o ingresso não foi gerado novamente
-            if(verificarPedido($numeroPedido)){
-                // Pagamento Realizado - Processando entrega do Pedido
-                if($pedido['status'] == "processing"){
-                    // Emitir Ingresso
-                    //Gerar Hash Identificados dos ingressos
-                    $hash = bin2hex(openssl_random_pseudo_bytes(32));
-
-                    // Pegar dados do pedido e do comprador
-                    $idPedido = $pedido['id'];
-                    getDadosComprador();
-                    $itens = $pedido['line_items'];
-                    $coupon = $pedido['coupon_lines'][0]['code'];
-                    if($coupon != ""){
-                        if($coupon == "PANTANAL10"||$coupon == "PANTA10"){
-                            $desconto = "1";
-                        }else{
-                            getVendedor($coupon);
-                        }
-                    }
-                    if(gerarIngressos()){
-                        enviarIngresso($hash, $senderEmail, $senderName, $idEvento, $nomeEvento);
-                        statusCompleted();
-                    }else{
-                        $msg = 'Erro ao gerar ingressos. <br>'.
-                        'URL de Origem: ' . $payment_url . '<br>' .
-                        'Pedido: ' . $numeroPedido;
-                        alerta($msg, $numeroPedido, '1', $_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']);
-                    };
-                } 
-            }
-        }else if($payment_url == "https://prefeitosdofuturo.com.br/"){
-            $promoter = 956;
-            // Pagamento Realizado - Processando entrega do Pedido
-            if($pedido['status'] == "processing"){
-                // Emitir Ingresso
-                $hash = bin2hex(openssl_random_pseudo_bytes(32));
-                $idPedido = $pedido['id'];
-                getDadosCompradorCorreto();
-                $itens = $pedido['line_items'];
-                $coupon = $pedido['coupon_lines'][0]['code'];
-                gerarIngressos();
-                enviarIngresso($hash, $senderEmail, $senderName, $idEvento, $nomeEvento);
-            } 
-        }else{
-            $msg = 'Tentativa de gerar ingresso de domínio não autorizado. <br>'.
-            'URL de Origem: ' . $payment_url . '<br>' .
-            'Pedido: ' . $numeroPedido;
-            alerta($msg, $numeroPedido, '1', $_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']);
-        }
-        
-        
-    }else{
-        $msg = 'Erro ao registrar log. <br>'.
-        'URL de Origem: ' . $payment_url . '<br>' .
-        'Pedido: ' . $numeroPedido;
-        
-        alerta($msg, $numeroPedido, '1', $_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']);
+    $data = [
+        'status' => 'processing',
+    ];
+    try {
+        $pedidos = json_decode(json_encode($woocommerce->get('orders', $data)),true); 
+        // var_dump($pedidos);
+    } catch (Throwable $th) {
+        //throw $th;
     }
+
+    $pedido = $pedidos[0];
+    $numeroPedido = $pedido['id'];
+    echo '<br><br>'. $numeroPedido.'<br>';
+    //Verifica se já foi gerado ingresso para esse pedido e garante que o ingresso não foi gerado novamente
+    if(verificarPedido($numeroPedido)){
+        echo 'Pedido Verificado<br>';
+        // Pagamento Realizado - Processando entrega do Pedido
+        if($pedido['status'] == "processing"){
+            // Emitir Ingresso
+            //Gerar Hash Identificados dos ingressos
+            $hash = bin2hex(openssl_random_pseudo_bytes(32));
+            echo 'Hash: '.$hash.'<br>';
+            // Pegar dados do pedido e do comprador
+            $idPedido = $pedido['id'];
+            getDadosComprador();
+            $itens = $pedido['line_items'];
+            $coupon = $pedido['coupon_lines'][0]['code'];
+            if($coupon != ""){
+                if($coupon == "PANTANAL10"||$coupon == "PANTA10"){
+                    $desconto = "1";
+                }else{
+                    getVendedor($coupon);
+                }
+            }
+            if(gerarIngressos()){
+                echo 'Ingresso Gerado';
+                enviarIngresso($hash, $senderEmail, $senderName, $idEvento, $nomeEvento);
+                statusCompleted();
+            }else{
+                $msg = 'Erro ao gerar ingressos. <br>'.
+                'URL de Origem: ' . $payment_url . '<br>' .
+                'Pedido: ' . $numeroPedido;
+                alerta($msg, $numeroPedido, '1', $_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']);
+            };
+        } 
+    }else{
+        statusCompleted();
+    }
+    
+        
+    
+    
+        
+    
+    
 
     function getVendedor($coupon){
         global $idVendedor;
@@ -127,21 +97,39 @@
     }
 
     function gerarIngressos(){
-        global $idLote, $itemAmount, $itemQuantity, $valor, $numeroPedido, $payment_url, $idEvento, $itens;
+        global $idLote, $itemAmount, $itemQuantity, $valor, $numeroPedido, $payment_url, $idEvento, $itens, $coupon;
         // Para cada Item do carrinho acessa os dados 
         foreach ($itens as $item) { 
             $itemQuantity = $item['quantity'];
             $itemAmount = $item['price'];
             $idLote = $item['sku'];
-            if(getLote()){
-                if($valor<$itemAmount){
-                    // Para cada quantidade solicitada pelo cliente cria um ingresso.
-                    // $msg = salvarLog("Valor CORRETO", $valor);
+            if($idLote == 895){
+                $idLote = 100450;
+            }
+            echo 'Lote: '.$idLote.'<br>';
+            if(getLote($item)){
+                $valorComTaxa = floatval($valor) * 1.1;
+                echo 'valorComTaxa: '.$valorComTaxa.'<br>';
+                echo 'valor: '.$valor.'<br>';
+                echo 'itemAmount: '.$itemAmount.'<br>';
+
+                if($coupon == "INGRESOZAPP20"||$coupon == "ingressozapp20"){
+                    $valor = floatval($valor) * 0.8;
+                    $valorComTaxa = $valorComTaxa * 0.8;
+                }
+
+                if(strval($valor) == strval($itemAmount)){
+                    for ($i=1; $i <= $itemQuantity; $i++) { 
+                        $valor = floatval($valor) * 0.9;
+                        criarIngresso();
+                    }
+                    $x = true;
+                }else if(strval($valorComTaxa) <= strval($itemAmount)){
                     for ($i=1; $i <= $itemQuantity; $i++) { 
                         criarIngresso();
                     }
                     $x = true;
-                }else if($idEvento == '632'||$idEvento == '744'){
+                }else if(strval($valorComTaxa-0.01) ==strval($itemAmount)){
                     for ($i=1; $i <= $itemQuantity; $i++) { 
                         criarIngresso();
                     }
@@ -189,7 +177,7 @@
     }
 
     // Pega todos os dados do lote do ingresso
-    function getLote(){
+    function getLote($item){
         global $idLote, $valor, $sexo, $quantidade, $vendidos, $idEvento, $nomeEvento, $payment_url, $numeroPedido;
         $consulta = "SELECT Lote.id, Lote.nome, Lote.valor, Lote.quantidade, Lote.validade, Lote.vendidos, Evento.id as idEvento, Evento.nome as nomeEvento FROM Lote JOIN Evento ON Lote.evento = Evento.id WHERE Lote.id='$idLote'";
         $obj = selecionar($consulta);
@@ -202,6 +190,23 @@
         $nomeEvento  =  $lote['nomeEvento'];
         $validade  =  $lote['validade'];
         if($valor == "" || $quantidade == ""){
+            $name = $item['name'];
+            $nomes = explode(' - ', $name);
+            $evento = $nomes[0];
+            $name = $nomes[1];
+            $consulta = "SELECT Lote.id, Lote.nome, Lote.valor, Lote.quantidade, Lote.validade, Lote.vendidos, Evento.id as idEvento, Evento.nome as nomeEvento FROM Lote JOIN Evento ON Lote.evento = Evento.id 
+            WHERE Lote.nome='$name' AND Evento.nome = '$evento'";
+            echo $consulta;
+            $obj = selecionar($consulta);
+            $lote = $obj[0];
+            $valor     =  $lote['valor'];
+            $sexo      =  $lote['sexo'];
+            $quantidade=  $lote['quantidade'];
+            $vendidos  =  $lote['vendidos'];
+            $idEvento=  $lote['idEvento'];
+            $nomeEvento  =  $lote['nomeEvento'];
+            $validade  =  $lote['validade'];
+            if($valor == "" || $quantidade == ""){
             $msg = 'Erro ao pegar dados do Lote. Não foi encontrado nenhum lote disponível no app com o SKU informado no WP-admin<br>'.
                 'SKU: ' . $idLote . '<br>' .
                 'Valor no app: ' . $valor . '<br>' .
@@ -214,6 +219,9 @@
             alerta($msg, $numeroPedido, '1', $_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']);
             
             return false;
+            }else{
+                return true;
+            }
         }else{
             if($validade!= 'DISPONÍVEL'){
                 $msg = 'Ingresso vendido pelo site para um lote que não está mais válido no app. favor verificar o lote no wp-admin e no app. Caso esteja realmente desativado no app. Desative imediatamente no wo-admin. <br>'.
@@ -278,6 +286,9 @@
 
     function gerarIngresso($codigo, $idEvento, $idCliente, $valor, $idLote, $promoter){
         global $hash, $numeroPedido, $idVendedor, $vendidos;
+        if($idEvento == '578'){
+            $valor = floatval($valor) * 0.95;
+        }
         if($idVendedor == ''){
             $promoter = '1';
         }else{
@@ -345,8 +356,8 @@
         $woocommerce->put($string, $data);
     }
 
+
     function enviarIngresso($hash, $senderEmail, $senderName, $idEvento, $nomeEvento){
-        global $whatsapp_cloud_api;
         $assunto = "Seus Ingressos para o evento ".$nomeEvento." estão aqui!!!";
         $msg = "
         <img style='width: 40%; margin-left:30%;' src='https://ingressozapp.com/app/getImagem.php?id=$idEvento'/>
@@ -357,12 +368,6 @@
         <a href='https://ingressozapp.com/app/ingressos/?hash=".$hash."' style='color: #fff;background-color: #000000;padding: 20px 50px;margin-top: 20px !important;border-radius: 24px;font-size: large; text-decoration: none;display: block;'>Visualizar Ingresso</a><br>
         <br>
         ";
-        $msg = '*Seu IngressoZapp Chegou!*
-'.$nomeEvento.'
-Clique no link: 
-https://ingressozapp.com/app/ingressos/?hash='.$hash;
-$whatsapp_cloud_api->sendTextMessage('5567999654445', $msg);
-
         enviaEmail($senderEmail, $senderName, $assunto, $msg);
     }
 
