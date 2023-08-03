@@ -1,5 +1,6 @@
 {
     "require": {
-        "automattic/woocommerce": "^3.0"
+        "automattic/woocommerce": "^3.0",
+        "netflie/whatsapp-cloud-api": "^2.0"
     }
 }
