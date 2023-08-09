@@ -32,20 +32,20 @@
     $paymentToken = 'Insira_aqui_seu_paymentToken';
     
     $customer = [
-        'name' => $name,
-        'cpf' => $cpf,
-        'phone_number' => $phone_number,
-        'email' => $email,
-        'birth' => '1999-03-18'
+        'name' => 'Gorbadoc Oldbuck',
+        'cpf' => '04267484171',
+        'phone_number' => '5144916523',
+        'email' => 'oldbuck@gerencianet.com.br',
+        'birth' => '1990-01-15'
     ];
     
     $billingAddress = [
-        'street' => $ccendereco,
-        'number' => $ccnumber,
+        'street' => 'Av JK',
+        'number' => 909,
         'neighborhood' => 'Bauxita',
-        'zipcode' => $cccep,
-        'city' => $cccidade,
-        'state' => $ccestado,
+        'zipcode' => '35400000',
+        'city' => 'Ouro Preto',
+        'state' => 'MG',
     ];
     
     $body = [

@@ -1,0 +1,14 @@
+[19-Jan-2022 19:02:38 UTC] PHP Warning:  include(../app/includes/verificarAcesso.php): failed to open stream: No such file or directory in /home/u989688937/domains/ingressozapp.com/public_html/transferencia/stb/header.php on line 2
+[19-Jan-2022 19:02:38 UTC] PHP Warning:  include(): Failed opening '../app/includes/verificarAcesso.php' for inclusion (include_path='.:/opt/alt/php74/usr/share/pear') in /home/u989688937/domains/ingressozapp.com/public_html/transferencia/stb/header.php on line 2
+[19-Jan-2022 19:02:38 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function selecionar() in /home/u989688937/domains/ingressozapp.com/public_html/transferencia/stb/header.php:5
+Stack trace:
+#0 /home/u989688937/domains/ingressozapp.com/public_html/transferencia/stb/index.php(2): include()
+#1 {main}
+  thrown in /home/u989688937/domains/ingressozapp.com/public_html/transferencia/stb/header.php on line 5
+[19-Jan-2022 19:02:41 UTC] PHP Warning:  include(../app/includes/verificarAcesso.php): failed to open stream: No such file or directory in /home/u989688937/domains/ingressozapp.com/public_html/transferencia/stb/header.php on line 2
+[19-Jan-2022 19:02:41 UTC] PHP Warning:  include(): Failed opening '../app/includes/verificarAcesso.php' for inclusion (include_path='.:/opt/alt/php74/usr/share/pear') in /home/u989688937/domains/ingressozapp.com/public_html/transferencia/stb/header.php on line 2
+[19-Jan-2022 19:02:41 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function selecionar() in /home/u989688937/domains/ingressozapp.com/public_html/transferencia/stb/header.php:5
+Stack trace:
+#0 /home/u989688937/domains/ingressozapp.com/public_html/transferencia/stb/index.php(2): include()
+#1 {main}
+  thrown in /home/u989688937/domains/ingressozapp.com/public_html/transferencia/stb/header.php on line 5

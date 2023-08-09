@@ -1,7 +1,7 @@
 <?php
     session_start();
     //Conexão com o o Banco de dados
-    $servidorBanco = '185.212.71.102:3306';
+    $servidorBanco = '127.0.0.1:3306';
     $senhaBanco ='vjdC7p5XBy';
     $usuarioBanco ='u989688937_IHLyR';
     $bdados ='u989688937_WtNbV';
@@ -12,7 +12,7 @@
     $HTTP_HOST = "http://". $_SERVER['HTTP_HOST'];
     $TOKEN = "BMJ-7V@9-$%ASbZXS#v%!bnmpHI%Cavj";
 
-    //FUNÇÕES BANCO DE DADOS
+    //FUNÇÕES BANCO DE DADOS 
     function verificar($consulta){
         global $servidorBanco, $usuarioBanco, $senhaBanco, $bdados;
         $conexao = mysqli_connect($servidorBanco, $usuarioBanco, $senhaBanco, $bdados);

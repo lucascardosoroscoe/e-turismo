@@ -1,6 +1,6 @@
 <?php
     include('../../includes/verificarAcesso.php');
-    verificarAcesso(2);
+    verificarAcesso(1);
     
 
     $id = $_GET['id'];

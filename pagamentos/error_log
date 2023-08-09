@@ -1,0 +1,37 @@
+[23-May-2021 06:13:22 UTC] PHP Warning:  simplexml_load_string(): Entity: line 1: parser error : Start tag expected, '&lt;' not found in /home/u989688937/domains/ingressozapp.com/public_html/pagamentos/index.php on line 15
+[23-May-2021 06:13:22 UTC] PHP Warning:  simplexml_load_string(): Unauthorized in /home/u989688937/domains/ingressozapp.com/public_html/pagamentos/index.php on line 15
+[23-May-2021 06:13:22 UTC] PHP Warning:  simplexml_load_string(): ^ in /home/u989688937/domains/ingressozapp.com/public_html/pagamentos/index.php on line 15
+[23-May-2021 06:18:02 UTC] PHP Warning:  simplexml_load_string(): Entity: line 1: parser error : Start tag expected, '&lt;' not found in /home/u989688937/domains/ingressozapp.com/public_html/pagamentos/index.php on line 15
+[23-May-2021 06:18:02 UTC] PHP Warning:  simplexml_load_string(): Unauthorized in /home/u989688937/domains/ingressozapp.com/public_html/pagamentos/index.php on line 15
+[23-May-2021 06:18:02 UTC] PHP Warning:  simplexml_load_string(): ^ in /home/u989688937/domains/ingressozapp.com/public_html/pagamentos/index.php on line 15
+[23-May-2021 03:20:03 America/Sao_Paulo] PHP Deprecated:  Function money_format() is deprecated in /home/u989688937/domains/ingressozapp.com/public_html/pagamentos/script.php on line 331
+[23-May-2021 03:20:03 America/Sao_Paulo] PHP Warning:  money_format() expects parameter 2 to be float, string given in /home/u989688937/domains/ingressozapp.com/public_html/pagamentos/script.php on line 331
+[23-May-2021 03:20:03 America/Sao_Paulo] PHP Deprecated:  Function money_format() is deprecated in /home/u989688937/domains/ingressozapp.com/public_html/pagamentos/script.php on line 333
+[23-May-2021 03:20:03 America/Sao_Paulo] PHP Warning:  money_format() expects parameter 2 to be float, string given in /home/u989688937/domains/ingressozapp.com/public_html/pagamentos/script.php on line 333
+[23-May-2021 03:20:03 America/Sao_Paulo] PHP Deprecated:  Function money_format() is deprecated in /home/u989688937/domains/ingressozapp.com/public_html/pagamentos/script.php on line 335
+[23-May-2021 03:20:03 America/Sao_Paulo] PHP Warning:  money_format() expects parameter 2 to be float, string given in /home/u989688937/domains/ingressozapp.com/public_html/pagamentos/script.php on line 335
+[23-May-2021 03:20:56 America/Sao_Paulo] PHP Deprecated:  Function money_format() is deprecated in /home/u989688937/domains/ingressozapp.com/public_html/pagamentos/script.php on line 331
+[23-May-2021 03:20:56 America/Sao_Paulo] PHP Warning:  money_format() expects parameter 2 to be float, string given in /home/u989688937/domains/ingressozapp.com/public_html/pagamentos/script.php on line 331
+[23-May-2021 03:20:56 America/Sao_Paulo] PHP Deprecated:  Function money_format() is deprecated in /home/u989688937/domains/ingressozapp.com/public_html/pagamentos/script.php on line 333
+[23-May-2021 03:20:56 America/Sao_Paulo] PHP Warning:  money_format() expects parameter 2 to be float, string given in /home/u989688937/domains/ingressozapp.com/public_html/pagamentos/script.php on line 333
+[23-May-2021 03:20:56 America/Sao_Paulo] PHP Deprecated:  Function money_format() is deprecated in /home/u989688937/domains/ingressozapp.com/public_html/pagamentos/script.php on line 335
+[23-May-2021 03:20:56 America/Sao_Paulo] PHP Warning:  money_format() expects parameter 2 to be float, string given in /home/u989688937/domains/ingressozapp.com/public_html/pagamentos/script.php on line 335
+[23-May-2021 03:22:08 America/Sao_Paulo] PHP Deprecated:  Function money_format() is deprecated in /home/u989688937/domains/ingressozapp.com/public_html/pagamentos/script.php on line 185
+[23-May-2021 03:22:08 America/Sao_Paulo] PHP Warning:  money_format() expects parameter 2 to be float, string given in /home/u989688937/domains/ingressozapp.com/public_html/pagamentos/script.php on line 185
+[23-May-2021 03:22:08 America/Sao_Paulo] PHP Deprecated:  Function money_format() is deprecated in /home/u989688937/domains/ingressozapp.com/public_html/pagamentos/script.php on line 187
+[23-May-2021 03:22:08 America/Sao_Paulo] PHP Warning:  money_format() expects parameter 2 to be float, string given in /home/u989688937/domains/ingressozapp.com/public_html/pagamentos/script.php on line 187
+[23-May-2021 03:22:08 America/Sao_Paulo] PHP Deprecated:  Function money_format() is deprecated in /home/u989688937/domains/ingressozapp.com/public_html/pagamentos/script.php on line 189
+[23-May-2021 03:22:08 America/Sao_Paulo] PHP Warning:  money_format() expects parameter 2 to be float, string given in /home/u989688937/domains/ingressozapp.com/public_html/pagamentos/script.php on line 189
+[23-May-2021 03:22:55 America/Sao_Paulo] PHP Deprecated:  Function money_format() is deprecated in /home/u989688937/domains/ingressozapp.com/public_html/pagamentos/script.php on line 185
+[23-May-2021 03:22:55 America/Sao_Paulo] PHP Warning:  money_format() expects parameter 2 to be float, string given in /home/u989688937/domains/ingressozapp.com/public_html/pagamentos/script.php on line 185
+[23-May-2021 03:22:55 America/Sao_Paulo] PHP Deprecated:  Function money_format() is deprecated in /home/u989688937/domains/ingressozapp.com/public_html/pagamentos/script.php on line 187
+[23-May-2021 03:22:55 America/Sao_Paulo] PHP Warning:  money_format() expects parameter 2 to be float, string given in /home/u989688937/domains/ingressozapp.com/public_html/pagamentos/script.php on line 187
+[23-May-2021 03:22:55 America/Sao_Paulo] PHP Deprecated:  Function money_format() is deprecated in /home/u989688937/domains/ingressozapp.com/public_html/pagamentos/script.php on line 189
+[23-May-2021 03:22:55 America/Sao_Paulo] PHP Warning:  money_format() expects parameter 2 to be float, string given in /home/u989688937/domains/ingressozapp.com/public_html/pagamentos/script.php on line 189
+[23-May-2021 03:24:42 America/Sao_Paulo] PHP Deprecated:  Function money_format() is deprecated in /home/u989688937/domains/ingressozapp.com/public_html/pagamentos/script.php on line 331
+[23-May-2021 03:24:42 America/Sao_Paulo] PHP Warning:  money_format() expects parameter 2 to be float, string given in /home/u989688937/domains/ingressozapp.com/public_html/pagamentos/script.php on line 331
+[23-May-2021 03:24:42 America/Sao_Paulo] PHP Deprecated:  Function money_format() is deprecated in /home/u989688937/domains/ingressozapp.com/public_html/pagamentos/script.php on line 333
+[23-May-2021 03:24:42 America/Sao_Paulo] PHP Warning:  money_format() expects parameter 2 to be float, string given in /home/u989688937/domains/ingressozapp.com/public_html/pagamentos/script.php on line 333
+[23-May-2021 03:24:42 America/Sao_Paulo] PHP Deprecated:  Function money_format() is deprecated in /home/u989688937/domains/ingressozapp.com/public_html/pagamentos/script.php on line 335
+[23-May-2021 03:24:42 America/Sao_Paulo] PHP Warning:  money_format() expects parameter 2 to be float, string given in /home/u989688937/domains/ingressozapp.com/public_html/pagamentos/script.php on line 335
+[23-May-2021 03:24:42 America/Sao_Paulo] PHP Warning:  Invalid argument supplied for foreach() in /home/u989688937/domains/ingressozapp.com/public_html/pagamentos/script.php on line 341

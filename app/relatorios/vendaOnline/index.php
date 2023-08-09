@@ -138,6 +138,7 @@ $idSecretaria = $_SESSION["idSecretaria"];
                         echo('<th>Lote</th>');
                         echo('<th>Telefone</th>');
                         echo('<th>Vendedor</th>');
+                        echo('<th>Cupom</th>');
                         echo('<th>Data</th>');
                         echo('<th>Validade</th>');
                         echo('<th></th>');
@@ -145,13 +146,13 @@ $idSecretaria = $_SESSION["idSecretaria"];
                     echo('</thead>');
                     echo('<tbody id="tbody">');
                         
-                            $consulta = "SELECT Ingresso.codigo, Ingresso.origem, Ingresso.data, Vendedor.nome as vendedor, Cliente.nome as cliente, Cliente.telefone as telefone, Ingresso.valor, Ingresso.validade, Lote.nome as lote
+                            $consulta = "SELECT Ingresso.codigo, Ingresso.origem, Ingresso.data, Ingresso.cupom, Vendedor.nome as vendedor, Cliente.nome as cliente, Cliente.telefone as telefone, Ingresso.valor, Ingresso.validade, Lote.nome as lote
                             FROM Ingresso JOIN Vendedor ON Ingresso.vendedor = Vendedor.id 
                             JOIN Cliente ON Ingresso.idCliente = Cliente.id
                             JOIN Lote ON Ingresso.lote =  Lote.id
                             WHERE Ingresso.evento = '$idEvento' AND Ingresso.validade != 'CANCELADO' AND Ingresso.vendedor = '1' ORDER BY Cliente.nome";
                             addtabela($consulta);
-                            $consulta = "SELECT Ingresso.codigo, Ingresso.origem, Ingresso.data, Vendedor.nome as vendedor, Cliente.nome as cliente, Cliente.telefone as telefone, Ingresso.valor, Ingresso.validade, Lote.nome as lote
+                            $consulta = "SELECT Ingresso.codigo, Ingresso.origem, Ingresso.data, Ingresso.cupom, Vendedor.nome as vendedor, Cliente.nome as cliente, Cliente.telefone as telefone, Ingresso.valor, Ingresso.validade, Lote.nome as lote
                             FROM Ingresso JOIN Vendedor ON Ingresso.vendedor = Vendedor.id 
                             JOIN Cliente ON Ingresso.idCliente = Cliente.id
                             JOIN Lote ON Ingresso.lote =  Lote.id
@@ -180,6 +181,7 @@ $idSecretaria = $_SESSION["idSecretaria"];
             echo ("<td>".$obj['lote']."</td>");
             echo ("<td>".$obj['telefone']."</td>"); 
             echo ("<td>".$origem." - ".$obj['vendedor']."</td>"); 
+            echo ("<td>".$obj['cupom']."</td>"); 
             echo ("<td>".$obj['data']."</td>"); 
             $validade = $obj['validade'];
             echo ("<td>".$validade."</td>");    

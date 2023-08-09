@@ -1,6 +1,6 @@
 <link rel="stylesheet" href="estiloqr.css">
 <?php
-include('includes/verificarAcesso.php');
+include('./includes/verificarAcesso.php');
 verificarAcesso(3);
 
 $codigo  = $_GET['codigo'];
@@ -29,6 +29,10 @@ Para entrar no evento apresente um print do QR CODE de cada um dos seus ingresso
 
 //Mensagem personalizada para ingressos do prefeito do futuro;
 if($idUsuario == 524){msgPrefeitos();}
+if($lote == '100805'){
+    msgPatricinhas();
+}
+// echo $msg;
 
 $aviso = "
 🔐 AVISOS 🔐
@@ -62,8 +66,8 @@ function enviarIngresso($hash, $senderEmail, $senderName, $idEvento, $nomeEvento
 }
 
 function selectCodigo(){
-    global $codigo, $telefone, $cliente, $evento, $vendedor, $email, $idEvento;
-    $consulta = "SELECT Ingresso.valor, Ingresso.validade, Ingresso.data,
+    global $codigo, $telefone, $cliente, $evento, $vendedor, $email, $idEvento, $lote;
+    $consulta = "SELECT Ingresso.valor, Ingresso.validade, Ingresso.data, Ingresso.lote,
     Evento.nome as evento, Evento.id as idEvento, Vendedor.nome as vendedor, 
     Cliente.nome as cliente, Cliente.email as email, Cliente.telefone, Lote.nome as lote
     FROM Ingresso 
@@ -76,14 +80,15 @@ function selectCodigo(){
     
     $telefone = $ingresso[0]['telefone'];
     $email = $ingresso[0]['email'];
+    $lote = $ingresso[0]['lote'];
     $cliente = $ingresso[0]['cliente'];
     $evento = $ingresso[0]['evento'];
     $idEvento = $ingresso[0]['idEvento'];
     $vendedor = $ingresso[0]['vendedor'];
 }
 function selectHash(){
-    global $hash, $telefone, $cliente, $evento, $vendedor, $email, $idEvento;
-    $consulta = "SELECT Ingresso.valor, Ingresso.validade, Ingresso.data,
+    global $hash, $telefone, $cliente, $evento, $vendedor, $email, $idEvento, $lote;
+    $consulta = "SELECT Ingresso.valor, Ingresso.validade, Ingresso.data, Ingresso.lote,
     Evento.nome as evento, Evento.id as idEvento, Vendedor.nome as vendedor, 
     Cliente.nome as cliente, Cliente.email as email, Cliente.telefone, Lote.nome as lote
     FROM Ingresso 
@@ -96,6 +101,7 @@ function selectHash(){
     
     $telefone = $ingresso[0]['telefone'];
     $email = $ingresso[0]['email'];
+    $lote = $ingresso[0]['lote'];
     $cliente = $ingresso[0]['cliente'];
     $evento = $ingresso[0]['evento'];
     $idEvento = $ingresso[0]['idEvento'];
@@ -104,20 +110,31 @@ function selectHash(){
 
 function msgPrefeitos(){
     global $msg, $cliente, $url;
-        $msg = "🎉 Prefeitos do Futuro 2022 🎉
-        
-    Olá ".$cliente." você está recebendo nesta mensagem o Qr Code de acesso ao evento Prefeitos do Futuro 2022, que acontece de 18 a 20 de maio, no Centro de Convenções Brasil 21
-    Localização: https://goo.gl/maps/isgpwtyZoLRULzbS8
-    O evento começa às 08h e termina às 18h todos os dias
-            
-    Para acessar seu passaporte salve esse número e clique no link: 
-    ".$url."
-            
-    Nos dias 18 e 19, quarta e quinta, teremos coquetéis de confraternização com shows especiais das 18:15 às 20:15 no mesmo local do evento.
-            
-    Para entrar no evento apresente seu ingresso e um documento original com foto no credenciamento na entrada do Centro de Convenções Brasil 21, teremos balcões de atendimento separados por: PREFEITOS, SECRETÁRIOS E ASSESSORES, CONVIDADOS E PALESTRANTES.
-            
-    Para evitar filas, você poderá retirar seu kit e fazer o seu credenciamento com este Qr Code já no dia 17/05, terça-feira, das 15h às 19h no próprio Centro de Convenções Brasil 21.";
+        $msg = "🎉 Prefeitos do Futuro 2023 🎉  
+Olá ".$cliente." você está recebendo nesta mensagem o Qr Code de acesso ao evento Prefeitos do Futuro 2023, que acontece de 24 a 26 de maio, no Hotel Royal Tulip Alvorada Localização: https://goo.gl/maps/vS6u9kMbGU4TPSjx9
+O evento começa às 8h e termina às 18h todos os dias Para acessar seu passaporte salve esse número e clique no link: 
+".$url."
+No dia 25/05, quinta-feira, teremos um coquetel de confraternização com um som especial das 18:10 às 20:10 no mesmo local do evento. Para entrar no evento apresente seu ingresso e um documento original com foto no credenciamento na entrada do Hotel Royal Tulip, teremos balcões de atendimento separados por: PREFEITOS, SECRETÁRIOS E ASSESSORES, CONVIDADOS E PALESTRANTES. 
+
+Para evitar filas, você poderá retirar seu kit e fazer o seu credenciamento com este Qr Code já no dia 23/05, terça-feira, das 15h às 19h na recepção do Hotel Royal Tulip.
+";
+}
+
+function msgVegas(){
+    global $msg, $cliente, $url;
+        $msg = "🎉 After do Vegas 🎉  
+Olá ".$cliente." você foi no Vegas dia 05/05 na Loop e *HOJE* vamos fazer um After oficial do evento com uma line foda!!! 
+COMO VOCÊ FOI NO EVENTO SUA ENTRADA É GRÁTIS
+O evento começa às 22h e seu ingresso está disponível no link: 
+".$url;
+}
+
+function msgPatricinhas(){
+    global $msg, $cliente, $url;
+        $msg = "🎉 Funk das Patricinhas 🎉  
+Olá ".$cliente.", você ganhou um ingresso + cerveja para o Funk das Patricinhas dia 09/06, te espero lá em!!! 
+O evento começa às 22h e seu ingresso está disponível no link: 
+".$url;
 }
 
 

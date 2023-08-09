@@ -28,7 +28,7 @@ $_SESSION['evento'] = $evento;
 echo ('<div class="row">');
 echo ('<div class="col s12 m6 push-m3 ">');
 echo ("<img class='imgEvento' src='../getImagem.php?nome=$evento&produtor=$produtor'/>");
-echo ('<p style="text-align: center; font-size: 1em;">CODIGO: '.$descricao.'</p>');
+
 echo ('<h1 style="text-align: center; font-size: 2em;">'.$evento.'</h1>');
 echo ('<p style="text-align: center; font-size: 1em;">'.$descricao.'</p>');
 
@@ -53,7 +53,7 @@ echo ('<div id="divpicpay">');
         echo ('<option value="9">10</option>');
         echo ('</select><br>');
 
-        echo ('<br><br><button onclick="enviarForm()" name="btn-cadastrar" class="btn">Comprar Ingressos</button>');
+        echo ('<br><br><button type="submit" name="btn-cadastrar" class="btn">Comprar Ingressos</button>');
     echo ('</form>');
     
 

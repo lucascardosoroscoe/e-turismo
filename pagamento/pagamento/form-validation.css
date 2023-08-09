@@ -1,0 +1,7 @@
+.container {
+  max-width: 960px;
+}
+.my-3{
+  display: flex;
+  justify-content: space-between;
+}

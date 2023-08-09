@@ -5,7 +5,9 @@
     include('../app/includes/header.php');
 
     $codigo    =  $_GET['codigo'];
-    $consulta = "SELECT Ingresso.codigo, Evento.id as idEvento, Evento.nome as evento, Vendedor.nome as vendedor, Cliente.nome as cliente, Ingresso.valor, Ingresso.validade, Ingresso.motivoInvalidar, Ingresso.data, Ingresso.horaLeitura, Lote.nome as lote
+
+
+    $consulta = "SELECT Ingresso.codigo, Evento.id as idEvento, Evento.produtor, Evento.nome as evento, Vendedor.nome as vendedor, Cliente.nome as cliente, Ingresso.valor, Ingresso.validade, Ingresso.motivoInvalidar, Ingresso.data, Ingresso.horaLeitura, Lote.nome as lote
     FROM Ingresso 
     JOIN Evento ON Ingresso.evento = Evento.id
     JOiN Vendedor ON Ingresso.vendedor = Vendedor.id
@@ -16,6 +18,7 @@
     $obj = $dados[0];
     $valido = $obj['validade'];
     $evento = $obj['evento'];
+    $produtor = $obj['produtor'];
     $idEvento = $obj['idEvento'];
     $cliente = $obj['cliente'];
     $vendedor = $obj['vendedor'];
@@ -24,6 +27,11 @@
     $horaLeitura = $obj['horaLeitura'];
     $valor = $obj['valor'];
     $motivo = $obj['motivoInvalidar'];
+    if($idUsuarioPortaria != ""){
+        if ($produtor != $idUsuarioPortaria){
+            $valido = "PARA EVENTO INVÁLIDO - Pertence a outro produtor";
+        }
+    }
     if ($valido == ""){
         $valido = "NÃO ENCONTRADO";
     } else if($valido == "VALIDO"){
@@ -36,12 +44,29 @@
             echo "<h5>Falha ao invalidar ingresso</h5>";
         }
     }
+    
     echo ('<div class="container-fluid">');
         echo ('<div class="card mb-4">');
             echo ('<div class="card-header" id="card">');
             echo ('<h5 id="validade">INGRESSO '.$valido.'</h5>');
             echo ('</div>');
+            
             echo ('<div class="card-body">');
+                if($idUsuarioPortaria == ""){
+                    echo'<form action="usuarioPortaria.php" id="usuarioPortaria" method="POST">';
+                        echo'<div class="form-row">';
+                            echo'<div class="col-md-12">';
+                                echo'<div class="form-group">';
+                                    echo'<label class="small mb-1" for="inputEmailAddress">E-mail do Produtor de Eventos*</label>';
+                                    echo'<input class="form-control py-4" id="inputEmailAddress"  name="inputEmailAddress" type="email" aria-describedby="emailHelp" placeholder="Digite o e-mail" required/>';
+                                echo'</div>';
+                            echo'</div>';
+                        echo'</div>';
+                        echo'<div class="form-group mt-4 mb-0"><button class="btn btn-primary btn-block" onclick="enviarForm()" >Validar produtor</button></div>';
+                    echo'</form>';
+                }else{
+                    
+                }
                 if($valido == "VALIDO" || $valido == "USADO" || $valido == "CANCELADO"){
                     if($valido == "CANCELADO"){
                         echo ('<h6 class="text">'.$motivo.'</h6>');

@@ -105,7 +105,7 @@ include('../../includes/header.php');
                     echo('</thead>');
                     echo('<tbody id="tbody">');
                         
-                            $consulta = "SELECT Evento.id, Evento.nome, SUM(Ingresso.valor) as valorVendido, COUNT(Ingresso.codigo) as qVendida FROM Ingresso JOIN Vendedor ON Ingresso.vendedor = Vendedor.id JOIN Cliente ON Ingresso.idCliente = Cliente.id JOIN Lote ON Ingresso.lote = Lote.id JOIN Evento ON Evento.id = Lote.evento WHERE ((Ingresso.validade != 'CANCELADO' AND Ingresso.vendedor = '1') OR (Ingresso.validade != 'CANCELADO' AND Ingresso.vendedor != '1' AND Ingresso.origem = '2')) AND Evento.validade = 'VALIDO' GROUP BY Evento.id;";
+                            $consulta = "SELECT Evento.id, Evento.nome, SUM(Ingresso.valor) as valorVendido, COUNT(Ingresso.codigo) as qVendida FROM Ingresso JOIN Vendedor ON Ingresso.vendedor = Vendedor.id JOIN Cliente ON Ingresso.idCliente = Cliente.id JOIN Lote ON Ingresso.lote = Lote.id JOIN Evento ON Evento.id = Lote.evento WHERE ((Ingresso.validade != 'CANCELADO' AND Ingresso.vendedor = '1') OR (Ingresso.validade != 'CANCELADO' AND Ingresso.vendedor != '1' AND Ingresso.origem = '2')) AND Evento.acerto = '0' AND Evento.validade = 'VALIDO' GROUP BY Evento.id;";
                             addtabela($consulta);
                         
                     echo('</tbody>');

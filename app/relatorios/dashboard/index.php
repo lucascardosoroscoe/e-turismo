@@ -52,15 +52,15 @@ getIngressos();
                                 <div class="col-lg-4">
                                     <div class="card shadow border-0 rounded-lg">
                                          Total
-                                        <div class="valor">R$<?php echo $totalIngressos?>,00 em Ingressos</div>
+                                        <div class="valor">R$<?php echo number_format($totalIngressos, 2, ',', '.')?> em Ingressos</div>
                                     </div>
                                     <div class="card shadow border-0 rounded-lg">
                                          Ativos
-                                        <div class="valor">R$<?php echo $ativosIngressos?>,00 em Ingressos</div>
+                                        <div class="valor">R$<?php echo number_format($ativosIngressos, 2, ',', '.')?> em Ingressos</div>
                                     </div>
                                     <div class="card shadow border-0 rounded-lg">
                                          Usados
-                                        <div class="valor">R$<?php echo $usadosIngressos?>,00 em Ingressos</div>
+                                        <div class="valor">R$<?php echo number_format($usadosIngressos, 2, ',', '.')?> em Ingressos</div>
                                     </div>
                                     <div class="shadow border-0 rounded-lg chart" id="chart_div3"></div>
                                 </div>
@@ -174,11 +174,11 @@ function getIngressos(){
     $consulta = "SELECT SUM(`valor`) as valor FROM `Ingresso` WHERE `validade` = 'VALIDO'";
     $dados = selecionar($consulta);
     $ativosIngressos = $dados[0]['valor'];
-    $consulta = "SELECT SUM(`valor`) as valor FROM `Ingresso` WHERE `validade` != 'VALIDO'";
+    $consulta = "SELECT SUM(`valor`) as valor FROM `Ingresso` WHERE `validade` = 'USADO'";
     $dados = selecionar($consulta);
     $usadosIngressos = $dados[0]['valor'];
     $totalIngressos = $usadosIngressos + $ativosIngressos;
-}
+} 
 function data1(){
     $consulta = "SELECT `estado`, COUNT(`estado`) as number FROM `Produtor` WHERE `validade` = 'VALIDO' GROUP BY `estado` ORDER BY `estado`";
     $dados = selecionar($consulta);

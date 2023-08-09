@@ -36,17 +36,17 @@ include('./header.php');
                                     </div>
                                 </div>
                             </div>
-                            <button class="form-group mt-4 mb-0 btn btn-primary btn-block" onclick="enviarForm()">Trocar Ingressos</button>
+                            <button class="form-group mt-4 mb-0 btn btn-primary btn-block" type="submit">Trocar Ingressos</button>
                         </form>
                         <br>
                         <?php
                             $texto  = 'Já fez sua troca de titularidade do STB CG, para o Vintage 11/03???
                             Garanta sua troca: 
-                            https://ingressozapp.com/transferencia/stb';
+                            http://ingressozapp.com/transferencia/stb';
                             $url = urldecode($texto);
                         ?>
                         <div>
-                            <div class="fb-like" data-href="https://ingressozapp.com/transferencia/stb" data-width="200" data-layout="button" data-action="recommend" data-size="small" data-share="true"></div>
+                            <div class="fb-like" data-href="http://ingressozapp.com/transferencia/stb" data-width="200" data-layout="button" data-action="recommend" data-size="small" data-share="true"></div>
                         </div>
                         <br><a href="https://api.whatsapp.com/send?text=<?php echo $url;?>" target="_blank" style="float: right;"><h6><i class="fab fa-whatsapp"></i> Enviar no Whatsapp</h6></a>
                     </div>

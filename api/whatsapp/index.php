@@ -1,16 +1,25 @@
 <?php
 
-// Require the Composer autoloader.
+// Require the Composer autoloader
+include('../../app/includes/verificarAcesso.php');
 require '../../vendor/autoload.php';
 
-use Netflie\WhatsAppCloudApi\WhatsAppCloudApi;
+use Netflie\WhatsAppCloudApi\WebHook;
 
-// Instantiate the WhatsAppCloudApi super class.
-$whatsapp_cloud_api = new WhatsAppCloudApi([
-    'from_phone_number_id' => '109747672212218',
-    'access_token' => 'EAASzZC83aS7EBO4I0MhKe9hSKN8YShyk17WxGouQj8uXHifiKgNxQ9DVwewJJB5KtaWQt5wzSehuV10N1sz8JNarMVxuTx16oo7GkEE5zCGJIVgNJHPbV0MuP95GmbaB4LGmdTZBzthJs8ZByNZCxltsWMMH0NJ2zutGZBuqzwsl9siZBMsUCwls0jq9gRYj4E3AWygOHwDHdPi6LzHF6jZCjnPcu5q9jxJZCQZDZD',
-]);
-$msg = '*Seu IngressoZapp Chegou!*
-Clique no link: 
-https://ingressozapp.com/app/qr.php?codigo=676811';
-$whatsapp_cloud_api->sendTextMessage('5567999654445', $msg);
+$log = file_get_contents('php://input');
+$get = json_decode($log, true);
+    
+$pedido = json_encode($get, true);
+$msg = salvarLog($get, $pedido, 1, "ingressozapp.com");
+
+// Instantiate the Webhook super class.
+$webhook = new WebHook();
+// $webhook->verify($_GET, "Baba@123258x");
+$txt = $webhook->read($log);
+$msg = salvarLog($txt, "TXT", 2, $pedido);
+
+function salvarLog($log, $server, $numeroPedido, $payment_url){
+    $consulta = "INSERT INTO `LogApi`( `log`,`server`,`pedido`,`url`) VALUES ('$log', '$server', '$numeroPedido', '$payment_url')";
+    $msg = executar($consulta);
+    return $msg;
+}

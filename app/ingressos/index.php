@@ -50,14 +50,23 @@ include('../includes/header.php');
                             
                             echo'<div class="card-header">';
                                 echo'<h3 class="text-center font-weight-light my-4">'.$evento.'</h3>';
-                                echo'<h6 class="font-weight-light" style="text-align: center;">Ingresso nº '.$contagem.'</h6>';
+                                if($idEvento == 880){
+                                    echo'<h6 class="font-weight-light" style="text-align: center;">INGRESSO VÁLIDO PARA OS TRÊS DIAS</h6>';
+                                }else{
+                                    echo'<h6 class="font-weight-light" style="text-align: center;">Ingresso nº '.$contagem.'</h6>';
+                                }
                             echo'</div>';
                             echo'<div class="card-body">';
                                 echo '<h6>'.$msgTitularidade.'</h6>';
                                 echo ("<img style='width: 100%;' src='../getImagem.php?id=$idEvento'/>");
                                 if($validade == 'VALIDO'){
                                     echo ('<img style="margin-left: 25%;" src="'.$aux.'" alt="" width="50%">');
-                                    echo ('<h6 style="text-align: center;">CODIGO: '.$codigo.'</h6><br>');
+                                    if($idEvento == 880){
+                                        echo ('<h6 style="text-align: center;">NÚMERO PARA O SORTEIO: '.$codigo.'</h6><br>');
+                                        echo ('<h6 style="text-align: center;"><b>Atenção: Vamos sortear nesse evento uma Titan 160 0km. Utilize o número a cima como seu número para o sorteio que será realizado no evento dia 13/05 às 00:00, e você precisa estar presente no evento. Aproveite, quanto mais ingressos comprar, mais chances de ganhar, convide seus amigos.</b></h6><br>');
+                                    }else{
+                                        echo ('<h6 style="text-align: center;">CODIGO: '.$codigo.'</h6><br>');
+                                    }
                                     echo ('<h6 style="text-align: center;">'.$descricaoEvento.'</h6><br>');
                                     echo ('<h6>Lote: '.$lote.'</h6><br>');
                                     if($valor == 0){ 
@@ -99,6 +108,12 @@ include('../includes/header.php');
                                         echo ('</form>');
                                     }
                                 }else if($validade == 'USADO'){
+                                    if($idEvento == 880){
+                                        echo ('<br><h6 style="text-align: center;">NÚMERO PARA O SORTEIO: '.$codigo.'</h6><br>');
+                                        echo ('<h6 style="text-align: center;"><b>Atenção: Vamos sortear nesse evento uma Titan 160 0km. Utilize o número a cima como seu número para o sorteio que será realizado no evento dia 13/05 às 00:00, e você precisa estar presente no evento. Aproveite, quanto mais ingressos comprar, mais chances de ganhar, convide seus amigos.</b></h6><br>');
+                                    }else{
+                                        echo ('<h6 style="text-align: center;">CODIGO: '.$codigo.'</h6><br>');
+                                    }
                                     echo ('<br><h3 style="text-align: center;">Ingresso Já usado Anteriormente</h3><br>');
                                     $hora = gmdate('d-m-Y H:i:s', strtotime( $horaLeitura ));
                                     echo ('<h6 style="text-align: center;">Hora de Uso: '.$hora.' (Brasília)</h6><br>');

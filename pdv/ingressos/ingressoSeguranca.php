@@ -47,15 +47,15 @@
                 <!-- <p style="text-align: center;font-size: 10px"><?php echo $evento . ' - ' . date_format($dataE, 'd-m');?></p> -->
                 <p style="text-align: center;font-size: 10px"><?php echo $evento;?></p>
                 <?php //echo "<img src='../getImagem.php?id=$idEvento' alt='' style='width: 150px'>";?>
-                    <?php echo "<img src='ALA7.png' alt='' style='width: 145px;'>";?>
+                    <?php echo "<img src='funk-chic.png' alt='' style='width: 145px;'>";?>
                 </div> 
                 <div class="direita"> 
                     <img src="logoIngressozapp.png" alt="" style="width: 90px;margin-top:10px">
                     <?php 
                         echo'<p style="text-align: center;font-size: 9px; margin:2px;">Ingresso nº '.$codigo.'</p>';
-                        echo'<p style="text-align: center;font-size: 8px; margin:2px;">'.$lote.' R$'.$valor.'</p>';
+                        //echo'<p style="text-align: center;font-size: 8px; margin:2px;">'.$lote.' R$'.$valor.'</p>';
 
-                        // echo'<p style="text-align: center;font-size: 8px; margin:2px;">'.$lote.'</p>';
+                        echo'<p style="text-align: center;font-size: 8px; margin:2px;">'.$lote.'</p>';
                         echo ('<img style="margin-left:10%" src="'.$aux.'" alt="" width="80%">');
                     ?>
                 </div>

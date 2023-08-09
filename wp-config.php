@@ -1,6 +1,6 @@
 <?php
-define( 'WP_CACHE', true ) ;
-
+define( 'WP_CACHE', true );
+ // WP-Optimize Cache
 /**
  * The base configuration for WordPress
  *
@@ -19,26 +19,19 @@ define( 'WP_CACHE', true ) ;
  *
  * @package WordPress
  */
-
 // ** MySQL settings - You can get this info from your web host ** //
 /** The name of the database for WordPress */
 define( 'DB_NAME', 'u989688937_WtNbV' );
-
 /** MySQL database username */
 define( 'DB_USER', 'u989688937_IHLyR' );
-
 /** MySQL database password */
 define( 'DB_PASSWORD', 'vjdC7p5XBy' );
-
 /** MySQL hostname */
-define( 'DB_HOST', 'mysql' );
-
+define( 'DB_HOST', '127.0.0.1:3306' );
 /** Database Charset to use in creating database tables. */
 define( 'DB_CHARSET', 'utf8' );
-
 /** The Database Collate type. Don't change this if in doubt. */
 define( 'DB_COLLATE', '' );
-
 /**
  * Authentication Unique Keys and Salts.
  *
@@ -57,7 +50,6 @@ define( 'SECURE_AUTH_SALT',  '2nGl(UA55kB*aBb4x.);b,VW5Ua-*zW{|YqjQA7dZvxT2:SE|$
 define( 'LOGGED_IN_SALT',    ']UY+]n)X72P6m=ynAWPQ,/@w=}r`K</I;0#/?9[y&kG-.X0gc0c2Pw?Q E{6H$yi' );
 define( 'NONCE_SALT',        '^:k3*`5L,258o=)=n`TEc-5t)0`uhY{J-,24=?OW.Rpb/5cUMNJR+P~8A@3GEM,W' );
 define( 'WP_CACHE_KEY_SALT', 'V{DTF}apI.0K?~VR6*=:Y(CYi23PrZzs/0Jzm*G:l,*X_S(EN-PsW&!=Hf-`.K-t' );
-
 /**
  * WordPress Database Table prefix.
  *
@@ -65,17 +57,12 @@ define( 'WP_CACHE_KEY_SALT', 'V{DTF}apI.0K?~VR6*=:Y(CYi23PrZzs/0Jzm*G:l,*X_S(EN-
  * a unique prefix. Only numbers, letters, and underscores please!
  */
 $table_prefix = 'wp_';
-
-
-
-
 define( 'WP_AUTO_UPDATE_CORE', true );
+define( 'FS_METHOD', 'direct' );
 /* That's all, stop editing! Happy publishing. */
-
 /** Absolute path to the WordPress directory. */
 if ( ! defined( 'ABSPATH' ) ) {
 	define( 'ABSPATH', dirname( __FILE__ ) . '/' );
 }
-
 /** Sets up WordPress vars and included files. */
 require_once ABSPATH . 'wp-settings.php';
