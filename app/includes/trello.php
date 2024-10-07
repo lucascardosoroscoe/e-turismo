@@ -1,7 +1,5 @@
 
 <?php
-$token = "efab47abf4333963554860b6eee5eff90f58eb6087e4c4501a275a442321b26e";
-$key = "8226e942b340c452308dbfb0c21914f2";
 $idBoard = "611d63899b1e5c82e071badb";
 $urlBoard = "https://trello.com/b/8ox3Kj9b";
 
